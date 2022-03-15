@@ -7,6 +7,6 @@
 ---
 
 ```javascript
-let test = "ggg";
+let test = "test";//!!!!!
 console.log(test);
 ```
