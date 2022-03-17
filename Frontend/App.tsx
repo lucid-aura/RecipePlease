@@ -1,115 +1,58 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { View } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+/*
+npm install @react-navigation/native
+npm install @react-navigation/bottom-tabs
+npm install react-native-safe-area-context
+npm install react-native-screens
+npm install react-native-vector-icons
 
-const Section: React.FC<{
-  title: string;
-}> = ({children, title}) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+*/
 
-const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+import Icon from 'react-native-vector-icons/Ionicons' //버전별 확인후 아이콘 패키지 설치 재 요망
+import BaseScreen from './src/screens/BaseScreen'; //src->screens 하위 4개 네비게이션 바 생성 시작
+import HomeScreen from './src/screens/HomeScreen';
+import MyScreen from './src/screens/MyScreen';
+import SettingScreen from './src/screens/SettingScreen'; //src->screens 하위 4개 네비게이션 바 생성 종료
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+const Tab = createBottomTabNavigator() // 탭 시 네비게이션 하단바 응답처리
 
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+export default function App(){
 
-export default App;
+  return(
+    
+      <NavigationContainer> 
+        <Tab.Navigator screenOptions={({route})=> ({tabBarIcon:({focused, color,size})=> {
+
+          let iconName
+
+          if(route.name === '홈'){
+            iconName = focused ? 'home': 'home-outline'
+          } else if(route.name === '분류'){
+            iconName = focused ? 'podium': 'podium-outline'
+          } else if(route.name === '굿즈'){
+            iconName = focused ? 'basket': 'basket-outline'
+          } else if(route.name === '마이'){
+            iconName = focused ? 'settings': 'settings-outline'
+          }
+
+          return <Icon name={iconName} size={size} color={color}></Icon>
+
+        },
+        })}>
+
+          <Tab.Screen name='홈' component={HomeScreen}></Tab.Screen>
+          <Tab.Screen name='분류' component={BaseScreen}></Tab.Screen>
+          <Tab.Screen name='굿즈' component={SettingScreen}></Tab.Screen>
+          <Tab.Screen name='마이' component={MyScreen}></Tab.Screen>
+
+        </Tab.Navigator>
+
+      </NavigationContainer>
+    // 네비 바 완성 이제 스크린 폴더 내 4개 이동탭 파일로 이동
+  )
+}
