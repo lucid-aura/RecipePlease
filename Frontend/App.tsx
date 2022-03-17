@@ -13,10 +13,11 @@ npm install react-native-vector-icons
 */
 
 import Icon from 'react-native-vector-icons/Ionicons' //버전별 확인후 아이콘 패키지 설치 재 요망
-import BaseScreen from './src/screens/BaseScreen'; //src->screens 하위 4개 네비게이션 바 생성 시작
+import RecipeHomeScreen from './src/screens/RecipeScreen'; //src->screens 하위 4개 네비게이션 바 생성 시작
 import HomeScreen from './src/screens/HomeScreen';
 import MyScreen from './src/screens/MyScreen';
-import SettingScreen from './src/screens/SettingScreen'; //src->screens 하위 4개 네비게이션 바 생성 종료
+import GoodsScreen from './src/screens/GoodsScreen'; //src->screens 하위 4개 네비게이션 바 생성 종료
+import RecipeScreen from './src/screens/RecipeScreen';
 
 const Tab = createBottomTabNavigator() // 탭 시 네비게이션 하단바 응답처리
 
@@ -46,8 +47,8 @@ export default function App(){
         })}>
 
           <Tab.Screen name='홈' component={HomeScreen}></Tab.Screen>
-          <Tab.Screen name='분류' component={BaseScreen}></Tab.Screen>
-          <Tab.Screen name='굿즈' component={SettingScreen}></Tab.Screen>
+          <Tab.Screen name='분류' component={RecipeScreen}></Tab.Screen>
+          <Tab.Screen name='굿즈' component={GoodsScreen}></Tab.Screen>
           <Tab.Screen name='마이' component={MyScreen}></Tab.Screen>
 
         </Tab.Navigator>

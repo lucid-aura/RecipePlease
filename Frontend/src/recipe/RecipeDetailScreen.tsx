@@ -1,27 +1,20 @@
 import { useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React from "react";
+import React, { createContext, useContext } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
-import DetailScreen from "../detail/DetailScreen";
-import HomeScreen from "../detail/HomeScreen";
 
 const Stack = createNativeStackNavigator()
+const context = createContext({})
 
-export default function RecipeScreen(){
-
+export default function RecipeDetailScreen(){
+    
     const navigation = useNavigation()
+    const url = useContext(context)
 
     return(
         <View style={styles.container}>
-            <Text>Recipe Screen</Text>
-            <Button title="검색결과로 이동" onPress={()=>navigation.navigate('Detail')}></Button>
-            
-            <Stack.Navigator>
-                <Stack.Screen name="Home" component={HomeScreen}></Stack.Screen>
-
-                <Stack.Screen name="Detail" component={DetailScreen}></Stack.Screen>
-
-            </Stack.Navigator>
+            <Text>Recipe Detail Screen</Text>
+            <Text>itemId: {JSON.stringify(url)}</Text>
 
         </View>
     )

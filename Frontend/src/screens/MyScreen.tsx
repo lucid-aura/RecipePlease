@@ -1,9 +1,9 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import HomeScreen from '../mypage/HomeScreen';
-import LoginScreen from '../mypage/LoginScreen';
-import UploadScreen from '../mypage/UploadScreen';
+import MyPageHomeScreen from '../mypage/MyPageHomeScreen';
+import MyPageLoginScreen from '../mypage/MyPageLoginScreen';
+import MyPageUploadScreen from '../mypage/MyPageUploadScreen';
 
 /*
 npm install react-native-gesture-handler
@@ -21,11 +21,11 @@ export default function MyScreen(){
 
     return(
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen}></Stack.Screen>
+        <Stack.Screen name="Home" component={MyPageHomeScreen}></Stack.Screen>
 
-        <Stack.Screen name="Login" component={LoginScreen}></Stack.Screen>
+        <Stack.Screen name="Login" component={MyPageLoginScreen}></Stack.Screen>
 
-        <Stack.Screen name="Upload" component={UploadScreen}></Stack.Screen>
+        <Stack.Screen name="Upload" component={MyPageUploadScreen}></Stack.Screen>
 
       </Stack.Navigator>
       
