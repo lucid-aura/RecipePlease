@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Text,StyleSheet, Button } from "react-native";
 
-export default function HomeScreen(){
+export default function MyPageHomeScreen(){
 
     const navigation = useNavigation()
 
