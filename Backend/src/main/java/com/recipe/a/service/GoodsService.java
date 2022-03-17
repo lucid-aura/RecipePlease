@@ -4,20 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.recipe.a.dao.GoodsDao;
+import com.recipe.a.dao.MembersDao;
 import com.recipe.a.dao.PhotoDao;
 import com.recipe.a.dao.RatingDao;
-import com.recipe.a.dao.RecipeDao;
-import com.recipe.a.dao.RecipeLikeDao;
 
 @Service
 @Transactional
-public class RecipeService {
+public class GoodsService {
 
 	@Autowired
-	RecipeDao recipeDao;
-	
-	@Autowired
-	RecipeLikeDao recipeLikeDao;
+	GoodsDao goodsDao;
 	
 	@Autowired
 	RatingDao ratingDao;
@@ -25,8 +22,8 @@ public class RecipeService {
 	@Autowired
 	PhotoDao photoDao;
 	
-	public int countRecipe() {
-		System.out.println("RecipeService");
-		return recipeDao.countRecipe();
+	public int countGoods() {
+		System.out.println("GoodsService");
+		return goodsDao.countGoods();
 	}
 }

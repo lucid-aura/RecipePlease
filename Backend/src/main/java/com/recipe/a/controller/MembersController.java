@@ -5,30 +5,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.recipe.a.service.MembersService;
 import com.recipe.a.service.RecipeLikeService;
-import com.recipe.a.service.RecipeService;
 
 @RestController // @Controller + @ResponseBody -> Restful
-public class RecipeController {
+public class MembersController {
 	
 	@Autowired
-	RecipeService recipeService;
+	MembersService memberService;
 	
 	@Autowired
 	RecipeLikeService recipeLikeService;
 	
-	@RequestMapping(value = "/main", method = {RequestMethod.GET, RequestMethod.POST})
-	public String main() {
-		System.out.println("RecipeController main()");
-		
-		return "Hello World!";
-	}
-	
-	
-	@RequestMapping(value = "/countRecipe", method = {RequestMethod.GET, RequestMethod.POST})
-	public String countRecipe() {
-		System.out.println("RecipeController countRecipe()");
-		int res = recipeService.countRecipe();
+	@RequestMapping(value = "/countMembers", method = {RequestMethod.GET, RequestMethod.POST})
+	public String countMembers() {
+		System.out.println("MembersController countMembers()");
+		int res = memberService.countMembers();
 		System.out.println(res);
 		return "개수는: " + res;
 	}

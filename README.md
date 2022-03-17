@@ -1,12 +1,12 @@
-# 테스트
+# RecipePlease
 
-## 테스트
+## 시큐어코딩을 적용한 앱 개발자 양성 과정
 
-### 테스트
+### 파이널 프로젝트
 
+레시피를 부탁해
 ---
 
-```javascript
-let test = "test";//!!!!!
-console.log(test);
+```
+
 ```
