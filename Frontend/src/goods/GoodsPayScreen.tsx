@@ -1,14 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function LoginScreen(){
+export default function GoodsPayScreen(){
 
     return(
         <View style={styles.container}>
-            <Text>Login Screen</Text>
+            <Text>Goods Pay Screen</Text>
         </View>
     )
-}
+} //굿즈 페이지
 
 const styles = StyleSheet.create({
     container: {
@@ -16,4 +16,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     }
-})
+})//css
