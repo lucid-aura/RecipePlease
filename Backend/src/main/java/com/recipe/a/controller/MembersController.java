@@ -1,10 +1,15 @@
 package com.recipe.a.controller;
 
+import java.lang.reflect.Member;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.recipe.a.dto.MembersDto;
 import com.recipe.a.service.MembersService;
 import com.recipe.a.service.RecipeLikeService;
 
@@ -17,11 +22,44 @@ public class MembersController {
 	@Autowired
 	RecipeLikeService recipeLikeService;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	
 	@RequestMapping(value = "/countMembers", method = {RequestMethod.GET, RequestMethod.POST})
 	public String countMembers() {
 		System.out.println("MembersController countMembers()");
 		int res = memberService.countMembers();
 		System.out.println(res);
 		return "개수는: " + res;
+	}
+	
+	//회원가입 - 노승현
+	@RequestMapping(value = "/regist", method = {RequestMethod.GET, RequestMethod.POST})
+	public String regist(MembersDto dto) {
+		System.out.println("MembersController regist()");
+		Random rnd = new Random();
+		String str[] = new String[4];
+		String pwd = "";
+		for(int i=0; i<str.length; i++) {
+			str[i] = String.valueOf((char) ((int) (rnd.nextInt(26)) + 97));
+			pwd += str[i];
+		}
+		dto.setSalt(pwd);
+		String secretNum = dto.getMember_pwd() + pwd;
+		System.out.println("secretNum: "+secretNum);
+		
+		String encodedPassword = passwordEncoder.encode(secretNum);
+		dto.setMember_pwd(encodedPassword);
+		System.out.println("dto.getMember_pwd" + dto.getMember_pwd() );
+		
+		boolean b = memberService.regist(dto);
+		
+		if (b) {
+			return "yes";
+		} else {
+			return "no";
+		}
+		
 	}
 }
