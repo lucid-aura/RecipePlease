@@ -6,12 +6,12 @@ public class MembersDto {
 	private String member_nickname;
 	private String member_email;
 	private String member_phone;
-	private int member_coin;
-	private String member_main_addr;
-	private String member_detail_addr;
-	private String member_zipcode;
-	private String member_name;
-	private String salt;
+	private int member_coin;				// 코인
+	private String member_main_addr;		// 주소
+	private String member_detail_addr;		// 상세주소
+	private String member_zipcode;			// 우편번호
+	private String member_name;				// 이름
+	private String salt;					// 암호화 할 때 번호
 	
 	public MembersDto(String member_id, String member_pwd, String member_nickname, String member_email,
 			String member_phone, int member_coin, String member_main_addr, String member_detail_addr,
