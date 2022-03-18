@@ -8,11 +8,26 @@ public class RecipeDto {
 	private String recipe_big_category;
 	private String recipe_small_category;
 	private String recipe_goods_tag;
-	private int recipe_open;
+	private int recipe_price;
 	private float recipe_rating;
 	
+	
+	
+	public RecipeDto(String member_id, String recipe_title, String recipe_content, String recipe_big_category,
+			String recipe_small_category, String recipe_goods_tag, int recipe_price) {
+		super();
+		this.member_id = member_id;
+		this.recipe_title = recipe_title;
+		this.recipe_content = recipe_content;
+		this.recipe_big_category = recipe_big_category;
+		this.recipe_small_category = recipe_small_category;
+		this.recipe_goods_tag = recipe_goods_tag;
+		this.recipe_price = recipe_price;
+		this.recipe_rating = 0.0f;
+	}
+
 	public RecipeDto(int recipe_seq, String member_id, String recipe_title, String recipe_content,
-			String recipe_big_category, String recipe_small_category, String recipe_goods_tag, int recipe_open,
+			String recipe_big_category, String recipe_small_category, String recipe_goods_tag, int recipe_price,
 			float recipe_rating) {
 		super();
 		this.recipe_seq = recipe_seq;
@@ -22,7 +37,7 @@ public class RecipeDto {
 		this.recipe_big_category = recipe_big_category;
 		this.recipe_small_category = recipe_small_category;
 		this.recipe_goods_tag = recipe_goods_tag;
-		this.recipe_open = recipe_open;
+		this.recipe_price = recipe_price;
 		this.recipe_rating = recipe_rating;
 	}
 
@@ -82,12 +97,12 @@ public class RecipeDto {
 		this.recipe_goods_tag = recipe_goods_tag;
 	}
 
-	public int getRecipe_open() {
-		return recipe_open;
+	public int getRecipe_price() {
+		return recipe_price;
 	}
 
-	public void setRecipe_open(int recipe_open) {
-		this.recipe_open = recipe_open;
+	public void setRecipe_price(int recipe_price) {
+		this.recipe_price = recipe_price;
 	}
 
 	public float getRecipe_rating() {
@@ -103,7 +118,7 @@ public class RecipeDto {
 		return "RecipeDto [recipe_seq=" + recipe_seq + ", member_id=" + member_id + ", recipe_title=" + recipe_title
 				+ ", recipe_content=" + recipe_content + ", recipe_big_category=" + recipe_big_category
 				+ ", recipe_small_category=" + recipe_small_category + ", recipe_goods_tag=" + recipe_goods_tag
-				+ ", recipe_open=" + recipe_open + ", recipe_rating=" + recipe_rating + "]";
+				+ ", recipe_price=" + recipe_price + ", recipe_rating=" + recipe_rating + "]";
 	}
 	
 	

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.recipe.a.dto.RecipeDto;
 import com.recipe.a.service.RecipeLikeService;
 import com.recipe.a.service.RecipeService;
 
@@ -29,6 +30,16 @@ public class RecipeController {
 	public String countRecipe() {
 		System.out.println("RecipeController countRecipe()");
 		int res = recipeService.countRecipe();
+		System.out.println(res);
+		return "개수는: " + res;
+	}
+	
+	@RequestMapping(value ="/insertRecipe", method = {RequestMethod.GET, RequestMethod.POST})
+	public String insertRecipe() {
+		System.out.println("RecipeController insertRecipe()");
+		RecipeDto temp = new RecipeDto("test", "title", "content", "big", "small", "tag", 0);
+
+		int res = recipeService.insertRecipe(temp);
 		System.out.println(res);
 		return "개수는: " + res;
 	}
