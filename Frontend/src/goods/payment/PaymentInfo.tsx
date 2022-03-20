@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
-import { BackHandler, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, BackHandler, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import RNPickerSelect from 'react-native-picker-select';
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -137,22 +137,26 @@ export default function PaymentInfo({navigation}:any, props:any) {
                         <TouchableOpacity 
                             style={[styles.paymentBtn, styles.btn]}
                             onPress={() => {
-                                AsyncStorage.setItem('payment', JSON.stringify({
-                                    pg: pg,
-                                    pay_method: 'card',
-                                    merchant_uid: `ORD-${uid}-userId`,   // 사용자 아이디를 추가
-                                    name: '카카오 편수냄비',
-                                    amount: amount,
-                                    buyer_email: 'kakao@kakao.com',
-                                    buyer_name: buyerName,
-                                    buyer_tel: buyerTel,
-                                    buyer_addr: buyerAddr,
-                                    buyer_postcode: '12345',
-                                    app_scheme: 'example',
-                                    escrow: false
-                                }));
-                                setModalVisible(false);
-                                navigation.navigate('payment');
+                                if(pg !== '') {
+                                    AsyncStorage.setItem('payment', JSON.stringify({
+                                        pg: pg,
+                                        pay_method: 'card',
+                                        merchant_uid: `ORD-${uid}-userId`,   // 사용자 아이디를 추가
+                                        name: '카카오 편수냄비',
+                                        amount: amount,
+                                        buyer_email: 'kakao@kakao.com',
+                                        buyer_name: buyerName,
+                                        buyer_tel: buyerTel,
+                                        buyer_addr: buyerAddr,
+                                        buyer_postcode: '12345',
+                                        app_scheme: 'example',
+                                        escrow: false
+                                    }));
+                                    setModalVisible(false);
+                                    navigation.navigate('payment');
+                                } else {
+                                    Alert.alert('결제수단 확인', '결제수단이 선택되지 않았습니다');
+                                }
                             }}
                         >
                             <Text style={styles.btnText}>결제하기</Text>
