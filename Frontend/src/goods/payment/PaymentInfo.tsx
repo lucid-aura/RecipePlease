@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
-import { Modal, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { BackHandler, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import RNPickerSelect from 'react-native-picker-select';
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -159,7 +159,7 @@ export default function PaymentInfo({navigation}:any, props:any) {
                         </TouchableOpacity>
                         <TouchableOpacity 
                             style={[styles.calcelBtn, styles.btn]}
-                            // onPress={navigation.navigate('')}
+                            onPress={() => navigation.goBack()}
                         >
                             <Text style={styles.btnText}>돌아가기</Text>
                         </TouchableOpacity>
