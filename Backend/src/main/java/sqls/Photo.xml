@@ -9,5 +9,16 @@
 	SELECT COUNT(*) FROM PHOTO
 </select>
 
+<select id="getPhoto" parameterType="com.recipe.a.dto.PhotoDto" resultType="com.recipe.a.dto.PhotoDto">
+	<!-- SELECT PHOTO_SEQ, DOCS_SEQ, PHOTO_TITLE, PHOTO_CONTENT, PHOTO_CATEGORY, PHOTO_URL  -->
+	SELECT *
+	FROM PHOTO 
+	<!-- WHERE DOCS_SEQ=#{docs_seq} AND PHOTO_CATEGORY=#{photo_category} -->
+	
+</select>
+
+<select id="test" resultType="Integer">
+	SELECT PHOTO_SEQ FROM PHOTO
+</select>
 
 </mapper>

@@ -14,9 +14,11 @@ import com.recipe.a.dao.PaymentListDao;
 @RequiredArgsConstructor
 public class PaymentService {
 
-	private final PaymentDao paymentDao;
+	@Autowired
+	PaymentDao paymentDao;
 
-	private final PaymentListDao paymentListDao;
+	@Autowired
+	PaymentListDao paymentListDao;
 	
 	public int countPayment() {
 		System.out.println("PaymentService");

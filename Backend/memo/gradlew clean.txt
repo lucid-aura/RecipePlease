@@ -1,0 +1,5 @@
+// android 디렉터리에서
+$ chmod +x gradlew
+
+// android에서 하나 나와서
+$ cd android && ./gradlew clean
