@@ -22,6 +22,7 @@
     "iamport-react-native": "^2.0.0-rc.2",
     "react": "17.0.2",
     "react-native": "0.67.3",
+    "react-native-daum-postcode": "^1.0.11",
     "react-native-flexi-radio-button": "^0.2.2",
     "react-native-gesture-handler": "^2.3.2",
     "react-native-image-slider-box": "^1.1.20",

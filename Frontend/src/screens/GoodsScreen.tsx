@@ -3,6 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import GoodsHomeScreen from '../goods/GoodsHomeScreen';
 import Payment from '../goods/payment/Payment';
+import PaymentAddr from '../goods/payment/PaymentAddr';
 import PaymentFailed from '../goods/payment/PaymentFailed';
 import PaymentInfo from '../goods/payment/PaymentInfo';
 import PaymentResult from '../goods/payment/PaymentResult';
@@ -28,6 +29,7 @@ export default function GoodsScreen(){
         <Stack.Screen name="payment" component={Payment} options={{title: "결제"}} />
         <Stack.Screen name="paymentResult" component={PaymentResult} options={{title: "결제완료"}} />
         <Stack.Screen name="paymentFailed" component={PaymentFailed} options={{title: "결제실패"}} />
+        <Stack.Screen name="paymentAddr" component={PaymentAddr} options={{title: "주소변환"}} />
 
       </Stack.Navigator>
     )
