@@ -1,110 +1,124 @@
 package com.recipe.a.dto;
 
 public class RecipeDto {
-	private int recipe_seq;
-	private String member_id;
-	private String recipe_title;
-	private String recipe_content;
-	private String recipe_big_category;
-	private String recipe_small_category;
-	private String recipe_goods_tag;
-	private int recipe_open;
-	private float recipe_rating;
+	private int recipeSeq;
+	private String memberId;
+	private String recipeTitle;
+	private String recipeContent;
+	private String recipeBigCategory;
+	private String recipeSmallCategory;
+	private String recipeGoodsTag;
+	private int recipePrice;
+	private float recipeRating;
 	
-	public RecipeDto(int recipe_seq, String member_id, String recipe_title, String recipe_content,
-			String recipe_big_category, String recipe_small_category, String recipe_goods_tag, int recipe_open,
-			float recipe_rating) {
+	
+	public RecipeDto(String memberId, String recipeTitle, String recipeContent, String recipeBigCategory,
+			String recipeSmallCategory, String recipeGoodsTag, int recipePrice) {
 		super();
-		this.recipe_seq = recipe_seq;
-		this.member_id = member_id;
-		this.recipe_title = recipe_title;
-		this.recipe_content = recipe_content;
-		this.recipe_big_category = recipe_big_category;
-		this.recipe_small_category = recipe_small_category;
-		this.recipe_goods_tag = recipe_goods_tag;
-		this.recipe_open = recipe_open;
-		this.recipe_rating = recipe_rating;
+		this.memberId = memberId;
+		this.recipeTitle = recipeTitle;
+		this.recipeContent = recipeContent;
+		this.recipeBigCategory = recipeBigCategory;
+		this.recipeSmallCategory = recipeSmallCategory;
+		this.recipeGoodsTag = recipeGoodsTag;
+		this.recipePrice = recipePrice;
+		this.recipeRating = 0.0F;
 	}
 
-	public int getRecipe_seq() {
-		return recipe_seq;
+	public RecipeDto(int recipeSeq, String memberId, String recipeTitle, String recipeContent, String recipeBigCategory,
+			String recipeSmallCategory, String recipeGoodsTag, int recipePrice, float recipeRating) {
+		super();
+		this.recipeSeq = recipeSeq;
+		this.memberId = memberId;
+		this.recipeTitle = recipeTitle;
+		this.recipeContent = recipeContent;
+		this.recipeBigCategory = recipeBigCategory;
+		this.recipeSmallCategory = recipeSmallCategory;
+		this.recipeGoodsTag = recipeGoodsTag;
+		this.recipePrice = recipePrice;
+		this.recipeRating = recipeRating;
 	}
 
-	public void setRecipe_seq(int recipe_seq) {
-		this.recipe_seq = recipe_seq;
+	public int getRecipeSeq() {
+		return recipeSeq;
 	}
 
-	public String getMember_id() {
-		return member_id;
+	public void setRecipeSeq(int recipeSeq) {
+		this.recipeSeq = recipeSeq;
 	}
 
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
+	public String getMemberId() {
+		return memberId;
 	}
 
-	public String getRecipe_title() {
-		return recipe_title;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
-	public void setRecipe_title(String recipe_title) {
-		this.recipe_title = recipe_title;
+	public String getRecipeTitle() {
+		return recipeTitle;
 	}
 
-	public String getRecipe_content() {
-		return recipe_content;
+	public void setRecipeTitle(String recipeTitle) {
+		this.recipeTitle = recipeTitle;
 	}
 
-	public void setRecipe_content(String recipe_content) {
-		this.recipe_content = recipe_content;
+	public String getRecipeContent() {
+		return recipeContent;
 	}
 
-	public String getRecipe_big_category() {
-		return recipe_big_category;
+	public void setRecipeContent(String recipeContent) {
+		this.recipeContent = recipeContent;
 	}
 
-	public void setRecipe_big_category(String recipe_big_category) {
-		this.recipe_big_category = recipe_big_category;
+	public String getRecipeBigCategory() {
+		return recipeBigCategory;
 	}
 
-	public String getRecipe_small_category() {
-		return recipe_small_category;
+	public void setRecipeBigCategory(String recipeBigCategory) {
+		this.recipeBigCategory = recipeBigCategory;
 	}
 
-	public void setRecipe_small_category(String recipe_small_category) {
-		this.recipe_small_category = recipe_small_category;
+	public String getRecipeSmallCategory() {
+		return recipeSmallCategory;
 	}
 
-	public String getRecipe_goods_tag() {
-		return recipe_goods_tag;
+	public void setRecipeSmallCategory(String recipeSmallCategory) {
+		this.recipeSmallCategory = recipeSmallCategory;
 	}
 
-	public void setRecipe_goods_tag(String recipe_goods_tag) {
-		this.recipe_goods_tag = recipe_goods_tag;
+	public String getRecipeGoodsTag() {
+		return recipeGoodsTag;
 	}
 
-	public int getRecipe_open() {
-		return recipe_open;
+	public void setRecipeGoodsTag(String recipeGoodsTag) {
+		this.recipeGoodsTag = recipeGoodsTag;
 	}
 
-	public void setRecipe_open(int recipe_open) {
-		this.recipe_open = recipe_open;
+	public int getRecipePrice() {
+		return recipePrice;
 	}
 
-	public float getRecipe_rating() {
-		return recipe_rating;
+	public void setRecipePrice(int recipePrice) {
+		this.recipePrice = recipePrice;
 	}
 
-	public void setRecipe_rating(float recipe_rating) {
-		this.recipe_rating = recipe_rating;
+	public float getRecipeRating() {
+		return recipeRating;
+	}
+
+	public void setRecipeRating(float recipeRating) {
+		this.recipeRating = recipeRating;
 	}
 
 	@Override
 	public String toString() {
-		return "RecipeDto [recipe_seq=" + recipe_seq + ", member_id=" + member_id + ", recipe_title=" + recipe_title
-				+ ", recipe_content=" + recipe_content + ", recipe_big_category=" + recipe_big_category
-				+ ", recipe_small_category=" + recipe_small_category + ", recipe_goods_tag=" + recipe_goods_tag
-				+ ", recipe_open=" + recipe_open + ", recipe_rating=" + recipe_rating + "]";
+		return "RecipeDto [recipeSeq=" + recipeSeq + ", memberId=" + memberId + ", recipeTitle=" + recipeTitle
+				+ ", recipeContent=" + recipeContent + ", recipeBigCategory=" + recipeBigCategory
+				+ ", recipeSmallCategory=" + recipeSmallCategory + ", recipeGoodsTag=" + recipeGoodsTag
+				+ ", recipePrice=" + recipePrice + ", recipeRating=" + recipeRating + "]";
 	}
+	
 	
 	
 }

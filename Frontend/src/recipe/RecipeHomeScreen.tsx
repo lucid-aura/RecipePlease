@@ -32,7 +32,9 @@ export default function RecipeHomeScreen(){
                 parentWidth={200}
                 onCurrentImagePressed={index => 
                     navigation.navigate('RecipeDetail',{
-                        url: testImage[index]
+                        url: testImage[index],
+                        seq: 2,
+                        category: 'recipe'
                     })}
                 dotColor="#FFEE58"
                 inactiveDotColor="#90A4AE"

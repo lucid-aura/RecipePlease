@@ -1,105 +1,123 @@
 package com.recipe.a.dto;
 
 public class MembersDto {
-	private String member_id;
-	private String member_pwd;
-	private String member_nickname;
-	private String member_email;
-	private String member_phone;
-	private int member_coin;				// 코인
-	private String member_main_addr;		// 주소
-	private String member_detail_addr;		// 상세주소
-	private String member_zipcode;			// 우편번호
-	private String member_gender;
-	private String member_name;				// 이름
-	private String member_grade;
-	private String salt;					// 암호화 할 때 번호
+	private String memberId;
+	private String memberPwd;
+	private String memberNickname;
+	private String memberEmail;
+	private String memberPhone;
+	private int memberCoin;
+	private String memberMainAddr;
+	private String memberDetailAddr;
+	private String memberZipcode;
+	private String memberGender;
+	private String memberName;
+	private String salt;
 	
-	
-	
-	public MembersDto(String member_id, String member_pwd, String member_nickname, String member_email,
-			String member_phone, int member_coin, String member_main_addr, String member_detail_addr,
-			String member_zipcode, String member_gender, String member_name, String member_grade, String salt) {
+	public MembersDto(String memberId, String memberPwd, String memberNickname, String memberEmail, String memberPhone,
+			int memberCoin, String memberMainAddr, String memberDetailAddr, String memberZipcode, String memberGender,
+			String memberName, String salt) {
 		super();
-		this.member_id = member_id;
-		this.member_pwd = member_pwd;
-		this.member_nickname = member_nickname;
-		this.member_email = member_email;
-		this.member_phone = member_phone;
-		this.member_coin = member_coin;
-		this.member_main_addr = member_main_addr;
-		this.member_detail_addr = member_detail_addr;
-		this.member_zipcode = member_zipcode;
-		this.member_gender = member_gender;
-		this.member_name = member_name;
-		this.member_grade = member_grade;
+		this.memberId = memberId;
+		this.memberPwd = memberPwd;
+		this.memberNickname = memberNickname;
+		this.memberEmail = memberEmail;
+		this.memberPhone = memberPhone;
+		this.memberCoin = memberCoin;
+		this.memberMainAddr = memberMainAddr;
+		this.memberDetailAddr = memberDetailAddr;
+		this.memberZipcode = memberZipcode;
+		this.memberGender = memberGender;
+		this.memberName = memberName;
 		this.salt = salt;
 	}
-	public String getMember_id() {
-		return member_id;
+
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
-	public String getMember_pwd() {
-		return member_pwd;
+
+	public String getMemberPwd() {
+		return memberPwd;
 	}
-	public void setMember_pwd(String member_pwd) {
-		this.member_pwd = member_pwd;
+
+	public void setMemberPwd(String memberPwd) {
+		this.memberPwd = memberPwd;
 	}
-	public String getMember_nickname() {
-		return member_nickname;
+
+	public String getMemberNickname() {
+		return memberNickname;
 	}
-	public void setMember_nickname(String member_nickname) {
-		this.member_nickname = member_nickname;
+
+	public void setMemberNickname(String memberNickname) {
+		this.memberNickname = memberNickname;
 	}
-	public String getMember_email() {
-		return member_email;
+
+	public String getMemberEmail() {
+		return memberEmail;
 	}
-	public void setMember_email(String member_email) {
-		this.member_email = member_email;
+
+	public void setMemberEmail(String memberEmail) {
+		this.memberEmail = memberEmail;
 	}
-	public String getMember_phone() {
-		return member_phone;
+
+	public String getMemberPhone() {
+		return memberPhone;
 	}
-	public void setMember_phone(String member_phone) {
-		this.member_phone = member_phone;
+
+	public void setMemberPhone(String memberPhone) {
+		this.memberPhone = memberPhone;
 	}
-	public int getMember_coin() {
-		return member_coin;
+
+	public int getMemberCoin() {
+		return memberCoin;
 	}
-	public void setMember_coin(int member_coin) {
-		this.member_coin = member_coin;
+
+	public void setMemberCoin(int memberCoin) {
+		this.memberCoin = memberCoin;
 	}
-	public String getMember_main_addr() {
-		return member_main_addr;
+
+	public String getMemberMainAddr() {
+		return memberMainAddr;
 	}
-	public void setMember_main_addr(String member_main_addr) {
-		this.member_main_addr = member_main_addr;
+
+	public void setMemberMainAddr(String memberMainAddr) {
+		this.memberMainAddr = memberMainAddr;
 	}
-	public String getMember_detail_addr() {
-		return member_detail_addr;
+
+	public String getMemberDetailAddr() {
+		return memberDetailAddr;
 	}
-	public void setMember_detail_addr(String member_detail_addr) {
-		this.member_detail_addr = member_detail_addr;
+
+	public void setMemberDetailAddr(String memberDetailAddr) {
+		this.memberDetailAddr = memberDetailAddr;
 	}
-	public String getMember_zipcode() {
-		return member_zipcode;
+
+	public String getMemberZipcode() {
+		return memberZipcode;
 	}
-	public void setMember_zipcode(String member_zipcode) {
-		this.member_zipcode = member_zipcode;
+
+	public void setMemberZipcode(String memberZipcode) {
+		this.memberZipcode = memberZipcode;
 	}
-	public String getMember_gender() {
-		return member_gender;
+
+	public String getMemberGender() {
+		return memberGender;
 	}
-	public void setMember_gender(String member_gender) {
-		this.member_gender = member_gender;
+
+	public void setMemberGender(String memberGender) {
+		this.memberGender = memberGender;
 	}
-	public String getMember_name() {
-		return member_name;
+
+	public String getMemberName() {
+		return memberName;
 	}
-	public void setMember_name(String member_name) {
-		this.member_name = member_name;
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 	public String getMember_grade() {
 		return member_grade;
@@ -115,16 +133,12 @@ public class MembersDto {
 	}
 	@Override
 	public String toString() {
-		return "MembersDto [member_id=" + member_id + ", member_pwd=" + member_pwd + ", member_nickname="
-				+ member_nickname + ", member_email=" + member_email + ", member_phone=" + member_phone
-				+ ", member_coin=" + member_coin + ", member_main_addr=" + member_main_addr + ", member_detail_addr="
-				+ member_detail_addr + ", member_zipcode=" + member_zipcode + ", member_gender=" + member_gender
-				+ ", member_name=" + member_name + ", member_grade=" + member_grade + ", salt=" + salt + "]";
+		return "MembersDto [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberNickname=" + memberNickname
+				+ ", memberEmail=" + memberEmail + ", memberPhone=" + memberPhone + ", memberCoin=" + memberCoin
+				+ ", memberMainAddr=" + memberMainAddr + ", memberDetailAddr=" + memberDetailAddr + ", memberZipcode="
+				+ memberZipcode + ", memberGender=" + memberGender + ", memberName=" + memberName + ", salt=" + salt
+				+ "]";
 	}
-	
-	
-	
-	
 	
 	
 }
