@@ -1,25 +1,28 @@
 package com.recipe.a.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import com.recipe.a.dto.PaymentDto;
+import com.recipe.a.service.PaymentService;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.recipe.a.service.GoodsService;
-import com.recipe.a.service.PaymentService;
 
-
-@RestController // @Controller + @ResponseBody -> Restful
+@RestController
+@RequiredArgsConstructor
 public class PaymentController {
 	
-	@Autowired
-	PaymentService service;
-	
-	@RequestMapping(value = "/countPayment", method = {RequestMethod.GET, RequestMethod.POST})
-	public String countMembers() {
-		System.out.println("PaymentController countPayment()");
-		int res = service.countPayment();
-		System.out.println(res);
-		return "개수는: " + res;
+	private final Logger logger = LoggerFactory.getLogger(PaymentController.class);
+	private final PaymentService service;
+
+	@PostMapping("/addGoodsShoppingList")
+	public String addGoodsShoppingList(PaymentDto dto) {
+		logger.info("PaymentController addGoodsShoopingList()");
+		int res = service.addGoodsShoppingList(dto);
+		if (res > 0) {
+			return "추가됨";
+		}
+		return "추가되지 않음";
 	}
 }
