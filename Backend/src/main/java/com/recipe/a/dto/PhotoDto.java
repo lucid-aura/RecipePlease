@@ -1,87 +1,82 @@
 package com.recipe.a.dto;
 
 public class PhotoDto {
-	private int photo_seq;
-	private int recipe_seq;
-	private int goods_seq;
-	private String photo_title;
-	private String photo_content;
-	private String photo_category;
-	private String photo_url;
+	private int photoSeq;
+	private int docsSeq;
+	private String photoTitle;
+	private String photoContent;
+	private String photoCategory;
+	private String photoUrl;
 	
-	public PhotoDto(int photo_seq, int recipe_seq, int goods_seq, String photo_title, String photo_content,
-			String photo_category, String photo_url) {
+	public PhotoDto() {
+	}
+
+	public PhotoDto(int photoSeq, int docsSeq, String photoTitle, String photoContent, String photoCategory,
+			String photoUrl) {
 		super();
-		this.photo_seq = photo_seq;
-		this.recipe_seq = recipe_seq;
-		this.goods_seq = goods_seq;
-		this.photo_title = photo_title;
-		this.photo_content = photo_content;
-		this.photo_category = photo_category;
-		this.photo_url = photo_url;
+		this.photoSeq = photoSeq;
+		this.docsSeq = docsSeq;
+		this.photoTitle = photoTitle;
+		this.photoContent = photoContent;
+		this.photoCategory = photoCategory;
+		this.photoUrl = photoUrl;
 	}
 
-	public int getPhoto_seq() {
-		return photo_seq;
+	public int getPhotoSeq() {
+		return photoSeq;
 	}
 
-	public void setPhoto_seq(int photo_seq) {
-		this.photo_seq = photo_seq;
+	public void setPhotoSeq(int photoSeq) {
+		this.photoSeq = photoSeq;
 	}
 
-	public int getRecipe_seq() {
-		return recipe_seq;
+	public int getDocsSeq() {
+		return docsSeq;
 	}
 
-	public void setRecipe_seq(int recipe_seq) {
-		this.recipe_seq = recipe_seq;
+	public void setDocsSeq(int docsSeq) {
+		this.docsSeq = docsSeq;
 	}
 
-	public int getGoods_seq() {
-		return goods_seq;
+	public String getPhotoTitle() {
+		return photoTitle;
 	}
 
-	public void setGoods_seq(int goods_seq) {
-		this.goods_seq = goods_seq;
+	public void setPhotoTitle(String photoTitle) {
+		this.photoTitle = photoTitle;
 	}
 
-	public String getPhoto_title() {
-		return photo_title;
+	public String getPhotoContent() {
+		return photoContent;
 	}
 
-	public void setPhoto_title(String photo_title) {
-		this.photo_title = photo_title;
+	public void setPhotoContent(String photoContent) {
+		this.photoContent = photoContent;
 	}
 
-	public String getPhoto_content() {
-		return photo_content;
+	public String getPhotoCategory() {
+		return photoCategory;
 	}
 
-	public void setPhoto_content(String photo_content) {
-		this.photo_content = photo_content;
+	public void setPhotoCategory(String photoCategory) {
+		this.photoCategory = photoCategory;
 	}
 
-	public String getPhoto_category() {
-		return photo_category;
+	public String getPhotoUrl() {
+		return photoUrl;
 	}
 
-	public void setPhoto_category(String photo_category) {
-		this.photo_category = photo_category;
-	}
-
-	public String getPhoto_url() {
-		return photo_url;
-	}
-
-	public void setPhoto_url(String photo_url) {
-		this.photo_url = photo_url;
+	public void setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
 	}
 
 	@Override
 	public String toString() {
-		return "PhotoDto [photo_seq=" + photo_seq + ", recipe_seq=" + recipe_seq + ", goods_seq=" + goods_seq
-				+ ", photo_title=" + photo_title + ", photo_content=" + photo_content + ", photo_category="
-				+ photo_category + ", photo_url=" + photo_url + "]";
+		return "PhotoDto [photoSeq=" + photoSeq + ", docsSeq=" + docsSeq + ", photoTitle=" + photoTitle
+				+ ", photoContent=" + photoContent + ", photoCategory=" + photoCategory + ", photoUrl=" + photoUrl
+				+ "]";
 	}
+	
+	
 	
 }

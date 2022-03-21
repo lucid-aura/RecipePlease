@@ -1,125 +1,124 @@
 package com.recipe.a.dto;
 
 public class RecipeDto {
-	private int recipe_seq;
-	private String member_id;
-	private String recipe_title;
-	private String recipe_content;
-	private String recipe_big_category;
-	private String recipe_small_category;
-	private String recipe_goods_tag;
-	private int recipe_price;
-	private float recipe_rating;
+	private int recipeSeq;
+	private String memberId;
+	private String recipeTitle;
+	private String recipeContent;
+	private String recipeBigCategory;
+	private String recipeSmallCategory;
+	private String recipeGoodsTag;
+	private int recipePrice;
+	private float recipeRating;
 	
 	
-	
-	public RecipeDto(String member_id, String recipe_title, String recipe_content, String recipe_big_category,
-			String recipe_small_category, String recipe_goods_tag, int recipe_price) {
+	public RecipeDto(String memberId, String recipeTitle, String recipeContent, String recipeBigCategory,
+			String recipeSmallCategory, String recipeGoodsTag, int recipePrice) {
 		super();
-		this.member_id = member_id;
-		this.recipe_title = recipe_title;
-		this.recipe_content = recipe_content;
-		this.recipe_big_category = recipe_big_category;
-		this.recipe_small_category = recipe_small_category;
-		this.recipe_goods_tag = recipe_goods_tag;
-		this.recipe_price = recipe_price;
-		this.recipe_rating = 0.0f;
+		this.memberId = memberId;
+		this.recipeTitle = recipeTitle;
+		this.recipeContent = recipeContent;
+		this.recipeBigCategory = recipeBigCategory;
+		this.recipeSmallCategory = recipeSmallCategory;
+		this.recipeGoodsTag = recipeGoodsTag;
+		this.recipePrice = recipePrice;
+		this.recipeRating = 0.0F;
 	}
 
-	public RecipeDto(int recipe_seq, String member_id, String recipe_title, String recipe_content,
-			String recipe_big_category, String recipe_small_category, String recipe_goods_tag, int recipe_price,
-			float recipe_rating) {
+	public RecipeDto(int recipeSeq, String memberId, String recipeTitle, String recipeContent, String recipeBigCategory,
+			String recipeSmallCategory, String recipeGoodsTag, int recipePrice, float recipeRating) {
 		super();
-		this.recipe_seq = recipe_seq;
-		this.member_id = member_id;
-		this.recipe_title = recipe_title;
-		this.recipe_content = recipe_content;
-		this.recipe_big_category = recipe_big_category;
-		this.recipe_small_category = recipe_small_category;
-		this.recipe_goods_tag = recipe_goods_tag;
-		this.recipe_price = recipe_price;
-		this.recipe_rating = recipe_rating;
+		this.recipeSeq = recipeSeq;
+		this.memberId = memberId;
+		this.recipeTitle = recipeTitle;
+		this.recipeContent = recipeContent;
+		this.recipeBigCategory = recipeBigCategory;
+		this.recipeSmallCategory = recipeSmallCategory;
+		this.recipeGoodsTag = recipeGoodsTag;
+		this.recipePrice = recipePrice;
+		this.recipeRating = recipeRating;
 	}
 
-	public int getRecipe_seq() {
-		return recipe_seq;
+	public int getRecipeSeq() {
+		return recipeSeq;
 	}
 
-	public void setRecipe_seq(int recipe_seq) {
-		this.recipe_seq = recipe_seq;
+	public void setRecipeSeq(int recipeSeq) {
+		this.recipeSeq = recipeSeq;
 	}
 
-	public String getMember_id() {
-		return member_id;
+	public String getMemberId() {
+		return memberId;
 	}
 
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
-	public String getRecipe_title() {
-		return recipe_title;
+	public String getRecipeTitle() {
+		return recipeTitle;
 	}
 
-	public void setRecipe_title(String recipe_title) {
-		this.recipe_title = recipe_title;
+	public void setRecipeTitle(String recipeTitle) {
+		this.recipeTitle = recipeTitle;
 	}
 
-	public String getRecipe_content() {
-		return recipe_content;
+	public String getRecipeContent() {
+		return recipeContent;
 	}
 
-	public void setRecipe_content(String recipe_content) {
-		this.recipe_content = recipe_content;
+	public void setRecipeContent(String recipeContent) {
+		this.recipeContent = recipeContent;
 	}
 
-	public String getRecipe_big_category() {
-		return recipe_big_category;
+	public String getRecipeBigCategory() {
+		return recipeBigCategory;
 	}
 
-	public void setRecipe_big_category(String recipe_big_category) {
-		this.recipe_big_category = recipe_big_category;
+	public void setRecipeBigCategory(String recipeBigCategory) {
+		this.recipeBigCategory = recipeBigCategory;
 	}
 
-	public String getRecipe_small_category() {
-		return recipe_small_category;
+	public String getRecipeSmallCategory() {
+		return recipeSmallCategory;
 	}
 
-	public void setRecipe_small_category(String recipe_small_category) {
-		this.recipe_small_category = recipe_small_category;
+	public void setRecipeSmallCategory(String recipeSmallCategory) {
+		this.recipeSmallCategory = recipeSmallCategory;
 	}
 
-	public String getRecipe_goods_tag() {
-		return recipe_goods_tag;
+	public String getRecipeGoodsTag() {
+		return recipeGoodsTag;
 	}
 
-	public void setRecipe_goods_tag(String recipe_goods_tag) {
-		this.recipe_goods_tag = recipe_goods_tag;
+	public void setRecipeGoodsTag(String recipeGoodsTag) {
+		this.recipeGoodsTag = recipeGoodsTag;
 	}
 
-	public int getRecipe_price() {
-		return recipe_price;
+	public int getRecipePrice() {
+		return recipePrice;
 	}
 
-	public void setRecipe_price(int recipe_price) {
-		this.recipe_price = recipe_price;
+	public void setRecipePrice(int recipePrice) {
+		this.recipePrice = recipePrice;
 	}
 
-	public float getRecipe_rating() {
-		return recipe_rating;
+	public float getRecipeRating() {
+		return recipeRating;
 	}
 
-	public void setRecipe_rating(float recipe_rating) {
-		this.recipe_rating = recipe_rating;
+	public void setRecipeRating(float recipeRating) {
+		this.recipeRating = recipeRating;
 	}
 
 	@Override
 	public String toString() {
-		return "RecipeDto [recipe_seq=" + recipe_seq + ", member_id=" + member_id + ", recipe_title=" + recipe_title
-				+ ", recipe_content=" + recipe_content + ", recipe_big_category=" + recipe_big_category
-				+ ", recipe_small_category=" + recipe_small_category + ", recipe_goods_tag=" + recipe_goods_tag
-				+ ", recipe_price=" + recipe_price + ", recipe_rating=" + recipe_rating + "]";
+		return "RecipeDto [recipeSeq=" + recipeSeq + ", memberId=" + memberId + ", recipeTitle=" + recipeTitle
+				+ ", recipeContent=" + recipeContent + ", recipeBigCategory=" + recipeBigCategory
+				+ ", recipeSmallCategory=" + recipeSmallCategory + ", recipeGoodsTag=" + recipeGoodsTag
+				+ ", recipePrice=" + recipePrice + ", recipeRating=" + recipeRating + "]";
 	}
+	
 	
 	
 }

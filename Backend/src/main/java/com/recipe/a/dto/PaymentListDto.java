@@ -1,67 +1,68 @@
 package com.recipe.a.dto;
 
 public class PaymentListDto {
-	private int payment_list_seq;
-	private int purchase_product_seq;
-	private String payment_list_category;
-	private int payment_count;
-	private int payment_list_pay;
+	private int paymentListSeq;
+	private int purchaseProductSeq;
+	private String paymentListCategory;
+	private int paymentCount;
+	private int paymentListPay;
 	
-	public PaymentListDto(int payment_list_seq, int purchase_product_seq, String payment_list_category,
-			int payment_count, int payment_list_pay) {
+	public PaymentListDto(int paymentListSeq, int purchaseProductSeq, String paymentListCategory, int paymentCount,
+			int paymentListPay) {
 		super();
-		this.payment_list_seq = payment_list_seq;
-		this.purchase_product_seq = purchase_product_seq;
-		this.payment_list_category = payment_list_category;
-		this.payment_count = payment_count;
-		this.payment_list_pay = payment_list_pay;
+		this.paymentListSeq = paymentListSeq;
+		this.purchaseProductSeq = purchaseProductSeq;
+		this.paymentListCategory = paymentListCategory;
+		this.paymentCount = paymentCount;
+		this.paymentListPay = paymentListPay;
 	}
 
-	public int getPayment_list_seq() {
-		return payment_list_seq;
+	public int getPaymentListSeq() {
+		return paymentListSeq;
 	}
 
-	public void setPayment_list_seq(int payment_list_seq) {
-		this.payment_list_seq = payment_list_seq;
+	public void setPaymentListSeq(int paymentListSeq) {
+		this.paymentListSeq = paymentListSeq;
 	}
 
-	public int getPurchase_product_seq() {
-		return purchase_product_seq;
+	public int getPurchaseProductSeq() {
+		return purchaseProductSeq;
 	}
 
-	public void setPurchase_product_seq(int purchase_product_seq) {
-		this.purchase_product_seq = purchase_product_seq;
+	public void setPurchaseProductSeq(int purchaseProductSeq) {
+		this.purchaseProductSeq = purchaseProductSeq;
 	}
 
-	public String getPayment_list_category() {
-		return payment_list_category;
+	public String getPaymentListCategory() {
+		return paymentListCategory;
 	}
 
-	public void setPayment_list_category(String payment_list_category) {
-		this.payment_list_category = payment_list_category;
+	public void setPaymentListCategory(String paymentListCategory) {
+		this.paymentListCategory = paymentListCategory;
 	}
 
-	public int getPayment_count() {
-		return payment_count;
+	public int getPaymentCount() {
+		return paymentCount;
 	}
 
-	public void setPayment_count(int payment_count) {
-		this.payment_count = payment_count;
+	public void setPaymentCount(int paymentCount) {
+		this.paymentCount = paymentCount;
 	}
 
-	public int getPayment_list_pay() {
-		return payment_list_pay;
+	public int getPaymentListPay() {
+		return paymentListPay;
 	}
 
-	public void setPayment_list_pay(int payment_list_pay) {
-		this.payment_list_pay = payment_list_pay;
+	public void setPaymentListPay(int paymentListPay) {
+		this.paymentListPay = paymentListPay;
 	}
 
 	@Override
 	public String toString() {
-		return "PaymentListDto [payment_list_seq=" + payment_list_seq + ", purchase_product_seq=" + purchase_product_seq
-				+ ", payment_list_category=" + payment_list_category + ", payment_count=" + payment_count
-				+ ", payment_list_pay=" + payment_list_pay + "]";
+		return "PaymentListDto [paymentListSeq=" + paymentListSeq + ", purchaseProductSeq=" + purchaseProductSeq
+				+ ", paymentListCategory=" + paymentListCategory + ", paymentCount=" + paymentCount
+				+ ", paymentListPay=" + paymentListPay + "]";
 	}
-
+	
+	
 }

@@ -14,4 +14,7 @@ public interface RecipeDao {
 	public int countRecipe();
 
 	public void insertRecipe(RecipeDto newRecipe);
+
+	public RecipeDto getOneRecipe(int recipeSeq);
+
 }
