@@ -52,7 +52,7 @@ export default function PaymentAddr({navigation}:any) {
                         roadAddr: data.roadAddress,
                         pastAddr: data.jibunAddress,
                     }));
-                    
+
                     navigation.navigate('paymentInfo');
                 }} 
                 onError={(err) => {
@@ -61,8 +61,7 @@ export default function PaymentAddr({navigation}:any) {
             />
 
             <Text>우편번호: {postcode}</Text>
-            <Text>도로명주소: {addr}</Text>
-            <Text>지번주소: {extraAddr}</Text>
+            <Text>주소: {addr}</Text>
         </View>
     )
 }
