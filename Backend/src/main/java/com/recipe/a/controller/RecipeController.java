@@ -25,11 +25,5 @@ public class RecipeController {
 	}
 	
 	
-	@RequestMapping(value = "/countRecipe", method = {RequestMethod.GET, RequestMethod.POST})
-	public String countRecipe() {
-		System.out.println("RecipeController countRecipe()");
-		int res = recipeService.countRecipe();
-		System.out.println(res);
-		return "개수는: " + res;
 	}
 }

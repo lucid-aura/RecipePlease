@@ -5,9 +5,10 @@
 
 <mapper namespace="com.recipe.a.dao.RecipeDao">
 
-<select id="countRecipe" resultType="Integer">
-	SELECT COUNT(*) FROM RECIPE
-</select>
-
+<insert id="uploadRecipe" parameterType="com.recipe.a.dto.RecipeDto">
+	INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, 
+				RECIPEGOODSTAG, RECIPEPRICE)
+	VALUES(NEXTVAL('SEQRECIPE'), #{RECIPETITLE}, #{RECIPECONTENT}, #{RECIPEBIGCATEGORY}, #{RECIPESMALLCATEGORY}, #{RECIPEGOODSTAG}, #{RECIPEPRICE})
+</insert>
 
 </mapper>
