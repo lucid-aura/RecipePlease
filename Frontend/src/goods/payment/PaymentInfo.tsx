@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useState } from "react";
+import { useIsFocused } from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
 import { Alert, BackHandler, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import RNPickerSelect from 'react-native-picker-select';
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -37,6 +38,30 @@ export default function PaymentInfo({navigation}:any, props:any) {
     const [pg, setPg] = useState('');
     const amount = 12400
 
+    // 주소 변경에서 가져온 값으로 화면상의 주소를 바꿔줌
+    // 주소 변경 시 화면단의 주소 정보를 바꿔주기 위해 useEffect와 isFocused 사용
+    const isFocused = useIsFocused();
+    useEffect(() => {
+        const getNewAddr = async () => {
+            let addrData = await AsyncStorage.getItem('addrData');
+            try {
+                if (addrData !== null) {
+                    let data = JSON.parse(addrData);
+                    console.log(`넘겨받는 데이터: ${addrData}`);
+                    setBuyerPostcode(data.zipcode);
+                    setBuyerAddr(data.roadAddr);
+                }
+            } catch(err) {
+                console.log(err);
+            }
+        }
+    
+        getNewAddr();
+    }, [isFocused]);
+    
+
+    
+
     return (
         <SafeAreaView>
             <ScrollView>
@@ -57,12 +82,21 @@ export default function PaymentInfo({navigation}:any, props:any) {
                                     value={buyerName}
                                     onChangeText={buyerName => setBuyerName(buyerName)}
                                 />
-                                <TextInput
-                                    style={modalStyles.modalInput}
-                                    placeholder="받는 사람 주소"
-                                    value={buyerAddr}
-                                    onChangeText={(buyerAddr) => setBuyerAddr(buyerAddr)}
-                                />
+                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                    <TextInput
+                                        style={modalStyles.modalInput}
+                                        placeholder="받는 사람 주소"
+                                        value={buyerAddr}
+                                        onChangeText={(addr) => setBuyerAddr(addr)}
+                                        editable={false}
+                                    />
+                                    <TouchableOpacity 
+                                        style={{backgroundColor: '#fff', position: 'absolute', padding: 7, right: 13}}
+                                        onPress={() => navigation.navigate('paymentAddr')}
+                                    >
+                                        <Text>주소찾기</Text>
+                                    </TouchableOpacity>
+                                </View>
                                 <TextInput
                                     style={modalStyles.modalInput}
                                     placeholder="받는 사람 연락처"
@@ -305,7 +339,7 @@ const modalStyles = StyleSheet.create({
     },
     // 모달 내부 컴포넌트 스타일
     modalInput: {
-        width: 200,
+        width: 300,
         height: 40,
         margin: 10,
         borderWidth: 1,
