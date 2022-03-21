@@ -1,66 +1,66 @@
 package com.recipe.a.dto;
 
 public class RatingDto {
-	private int rating_seq;
-	private int docs_seq;
-	private String rating_category;
-	private int rating_score;
-	private String rating_comment;
+	private int ratingSeq;
+	private int docsSeq;
+	private String ratingCategory;
+	private int ratingScore;
+	private String ratingComment;
 	
-	public RatingDto(int rating_seq, int docs_seq, String rating_category, int rating_score, String rating_comment) {
+	public RatingDto(int ratingSeq, int docsSeq, String ratingCategory, int ratingScore, String ratingComment) {
 		super();
-		this.rating_seq = rating_seq;
-		this.docs_seq = docs_seq;
-		this.rating_category = rating_category;
-		this.rating_score = rating_score;
-		this.rating_comment = rating_comment;
+		this.ratingSeq = ratingSeq;
+		this.docsSeq = docsSeq;
+		this.ratingCategory = ratingCategory;
+		this.ratingScore = ratingScore;
+		this.ratingComment = ratingComment;
 	}
 
-	public int getRating_seq() {
-		return rating_seq;
+	public int getRatingSeq() {
+		return ratingSeq;
 	}
 
-	public void setRating_seq(int rating_seq) {
-		this.rating_seq = rating_seq;
+	public void setRatingSeq(int ratingSeq) {
+		this.ratingSeq = ratingSeq;
 	}
 
-	public int getDocs_seq() {
-		return docs_seq;
+	public int getDocsSeq() {
+		return docsSeq;
 	}
 
-	public void setDocs_seq(int docs_seq) {
-		this.docs_seq = docs_seq;
+	public void setDocsSeq(int docsSeq) {
+		this.docsSeq = docsSeq;
 	}
 
-	public String getRating_category() {
-		return rating_category;
+	public String getRatingCategory() {
+		return ratingCategory;
 	}
 
-	public void setRating_category(String rating_category) {
-		this.rating_category = rating_category;
+	public void setRatingCategory(String ratingCategory) {
+		this.ratingCategory = ratingCategory;
 	}
 
-	public int getRating_score() {
-		return rating_score;
+	public int getRatingScore() {
+		return ratingScore;
 	}
 
-	public void setRating_score(int rating_score) {
-		this.rating_score = rating_score;
+	public void setRatingScore(int ratingScore) {
+		this.ratingScore = ratingScore;
 	}
 
-	public String getRating_comment() {
-		return rating_comment;
+	public String getRatingComment() {
+		return ratingComment;
 	}
 
-	public void setRating_comment(String rating_comment) {
-		this.rating_comment = rating_comment;
+	public void setRatingComment(String ratingComment) {
+		this.ratingComment = ratingComment;
 	}
 
 	@Override
 	public String toString() {
-		return "RatingDto [rating_seq=" + rating_seq + ", docs_seq=" + docs_seq + ", rating_category=" + rating_category
-				+ ", rating_score=" + rating_score + ", rating_comment=" + rating_comment + "]";
+		return "RatingDto [ratingSeq=" + ratingSeq + ", docsSeq=" + docsSeq + ", ratingCategory=" + ratingCategory
+				+ ", ratingScore=" + ratingScore + ", ratingComment=" + ratingComment + "]";
 	}
-	
+
 	
 }
