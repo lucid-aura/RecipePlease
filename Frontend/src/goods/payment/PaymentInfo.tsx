@@ -5,7 +5,6 @@ import { Alert, BackHandler, Modal, Pressable, ScrollView, StyleSheet, Text, Tex
 import RNPickerSelect from 'react-native-picker-select';
 import { SafeAreaView } from "react-native-safe-area-context";
 
-
 const date = new Date()
 let random = Math.floor(Math.random() * 10 + 1)
 let uid = `${date.getFullYear()}${date.getMonth()+1}${date.getDate()}-${date.getHours()}${date.getMinutes()}${date.getSeconds()}-${random}`
@@ -31,16 +30,16 @@ export default function PaymentInfo({navigation}:any, props:any) {
     const [toPay, setToPay] = useState("결제 수단이 선택되지 않았습니다.");
     
     // 결제관련 정보
-    const [buyerName, setBuyerName] = useState('테스트');
-    const [buyerPostcode, setBuyerPostcode] = useState(12345);
-    const [buyerAddr, setBuyerAddr] = useState('대전광역시 서구 둔산로 100');
+    const [buyerName, setBuyerName] = useState('카카오');
+    const [buyerPostcode, setBuyerPostcode] = useState();
+    const [buyerAddr, setBuyerAddr] = useState('');
     const [buyerAddrDetail, setBuyerAddrDetail] = useState('');
-    const [buyerTel, setBuyerTel] = useState('010-2345-7891');
+    const [buyerTel, setBuyerTel] = useState('');
     const [pg, setPg] = useState('');
     const amount = 12400
 
     // 주소 변경에서 가져온 값으로 화면상의 주소를 바꿔줌
-    // 주소 변경 시 화면단의 주소 정보를 바꿔주기 위해 useEffect와 isFocused 사용
+    // 주소를 화면단으로 가져와 반영하여 새로고침 해주기 위해 useIsFocused, useEffect 사용
     const isFocused = useIsFocused();
     useEffect(() => {
         const getNewAddr = async () => {
@@ -74,10 +73,11 @@ export default function PaymentInfo({navigation}:any, props:any) {
                 >
                     <View>
                         {/* 배송정보 수정하는 모달 */}
-                        <Modal
+                        {/* <Modal
                             animationType="slide"
-                            transparent={false}
+                            transparent={true}
                             visible={modalVisible}
+                            // 뒤로가기 버튼을 누를 때 모달이 보이지 않게 함.
                             onRequestClose={() => setModalVisible(!modalVisible)}
                         >
                             <View style={modalStyles.centeredView}>
@@ -149,20 +149,65 @@ export default function PaymentInfo({navigation}:any, props:any) {
                                     </View>
                                 </View>
                             </View>
-                        </Modal>
+                        </Modal> */}
 
                         {/* 결제 메인 화면 */}
                         <View style={styles.eachComponent}>
                             <Text style={styles.subTitle}>배송지 정보</Text>
-                            <View style={styles.nameSpace}>
-                                <Text style={styles.buyerName}>{buyerName}</Text>
+                            <View style={styles.informContainer}>
+                                {/* <Text style={styles.buyerName}>{buyerName}</Text>
                                 <View>
                                     <Text>{reduceAddr(`[${buyerPostcode}] ${buyerAddr} ${buyerAddrDetail}`)}</Text>
                                     <Text>{addHyphenToPhoneNumber(buyerTel)}</Text>
                                 </View>
                                 <TouchableOpacity style={styles.changeBtn} onPress={() => setModalVisible(true)}>
                                     <Text style={styles.changeBtnText}>정보변경</Text>
-                                </TouchableOpacity>
+                                </TouchableOpacity> */}
+                                <TextInput
+                                    style={styles.textInput}
+                                    placeholder="받는 사람 이름"
+                                    value={buyerName}
+                                    onChangeText={buyerName => setBuyerName(buyerName)}
+                                />
+                                <View>
+                                    <TextInput
+                                        style={styles.textInput}
+                                        placeholder="받는 사람 주소"
+                                        value={`${buyerAddr}`}
+                                        onChangeText={(addr) => setBuyerAddr(addr)}
+                                        editable={false}
+                                    />
+                                    <TouchableOpacity 
+                                        style={{
+                                            backgroundColor: '#fff', 
+                                            position: 'absolute', 
+                                            padding: 7, 
+                                            right: 12,
+                                            top: 7
+                                        }}
+                                        onPress={() => {
+                                            navigation.navigate('paymentAddr');
+
+                                            // 주소를 입력받아오면 모달이 다시 열리지 않기 때문에 모달이 다시 열리도록 함.
+                                            setModalVisible(!modalVisible);
+                                        }}
+                                    >
+                                        <Text style={{color: '#47619e', textDecorationLine: 'underline'}}>주소찾기</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <TextInput
+                                    style={styles.textInput}
+                                    placeholder="상세주소"
+                                    value={buyerAddrDetail}
+                                    onChangeText={(addrDetail) => setBuyerAddrDetail(addrDetail)}
+                                />
+                                <TextInput
+                                    keyboardType="numeric"
+                                    style={styles.textInput}
+                                    placeholder="받는 사람 연락처"
+                                    value={buyerTel}
+                                    onChangeText={(buyerTel) => setBuyerTel(addHyphenToPhoneNumber(buyerTel))}
+                                />
                             </View>
                         </View>
                         <View style={styles.eachComponent}>
@@ -270,6 +315,21 @@ const styles = StyleSheet.create({
         padding: 15,
         backgroundColor: '#4b99ff',
     },
+    textInput: {
+        width: '98%',
+        height: 40,
+        margin: 3,
+        borderWidth: 1,
+        padding: 10,
+        borderRadius: 10,
+        borderColor: '#e9e9e9',
+    },
+    informContainer: {
+        alignContent: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#fff',
+        padding: 10
+    },
     changeBtnText: {
         fontWeight: '700',
     },
@@ -320,62 +380,3 @@ const styles = StyleSheet.create({
         backgroundColor: '#bd4646'
     }
 })
-
-const modalStyles = StyleSheet.create({
-    centeredView: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      marginTop: 22,
-      backgroundColor: 'rgba(255,255,255, 0.8)'
-    },
-    modalView: {
-      margin: 20,
-      backgroundColor: "#fff",
-      borderRadius: 20,
-      padding: 35,
-      alignItems: "center",
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 2
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 4,
-      elevation: 5
-    },
-    button: {
-      borderRadius: 10,
-      padding: 10,
-      elevation: 2,
-      margin: 5,
-      width: 95,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    buttonApply: {
-      backgroundColor: "#2196F3",
-    },
-    buttonClose: {
-      backgroundColor: "#bd4646",
-    },
-    textStyle: {
-      color: "white",
-      fontWeight: "bold",
-      textAlign: "center"
-    },
-    modalText: {
-      marginBottom: 15,
-      textAlign: "center"
-    },
-    // 모달 내부 컴포넌트 스타일
-    modalInput: {
-        width: 300,
-        height: 40,
-        margin: 10,
-        borderWidth: 1,
-        padding: 10,
-        borderRadius: 10,
-        borderColor: '#e9e9e9'
-    }
-  });
