@@ -40,13 +40,13 @@ public class MembersController {
 		System.out.println("MembersController regist()");
 		Random rnd = new Random();
 		String str[] = new String[4];
-		String pwd = "";
+		String salt = "";
 		for(int i=0; i<str.length; i++) {
 			str[i] = String.valueOf((char) ((int) (rnd.nextInt(26)) + 97));
-			pwd += str[i];
+			salt += str[i];
 		}
-		dto.setSalt(pwd);
-		String secretNum = dto.getMember_pwd() + pwd;
+		dto.setSalt(salt);
+		String secretNum = dto.getMember_pwd() + salt;
 		System.out.println("secretNum: "+secretNum);
 		
 		String encodedPassword = passwordEncoder.encode(secretNum);
