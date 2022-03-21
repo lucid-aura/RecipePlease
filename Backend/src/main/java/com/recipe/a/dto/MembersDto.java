@@ -10,12 +10,16 @@ public class MembersDto {
 	private String member_main_addr;		// 주소
 	private String member_detail_addr;		// 상세주소
 	private String member_zipcode;			// 우편번호
+	private String member_gender;
 	private String member_name;				// 이름
+	private String member_grade;
 	private String salt;					// 암호화 할 때 번호
+	
+	
 	
 	public MembersDto(String member_id, String member_pwd, String member_nickname, String member_email,
 			String member_phone, int member_coin, String member_main_addr, String member_detail_addr,
-			String member_zipcode, String member_name, String salt) {
+			String member_zipcode, String member_gender, String member_name, String member_grade, String salt) {
 		super();
 		this.member_id = member_id;
 		this.member_pwd = member_pwd;
@@ -26,106 +30,99 @@ public class MembersDto {
 		this.member_main_addr = member_main_addr;
 		this.member_detail_addr = member_detail_addr;
 		this.member_zipcode = member_zipcode;
+		this.member_gender = member_gender;
 		this.member_name = member_name;
+		this.member_grade = member_grade;
 		this.salt = salt;
 	}
-
 	public String getMember_id() {
 		return member_id;
 	}
-
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
-
 	public String getMember_pwd() {
 		return member_pwd;
 	}
-
 	public void setMember_pwd(String member_pwd) {
 		this.member_pwd = member_pwd;
 	}
-
 	public String getMember_nickname() {
 		return member_nickname;
 	}
-
 	public void setMember_nickname(String member_nickname) {
 		this.member_nickname = member_nickname;
 	}
-
 	public String getMember_email() {
 		return member_email;
 	}
-
 	public void setMember_email(String member_email) {
 		this.member_email = member_email;
 	}
-
 	public String getMember_phone() {
 		return member_phone;
 	}
-
 	public void setMember_phone(String member_phone) {
 		this.member_phone = member_phone;
 	}
-
 	public int getMember_coin() {
 		return member_coin;
 	}
-
 	public void setMember_coin(int member_coin) {
 		this.member_coin = member_coin;
 	}
-
 	public String getMember_main_addr() {
 		return member_main_addr;
 	}
-
 	public void setMember_main_addr(String member_main_addr) {
 		this.member_main_addr = member_main_addr;
 	}
-
 	public String getMember_detail_addr() {
 		return member_detail_addr;
 	}
-
 	public void setMember_detail_addr(String member_detail_addr) {
 		this.member_detail_addr = member_detail_addr;
 	}
-
 	public String getMember_zipcode() {
 		return member_zipcode;
 	}
-
 	public void setMember_zipcode(String member_zipcode) {
 		this.member_zipcode = member_zipcode;
 	}
-
+	public String getMember_gender() {
+		return member_gender;
+	}
+	public void setMember_gender(String member_gender) {
+		this.member_gender = member_gender;
+	}
 	public String getMember_name() {
 		return member_name;
 	}
-
 	public void setMember_name(String member_name) {
 		this.member_name = member_name;
 	}
-
+	public String getMember_grade() {
+		return member_grade;
+	}
+	public void setMember_grade(String member_grade) {
+		this.member_grade = member_grade;
+	}
 	public String getSalt() {
 		return salt;
 	}
-
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
-
 	@Override
 	public String toString() {
 		return "MembersDto [member_id=" + member_id + ", member_pwd=" + member_pwd + ", member_nickname="
 				+ member_nickname + ", member_email=" + member_email + ", member_phone=" + member_phone
 				+ ", member_coin=" + member_coin + ", member_main_addr=" + member_main_addr + ", member_detail_addr="
-				+ member_detail_addr + ", member_zipcode=" + member_zipcode + ", member_name=" + member_name + ", salt="
-				+ salt + "]";
+				+ member_detail_addr + ", member_zipcode=" + member_zipcode + ", member_gender=" + member_gender
+				+ ", member_name=" + member_name + ", member_grade=" + member_grade + ", salt=" + salt + "]";
 	}
+	
+	
 	
 	
 	

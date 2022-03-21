@@ -13,12 +13,14 @@
 	INSERT INTO MEMBERS(MEMBER_ID, MEMBER_PWD, MEMBER_NICKNAME, MEMBER_EMAIL, MEMBER_PHONE,
 						MEMBER_COIN, MEMBER_MAIN_ADDR, MEMBER_DETAIL_ADDR, MEMBER_ZIPCODE,
 						MEMBER_GENDER, MEMBER_NAME, MEMBER_GRADE, SALT)
-	VALUES(#{id}, #{pwd}, #{nickName}, #{email}, #{address}, )
+	VALUES(#{id}, #{pwd}, #{nickName}, #{email}, #{phone},
+			0, #{mainAddr}, #{detailAddr}, {zieCode},
+			#{gender}, #{name}, #{grade}, #{salt})
 </insert>
 
 <!-- 
 
-private String member_id;
+	private String member_id;
 	private String member_pwd;
 	private String member_nickname;
 	private String member_email;
@@ -27,8 +29,10 @@ private String member_id;
 	private String member_main_addr;		// 주소
 	private String member_detail_addr;		// 상세주소
 	private String member_zipcode;			// 우편번호
+	private String member_gender;
 	private String member_name;				// 이름
-	private String salt;	
+	private String member_grade;
+	private String salt;					// 암호화 할 때 번호
 
  -->
 

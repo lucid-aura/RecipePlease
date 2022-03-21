@@ -47,11 +47,11 @@ public class MembersController {
 		}
 		dto.setSalt(salt);
 		String secretNum = dto.getMember_pwd() + salt;
-		System.out.println("secretNum: "+secretNum);
+		System.out.println("secretNum: "+ secretNum);
 		
 		String encodedPassword = passwordEncoder.encode(secretNum);
 		dto.setMember_pwd(encodedPassword);
-		System.out.println("dto.getMember_pwd" + dto.getMember_pwd() );
+		System.out.println("dto.getMember_pwd: " + dto.getMember_pwd() );
 		
 		boolean b = memberService.regist(dto);
 		

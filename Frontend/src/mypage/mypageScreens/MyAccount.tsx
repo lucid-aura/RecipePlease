@@ -1,6 +1,6 @@
 import Postcode from "@actbase/react-daum-postcode";
 import React, { useState } from "react";
-import { Alert, Button, Modal, Text, TextInput, TouchableHighlight, View } from "react-native";
+import { Alert, Button, Modal, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
 import { RadioButton } from "react-native-paper";
 
 /* 
@@ -19,18 +19,21 @@ export default function MyAccount() {
     const [nickName, setNickName] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [phone, setPhone] = useState<string>('')
+    const [mainAddress, setMainAddress] = useState<string>('')
+    const [detailAddress, setDetailAddress] = useState<string>('')
+    const [zipCode, setZipCode] = useState<string>('')
     const [gender, setGender] = useState<string>('mail')
     const [name, setName] = useState<string>('')
 
     const [msg, setMsg] = useState<string>('msg')
 
     const[isModal, setModal] = useState(false)
-    const[address, setAddress] = useState<string>('')
-    const[zipCode, setZipCode] = useState<string>('')
+    
+    
     //zonecode => 우편번호 address => 주소
 
     return (
-        <View>
+        <View style={styles.container}>
             <Text>회원가입</Text>
             <View>
                 <TextInput 
@@ -114,9 +117,9 @@ export default function MyAccount() {
                         onSelected={data => {
                             Alert.alert(JSON.stringify(data));
                             console.log(JSON.stringify(data))
-                            setAddress(data.address) 
+                            setMainAddress(data.address) 
                             setZipCode(data.zonecode.toString())
-                            console.log(address)
+                            console.log(mainAddress)
                             console.log(zipCode)
                             setModal(false);
                         }} 
@@ -126,11 +129,24 @@ export default function MyAccount() {
                     <Button title='되돌아가기' onPress={() => setModal(false)} />
                 </Modal>
                 <Button title='주소찾기' onPress={() => setModal(true)}></Button>
-
+                
                 <Text>{zipCode}</Text>
-                <Text>{address}</Text>
+                <Text>{mainAddress}</Text>
+                <TextInput 
+                    placeholder="상세주소"
+                    value={detailAddress}
+                    underlineColorAndroid='transparent'
+                    onChangeText={(detailAddress) => setDetailAddress(detailAddress)}
+                />
             </View>
 
         </View>
     )
 }
+
+const styles = StyleSheet.create ({
+    container: {
+        flex: 1,
+        alignItems: 'center'
+    }
+})

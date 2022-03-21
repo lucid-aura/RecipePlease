@@ -19,7 +19,8 @@ public class MembersService {
 		return dao.countMembers();
 	}
 	
-	public boolean regist(MembersDto dto) {	// 회원가입 - 노승현
+	// 회원가입 - 노승현
+	public boolean regist(MembersDto dto) {	
 		
 		int n = dao.regist(dto);
 		
