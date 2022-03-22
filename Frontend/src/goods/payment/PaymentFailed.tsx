@@ -1,13 +1,15 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
+// 결제 실패 시 로드할 화면
+
 export default function PaymentFailed({navigation}:any) {
 
     return (
         <View style={styles.container}>
             <View>
                 <Text style={styles.textView}>
-                    결제를 취소하여 승인되지 않았거나 {'\n'}
+                    사용자가 결제를 취소하였거나 {'\n'}
                     결제 모듈을 불러오는데 실패하였습니다.
                 </Text>
             </View>
