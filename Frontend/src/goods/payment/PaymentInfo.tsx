@@ -5,6 +5,9 @@ import { Alert, BackHandler, Modal, Pressable, ScrollView, StyleSheet, Text, Tex
 import RNPickerSelect from 'react-native-picker-select';
 import { SafeAreaView } from "react-native-safe-area-context";
 
+// 결제 하지 않고 뒤로 돌아갈 때 메모리 누수 방지
+// AsyncStorage.removeItem('payment');
+
 // 주문번호를 iamport 관리자 콘솔에 전달하기 위해 사용
 const date = new Date()
 let random = Math.floor(Math.random() * 10 + 1)
@@ -176,6 +179,7 @@ export default function PaymentInfo({navigation}:any, props:any) {
                                             buyer_name: buyerName,
                                             buyer_tel: buyerTel,
                                             buyer_addr: buyerAddr,
+                                            buyer_detail_addr: buyerAddrDetail,
                                             buyer_postcode: buyerPostcode,
                                             app_scheme: 'example',
                                             escrow: false

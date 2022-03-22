@@ -25,6 +25,7 @@ export default function Payment({ navigation }:any) {
         buyer_name: '',
         buyer_tel: '',
         buyer_addr: '',
+        buyer_detail_addr: '',
         buyer_postcode: '',
         app_scheme: '',
         escrow: false
@@ -50,7 +51,11 @@ export default function Payment({ navigation }:any) {
     const callBack = (resp:any) => {
         // console.log(resp);
         if (resp.imp_success === 'true') {
-            navigation.replace('paymentResult', resp);
+            //navigation.replace('paymentResult', resp);
+            navigation.navigate('paymentResult', {"key": paymentInform});
+            //console.log(JSON.stringify(paymentInform));
+            //navigation.navigate('paymentResult', JSON.stringify(paymentInform));
+            
         } else {
             navigation.replace('paymentFailed', resp);
         }
