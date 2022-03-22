@@ -3,11 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.recipe.a.dao.PaymentListDao">
+<mapper namespace="com.recipe.a.dao.PaymentDao">
 
-<select id="countPaymentList" resultType="Integer">
-	SELECT COUNT(*) FROM PAYMENT_LIST
-</select>
+	<select id="countPaymentList" resultType="Integer">
+		SELECT COUNT(*) FROM PAYMENT_LIST
+	</select>
 
+	<!-- 결제 성공 시 결제 정보 추가 -->
+	<insert id="addGoodsShoppingList" parameterType="com.recipe.a.dto.PaymentDto">
+		INSERT INTO PAYMENT(PAYMENT_SEQ, MEMBER_ID, PAYMENT_PAY,
+		                    PAYMENT_DATE, PAYMENT_DEL, PAYMENT_MAIN_ADDR,
+							PAYMENT_DETAIL_ADDR, PAYMENT_ZIPCODE, PAYMENT_CATEGORY,
+							PAYMENT_COUNT)
+		VALUES (NEXTVAL('SEQ'), #{memberId}, #{amount}, DATE, '', #{mainAddr}, #{detailAddr}, #{zipcode}, '굿즈', PAYMENT_COUNT - 1)
+	</insert>
 
 </mapper>
