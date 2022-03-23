@@ -29,7 +29,7 @@ export default function PaymentInfo({navigation}:any, props:any) {
     const [buyerAddrDetail, setBuyerAddrDetail] = useState('');
     const [buyerTel, setBuyerTel] = useState('');
     const [pg, setPg] = useState('');
-    const amount = 12400
+    const amount = 20000
     const [toPay, setToPay] = useState("결제 수단이 선택되지 않았습니다.");
 
     // 주소 변경에서 가져온 값으로 화면상의 주소를 바꿔줌
@@ -67,8 +67,20 @@ export default function PaymentInfo({navigation}:any, props:any) {
                 >
 
                     {/* 결제 메인 화면 */}
-                    <View>
-                        <View style={styles.eachComponent}>
+                    <View style={{flex: 1}}>
+
+                        {/* 주문정보(주문 상품 확인), 임의로 기입되었으므로 향후 보완 필요 */}
+                        <View>
+                            <Text style={styles.subTitle}>주문 정보</Text>
+                            <View style={styles.buyContainer}>
+                                <Text>IMG</Text>
+                                <Text>카카오 도마 칼세트</Text>
+                                <Text>1개</Text>
+                                <Text>{amount}원</Text>
+                            </View>
+                        </View>
+
+                        <View>
                             {/* 배송지 정보 */}
                             <Text style={styles.subTitle}>배송지 정보</Text>
                             <View style={styles.informContainer}>
@@ -116,20 +128,9 @@ export default function PaymentInfo({navigation}:any, props:any) {
                                 />
                             </View>
                         </View>
-
-                        {/* 주문정보(주문 상품 확인), 임의로 기입되었으므로 향후 보완 필요 */}
-                        <View style={styles.eachComponent}>
-                            <Text style={styles.subTitle}>주문 정보</Text>
-                            <View style={styles.buyContainer}>
-                                <Text>IMG</Text>
-                                <Text>카카오 편수냄비</Text>
-                                <Text>1개</Text>
-                                <Text>{amount}</Text>
-                            </View>
-                        </View>
                         
                         {/* 결제수단 선택(카카오페이, 토스페이먼츠 지원) */}
-                        <View style={styles.eachComponent}>
+                        <View>
                             <Text style={styles.subTitle}>결제 수단</Text>
                             <View style={styles.selectBox}>
                                 <RNPickerSelect
@@ -152,52 +153,56 @@ export default function PaymentInfo({navigation}:any, props:any) {
                         </View>
                         
                         {/* 결제 페이지로 이동 및 결제 정보를 AsyncStorage로 가지고 결제 성공 페이지로 이동(백엔드 전처리) */}
-                        <View style={styles.eachComponent}>
+                        <View>
                             <Text style={styles.toPayView}>{toPay}</Text>
-                            <TouchableOpacity 
-                                style={[styles.paymentBtn, styles.btn]}
-                                onPress={() => {
-                                    if (buyerName === '' || buyerName === null) {
-                                        Alert.alert('배송지 정보 누락', '받는 사람의 이름이 입력되지 않았습니다.');
-                                    } else if (buyerAddr === '' || buyerAddr === null) {
-                                        Alert.alert('배송지 정보 누락','받는 사람의 주소가 입력되지 않았습니다.');
-                                    } else if (buyerAddrDetail === '' || buyerAddrDetail === null) {
-                                        Alert.alert('배송지 정보 누락','받는 사람의 상세 주소가 입력되지 않았습니다.');
-                                    } else if (buyerTel === '' || buyerTel === null) {
-                                        Alert.alert('배송지 정보 누락','받는 사람의 연락처가 입력되지 않았습니다.');
-                                    } else if (pg === '' || pg === null) {
-                                        Alert.alert('결제수단 누락', '결제수단이 선택되지 않았습니다');
-                                    } else {
-                                        // 모든 정보를 가지고
-                                        AsyncStorage.setItem('payment', JSON.stringify({
-                                            pg: pg,
-                                            pay_method: 'card',
-                                            merchant_uid: `ORD-${uid}-userId`,   // 사용자 아이디를 추가
-                                            name: '카카오 편수냄비',
-                                            amount: amount,
-                                            buyer_email: 'kakao@kakao.com',
-                                            buyer_name: buyerName,
-                                            buyer_tel: buyerTel,
-                                            buyer_addr: buyerAddr,
-                                            buyer_detail_addr: buyerAddrDetail,
-                                            buyer_postcode: buyerPostcode,
-                                            app_scheme: 'example',
-                                            escrow: false
-                                        }));
+                            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                <TouchableOpacity 
+                                    style={[styles.calcelBtn, styles.btn]}
+                                    onPress={() => navigation.goBack()}
+                                >
+                                    <Text style={styles.btnText}>돌아가기</Text>
+                                </TouchableOpacity>
 
-                                        // Payment 컴포넌트로 이동
-                                        navigation.navigate('payment');
-                                    }
-                                }}
-                            >
-                                <Text style={styles.btnText}>결제하기</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity 
-                                style={[styles.calcelBtn, styles.btn]}
-                                onPress={() => navigation.goBack()}
-                            >
-                                <Text style={styles.btnText}>돌아가기</Text>
-                            </TouchableOpacity>
+                                <TouchableOpacity 
+                                    style={[styles.paymentBtn, styles.btn]}
+                                    onPress={() => {
+                                        if (buyerName === '' || buyerName === null) {
+                                            Alert.alert('배송지 정보 누락', '받는 사람의 이름이 입력되지 않았습니다.');
+                                        } else if (buyerAddr === '' || buyerAddr === null) {
+                                            Alert.alert('배송지 정보 누락','받는 사람의 주소가 입력되지 않았습니다.');
+                                        } else if (buyerAddrDetail === '' || buyerAddrDetail === null) {
+                                            Alert.alert('배송지 정보 누락','받는 사람의 상세 주소가 입력되지 않았습니다.');
+                                        } else if (buyerTel === '' || buyerTel === null) {
+                                            Alert.alert('배송지 정보 누락','받는 사람의 연락처가 입력되지 않았습니다.');
+                                        } else if (pg === '' || pg === null) {
+                                            Alert.alert('결제수단 누락', '결제수단이 선택되지 않았습니다');
+                                        } else {
+                                            // 모든 정보를 가지고
+                                            AsyncStorage.setItem('payment', JSON.stringify({
+                                                pg: pg,
+                                                pay_method: 'card',
+                                                merchant_uid: `ORD-${uid}-userId`,   // 사용자 아이디를 추가
+                                                name: '카카오 도마 칼 세트',
+                                                amount: amount,
+                                                buyer_email: 'kakao@kakao.com',
+                                                buyer_name: buyerName,
+                                                buyer_tel: buyerTel,
+                                                buyer_addr: buyerAddr,
+                                                buyer_detail_addr: buyerAddrDetail,
+                                                buyer_postcode: buyerPostcode,
+                                                app_scheme: 'example',
+                                                escrow: false
+                                            }));
+
+                                            // Payment 컴포넌트로 이동
+                                            navigation.navigate('payment');
+                                        }
+                                    }}
+                                >
+                                    <Text style={styles.btnText}>결제하기</Text>
+                                </TouchableOpacity>
+                                
+                            </View>
                         </View>
                     </View>
                 </View>
@@ -207,9 +212,6 @@ export default function PaymentInfo({navigation}:any, props:any) {
 }
 
 const styles = StyleSheet.create({
-    eachComponent: {
-        marginBottom: 10
-    },
     subTitle: {
         fontSize: 20,
         fontWeight: "800",
@@ -264,7 +266,7 @@ const styles = StyleSheet.create({
         padding: 15,
         borderWidth: 2,
         borderColor: '#e9e9e9',
-        height: 150,
+        height: 55,
         backgroundColor: '#fff'
     },
     selectBox: {
@@ -287,9 +289,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
-        height: 55,
+        // height: 45,
         marginTop: 10,
-        marginBottom: 10
+        marginBottom: 10,
+        width: '40%',
+        padding: 15
     },
     btnText: {
         color: '#fff',

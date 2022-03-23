@@ -51,10 +51,9 @@ export default function Payment({ navigation }:any) {
     const callBack = (resp:any) => {
         // console.log(resp);
         if (resp.imp_success === 'true') {
-            //navigation.replace('paymentResult', resp);
             navigation.navigate('paymentResult', {"key": paymentInform});
-            //console.log(JSON.stringify(paymentInform));
-            //navigation.navigate('paymentResult', JSON.stringify(paymentInform));
+            //navigation.replace('paymentResult', resp);        // 원래 방법
+            //navigation.navigate('paymentResult', JSON.stringify(paymentInform));      // JSON.stringify로 해도 안됨...
             
         } else {
             navigation.replace('paymentFailed', resp);

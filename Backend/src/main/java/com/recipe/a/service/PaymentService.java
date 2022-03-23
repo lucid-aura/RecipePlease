@@ -9,16 +9,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.recipe.a.dao.PaymentDao;
 import com.recipe.a.dao.PaymentListDao;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class PaymentService {
 
-	@Autowired
-	PaymentDao paymentDao;
-
-	@Autowired
-	PaymentListDao paymentListDao;
+	private final PaymentDao paymentDao;
+	private final PaymentListDao paymentListDao;
 	
 	public int countPayment() {
 		System.out.println("PaymentService");
@@ -26,6 +25,15 @@ public class PaymentService {
 	}
 
 	public int addGoodsShoppingList(PaymentDto dto) {
-		return paymentDao.addGoodsShoppingList(dto);
+		boolean b = paymentDao.addGoodsShoppingList(dto);
+		return b ? 1 : 0;
+	}
+
+	public boolean refundGoods(PaymentDto dto) {
+		return paymentDao.refundGoods(dto);
+	}
+
+	public List<PaymentDto> goodsPurchaseList(PaymentDto dto) {
+		return paymentDao.goodsPurchaseList(dto);
 	}
 }

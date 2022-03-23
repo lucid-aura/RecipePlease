@@ -10,7 +10,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PaymentDao {
 
-	public int countPayment();
+	int countPayment();
 
-	int addGoodsShoppingList(PaymentDto dto);
+	boolean addGoodsShoppingList(PaymentDto dto);
+	boolean refundGoods(PaymentDto dto);
+	List<PaymentDto> goodsPurchaseList(PaymentDto dto);
 }
