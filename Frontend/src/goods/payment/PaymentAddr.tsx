@@ -1,7 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CommonActions, NavigationRouteContext } from "@react-navigation/native";
 import React, { useState } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import Postcode from "react-native-daum-postcode";
 
 // 주소 검색 관련 모듈

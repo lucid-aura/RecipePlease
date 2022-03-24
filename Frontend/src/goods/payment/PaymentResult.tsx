@@ -20,7 +20,9 @@ export default function PaymentResult({ navigation, route }:any) {
 
     // 결제 성공시 배송 및 주문 정보를 axios로 백엔드에 넘겨서 처리
     useEffect(() => {
-        axios.post('http://192.168.0.13:3000/payment/addGoodsShoppingList', null, {params: {
+        axios.post('http://192.168.0.13:3000/payment/addGoodsShoppingList', null, 
+        {
+            params: {
             memberId: paymentData.buyer_name,
             paymentPay: paymentData.amount,
             paymentMainAddr: paymentData.buyer_addr,
@@ -29,7 +31,7 @@ export default function PaymentResult({ navigation, route }:any) {
         }})
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err));
-    }, [])
+    }, []);
     
 
     return (

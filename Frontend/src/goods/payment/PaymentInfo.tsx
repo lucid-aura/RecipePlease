@@ -1,12 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useIsFocused } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { Alert, BackHandler, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, BackHandler, Button, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import RNPickerSelect from 'react-native-picker-select';
 import { SafeAreaView } from "react-native-safe-area-context";
-
-// 결제 하지 않고 뒤로 돌아갈 때 메모리 누수 방지
-// AsyncStorage.removeItem('payment');
 
 // 주문번호를 iamport 관리자 콘솔에 전달하기 위해 사용
 const date = new Date()
@@ -41,7 +38,7 @@ export default function PaymentInfo({navigation}:any, props:any) {
             try {
                 if (addrData !== null) {
                     let data = JSON.parse(addrData);
-                    console.log(`넘겨받는 데이터: ${addrData}`);
+                    // console.log(`넘겨받는 데이터: ${addrData}`);
                     setBuyerPostcode(data.zipcode);
                     setBuyerAddr(data.roadAddr);
                 }
@@ -65,7 +62,6 @@ export default function PaymentInfo({navigation}:any, props:any) {
                         alignItems: 'stretch'
                     }}
                 >
-
                     {/* 결제 메인 화면 */}
                     <View style={{flex: 1}}>
 
@@ -206,6 +202,14 @@ export default function PaymentInfo({navigation}:any, props:any) {
                         </View>
                     </View>
                 </View>
+
+                {/* 테스트 페이지 접근 */}
+                <Pressable 
+                    style={{width: '40%', backgroundColor: '#00ffff', alignItems: 'center', padding: 5, borderRadius: 10}} 
+                    onPress={() => navigation.navigate('testPage')}
+                >
+                    <Text>테스트 페이지 이동</Text>
+                </Pressable>
             </ScrollView>
         </SafeAreaView>
     )

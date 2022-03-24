@@ -7,6 +7,8 @@ import PaymentAddr from '../goods/payment/PaymentAddr';
 import PaymentFailed from '../goods/payment/PaymentFailed';
 import PaymentInfo from '../goods/payment/PaymentInfo';
 import PaymentResult from '../goods/payment/PaymentResult';
+import PurchaseList from '../goods/payment/test/PurchaseList';
+import TestPage from '../goods/payment/test/TestPage';
 
 /*
 npm install react-native-gesture-handler
@@ -29,9 +31,13 @@ export default function GoodsScreen(){
         <Stack.Screen name="payment" component={Payment} options={{title: "결제"}} />
         <Stack.Screen name="paymentResult" component={PaymentResult} options={{title: "결제완료"}} />
         <Stack.Screen name="paymentFailed" component={PaymentFailed} options={{title: "결제실패"}} />
-        <Stack.Screen name="paymentAddr" component={PaymentAddr} options={{title: "주소변환"}} />
+        <Stack.Screen name="paymentAddr" component={PaymentAddr} options={{title: "주소찾기"}} />
+
+        {/* test 디렉터리 내부 컴포넌트 이동 */}
+        <Stack.Screen name="testPage" component={TestPage} options={{title: "테스트 페이지"}} />
+        <Stack.Screen name="purchaseList" component={PurchaseList} options={{title: "구매이력"}} />
 
       </Stack.Navigator>
     )
-  }
+}
   //굿즈 컴포넌트 이동
