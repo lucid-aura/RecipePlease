@@ -5,18 +5,13 @@ import { Alert, BackHandler, Modal, Pressable, ScrollView, StyleSheet, Text, Tex
 import RNPickerSelect from 'react-native-picker-select';
 import { SafeAreaView } from "react-native-safe-area-context";
 
+// 결제 하지 않고 뒤로 돌아갈 때 메모리 누수 방지
+// AsyncStorage.removeItem('payment');
 
+// 주문번호를 iamport 관리자 콘솔에 전달하기 위해 사용
 const date = new Date()
 let random = Math.floor(Math.random() * 10 + 1)
 let uid = `${date.getFullYear()}${date.getMonth()+1}${date.getDate()}-${date.getHours()}${date.getMinutes()}${date.getSeconds()}-${random}`
-
-// 주소의 길이를 줄여서 표현해주는 함수
-const reduceAddr = (addr:String) => {
-    if(addr.length > 15) {
-        return addr.substring(0, 15) + '...';
-    }
-    return addr;
-}
 
 // 하이픈을 자동으로 추가해주는 함수
 const addHyphenToPhoneNumber = (phoneNum:String) => {
@@ -27,20 +22,18 @@ const addHyphenToPhoneNumber = (phoneNum:String) => {
 
 export default function PaymentInfo({navigation}:any, props:any) {
 
-    const [modalVisible, setModalVisible] = useState(false);
-    const [toPay, setToPay] = useState("결제 수단이 선택되지 않았습니다.");
-    
     // 결제관련 정보
-    const [buyerName, setBuyerName] = useState('테스트');
-    const [buyerPostcode, setBuyerPostcode] = useState(12345);
-    const [buyerAddr, setBuyerAddr] = useState('대전광역시 서구 둔산로 100');
+    const [buyerName, setBuyerName] = useState('카카오');
+    const [buyerPostcode, setBuyerPostcode] = useState();
+    const [buyerAddr, setBuyerAddr] = useState('');
     const [buyerAddrDetail, setBuyerAddrDetail] = useState('');
-    const [buyerTel, setBuyerTel] = useState('010-2345-7891');
+    const [buyerTel, setBuyerTel] = useState('');
     const [pg, setPg] = useState('');
     const amount = 12400
+    const [toPay, setToPay] = useState("결제 수단이 선택되지 않았습니다.");
 
     // 주소 변경에서 가져온 값으로 화면상의 주소를 바꿔줌
-    // 주소 변경 시 화면단의 주소 정보를 바꿔주기 위해 useEffect와 isFocused 사용
+    // 주소를 화면단으로 가져와 반영하여 새로고침 해주기 위해 useIsFocused, useEffect 사용
     const isFocused = useIsFocused();
     useEffect(() => {
         const getNewAddr = async () => {
@@ -72,99 +65,59 @@ export default function PaymentInfo({navigation}:any, props:any) {
                         alignItems: 'stretch'
                     }}
                 >
+
+                    {/* 결제 메인 화면 */}
                     <View>
-                        {/* 배송정보 수정하는 모달 */}
-                        <Modal
-                            animationType="slide"
-                            transparent={false}
-                            visible={modalVisible}
-                            onRequestClose={() => setModalVisible(!modalVisible)}
-                        >
-                            <View style={modalStyles.centeredView}>
-                                <View style={modalStyles.modalView}>
-                                    <Text style={{
-                                            fontSize: 20, 
-                                            marginBottom: 10, 
-                                            fontWeight: '700'
+                        <View style={styles.eachComponent}>
+                            {/* 배송지 정보 */}
+                            <Text style={styles.subTitle}>배송지 정보</Text>
+                            <View style={styles.informContainer}>
+                                <TextInput
+                                    style={styles.textInput}
+                                    placeholder="받는 사람 이름"
+                                    value={buyerName}
+                                    onChangeText={buyerName => setBuyerName(buyerName)}
+                                />
+                                <View>
+                                    <TextInput
+                                        style={styles.textInput}
+                                        placeholder="받는 사람 주소"
+                                        value={`[${buyerPostcode}] ${buyerAddr}`}
+                                        onChangeText={(addr) => setBuyerAddr(addr)}
+                                        editable={false}
+                                    />
+                                    <TouchableOpacity 
+                                        style={{
+                                            backgroundColor: '#fff', 
+                                            position: 'absolute', 
+                                            padding: 7, 
+                                            right: 12,
+                                            top: 7
+                                        }}
+                                        onPress={() => {
+                                            navigation.navigate('paymentAddr');
                                         }}
                                     >
-                                        받는 사람 정보 변경
-                                    </Text>
-                                    <TextInput
-                                        style={modalStyles.modalInput}
-                                        placeholder="받는 사람"
-                                        value={buyerName}
-                                        onChangeText={buyerName => setBuyerName(buyerName)}
-                                    />
-                                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                        <TextInput
-                                            style={modalStyles.modalInput}
-                                            placeholder="받는 사람 주소"
-                                            value={`${buyerAddr}`}
-                                            onChangeText={(addr) => setBuyerAddr(addr)}
-                                            editable={false}
-                                        />
-                                        <TouchableOpacity 
-                                            style={{
-                                                backgroundColor: '#fff', 
-                                                position: 'absolute', 
-                                                padding: 7, 
-                                                right: 13
-                                            }}
-                                            onPress={() => {
-                                                navigation.navigate('paymentAddr');
-
-                                                // 주소를 입력받아오면 모달이 다시 열리지 않기 때문에 모달이 다시 열리도록 함.
-                                                setModalVisible(!modalVisible);
-                                            }}
-                                        >
-                                            <Text style={{color: '#47619e', textDecorationLine: 'underline'}}>주소찾기</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                    <TextInput
-                                        style={modalStyles.modalInput}
-                                        placeholder="상세주소"
-                                        value={buyerAddrDetail}
-                                        onChangeText={(addrDetail) => setBuyerAddrDetail(addrDetail)}
-                                    />
-                                    <TextInput
-                                        style={modalStyles.modalInput}
-                                        placeholder="받는 사람 연락처"
-                                        value={buyerTel}
-                                        onChangeText={(buyerTel) => setBuyerTel(addHyphenToPhoneNumber(buyerTel))}
-                                    />
-                                    <View style={{flexDirection: 'row'}}>
-                                        <TouchableOpacity 
-                                            style={[modalStyles.button, modalStyles.buttonClose]}
-                                            onPress={() => setModalVisible(false)}
-                                        >
-                                            <Text style={{color: '#fff', fontWeight: '700'}}>취소</Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity 
-                                            style={[modalStyles.button, modalStyles.buttonApply]}
-                                            onPress={() => { setModalVisible(false)}}
-                                        >
-                                            <Text style={{color: '#fff', fontWeight: '700'}}>확인</Text>
-                                        </TouchableOpacity>
-                                    </View>
+                                        <Text style={{color: '#47619e', textDecorationLine: 'underline'}}>주소찾기</Text>
+                                    </TouchableOpacity>
                                 </View>
-                            </View>
-                        </Modal>
-
-                        {/* 결제 메인 화면 */}
-                        <View style={styles.eachComponent}>
-                            <Text style={styles.subTitle}>배송지 정보</Text>
-                            <View style={styles.nameSpace}>
-                                <Text style={styles.buyerName}>{buyerName}</Text>
-                                <View>
-                                    <Text>{reduceAddr(`[${buyerPostcode}] ${buyerAddr} ${buyerAddrDetail}`)}</Text>
-                                    <Text>{addHyphenToPhoneNumber(buyerTel)}</Text>
-                                </View>
-                                <TouchableOpacity style={styles.changeBtn} onPress={() => setModalVisible(true)}>
-                                    <Text style={styles.changeBtnText}>정보변경</Text>
-                                </TouchableOpacity>
+                                <TextInput
+                                    style={styles.textInput}
+                                    placeholder="상세주소"
+                                    value={buyerAddrDetail}
+                                    onChangeText={(addrDetail) => setBuyerAddrDetail(addrDetail)}
+                                />
+                                <TextInput
+                                    keyboardType="numeric"
+                                    style={styles.textInput}
+                                    placeholder="받는 사람 연락처"
+                                    value={buyerTel}
+                                    onChangeText={(buyerTel) => setBuyerTel(addHyphenToPhoneNumber(buyerTel))}
+                                />
                             </View>
                         </View>
+
+                        {/* 주문정보(주문 상품 확인), 임의로 기입되었으므로 향후 보완 필요 */}
                         <View style={styles.eachComponent}>
                             <Text style={styles.subTitle}>주문 정보</Text>
                             <View style={styles.buyContainer}>
@@ -175,6 +128,7 @@ export default function PaymentInfo({navigation}:any, props:any) {
                             </View>
                         </View>
                         
+                        {/* 결제수단 선택(카카오페이, 토스페이먼츠 지원) */}
                         <View style={styles.eachComponent}>
                             <Text style={styles.subTitle}>결제 수단</Text>
                             <View style={styles.selectBox}>
@@ -196,13 +150,25 @@ export default function PaymentInfo({navigation}:any, props:any) {
                                 />
                             </View>
                         </View>
-
+                        
+                        {/* 결제 페이지로 이동 및 결제 정보를 AsyncStorage로 가지고 결제 성공 페이지로 이동(백엔드 전처리) */}
                         <View style={styles.eachComponent}>
                             <Text style={styles.toPayView}>{toPay}</Text>
                             <TouchableOpacity 
                                 style={[styles.paymentBtn, styles.btn]}
                                 onPress={() => {
-                                    if(pg !== '') {
+                                    if (buyerName === '' || buyerName === null) {
+                                        Alert.alert('배송지 정보 누락', '받는 사람의 이름이 입력되지 않았습니다.');
+                                    } else if (buyerAddr === '' || buyerAddr === null) {
+                                        Alert.alert('배송지 정보 누락','받는 사람의 주소가 입력되지 않았습니다.');
+                                    } else if (buyerAddrDetail === '' || buyerAddrDetail === null) {
+                                        Alert.alert('배송지 정보 누락','받는 사람의 상세 주소가 입력되지 않았습니다.');
+                                    } else if (buyerTel === '' || buyerTel === null) {
+                                        Alert.alert('배송지 정보 누락','받는 사람의 연락처가 입력되지 않았습니다.');
+                                    } else if (pg === '' || pg === null) {
+                                        Alert.alert('결제수단 누락', '결제수단이 선택되지 않았습니다');
+                                    } else {
+                                        // 모든 정보를 가지고
                                         AsyncStorage.setItem('payment', JSON.stringify({
                                             pg: pg,
                                             pay_method: 'card',
@@ -213,14 +179,14 @@ export default function PaymentInfo({navigation}:any, props:any) {
                                             buyer_name: buyerName,
                                             buyer_tel: buyerTel,
                                             buyer_addr: buyerAddr,
-                                            buyer_postcode: '12345',
+                                            buyer_detail_addr: buyerAddrDetail,
+                                            buyer_postcode: buyerPostcode,
                                             app_scheme: 'example',
                                             escrow: false
                                         }));
-                                        setModalVisible(false);
+
+                                        // Payment 컴포넌트로 이동
                                         navigation.navigate('payment');
-                                    } else {
-                                        Alert.alert('결제수단 확인', '결제수단이 선택되지 않았습니다');
                                     }
                                 }}
                             >
@@ -269,6 +235,23 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 15,
         backgroundColor: '#4b99ff',
+    },
+    textInput: {
+        width: '98%',
+        height: 40,
+        margin: 3,
+        borderWidth: 1,
+        padding: 10,
+        borderRadius: 10,
+        borderColor: '#e9e9e9',
+    },
+    informContainer: {
+        alignContent: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#fff',
+        padding: 10,
+        borderWidth: 2,
+        borderColor: '#e9e9e9'
     },
     changeBtnText: {
         fontWeight: '700',
@@ -320,62 +303,3 @@ const styles = StyleSheet.create({
         backgroundColor: '#bd4646'
     }
 })
-
-const modalStyles = StyleSheet.create({
-    centeredView: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      marginTop: 22,
-      backgroundColor: 'rgba(255,255,255, 0.8)'
-    },
-    modalView: {
-      margin: 20,
-      backgroundColor: "#fff",
-      borderRadius: 20,
-      padding: 35,
-      alignItems: "center",
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 2
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 4,
-      elevation: 5
-    },
-    button: {
-      borderRadius: 10,
-      padding: 10,
-      elevation: 2,
-      margin: 5,
-      width: 95,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    buttonApply: {
-      backgroundColor: "#2196F3",
-    },
-    buttonClose: {
-      backgroundColor: "#bd4646",
-    },
-    textStyle: {
-      color: "white",
-      fontWeight: "bold",
-      textAlign: "center"
-    },
-    modalText: {
-      marginBottom: 15,
-      textAlign: "center"
-    },
-    // 모달 내부 컴포넌트 스타일
-    modalInput: {
-        width: 300,
-        height: 40,
-        margin: 10,
-        borderWidth: 1,
-        padding: 10,
-        borderRadius: 10,
-        borderColor: '#e9e9e9'
-    }
-  });

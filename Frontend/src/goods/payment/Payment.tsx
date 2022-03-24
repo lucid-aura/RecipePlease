@@ -14,6 +14,7 @@ const Loading = (props:any) => {
 
 export default function Payment({ navigation }:any) {
 
+    // 결제시 Iamport Module에 전송할 값을 세팅
     const [paymentInform, setPaymentInform] = useState({
         pg: '',
         pay_method: '',
@@ -24,17 +25,20 @@ export default function Payment({ navigation }:any) {
         buyer_name: '',
         buyer_tel: '',
         buyer_addr: '',
+        buyer_detail_addr: '',
         buyer_postcode: '',
         app_scheme: '',
         escrow: false
     });
 
+    // AsyncStorage로 저장해서 받아온 값을 poaymentInfo에 넣어줌.
     const getPaymentInform = async () => {
         let payInform = await AsyncStorage.getItem('payment');
         try {
             if (payInform !== null) {
                 setPaymentInform(JSON.parse(payInform));
-                AsyncStorage.removeItem('payment'); // 결제 하지 않고 뒤로 돌아갈 때 메모리 누수 방지
+                // 결제 하지 않고 뒤로 돌아갈 때 메모리 누수 방지
+                AsyncStorage.removeItem('payment');
             }
         } catch (err) {
             console.log(err);
@@ -43,10 +47,15 @@ export default function Payment({ navigation }:any) {
 
     getPaymentInform();
 
+    // Iamport 모듈 실행에 대한 콜백함수
     const callBack = (resp:any) => {
         // console.log(resp);
         if (resp.imp_success === 'true') {
-            navigation.replace('paymentResult', resp);
+            //navigation.replace('paymentResult', resp);
+            navigation.navigate('paymentResult', {"key": paymentInform});
+            //console.log(JSON.stringify(paymentInform));
+            //navigation.navigate('paymentResult', JSON.stringify(paymentInform));
+            
         } else {
             navigation.replace('paymentFailed', resp);
         }
@@ -54,7 +63,7 @@ export default function Payment({ navigation }:any) {
 
     return (
         <>
-            {/* <Text>{data.pg}로 결제 테스트하기</Text> */}
+            {/* Node Module 설치 확인 필(iamport-react-native) */}
             <IMP.Payment 
                 userCode={'imp86589899'} 
                 data={paymentInform} 

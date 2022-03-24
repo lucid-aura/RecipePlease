@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Text, View } from "react-native";
 import Postcode from "react-native-daum-postcode";
 
+// 주소 검색 관련 모듈
 export default function PaymentAddr({navigation}:any) {
 
     const [postcode, setPostcode] = useState<number | null>(null);
@@ -14,6 +15,7 @@ export default function PaymentAddr({navigation}:any) {
         <View 
             style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
         >
+            {/* node module 설치 여부 확인 필(react-native-daum-postcode) */}
             <Postcode
                 style={{ width: 400, height: 200 }}
                 jsOptions={{ animation: true }}
@@ -37,7 +39,8 @@ export default function PaymentAddr({navigation}:any) {
                         } else {
                             setExtraAddr('');
                         }
-
+                        
+                        // 확인용
                         // console.log(data.zonecode)
                         // console.log(data.roadAddress)
                         // console.log(data.jibunAddress)
@@ -46,7 +49,7 @@ export default function PaymentAddr({navigation}:any) {
                         setExtraAddr(data.jibunAddress);
                     }
 
-                    
+                    // 주소를 가지고 PaymentInfo 페이지로 이동하기 위해 AsyncStorage 사용
                     AsyncStorage.setItem('addrData', JSON.stringify({
                         zipcode: data.zonecode,
                         roadAddr: data.roadAddress,
@@ -60,8 +63,9 @@ export default function PaymentAddr({navigation}:any) {
                 }}
             />
 
-            <Text>우편번호: {postcode}</Text>
-            <Text>주소: {addr}</Text>
+            {/* 확인용 */}
+            {/* <Text>우편번호: {postcode}</Text>
+            <Text>주소: {addr}</Text> */}
         </View>
     )
 }

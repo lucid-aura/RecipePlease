@@ -17,4 +17,7 @@ public interface RecipeDao {
 
 	public RecipeDto getOneRecipe(int recipeSeq);
 
+	public int updateRecipeRating(int docsSeq);
+
+
 }
