@@ -14,5 +14,9 @@ public interface PaymentDao {
 
 	boolean addGoodsShoppingList(PaymentDto dto);
 	boolean refundGoods(PaymentDto dto);
-	List<PaymentDto> goodsPurchaseList(PaymentDto dto);
+	List<PaymentDto> goodsPurchaseList(String memberId);
+	
+	boolean chargeCoin(PaymentDto dto);
+	
+	PaymentDto getGoodsPurchaseDetail(int paymentSeq);
 }

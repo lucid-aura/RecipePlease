@@ -2,6 +2,10 @@ package com.recipe.a.service;
 
 import com.recipe.a.dto.PaymentDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,11 +17,22 @@ import java.util.List;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
+@Slf4j
+//@RequiredArgsConstructor
 public class PaymentService {
 
 	private final PaymentDao paymentDao;
-	private final PaymentListDao paymentListDao;
+	
+	
+	
+	
+	public PaymentService(PaymentDao paymentDao) {
+
+		this.paymentDao = paymentDao;
+	
+	}
+
+	private Logger logger = LoggerFactory.getLogger(PaymentService.class);
 	
 	public int countPayment() {
 		System.out.println("PaymentService");
@@ -33,7 +48,20 @@ public class PaymentService {
 		return paymentDao.refundGoods(dto);
 	}
 
-	public List<PaymentDto> goodsPurchaseList(PaymentDto dto) {
-		return paymentDao.goodsPurchaseList(dto);
+	public List<PaymentDto> goodsPurchaseList(String memberId) {
+		
+		List<PaymentDto> testList = paymentDao.goodsPurchaseList(memberId);
+		logger.info(""+testList);
+		return testList;
+		
+	}
+	
+	public boolean chargeCoin(PaymentDto dto) {
+		return paymentDao.chargeCoin(dto);
+	}
+	
+	public PaymentDto getGoodsPurchaseDetail(int paymentSeq) {
+		return paymentDao.getGoodsPurchaseDetail(paymentSeq);
 	}
 }
+

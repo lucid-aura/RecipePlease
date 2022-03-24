@@ -1,0 +1,547 @@
+2022-03-24 09:18:40.538 INFO  715  --- [ main ] com.recipe.a.BackendApplication - Starting BackendApplication using Java 11.0.11 on hwangduils-MacBook-Pro.local with PID 1977 (/Users/hwangduil/FinalProject/RecipePlease/Backend/target/classes started by hwangduil in /Users/hwangduil/FinalProject/RecipePlease/Backend)
+2022-03-24 09:18:40.540 DEBUG 717  --- [ main ] com.recipe.a.BackendApplication - Running with Spring Boot v2.6.4, Spring v5.3.16
+2022-03-24 09:18:40.541 INFO  718  --- [ main ] com.recipe.a.BackendApplication - No active profile set, falling back to 1 default profile: "default"
+2022-03-24 09:18:41.168 DEBUG 1345 --- [ main ] o.m.s.b.a.MybatisAutoConfiguration - Searching for mappers annotated with @Mapper
+2022-03-24 09:18:41.169 DEBUG 1346 --- [ main ] o.m.s.b.a.MybatisAutoConfiguration - Using auto-configuration base package 'com.recipe.a'
+2022-03-24 09:18:41.269 DEBUG 1446 --- [ main ] o.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2022-03-24 09:18:41.274 DEBUG 1451 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [/Users/hwangduil/FinalProject/RecipePlease/Backend/target/classes/com/recipe/a/dao/GoodsDao.class]
+2022-03-24 09:18:41.274 DEBUG 1451 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [/Users/hwangduil/FinalProject/RecipePlease/Backend/target/classes/com/recipe/a/dao/MembersDao.class]
+2022-03-24 09:18:41.274 DEBUG 1451 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [/Users/hwangduil/FinalProject/RecipePlease/Backend/target/classes/com/recipe/a/dao/PaymentDao.class]
+2022-03-24 09:18:41.274 DEBUG 1451 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [/Users/hwangduil/FinalProject/RecipePlease/Backend/target/classes/com/recipe/a/dao/PaymentListDao.class]
+2022-03-24 09:18:41.274 DEBUG 1451 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [/Users/hwangduil/FinalProject/RecipePlease/Backend/target/classes/com/recipe/a/dao/PhotoDao.class]
+2022-03-24 09:18:41.274 DEBUG 1451 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [/Users/hwangduil/FinalProject/RecipePlease/Backend/target/classes/com/recipe/a/dao/RatingDao.class]
+2022-03-24 09:18:41.274 DEBUG 1451 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [/Users/hwangduil/FinalProject/RecipePlease/Backend/target/classes/com/recipe/a/dao/RecipeDao.class]
+2022-03-24 09:18:41.274 DEBUG 1451 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [/Users/hwangduil/FinalProject/RecipePlease/Backend/target/classes/com/recipe/a/dao/RecipeLikeDao.class]
+2022-03-24 09:18:41.275 DEBUG 1452 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'goodsDao' and 'com.recipe.a.dao.GoodsDao' mapperInterface
+2022-03-24 09:18:41.277 DEBUG 1454 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'goodsDao'.
+2022-03-24 09:18:41.277 DEBUG 1454 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'membersDao' and 'com.recipe.a.dao.MembersDao' mapperInterface
+2022-03-24 09:18:41.277 DEBUG 1454 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'membersDao'.
+2022-03-24 09:18:41.277 DEBUG 1454 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'paymentDao' and 'com.recipe.a.dao.PaymentDao' mapperInterface
+2022-03-24 09:18:41.277 DEBUG 1454 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'paymentDao'.
+2022-03-24 09:18:41.277 DEBUG 1454 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'paymentListDao' and 'com.recipe.a.dao.PaymentListDao' mapperInterface
+2022-03-24 09:18:41.277 DEBUG 1454 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'paymentListDao'.
+2022-03-24 09:18:41.277 DEBUG 1454 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'photoDao' and 'com.recipe.a.dao.PhotoDao' mapperInterface
+2022-03-24 09:18:41.277 DEBUG 1454 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'photoDao'.
+2022-03-24 09:18:41.277 DEBUG 1454 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'ratingDao' and 'com.recipe.a.dao.RatingDao' mapperInterface
+2022-03-24 09:18:41.278 DEBUG 1455 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'ratingDao'.
+2022-03-24 09:18:41.278 DEBUG 1455 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'recipeDao' and 'com.recipe.a.dao.RecipeDao' mapperInterface
+2022-03-24 09:18:41.278 DEBUG 1455 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'recipeDao'.
+2022-03-24 09:18:41.278 DEBUG 1455 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'recipeLikeDao' and 'com.recipe.a.dao.RecipeLikeDao' mapperInterface
+2022-03-24 09:18:41.278 DEBUG 1455 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'recipeLikeDao'.
+2022-03-24 09:18:41.729 INFO  1906 --- [ main ] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 3000 (http)
+2022-03-24 09:18:41.739 INFO  1916 --- [ main ] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-3000"]
+2022-03-24 09:18:41.743 INFO  1920 --- [ main ] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2022-03-24 09:18:41.743 INFO  1920 --- [ main ] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.58]
+2022-03-24 09:18:41.813 INFO  1990 --- [ main ] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-03-24 09:18:41.814 INFO  1991 --- [ main ] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1230 ms
+2022-03-24 09:18:41.911 DEBUG 2088 --- [ main ] com.zaxxer.hikari.HikariConfig - Driver class com.mysql.cj.jdbc.Driver found in Thread context class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2c13da15
+2022-03-24 09:18:41.921 DEBUG 2098 --- [ main ] com.zaxxer.hikari.HikariConfig - HikariPool-1 - configuration:
+2022-03-24 09:18:41.923 DEBUG 2100 --- [ main ] com.zaxxer.hikari.HikariConfig - allowPoolSuspension................................false
+2022-03-24 09:18:41.923 DEBUG 2100 --- [ main ] com.zaxxer.hikari.HikariConfig - autoCommit................................true
+2022-03-24 09:18:41.923 DEBUG 2100 --- [ main ] com.zaxxer.hikari.HikariConfig - catalog................................none
+2022-03-24 09:18:41.923 DEBUG 2100 --- [ main ] com.zaxxer.hikari.HikariConfig - connectionInitSql................................none
+2022-03-24 09:18:41.923 DEBUG 2100 --- [ main ] com.zaxxer.hikari.HikariConfig - connectionTestQuery................................none
+2022-03-24 09:18:41.923 DEBUG 2100 --- [ main ] com.zaxxer.hikari.HikariConfig - connectionTimeout................................30000
+2022-03-24 09:18:41.923 DEBUG 2100 --- [ main ] com.zaxxer.hikari.HikariConfig - dataSource................................none
+2022-03-24 09:18:41.923 DEBUG 2100 --- [ main ] com.zaxxer.hikari.HikariConfig - dataSourceClassName................................none
+2022-03-24 09:18:41.924 DEBUG 2101 --- [ main ] com.zaxxer.hikari.HikariConfig - dataSourceJNDI................................none
+2022-03-24 09:18:41.924 DEBUG 2101 --- [ main ] com.zaxxer.hikari.HikariConfig - dataSourceProperties................................{password=<masked>}
+2022-03-24 09:18:41.924 DEBUG 2101 --- [ main ] com.zaxxer.hikari.HikariConfig - driverClassName................................"com.mysql.cj.jdbc.Driver"
+2022-03-24 09:18:41.924 DEBUG 2101 --- [ main ] com.zaxxer.hikari.HikariConfig - exceptionOverrideClassName................................none
+2022-03-24 09:18:41.924 DEBUG 2101 --- [ main ] com.zaxxer.hikari.HikariConfig - healthCheckProperties................................{}
+2022-03-24 09:18:41.925 DEBUG 2102 --- [ main ] com.zaxxer.hikari.HikariConfig - healthCheckRegistry................................none
+2022-03-24 09:18:41.925 DEBUG 2102 --- [ main ] com.zaxxer.hikari.HikariConfig - idleTimeout................................600000
+2022-03-24 09:18:41.925 DEBUG 2102 --- [ main ] com.zaxxer.hikari.HikariConfig - initializationFailTimeout................................1
+2022-03-24 09:18:41.925 DEBUG 2102 --- [ main ] com.zaxxer.hikari.HikariConfig - isolateInternalQueries................................false
+2022-03-24 09:18:41.925 DEBUG 2102 --- [ main ] com.zaxxer.hikari.HikariConfig - jdbcUrl................................jdbc:mysql://localhost:3306/recipe
+2022-03-24 09:18:41.926 DEBUG 2103 --- [ main ] com.zaxxer.hikari.HikariConfig - keepaliveTime................................0
+2022-03-24 09:18:41.926 DEBUG 2103 --- [ main ] com.zaxxer.hikari.HikariConfig - leakDetectionThreshold................................0
+2022-03-24 09:18:41.926 DEBUG 2103 --- [ main ] com.zaxxer.hikari.HikariConfig - maxLifetime................................1800000
+2022-03-24 09:18:41.926 DEBUG 2103 --- [ main ] com.zaxxer.hikari.HikariConfig - maximumPoolSize................................10
+2022-03-24 09:18:41.926 DEBUG 2103 --- [ main ] com.zaxxer.hikari.HikariConfig - metricRegistry................................none
+2022-03-24 09:18:41.926 DEBUG 2103 --- [ main ] com.zaxxer.hikari.HikariConfig - metricsTrackerFactory................................none
+2022-03-24 09:18:41.926 DEBUG 2103 --- [ main ] com.zaxxer.hikari.HikariConfig - minimumIdle................................10
+2022-03-24 09:18:41.926 DEBUG 2103 --- [ main ] com.zaxxer.hikari.HikariConfig - password................................<masked>
+2022-03-24 09:18:41.926 DEBUG 2103 --- [ main ] com.zaxxer.hikari.HikariConfig - poolName................................"HikariPool-1"
+2022-03-24 09:18:41.926 DEBUG 2103 --- [ main ] com.zaxxer.hikari.HikariConfig - readOnly................................false
+2022-03-24 09:18:41.926 DEBUG 2103 --- [ main ] com.zaxxer.hikari.HikariConfig - registerMbeans................................false
+2022-03-24 09:18:41.926 DEBUG 2103 --- [ main ] com.zaxxer.hikari.HikariConfig - scheduledExecutor................................none
+2022-03-24 09:18:41.926 DEBUG 2103 --- [ main ] com.zaxxer.hikari.HikariConfig - schema................................none
+2022-03-24 09:18:41.926 DEBUG 2103 --- [ main ] com.zaxxer.hikari.HikariConfig - threadFactory................................internal
+2022-03-24 09:18:41.927 DEBUG 2104 --- [ main ] com.zaxxer.hikari.HikariConfig - transactionIsolation................................default
+2022-03-24 09:18:41.927 DEBUG 2104 --- [ main ] com.zaxxer.hikari.HikariConfig - username................................"root"
+2022-03-24 09:18:41.927 DEBUG 2104 --- [ main ] com.zaxxer.hikari.HikariConfig - validationTimeout................................5000
+2022-03-24 09:18:41.929 INFO  2106 --- [ main ] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-03-24 09:18:42.347 DEBUG 2524 --- [ main ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2f79f192
+2022-03-24 09:18:42.348 INFO  2525 --- [ main ] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-03-24 09:18:42.356 DEBUG 2533 --- [ main ] o.m.spring.SqlSessionFactoryBean - Property 'configuration' or 'configLocation' not specified, using default MyBatis Configuration
+2022-03-24 09:18:42.453 DEBUG 2630 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=1, active=0, idle=1, waiting=0)
+2022-03-24 09:18:42.465 DEBUG 2642 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [/Users/hwangduil/FinalProject/RecipePlease/Backend/target/classes/sqls/Goods.xml]'
+2022-03-24 09:18:42.491 DEBUG 2668 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [/Users/hwangduil/FinalProject/RecipePlease/Backend/target/classes/sqls/Members.xml]'
+2022-03-24 09:18:42.498 DEBUG 2675 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@21f0a57f
+2022-03-24 09:18:42.524 DEBUG 2701 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [/Users/hwangduil/FinalProject/RecipePlease/Backend/target/classes/sqls/Payment.xml]'
+2022-03-24 09:18:42.534 DEBUG 2711 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [/Users/hwangduil/FinalProject/RecipePlease/Backend/target/classes/sqls/Payment_List.xml]'
+2022-03-24 09:18:42.538 DEBUG 2715 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@60cdaf44
+2022-03-24 09:18:42.562 DEBUG 2739 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [/Users/hwangduil/FinalProject/RecipePlease/Backend/target/classes/sqls/Photo.xml]'
+2022-03-24 09:18:42.571 DEBUG 2748 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [/Users/hwangduil/FinalProject/RecipePlease/Backend/target/classes/sqls/Rating.xml]'
+2022-03-24 09:18:42.576 DEBUG 2753 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@e2500b
+2022-03-24 09:18:42.610 DEBUG 2787 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [/Users/hwangduil/FinalProject/RecipePlease/Backend/target/classes/sqls/Recipe.xml]'
+2022-03-24 09:18:42.623 DEBUG 2800 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [/Users/hwangduil/FinalProject/RecipePlease/Backend/target/classes/sqls/Recipelike.xml]'
+2022-03-24 09:18:42.640 DEBUG 2817 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@58817dda
+2022-03-24 09:18:42.668 DEBUG 2845 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4acac48
+2022-03-24 09:18:42.704 DEBUG 2881 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@49ed8e30
+2022-03-24 09:18:42.735 DEBUG 2912 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6d4a00d2
+2022-03-24 09:18:42.764 DEBUG 2941 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@755164aa
+2022-03-24 09:18:42.785 DEBUG 2962 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@154e796b
+2022-03-24 09:18:42.788 DEBUG 2965 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - After adding stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:18:42.999 DEBUG 3176 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 
+	c.r.a.c.GoodsController:
+	{[GET, POST] [/countGoods]}: countMembers()
+2022-03-24 09:18:43.000 DEBUG 3177 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 
+	c.r.a.c.MembersController:
+	{[GET, POST] [/countMembers]}: countMembers()
+2022-03-24 09:18:43.001 DEBUG 3178 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 
+	c.r.a.c.PaymentController:
+	{POST [/payment/addGoodsShoppingList]}: addGoodsShoppingList(PaymentDto)
+	{POST [/payment/refundGoods]}: refundGoods(PaymentDto)
+	{POST [/payment/returnGoods]}: returnGoods(PaymentDto)
+	{GET [/payment/goodsPurchaseList]}: goodsPurchaseList(String)
+	{GET [/payment/testMode]}: testMode()
+	{GET [/payment/countTest]}: countTest()
+	{POST [/payment/chargeCoin]}: chargeCoin(PaymentDto)
+2022-03-24 09:18:43.003 DEBUG 3180 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 
+	c.r.a.c.RecipeController:
+	{[GET, POST] [/countRecipe]}: countRecipe()
+	{[GET, POST] [/insertRecipe]}: insertRecipe()
+	{GET [/getOneRecipe]}: getOneRecipe(int)
+	{[GET, POST] [/countPhoto]}: countPhoto()
+	{GET [/getPhoto]}: getPhoto(int,String)
+	{[GET, POST] [/main]}: main()
+	{GET [/test]}: test(int,String)
+2022-03-24 09:18:43.011 DEBUG 3188 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+	{ [/error]}: error(HttpServletRequest)
+2022-03-24 09:18:43.023 DEBUG 3200 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 'beanNameHandlerMapping' {}
+2022-03-24 09:18:43.034 DEBUG 3211 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2022-03-24 09:18:43.060 DEBUG 3237 --- [ main ] o.m.s.b.a.MybatisAutoConfiguration - Not found configuration for registering mapper bean using @MapperScan, MapperFactoryBean and MapperScannerConfigurer.
+2022-03-24 09:18:43.174 INFO  3351 --- [ main ] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-3000"]
+2022-03-24 09:18:43.190 INFO  3367 --- [ main ] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 3000 (http) with context path ''
+2022-03-24 09:18:43.209 INFO  3386 --- [ main ] com.recipe.a.BackendApplication - Started BackendApplication in 3.08 seconds (JVM running for 4.145)
+2022-03-24 09:19:12.463 DEBUG 32640 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:19:12.466 DEBUG 32643 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:19:42.470 DEBUG 62647 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:19:42.473 DEBUG 62650 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:19:51.297 INFO  71474 --- [ http-nio-3000-exec-1 ] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-03-24 09:19:51.297 INFO  71474 --- [ http-nio-3000-exec-1 ] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-03-24 09:19:51.299 INFO  71476 --- [ http-nio-3000-exec-1 ] o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2022-03-24 09:19:51.328 INFO  71505 --- [ http-nio-3000-exec-1 ] c.r.a.controller.PaymentController - PaymentController goodsPurchaseList()
+2022-03-24 09:19:51.355 DEBUG 71532 --- [ http-nio-3000-exec-1 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-24 09:19:51.360 DEBUG 71537 --- [ http-nio-3000-exec-1 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@c3a5ae0]
+2022-03-24 09:19:51.365 DEBUG 71542 --- [ http-nio-3000-exec-1 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@2102691699 wrapping com.mysql.cj.jdbc.ConnectionImpl@2f79f192] will be managed by Spring
+2022-03-24 09:19:51.372 DEBUG 71549 --- [ http-nio-3000-exec-1 ] c.r.a.d.P.goodsPurchaseList - ==>  Preparing: SELECT * FROM PAYMENT WHERE MEMBERID = ?
+2022-03-24 09:19:51.399 DEBUG 71576 --- [ http-nio-3000-exec-1 ] c.r.a.d.P.goodsPurchaseList - ==> Parameters: k(String)
+2022-03-24 09:19:51.455 DEBUG 71632 --- [ http-nio-3000-exec-1 ] c.r.a.d.P.goodsPurchaseList - <==      Total: 0
+2022-03-24 09:19:51.459 DEBUG 71636 --- [ http-nio-3000-exec-1 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@c3a5ae0]
+2022-03-24 09:19:51.459 INFO  71636 --- [ http-nio-3000-exec-1 ] com.recipe.a.service.PaymentService - []
+2022-03-24 09:19:51.459 DEBUG 71636 --- [ http-nio-3000-exec-1 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@c3a5ae0]
+2022-03-24 09:19:51.459 DEBUG 71636 --- [ http-nio-3000-exec-1 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@c3a5ae0]
+2022-03-24 09:19:51.460 DEBUG 71637 --- [ http-nio-3000-exec-1 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@c3a5ae0]
+2022-03-24 09:20:12.480 DEBUG 92657 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:20:12.491 DEBUG 92668 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:20:42.496 DEBUG 122673 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:20:42.508 DEBUG 122685 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:21:12.511 DEBUG 152688 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:21:12.514 DEBUG 152691 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:21:42.519 DEBUG 182696 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:21:42.521 DEBUG 182698 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:22:12.524 DEBUG 212701 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:22:12.526 DEBUG 212703 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:22:42.530 DEBUG 242707 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:22:42.532 DEBUG 242709 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:23:12.537 DEBUG 272714 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:23:12.541 DEBUG 272718 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:23:42.545 DEBUG 302722 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:23:42.547 DEBUG 302724 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:24:12.550 DEBUG 332727 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:24:12.552 DEBUG 332729 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:24:42.557 DEBUG 362734 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:24:42.559 DEBUG 362736 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:25:12.562 DEBUG 392739 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:25:12.575 DEBUG 392752 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:25:42.577 DEBUG 422754 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:25:42.584 DEBUG 422761 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:26:12.589 DEBUG 452766 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:26:12.591 DEBUG 452768 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:26:42.595 DEBUG 482772 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:26:42.597 DEBUG 482774 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:27:12.602 DEBUG 512779 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:27:12.604 DEBUG 512781 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:27:42.608 DEBUG 542785 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:27:42.608 DEBUG 542785 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:28:12.611 DEBUG 572788 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:28:12.612 DEBUG 572789 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:28:42.617 DEBUG 602794 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:28:42.618 DEBUG 602795 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:29:12.622 DEBUG 632799 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:29:12.623 DEBUG 632800 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:29:42.625 DEBUG 662802 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:29:42.630 DEBUG 662807 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:30:12.635 DEBUG 692812 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:30:12.642 DEBUG 692819 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:30:31.485 INFO  711662 --- [ http-nio-3000-exec-3 ] c.r.a.controller.PaymentController - PaymentController goodsPurchaseList()
+2022-03-24 09:30:31.515 DEBUG 711692 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-24 09:30:31.516 DEBUG 711693 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c250dfb]
+2022-03-24 09:30:31.517 DEBUG 711694 --- [ http-nio-3000-exec-3 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1457350283 wrapping com.mysql.cj.jdbc.ConnectionImpl@2f79f192] will be managed by Spring
+2022-03-24 09:30:31.517 DEBUG 711694 --- [ http-nio-3000-exec-3 ] c.r.a.d.P.goodsPurchaseList - ==>  Preparing: SELECT * FROM PAYMENT WHERE MEMBERID = ?
+2022-03-24 09:30:31.521 DEBUG 711698 --- [ http-nio-3000-exec-3 ] c.r.a.d.P.goodsPurchaseList - ==> Parameters: k(String)
+2022-03-24 09:30:31.548 DEBUG 711725 --- [ http-nio-3000-exec-3 ] c.r.a.d.P.goodsPurchaseList - <==      Total: 0
+2022-03-24 09:30:31.555 DEBUG 711732 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c250dfb]
+2022-03-24 09:30:31.555 INFO  711732 --- [ http-nio-3000-exec-3 ] com.recipe.a.service.PaymentService - []
+2022-03-24 09:30:31.555 DEBUG 711732 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c250dfb]
+2022-03-24 09:30:31.556 DEBUG 711733 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c250dfb]
+2022-03-24 09:30:31.556 DEBUG 711733 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c250dfb]
+2022-03-24 09:30:37.321 INFO  717498 --- [ http-nio-3000-exec-4 ] c.r.a.controller.PaymentController - PaymentController goodsPurchaseList()
+2022-03-24 09:30:37.324 DEBUG 717501 --- [ http-nio-3000-exec-4 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-24 09:30:37.324 DEBUG 717501 --- [ http-nio-3000-exec-4 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@fc2d52]
+2022-03-24 09:30:37.324 DEBUG 717501 --- [ http-nio-3000-exec-4 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@168052258 wrapping com.mysql.cj.jdbc.ConnectionImpl@2f79f192] will be managed by Spring
+2022-03-24 09:30:37.325 DEBUG 717502 --- [ http-nio-3000-exec-4 ] c.r.a.d.P.goodsPurchaseList - ==>  Preparing: SELECT * FROM PAYMENT WHERE MEMBERID = ?
+2022-03-24 09:30:37.326 DEBUG 717503 --- [ http-nio-3000-exec-4 ] c.r.a.d.P.goodsPurchaseList - ==> Parameters: k(String)
+2022-03-24 09:30:37.331 DEBUG 717508 --- [ http-nio-3000-exec-4 ] c.r.a.d.P.goodsPurchaseList - <==      Total: 0
+2022-03-24 09:30:37.334 DEBUG 717511 --- [ http-nio-3000-exec-4 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@fc2d52]
+2022-03-24 09:30:37.335 INFO  717512 --- [ http-nio-3000-exec-4 ] com.recipe.a.service.PaymentService - []
+2022-03-24 09:30:37.335 DEBUG 717512 --- [ http-nio-3000-exec-4 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@fc2d52]
+2022-03-24 09:30:37.335 DEBUG 717512 --- [ http-nio-3000-exec-4 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@fc2d52]
+2022-03-24 09:30:37.335 DEBUG 717512 --- [ http-nio-3000-exec-4 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@fc2d52]
+2022-03-24 09:30:42.642 DEBUG 722819 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:30:42.655 DEBUG 722832 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:31:12.661 DEBUG 752838 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:31:12.671 DEBUG 752848 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:31:42.673 DEBUG 782850 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:31:42.676 DEBUG 782853 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:32:12.680 DEBUG 812857 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:32:12.686 DEBUG 812863 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:32:35.686 INFO  835863 --- [ http-nio-3000-exec-6 ] c.r.a.controller.PaymentController - PaymentController goodsPurchaseList()
+2022-03-24 09:32:35.694 DEBUG 835871 --- [ http-nio-3000-exec-6 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-24 09:32:35.694 DEBUG 835871 --- [ http-nio-3000-exec-6 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1e32c162]
+2022-03-24 09:32:35.695 DEBUG 835872 --- [ http-nio-3000-exec-6 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@348826130 wrapping com.mysql.cj.jdbc.ConnectionImpl@2f79f192] will be managed by Spring
+2022-03-24 09:32:35.697 DEBUG 835874 --- [ http-nio-3000-exec-6 ] c.r.a.d.P.goodsPurchaseList - ==>  Preparing: SELECT * FROM PAYMENT WHERE MEMBERID = ?
+2022-03-24 09:32:35.700 DEBUG 835877 --- [ http-nio-3000-exec-6 ] c.r.a.d.P.goodsPurchaseList - ==> Parameters: 카카오(String)
+2022-03-24 09:32:35.738 DEBUG 835915 --- [ http-nio-3000-exec-6 ] c.r.a.d.P.goodsPurchaseList - <==      Total: 5
+2022-03-24 09:32:35.739 DEBUG 835916 --- [ http-nio-3000-exec-6 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1e32c162]
+2022-03-24 09:32:35.740 INFO  835917 --- [ http-nio-3000-exec-6 ] com.recipe.a.service.PaymentService - [PaymentDto [paymentSeq=1, memberId=카카오, paymentPay=0, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=null, paymentDetailAddr=null, paymentZipcode=0, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=2, memberId=카카오, paymentPay=0, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=지하 1층, paymentZipcode=0, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=3, memberId=카카오, paymentPay=12400, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=지하 1층, paymentZipcode=35242, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=4, memberId=카카오, paymentPay=12400, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=1층 경비실, paymentZipcode=35242, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=5, memberId=카카오, paymentPay=12400, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=1층 경비실, paymentZipcode=35242, paymentCategory=굿즈, paymentCount=1]]
+2022-03-24 09:32:35.740 DEBUG 835917 --- [ http-nio-3000-exec-6 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1e32c162]
+2022-03-24 09:32:35.740 DEBUG 835917 --- [ http-nio-3000-exec-6 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1e32c162]
+2022-03-24 09:32:35.741 DEBUG 835918 --- [ http-nio-3000-exec-6 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1e32c162]
+2022-03-24 09:32:42.690 DEBUG 842867 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:32:42.692 DEBUG 842869 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:32:45.492 INFO  845669 --- [ http-nio-3000-exec-7 ] c.r.a.controller.PaymentController - PaymentController goodsPurchaseList()
+2022-03-24 09:32:45.494 DEBUG 845671 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-24 09:32:45.495 DEBUG 845672 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4cadb38d]
+2022-03-24 09:32:45.496 DEBUG 845673 --- [ http-nio-3000-exec-7 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1180031229 wrapping com.mysql.cj.jdbc.ConnectionImpl@2f79f192] will be managed by Spring
+2022-03-24 09:32:45.496 DEBUG 845673 --- [ http-nio-3000-exec-7 ] c.r.a.d.P.goodsPurchaseList - ==>  Preparing: SELECT * FROM PAYMENT WHERE MEMBERID = ?
+2022-03-24 09:32:45.499 DEBUG 845676 --- [ http-nio-3000-exec-7 ] c.r.a.d.P.goodsPurchaseList - ==> Parameters: 카카오(String)
+2022-03-24 09:32:45.513 DEBUG 845690 --- [ http-nio-3000-exec-7 ] c.r.a.d.P.goodsPurchaseList - <==      Total: 5
+2022-03-24 09:32:45.515 DEBUG 845692 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4cadb38d]
+2022-03-24 09:32:45.515 INFO  845692 --- [ http-nio-3000-exec-7 ] com.recipe.a.service.PaymentService - [PaymentDto [paymentSeq=1, memberId=카카오, paymentPay=0, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=null, paymentDetailAddr=null, paymentZipcode=0, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=2, memberId=카카오, paymentPay=0, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=지하 1층, paymentZipcode=0, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=3, memberId=카카오, paymentPay=12400, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=지하 1층, paymentZipcode=35242, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=4, memberId=카카오, paymentPay=12400, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=1층 경비실, paymentZipcode=35242, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=5, memberId=카카오, paymentPay=12400, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=1층 경비실, paymentZipcode=35242, paymentCategory=굿즈, paymentCount=1]]
+2022-03-24 09:32:45.516 DEBUG 845693 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4cadb38d]
+2022-03-24 09:32:45.516 DEBUG 845693 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4cadb38d]
+2022-03-24 09:32:45.516 DEBUG 845693 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4cadb38d]
+2022-03-24 09:32:50.289 INFO  850466 --- [ http-nio-3000-exec-8 ] c.r.a.controller.PaymentController - PaymentController goodsPurchaseList()
+2022-03-24 09:32:50.293 DEBUG 850470 --- [ http-nio-3000-exec-8 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-24 09:32:50.293 DEBUG 850470 --- [ http-nio-3000-exec-8 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4d7e57fa]
+2022-03-24 09:32:50.295 DEBUG 850472 --- [ http-nio-3000-exec-8 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1199979658 wrapping com.mysql.cj.jdbc.ConnectionImpl@2f79f192] will be managed by Spring
+2022-03-24 09:32:50.295 DEBUG 850472 --- [ http-nio-3000-exec-8 ] c.r.a.d.P.goodsPurchaseList - ==>  Preparing: SELECT * FROM PAYMENT WHERE MEMBERID = ?
+2022-03-24 09:32:50.296 DEBUG 850473 --- [ http-nio-3000-exec-8 ] c.r.a.d.P.goodsPurchaseList - ==> Parameters: 카카오(String)
+2022-03-24 09:32:50.310 DEBUG 850487 --- [ http-nio-3000-exec-8 ] c.r.a.d.P.goodsPurchaseList - <==      Total: 5
+2022-03-24 09:32:50.311 DEBUG 850488 --- [ http-nio-3000-exec-8 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4d7e57fa]
+2022-03-24 09:32:50.312 INFO  850489 --- [ http-nio-3000-exec-8 ] com.recipe.a.service.PaymentService - [PaymentDto [paymentSeq=1, memberId=카카오, paymentPay=0, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=null, paymentDetailAddr=null, paymentZipcode=0, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=2, memberId=카카오, paymentPay=0, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=지하 1층, paymentZipcode=0, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=3, memberId=카카오, paymentPay=12400, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=지하 1층, paymentZipcode=35242, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=4, memberId=카카오, paymentPay=12400, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=1층 경비실, paymentZipcode=35242, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=5, memberId=카카오, paymentPay=12400, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=1층 경비실, paymentZipcode=35242, paymentCategory=굿즈, paymentCount=1]]
+2022-03-24 09:32:50.313 DEBUG 850490 --- [ http-nio-3000-exec-8 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4d7e57fa]
+2022-03-24 09:32:50.313 DEBUG 850490 --- [ http-nio-3000-exec-8 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4d7e57fa]
+2022-03-24 09:32:50.313 DEBUG 850490 --- [ http-nio-3000-exec-8 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4d7e57fa]
+2022-03-24 09:33:12.696 DEBUG 872873 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:33:12.699 DEBUG 872876 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:33:42.703 DEBUG 902880 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:33:42.707 DEBUG 902884 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:34:12.713 DEBUG 932890 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:34:12.717 DEBUG 932894 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:34:42.719 DEBUG 962896 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:34:42.720 DEBUG 962897 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:35:12.725 DEBUG 992902 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:35:12.726 DEBUG 992903 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:35:42.731 DEBUG 1022908 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:35:42.733 DEBUG 1022910 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:36:12.735 DEBUG 1052912 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:36:12.737 DEBUG 1052914 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:36:42.737 DEBUG 1082914 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:36:42.739 DEBUG 1082916 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:37:12.743 DEBUG 1112920 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:37:12.745 DEBUG 1112922 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:37:42.753 DEBUG 1142930 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:37:42.758 DEBUG 1142935 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:37:47.033 INFO  1147210 --- [ http-nio-3000-exec-10 ] c.r.a.controller.PaymentController - PaymentController goodsPurchaseList()
+2022-03-24 09:37:47.045 DEBUG 1147222 --- [ http-nio-3000-exec-10 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-24 09:37:47.045 DEBUG 1147222 --- [ http-nio-3000-exec-10 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@40378585]
+2022-03-24 09:37:47.046 DEBUG 1147223 --- [ http-nio-3000-exec-10 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1255141109 wrapping com.mysql.cj.jdbc.ConnectionImpl@2f79f192] will be managed by Spring
+2022-03-24 09:37:47.046 DEBUG 1147223 --- [ http-nio-3000-exec-10 ] c.r.a.d.P.goodsPurchaseList - ==>  Preparing: SELECT * FROM PAYMENT WHERE MEMBERID = ?
+2022-03-24 09:37:47.047 DEBUG 1147224 --- [ http-nio-3000-exec-10 ] c.r.a.d.P.goodsPurchaseList - ==> Parameters: 카카오(String)
+2022-03-24 09:37:47.069 DEBUG 1147246 --- [ http-nio-3000-exec-10 ] c.r.a.d.P.goodsPurchaseList - <==      Total: 5
+2022-03-24 09:37:47.071 DEBUG 1147248 --- [ http-nio-3000-exec-10 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@40378585]
+2022-03-24 09:37:47.072 INFO  1147249 --- [ http-nio-3000-exec-10 ] com.recipe.a.service.PaymentService - [PaymentDto [paymentSeq=1, memberId=카카오, paymentPay=0, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=null, paymentDetailAddr=null, paymentZipcode=0, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=2, memberId=카카오, paymentPay=0, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=지하 1층, paymentZipcode=0, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=3, memberId=카카오, paymentPay=12400, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=지하 1층, paymentZipcode=35242, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=4, memberId=카카오, paymentPay=12400, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=1층 경비실, paymentZipcode=35242, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=5, memberId=카카오, paymentPay=12400, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=1층 경비실, paymentZipcode=35242, paymentCategory=굿즈, paymentCount=1]]
+2022-03-24 09:37:47.072 DEBUG 1147249 --- [ http-nio-3000-exec-10 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@40378585]
+2022-03-24 09:37:47.072 DEBUG 1147249 --- [ http-nio-3000-exec-10 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@40378585]
+2022-03-24 09:37:47.072 DEBUG 1147249 --- [ http-nio-3000-exec-10 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@40378585]
+2022-03-24 09:38:12.765 DEBUG 1172942 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:38:12.769 DEBUG 1172946 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:38:42.773 DEBUG 1202950 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:38:42.775 DEBUG 1202952 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:39:12.777 DEBUG 1232954 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:39:12.780 DEBUG 1232957 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:39:42.782 DEBUG 1262959 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:39:42.783 DEBUG 1262960 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:40:12.788 DEBUG 1292965 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:40:12.791 DEBUG 1292968 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:40:42.794 DEBUG 1322971 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:40:42.794 DEBUG 1322971 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:41:12.796 DEBUG 1352973 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:41:12.797 DEBUG 1352974 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:41:42.802 DEBUG 1382979 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:41:42.805 DEBUG 1382982 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:42:12.809 DEBUG 1412986 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:42:12.811 DEBUG 1412988 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:42:42.816 DEBUG 1442993 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:42:42.817 DEBUG 1442994 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:43:12.822 DEBUG 1472999 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:43:12.823 DEBUG 1473000 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:43:42.828 DEBUG 1503005 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:43:42.829 DEBUG 1503006 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:44:12.830 DEBUG 1533007 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:44:12.832 DEBUG 1533009 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:44:42.837 DEBUG 1563014 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:44:42.838 DEBUG 1563015 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:45:12.838 DEBUG 1593015 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:45:12.840 DEBUG 1593017 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:45:42.844 DEBUG 1623021 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:45:42.845 DEBUG 1623022 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:46:12.850 DEBUG 1653027 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:46:12.852 DEBUG 1653029 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:46:42.853 DEBUG 1683030 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:46:42.854 DEBUG 1683031 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:47:12.858 DEBUG 1713035 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:47:12.860 DEBUG 1713037 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:47:42.864 DEBUG 1743041 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:47:42.866 DEBUG 1743043 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:48:02.085 DEBUG 1762262 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@60cdaf44: (connection has passed maxLifetime)
+2022-03-24 09:48:02.168 DEBUG 1762345 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@54fef754
+2022-03-24 09:48:02.687 DEBUG 1762864 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@2f79f192: (connection has passed maxLifetime)
+2022-03-24 09:48:02.751 DEBUG 1762928 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@15c3fd6f
+2022-03-24 09:48:04.512 DEBUG 1764689 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@21f0a57f: (connection has passed maxLifetime)
+2022-03-24 09:48:04.580 DEBUG 1764757 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@75ec0220
+2022-03-24 09:48:04.601 DEBUG 1764778 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@58817dda: (connection has passed maxLifetime)
+2022-03-24 09:48:04.634 DEBUG 1764811 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6e0f1214
+2022-03-24 09:48:08.589 DEBUG 1768766 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@e2500b: (connection has passed maxLifetime)
+2022-03-24 09:48:08.660 DEBUG 1768837 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@71a29b75
+2022-03-24 09:48:12.870 DEBUG 1773047 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:48:12.871 DEBUG 1773048 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:48:20.566 DEBUG 1780743 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@755164aa: (connection has passed maxLifetime)
+2022-03-24 09:48:20.626 DEBUG 1780803 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@be8d18f
+2022-03-24 09:48:21.134 DEBUG 1781311 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@154e796b: (connection has passed maxLifetime)
+2022-03-24 09:48:21.198 DEBUG 1781375 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@12c43282
+2022-03-24 09:48:42.118 DEBUG 1802295 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@49ed8e30: (connection has passed maxLifetime)
+2022-03-24 09:48:42.141 DEBUG 1802318 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Add connection elided, waiting 0, queue 1
+2022-03-24 09:48:42.141 DEBUG 1802318 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@4acac48: (connection has passed maxLifetime)
+2022-03-24 09:48:42.174 DEBUG 1802351 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@74c51463
+2022-03-24 09:48:42.175 DEBUG 1802352 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Add connection elided, waiting 0, queue 1
+2022-03-24 09:48:42.175 DEBUG 1802352 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@6d4a00d2: (connection has passed maxLifetime)
+2022-03-24 09:48:42.202 DEBUG 1802379 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@35f81e58
+2022-03-24 09:48:42.202 DEBUG 1802379 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - After adding stats (total=9, active=0, idle=9, waiting=0)
+2022-03-24 09:48:42.231 DEBUG 1802408 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4072cb1
+2022-03-24 09:48:42.233 DEBUG 1802410 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - After adding stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:48:42.876 DEBUG 1803053 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:48:42.876 DEBUG 1803053 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:49:12.878 DEBUG 1833055 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:49:12.880 DEBUG 1833057 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:49:42.885 DEBUG 1863062 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:49:42.891 DEBUG 1863068 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:50:12.896 DEBUG 1893073 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:50:12.897 DEBUG 1893074 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:50:42.902 DEBUG 1923079 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:50:42.905 DEBUG 1923082 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:51:12.910 DEBUG 1953087 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:51:12.911 DEBUG 1953088 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:51:42.915 DEBUG 1983092 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:51:42.919 DEBUG 1983096 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:52:12.921 DEBUG 2013098 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:52:12.922 DEBUG 2013099 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:52:42.928 DEBUG 2043105 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:52:42.932 DEBUG 2043109 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:53:12.936 DEBUG 2073113 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:53:12.938 DEBUG 2073115 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:53:42.945 DEBUG 2103122 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:53:42.947 DEBUG 2103124 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:54:12.955 DEBUG 2133132 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:54:12.957 DEBUG 2133134 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:54:42.961 DEBUG 2163138 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:54:42.963 DEBUG 2163140 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:55:12.967 DEBUG 2193144 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:55:12.971 DEBUG 2193148 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:55:42.977 DEBUG 2223154 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:55:42.979 DEBUG 2223156 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:56:12.980 DEBUG 2253157 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:56:12.983 DEBUG 2253160 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:56:42.986 DEBUG 2283163 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:56:42.988 DEBUG 2283165 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:57:12.993 DEBUG 2313170 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:57:12.995 DEBUG 2313172 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:57:43.000 DEBUG 2343177 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:57:43.001 DEBUG 2343178 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:58:13.004 DEBUG 2373181 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:58:13.006 DEBUG 2373183 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:58:43.010 DEBUG 2403187 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:58:43.014 DEBUG 2403191 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:59:13.016 DEBUG 2433193 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:59:13.018 DEBUG 2433195 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 09:59:43.023 DEBUG 2463200 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 09:59:43.029 DEBUG 2463206 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:00:13.031 DEBUG 2493208 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:00:13.035 DEBUG 2493212 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:00:43.039 DEBUG 2523216 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:00:43.047 DEBUG 2523224 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:01:13.080 DEBUG 2553257 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:01:13.084 DEBUG 2553261 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:01:43.097 DEBUG 2583274 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:01:43.099 DEBUG 2583276 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:02:13.105 DEBUG 2613282 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:02:13.106 DEBUG 2613283 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:02:43.112 DEBUG 2643289 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:02:43.113 DEBUG 2643290 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:03:13.118 DEBUG 2673295 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:03:13.129 DEBUG 2673306 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:03:43.134 DEBUG 2703311 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:03:43.136 DEBUG 2703313 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:04:13.139 DEBUG 2733316 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:04:13.142 DEBUG 2733319 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:04:43.154 DEBUG 2763331 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:04:43.160 DEBUG 2763337 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:05:13.166 DEBUG 2793343 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:05:13.168 DEBUG 2793345 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:05:43.175 DEBUG 2823352 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:05:43.176 DEBUG 2823353 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:06:13.181 DEBUG 2853358 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:06:13.183 DEBUG 2853360 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:06:43.185 DEBUG 2883362 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:06:43.187 DEBUG 2883364 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:07:13.190 DEBUG 2913367 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:07:13.191 DEBUG 2913368 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:07:43.197 DEBUG 2943374 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:07:43.198 DEBUG 2943375 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:08:13.203 DEBUG 2973380 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:08:13.205 DEBUG 2973382 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:08:43.207 DEBUG 3003384 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:08:43.209 DEBUG 3003386 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:09:13.209 DEBUG 3033386 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:09:13.211 DEBUG 3033388 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:09:43.216 DEBUG 3063393 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:09:43.218 DEBUG 3063395 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:10:13.223 DEBUG 3093400 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:10:13.223 DEBUG 3093400 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:10:43.226 DEBUG 3123403 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:10:43.227 DEBUG 3123404 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:11:13.232 DEBUG 3153409 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:11:13.233 DEBUG 3153410 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:11:43.239 DEBUG 3183416 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:11:43.240 DEBUG 3183417 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:12:13.245 DEBUG 3213422 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:12:13.252 DEBUG 3213429 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:12:43.254 DEBUG 3243431 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:12:43.255 DEBUG 3243432 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:13:13.260 DEBUG 3273437 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:13:13.262 DEBUG 3273439 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:13:43.263 DEBUG 3303440 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:13:43.266 DEBUG 3303443 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:14:13.269 DEBUG 3333446 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:14:13.272 DEBUG 3333449 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:14:43.278 DEBUG 3363455 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:14:43.280 DEBUG 3363457 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:15:13.286 DEBUG 3393463 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:15:13.291 DEBUG 3393468 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:15:43.293 DEBUG 3423470 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:15:43.295 DEBUG 3423472 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:16:13.300 DEBUG 3453477 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:16:13.301 DEBUG 3453478 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:16:43.302 DEBUG 3483479 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:16:43.304 DEBUG 3483481 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:17:13.310 DEBUG 3513487 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:17:13.313 DEBUG 3513490 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:17:25.141 DEBUG 3525318 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@54fef754: (connection has passed maxLifetime)
+2022-03-24 10:17:25.255 DEBUG 3525432 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@17b06948
+2022-03-24 10:17:27.538 DEBUG 3527715 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@15c3fd6f: (connection has passed maxLifetime)
+2022-03-24 10:17:27.597 DEBUG 3527774 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@568d6373
+2022-03-24 10:17:37.975 DEBUG 3538152 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@6e0f1214: (connection has passed maxLifetime)
+2022-03-24 10:17:38.017 DEBUG 3538194 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6a2d4015
+2022-03-24 10:17:43.319 DEBUG 3543496 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:17:43.319 DEBUG 3543496 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:17:49.558 DEBUG 3549735 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@71a29b75: (connection has passed maxLifetime)
+2022-03-24 10:17:49.595 DEBUG 3549772 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@b6e125c
+2022-03-24 10:17:51.640 DEBUG 3551817 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@be8d18f: (connection has passed maxLifetime)
+2022-03-24 10:17:51.683 DEBUG 3551860 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4a531867
+2022-03-24 10:17:59.423 DEBUG 3559600 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@4072cb1: (connection has passed maxLifetime)
+2022-03-24 10:17:59.480 DEBUG 3559657 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@30d8ee19
+2022-03-24 10:18:01.286 DEBUG 3561463 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@75ec0220: (connection has passed maxLifetime)
+2022-03-24 10:18:01.343 DEBUG 3561520 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@71e5e422
+2022-03-24 10:18:01.379 DEBUG 3561556 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@12c43282: (connection has passed maxLifetime)
+2022-03-24 10:18:01.414 DEBUG 3561591 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@405e973c
+2022-03-24 10:18:04.102 DEBUG 3564279 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@74c51463: (connection has passed maxLifetime)
+2022-03-24 10:18:04.147 DEBUG 3564324 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@11ca1b6d
+2022-03-24 10:18:13.324 DEBUG 3573501 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:18:13.326 DEBUG 3573503 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:18:19.772 DEBUG 3579949 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@35f81e58: (connection has passed maxLifetime)
+2022-03-24 10:18:19.831 DEBUG 3580008 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@420aeac7
+2022-03-24 10:18:43.331 DEBUG 3603508 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:18:43.334 DEBUG 3603511 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:19:13.340 DEBUG 3633517 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:19:13.343 DEBUG 3633520 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:19:43.346 DEBUG 3663523 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:19:43.347 DEBUG 3663524 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:20:13.352 DEBUG 3693529 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:20:13.354 DEBUG 3693531 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:20:43.359 DEBUG 3723536 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:20:43.361 DEBUG 3723538 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:21:13.366 DEBUG 3753543 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:21:13.368 DEBUG 3753545 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:21:43.370 DEBUG 3783547 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:21:43.372 DEBUG 3783549 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:22:13.377 DEBUG 3813554 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:22:13.379 DEBUG 3813556 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:22:43.385 DEBUG 3843562 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:22:43.387 DEBUG 3843564 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:22:52.099 INFO  3852276 --- [ http-nio-3000-exec-2 ] c.r.a.controller.PaymentController - PaymentController goodsPurchaseList()
+2022-03-24 10:22:52.118 DEBUG 3852295 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-24 10:22:52.119 DEBUG 3852296 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7ca8b6d2]
+2022-03-24 10:22:52.120 DEBUG 3852297 --- [ http-nio-3000-exec-2 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1985011106 wrapping com.mysql.cj.jdbc.ConnectionImpl@17b06948] will be managed by Spring
+2022-03-24 10:22:52.120 DEBUG 3852297 --- [ http-nio-3000-exec-2 ] c.r.a.d.P.goodsPurchaseList - ==>  Preparing: SELECT * FROM PAYMENT WHERE MEMBERID = ?
+2022-03-24 10:22:52.127 DEBUG 3852304 --- [ http-nio-3000-exec-2 ] c.r.a.d.P.goodsPurchaseList - ==> Parameters: 카카오(String)
+2022-03-24 10:22:52.166 DEBUG 3852343 --- [ http-nio-3000-exec-2 ] c.r.a.d.P.goodsPurchaseList - <==      Total: 5
+2022-03-24 10:22:52.172 DEBUG 3852349 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7ca8b6d2]
+2022-03-24 10:22:52.172 INFO  3852349 --- [ http-nio-3000-exec-2 ] com.recipe.a.service.PaymentService - [PaymentDto [paymentSeq=1, memberId=카카오, paymentPay=0, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=null, paymentDetailAddr=null, paymentZipcode=0, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=2, memberId=카카오, paymentPay=0, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=지하 1층, paymentZipcode=0, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=3, memberId=카카오, paymentPay=12400, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=지하 1층, paymentZipcode=35242, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=4, memberId=카카오, paymentPay=12400, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=1층 경비실, paymentZipcode=35242, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=5, memberId=카카오, paymentPay=12400, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=1층 경비실, paymentZipcode=35242, paymentCategory=굿즈, paymentCount=1]]
+2022-03-24 10:22:52.172 DEBUG 3852349 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7ca8b6d2]
+2022-03-24 10:22:52.172 DEBUG 3852349 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7ca8b6d2]
+2022-03-24 10:22:52.173 DEBUG 3852350 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7ca8b6d2]
+2022-03-24 10:23:07.482 INFO  3867659 --- [ http-nio-3000-exec-3 ] c.r.a.controller.PaymentController - PaymentController goodsPurchaseList()
+2022-03-24 10:23:07.494 DEBUG 3867671 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-24 10:23:07.495 DEBUG 3867672 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67e17f61]
+2022-03-24 10:23:07.495 DEBUG 3867672 --- [ http-nio-3000-exec-3 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@533861095 wrapping com.mysql.cj.jdbc.ConnectionImpl@17b06948] will be managed by Spring
+2022-03-24 10:23:07.495 DEBUG 3867672 --- [ http-nio-3000-exec-3 ] c.r.a.d.P.goodsPurchaseList - ==>  Preparing: SELECT * FROM PAYMENT WHERE MEMBERID = ?
+2022-03-24 10:23:07.500 DEBUG 3867677 --- [ http-nio-3000-exec-3 ] c.r.a.d.P.goodsPurchaseList - ==> Parameters: 카카오(String)
+2022-03-24 10:23:07.505 DEBUG 3867682 --- [ http-nio-3000-exec-3 ] c.r.a.d.P.goodsPurchaseList - <==      Total: 5
+2022-03-24 10:23:07.505 DEBUG 3867682 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67e17f61]
+2022-03-24 10:23:07.505 INFO  3867682 --- [ http-nio-3000-exec-3 ] com.recipe.a.service.PaymentService - [PaymentDto [paymentSeq=1, memberId=카카오, paymentPay=0, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=null, paymentDetailAddr=null, paymentZipcode=0, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=2, memberId=카카오, paymentPay=0, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=지하 1층, paymentZipcode=0, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=3, memberId=카카오, paymentPay=12400, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=지하 1층, paymentZipcode=35242, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=4, memberId=카카오, paymentPay=12400, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=1층 경비실, paymentZipcode=35242, paymentCategory=굿즈, paymentCount=1], PaymentDto [paymentSeq=5, memberId=카카오, paymentPay=12400, paymentDate=2022-03-22, paymentDel=0, paymentMainAddr=대전 서구 둔산로 100, paymentDetailAddr=1층 경비실, paymentZipcode=35242, paymentCategory=굿즈, paymentCount=1]]
+2022-03-24 10:23:07.506 DEBUG 3867683 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67e17f61]
+2022-03-24 10:23:07.506 DEBUG 3867683 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67e17f61]
+2022-03-24 10:23:07.506 DEBUG 3867683 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67e17f61]
+2022-03-24 10:23:13.389 DEBUG 3873566 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:23:13.389 DEBUG 3873566 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:23:43.393 DEBUG 3903570 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:23:43.394 DEBUG 3903571 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:24:13.396 DEBUG 3933573 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:24:13.398 DEBUG 3933575 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.

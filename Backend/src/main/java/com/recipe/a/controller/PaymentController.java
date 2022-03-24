@@ -8,21 +8,28 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class PaymentController {
 	
 	
 	private final Logger logger = LoggerFactory.getLogger(PaymentController.class);
 	
 	private final PaymentService service;
+	
+
+	public PaymentController(PaymentService service) {
+		this.service = service;
+	}
 
 	// 테스트모드 1
 	@GetMapping("payment/testMode")
@@ -72,9 +79,38 @@ public class PaymentController {
 	}
 
 	// 결제내역 조회
+//	@GetMapping("/payment/goodsPurchaseList")
+//	public ResponseEntity<List<PaymentDto>> goodsPurchaseList(String memberId) {
+//		logger.info("PaymentController goodsPurchaseList()");
+//		return Optional.ofNullable(service.goodsPurchaseList(memberId))
+//				.map(li -> ResponseEntity.ok(li))
+//				.orElse(ResponseEntity.noContent().build());
+//	}
+	
 	@GetMapping("/payment/goodsPurchaseList")
-	public List<PaymentDto> goodsPurchaseList(PaymentDto dto) {
+	public List<PaymentDto> goodsPurchaseList(String memberId) {
 		logger.info("PaymentController goodsPurchaseList()");
-		return service.goodsPurchaseList(dto);
+		return service.goodsPurchaseList(memberId);
+	}
+	
+	// 결제 내역 상세
+	@GetMapping("/payment/getPurchaseDetail")
+	public PaymentDto getGoodsPurchaseDetail(int paymentSeq) {
+		logger.info("PaymentController getGoodsPurchaseDetail()");
+		logger.info("paymentSeq: "+paymentSeq);
+		
+		return service.getGoodsPurchaseDetail(paymentSeq);
+	}
+	
+	// 코인 구매
+	@PostMapping("/payment/chargeCoin")
+	public int chargeCoin(PaymentDto dto) {
+		logger.info("PaymentController chargeCoin()");
+		boolean resp = service.chargeCoin(dto);
+		if (resp) {
+			return 200;
+		}
+		return 500;
 	}
 }
+
