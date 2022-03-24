@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.recipe.a.dao.RatingDao">
+
+<select id="countRating" resultType="Integer">
+	SELECT COUNT(*) FROM RATING
+</select>
+
+<select id="getAllRatingsBySeq" parameterType="Integer" resultType="com.recipe.a.dto.RatingDto">
+	SELECT * FROM RATING WHERE DOCSSEQ=#{docsSeq}
+</select>
+
+<insert id="writeComment" parameterType="com.recipe.a.dto.RatingDto">
+	INSERT INTO RATING(RATINGSEQ, MEMBERID, DOCSSEQ, RATINGCATEGORY, RATINGSCORE, RATINGCOMMENT)
+    VALUES(NEXTVAL('RATINGSEQ'), #{memberId}, #{docsSeq}, #{ratingCategory}, #{ratingScore}, #{ratingComment})
+</insert>
+
+</mapper>

@@ -1,17 +1,61 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-export default function PaymentResult({ navigation }:any) {
+export default function PaymentResult({ navigation, route }:any) {
+    
+    /* 
+        Payment 컴포넌트에서 Iamport 모듈의 data 속성에 전달해주는 값을 그대로 가져온다.
+        Payment 컴포넌트에서 사용자가 임의로 결제를 취소하는 경우 메모리 누수가 발생하므로
+        이를 방지하기 위해 AsyncStorage가 remove되도록 했기 때문에 값을 가져올 수 없다.
+        이 때 data에 넣어주는 값은 JavaScript 객체이고, 이 값을 PaymentResult로 가져오기 위해
+        Iamport의 콜백함수에서 navigate 메소드에 data를 전달하는데, key-value 형태로 값을 가져와야 이 컴포넌트에서 불러올 수 있다.
+        그냥 getter로 전달하려고 했더니 안된다...
+    */
+    // console.log(route.params.key);
+
+    const paymentData = route.params.key;
+    console.log(paymentData);
+
+    // 결제 성공시 배송 및 주문 정보를 axios로 백엔드에 넘겨서 처리
+    axios({
+        url: 'http://192.168.0.13:3000/payment/addGoodsShoppingList',
+        method: 'post',
+        headers: { "Content-Type": "application/json" },
+        data: {
+            memberId: paymentData.buyer_name,
+            paymentPay: paymentData.amount,
+            paymentMainAddr: paymentData.buyer_addr,
+            paymentDetailAddr: paymentData.buyer_detail_addr,
+            detailAddr: paymentData.buyer_detail_addr,
+            paymentZipcode: paymentData.buyer_postcode
+        },
+    })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+    // axios.post('http://192.168.0.13:3000/payment/addGoodsShoppingList', null, {params: {
+    //     memberId: paymentData.buyer_name,
+    //     amount: paymentData.amount,
+    //     mainAddr: paymentData.buyer_addr,
+    //     detailAddr: paymentData.buyer_detail_addr,
+    //     zipcode: paymentData.buyer_postcode
+    // }})
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>결제가 완료되었습니다!</Text>
             <View style={styles.btnGroup}>
-                <TouchableOpacity style={[styles.btn, styles.btnPrimary]}>
+                <TouchableOpacity 
+                    style={[styles.btn, styles.btnPrimary]}
+                    // onPress={() => navigation.navigate("Home")}
+                >
                     <Text style={styles.btnText}>상세 주문 정보</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.btn, styles.btnBack]}>
+                <TouchableOpacity 
+                    style={[styles.btn, styles.btnBack]}
+                    onPress={() => navigation.navigate("Home")}
+                >
                     <Text style={styles.btnText}>계속 쇼핑하기</Text>
                 </TouchableOpacity>
             </View>
