@@ -10,15 +10,24 @@
 </select>
 
 <select id="getPhoto" parameterType="com.recipe.a.dto.PhotoDto" resultType="com.recipe.a.dto.PhotoDto">
+	<!-- SELECT PHOTOSEQ, DOCSSEQ, PHOTOTITLE, PHOTOCONTENT, PHOTOCATEGORY, PHOTOURL  -->
+	SELECT *
+	FROM PHOTO 
+	WHERE DOCSSEQ=#{docsSeq} AND PHOTOCATEGORY=#{photoCategory}
+	
+</select>
+
+
+<select id="getThumbnailPhoto" parameterType="com.recipe.a.dto.PhotoDto" resultType="com.recipe.a.dto.PhotoDto">
 	<!-- SELECT PHOTO_SEQ, DOCS_SEQ, PHOTO_TITLE, PHOTO_CONTENT, PHOTO_CATEGORY, PHOTO_URL  -->
 	SELECT *
 	FROM PHOTO 
-	<!-- WHERE DOCS_SEQ=#{docs_seq} AND PHOTO_CATEGORY=#{photo_category} -->
+	WHERE DOCSSEQ=#{docsSeq} AND PHOTOCATEGORY=#{photoCategory} AND PHOTOTITLE='thumbnail'
 	
 </select>
 
 <select id="test" resultType="Integer">
-	SELECT PHOTO_SEQ FROM PHOTO
+	SELECT PHOTOSEQ FROM PHOTO
 </select>
 
 </mapper>
