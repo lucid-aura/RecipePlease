@@ -11,6 +11,7 @@ import com.recipe.a.dao.RatingDao;
 import com.recipe.a.dao.RecipeDao;
 import com.recipe.a.dao.RecipeLikeDao;
 import com.recipe.a.dto.PhotoDto;
+import com.recipe.a.dto.RatingDto;
 import com.recipe.a.dto.RecipeDto;
 
 @Service
@@ -58,5 +59,18 @@ public class RecipeService {
 
 	public RecipeDto getOneRecipe(int recipeSeq) {
 		return recipeDao.getOneRecipe(recipeSeq);
+	}
+
+	public PhotoDto getThumbnailPhoto(PhotoDto photoDto) {
+		return photoDao.getThumbnailPhoto(photoDto);
+	}
+
+	public List<RatingDto> getAllRatingsBySeq(int docsSeq) {
+		return ratingDao.getAllRatingsBySeq(docsSeq);
+	}
+
+	public int writeComment(RatingDto ratingDto) {
+		ratingDao.writeComment(ratingDto);
+		return recipeDao.updateRecipeRating(ratingDto.getDocsSeq());
 	}
 }
