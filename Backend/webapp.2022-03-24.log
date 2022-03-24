@@ -545,3 +545,7 @@
 2022-03-24 10:23:43.394 DEBUG 3903571 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
 2022-03-24 10:24:13.396 DEBUG 3933573 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
 2022-03-24 10:24:13.398 DEBUG 3933575 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:24:43.403 DEBUG 3963580 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:24:43.407 DEBUG 3963584 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-24 10:25:13.412 DEBUG 3993589 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-24 10:25:13.415 DEBUG 3993592 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
