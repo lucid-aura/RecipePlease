@@ -29,86 +29,36 @@ const testData = [
     }
 ];
 
-const Item = ({ member, paymentCategory, paymentCount, 
-                paymentDate, paymentDel, paymentMainAddr, 
-                paymentDetailAddr, paymentPay, paymentSeq, paymentZipcode }:any) => {
-    
-    function itemClick(paymentSeq:number) {
-        console.log('item clicked');
-    }
-
-    return (
-        <View>
-            <TouchableOpacity onPress={() => itemClick(paymentSeq)}>
-                <Text>{member}</Text>
-                <Text>{paymentCategory}</Text>
-                <Text>{paymentCount}</Text>
-                <Text>{paymentDate}</Text>
-                <Text>{paymentDel}</Text>
-                <Text>{paymentMainAddr}</Text>
-                <Text>{paymentDetailAddr}</Text>
-                <Text>{paymentPay}</Text>
-                <Text>{paymentSeq}</Text>
-                <Text>{paymentZipcode}</Text>
-            </TouchableOpacity>
-        </View>
-    )
-}
-
-const renderPurchaseList = () => {
-
-    const renderItem = ({item}:any) => {
-        return (
-            <Item
-                member={item.member}
-                paymentCategory={item.paymentCategory}
-                paymentCount={item.paymentCount}
-                paymentDate={item.paymentDate}
-                paymentDel={item.paymentDel}
-                paymentMainAddr={item.paymentMainAddr}
-                paymentDetailAddr={item.paymentDetailAddr}
-                paymentPay={item.paymentPay}
-                paymentSeq={item.paymentSeq}
-                paymentZipcode={item.paymentZipcode}
-            />
-        )
-    }
-
-    const [data, setData] = useState([]);
-
-    // useEffect(() => {
-    //     axios.get("http://192.168.0.13:3000/payment/goodsPurchaseList", {
-    //         params: {
-    //             paymentSeq: 
-    //         }
-    //     })
-    // })
-
-    return (
-        <View>
-            <FlatList data={testData} renderItem={renderItem} />
-        </View>
-    )
-}
-
 export default function PurchaseList() {
 
-    const [memberId, setMemberId] = useState('카카오');
+    const [memberId, setMemberId] = useState('test');
+    const [addr, setAddr] = useState('');
+    const [amount, setAmount] = useState(0);
     
     axios.get("http://192.168.0.13:3000/payment/goodsPurchaseList", {
             params: {
                 memberId: memberId
             }
-        })
-        .then((res) => {
-            console.log(res.data);
-            
-        })
-        .catch((err) => console.log(err));
+    })
+    .then((res) => {
+        console.log(res.data);
+        // setData(res.data[0].memberId);
+        console.log(res.data.length);
+        // for (let i = 0; i < res.data.length; i++) {
+        //     setMemberId(res.data[i].memberId);
+        //     setAddr(res.data[i].paymentMainAddr);
+        //     setAmount(res.data[i].paymentPay);
+        // }
+    })
+    .catch((err) => console.log(err));
 
     return (
         <View>
             <Text>Purchase List Page</Text>
+            <Text>{memberId}</Text>
+            <Text>{addr}</Text>
+            <Text>{amount}</Text>
+
         </View>
     )
 }

@@ -5,9 +5,16 @@
 
 <mapper namespace="com.recipe.a.dao.PaymentDao">
 
-<select id="countPayment" resultType="Integer">
-	SELECT COUNT(*) FROM PAYMENT
-</select>
+	<select id="countPayment" resultType="Integer">
+		SELECT COUNT(*) FROM PAYMENT
+	</select>
 
+	<!-- 물품 구매시 추가 -->
+<!-- 	<insert id="addGoodsShoppingListInPaymentList" parameterType="com.recipe.a.dto.PaymentListDto">
+		INSERT INTO PAYMENTLIST (PAYMENTLISTSEQ, PAYMENTSEQ, MEMBERID, PURCHASEPRODUCTSEQ, PAYMENTLISTCATEGORY, PAYMENTCOUNT, PAYMENTLISTPAY)
+		VALUES (NEXTVAL('PAYMENTLISTSEQ'), #{paymentSeq}, #{memberId}, #{purchaseProductSeq}, #{paymentListCategory}, #{paymentCount}, #{paymentListPay})
+	</insert> -->
+	
+	
 
 </mapper>
