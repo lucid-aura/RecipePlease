@@ -68,6 +68,7 @@ export default function Payment({ navigation }:any) {
     }
 
     return (
+        // 빈태그로 묶어줍니다.
         <>
             {/* Node Module 설치 확인 필(iamport-react-native) */}
             <IMP.Payment 

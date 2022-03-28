@@ -78,6 +78,7 @@ export default function PurchaseRecipe() {
     return (
         <View style={styles.flexible}>
 
+            {/* 모달을 띄우게 할 버튼 */}
             <View style={styles.alignContentsCenter}>
                 <Button 
                     title="버튼을 탭하여 레시피 구매"
@@ -137,27 +138,27 @@ export default function PurchaseRecipe() {
 const styles = StyleSheet.create({
     flexible: {
         flex: 1
-    },
+    },  // flex 속성 지정
     alignContentsCenter: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
-    },
+    },  // 가로세로 중앙정렬
     modalOverlay: {
         flex: 1,
         justifyContent: 'flex-end',
         backgroundColor: 'rgba(0, 0, 0, 0.4)'
-    },
+    },  // 모달이 띄워졌을 때 화면을 어둡게 하기 위한 오버레이
     bottomSheetContainer: {
         height: 300,
         backgroundColor: '#fff',
         borderTopLeftRadius: 7,
         borderTopRightRadius: 7,
         padding: 20
-    },
+    },  // 모달 스타일
     modalBtn: {
         padding: 10,
         backgroundColor: '#ff47bb',
         borderRadius: 7
-    }
+    }   // 모달 내 결제버튼
 })

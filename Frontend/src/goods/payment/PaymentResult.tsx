@@ -58,16 +58,16 @@ export default function PaymentResult({ navigation, route }:any) {
 const styles = StyleSheet.create({
     container: {
         padding: 20
-    },
+    },  // 전체 뷰 조정
     title: {
         color: '#000',
         fontWeight: '800',
         fontSize: 25
-    },
+    },  // 결제 완료 메시지 
     btnGroup: {
         flexDirection: 'row',
         justifyContent: 'space-between'
-    },
+    },  // 버튼 그룹
     btn: {
         justifyContent: 'center',
         alignItems: 'center',
@@ -75,15 +75,15 @@ const styles = StyleSheet.create({
         height: 40,
         marginTop: 20,
         width: '40%',
-    },
+    },  // 버튼 각각에 대한 스타일
     btnText: {
         color: "#fff",
         fontSize: 17,
-    },
+    },  // 버튼 텍스트
     btnPrimary: {
         backgroundColor: '#3064b8',
-    },
+    },  // 파란버튼
     btnBack: {
         backgroundColor: '#bd4646'
-    }
+    }   // 돌아가기 버튼
 })

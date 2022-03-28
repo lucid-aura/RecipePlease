@@ -165,7 +165,7 @@ export default function PaymentInfo({navigation}:any, props:any) {
                                     placeholder={{ label: '결제 수단을 선택하세요', value: null }}
                                     items={[
                                         { label: '카카오페이로 결제', value: 'kakaopay' },
-                                        { label: '토스페이먼츠로 결제', value: 'tosspay'}
+                                        { label: '토스페이먼츠로 결제', value: 'tosspay' }
                                     ]}
                                     onValueChange={(val) => {
                                         if (val === 'kakaopay') {
@@ -255,27 +255,11 @@ const styles = StyleSheet.create({
         fontWeight: "800",
         paddingTop: 20,
         paddingBottom: 5
-    },
-    nameSpace: {
-        flexDirection: 'row', 
-        borderWidth: 2, 
-        borderColor: '#e9e9e9', 
-        height: 80, 
-        alignItems: 'center', 
-        padding: 10, 
-        backgroundColor: '#fff',
-        justifyContent: 'space-between'
-    },
+    },  // 각 섹션 제목
     buyerName: {
         fontSize: 20, 
         fontWeight: "800", 
-    },
-    changeBtn: {
-        marginLeft: 10,
-        borderRadius: 10,
-        padding: 15,
-        backgroundColor: '#4b99ff',
-    },
+    }, // 구매자 성명
     textInput: {
         width: '98%',
         height: 40,
@@ -284,7 +268,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
         borderColor: '#e9e9e9',
-    },
+    },  // 텍스트 입력란
     informContainer: {
         alignContent: 'center',
         justifyContent: 'center',
@@ -292,10 +276,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderWidth: 2,
         borderColor: '#e9e9e9'
-    },
-    changeBtnText: {
-        fontWeight: '700',
-    },
+    },  // 받는 사람 정보를 담는 컨테이너
     buyContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -306,42 +287,40 @@ const styles = StyleSheet.create({
         borderColor: '#e9e9e9',
         height: 55,
         backgroundColor: '#fff'
-    },
+    },  // 구매 품목에 대한 정보를 담는 컨테이너
     selectBox: {
         borderWidth: 2,
         borderColor: '#e9e9e9',
         fontSize: 17,
         backgroundColor: '#fff',
-        // height: 40,
         borderRadius: 10,
         padding: 3
-    },
+    },  // 결제수단을 고르는 Picker
     toPayView: {
         fontWeight: '700',
         textAlign: 'center',
         paddingTop: 20,
         paddingBottom: 20,
         fontSize: 20
-    },
+    },  // 결제수단과 결제금액을 보여주는 메시지
     btn: {
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
-        // height: 45,
         marginTop: 10,
         marginBottom: 10,
         width: '40%',
         padding: 15
-    },
+    },  // 버튼 공통 속성
     btnText: {
         color: '#fff',
         fontSize: 17,
         fontWeight: "700"
-    },
+    },  // 버튼 텍스트 공통속성
     paymentBtn: {
         backgroundColor: '#4852c7',
-    },
+    },  // 결제버튼
     calcelBtn: {
         backgroundColor: '#bd4646'
-    }
+    }   // 취소버튼
 })
