@@ -1,5 +1,6 @@
 package com.recipe.a.service;
 
+import com.recipe.a.dto.MembersDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,12 @@ public class MembersService {
 	@Autowired
 	MembersDao dao;
 	
+	private MembersDao dao;
+
+	public MembersService(MembersDao dao) {
+		this.dao = dao;
+	}
+
 	public int countMembers() {
 		System.out.println("MembersService");
 		return dao.countMembers();
@@ -26,5 +33,8 @@ public class MembersService {
 		
 		return n>0? true:false;
 		
+
+	public MembersDto login(String memberId, String memberPwd) {
+		return dao.login(memberId, memberPwd);
 	}
 }

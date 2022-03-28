@@ -18,4 +18,6 @@ public interface PhotoDao {
 	public List<Integer> test(); 
 	
 	public PhotoDto getThumbnailPhoto(PhotoDto photoDto);
+
+	public List<PhotoDto> getRecommendThumnailPhoto(List<Integer> seqList);
 }

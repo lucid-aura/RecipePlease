@@ -8,32 +8,35 @@ import { Button, DataTable, TextInput } from 'react-native-paper';
 /*
 npm install react-native-table-component
 */
-export default function RecipeDetailOrder( {seq, setAvarage} :any) {
+export default function RecipeDetailOrder( {seq, setAvarage, star} :any) { // 평가 및 별점 부여 컴포넌트
 
-    const [point, setPoint] = useState(3)
-    const [rating, setRating] = useState([])
-    const [inputRating, setInputRating] = useState({memberId:"", ratingComment:"", score:0})
-    const [text, setText] = useState("")
+    const [point, setPoint] = useState(3) // 댓글 입력시 기본 3점 default 값
+    const [rating, setRating] = useState([]) // 해당 레시피의 평가글들을 모아놓은 배열
+    const [text, setText] = useState("") // 입력한 평가 글
     
-    function writeCommentReq(){
+    function writeCommentReq(){ // 평가글 및 점수 입력 등록 했을 시
         console.log("writeCommentReq 함수 실행")
         const response = axios.post("http://192.168.0.4:3000/writeComment", null , {
             params: {
-                memberId:'test',
+                memberId:'test', // 이후 memberId 에따라 로그인 확인 및 변경 필요
                 docsSeq:seq,
                 ratingCategory:'recipe',
                 ratingScore:point,
                 ratingComment:text,
             } 
         }).then(function(res) {
+
             setRating(res.data)
+
+            // 평점 구하는 부분
             let sum = 0;
             res.data.map((item:any, index:number) => {
                 sum += item.ratingScore
             })
             let avg = (sum/res.data.length).toFixed(2)
-            console.log(avg)
-            setAvarage(parseFloat(avg))
+            setAvarage(parseFloat(avg)) // 여기있는 이  setter함수는 부모 컴포넌트(RecipeDetailScreen)에서 받아온 함수
+
+            star() // 부모의 자매 컴포넌트에서 받아온 레시피 평균 값 변경 시 추천 레시피 리로드 함수
         }).catch(function(err){
             console.log(err)
         })
@@ -42,52 +45,22 @@ export default function RecipeDetailOrder( {seq, setAvarage} :any) {
         
     }
 
-    if (text.length > 500) {
+    if (text.length > 500) { // 댓글 제한 500자
         Alert.alert("","길이는 최대 500자 제한입니다.");
         setText(text.substring(0, 500));
     }
 
-    useEffect( () => {
+    useEffect( () => { // 새로운 글이 작성되었을 시 다시 랜더링
         console.log("테이블 업데이트")
     }, [rating, point])
 
-    useEffect( () => {
+    useEffect( () => { // 첫 진입 시 랜더링
         console.log("rating effect rerendering")
         let completed = false;
         const fetchRating = async() =>{
             console.log("Rating 컴포넌트 " + seq)
             const ratingRes =await axios.get("http://192.168.0.4:3000/getAllRatingsBySeq?docsSeq=" + seq )
             setRating(ratingRes.data)
-
-            /*
-            let sum = 0;
-            ratingRes.data.map((item:any, index:number) => {
-                sum += item.ratingScore;
-                
-            })
-            let avg = (sum/ratingRes.data.length).toFixed(2)
-            setPoint(parseFloat(avg))
-            console.log("길이는 : " + ratingRes.data.length + " 합은 : " + sum + " 평균은 : " + sum/ratingRes.data.length)
-            console.log(ratingRes.data)
-
-
-            let tableData:any = []
-            ratingRes.data.map((item:any, index:number) => {
-                tableData.push( [item.memberId, item.ratingComment, item.ratingScore] )
-            })
-            
-
-            let ratings = {
-                HeadTable: ['id', 'comment', 'score'],
-                DataTable: tableData
-            }
-            //setRatingTable(ratings)
-            console.log(ratings)
-            */
-        }
-
-        const writeComment = async () => {
-            writeCommentReq()
         }
 
         fetchRating()
@@ -97,11 +70,9 @@ export default function RecipeDetailOrder( {seq, setAvarage} :any) {
           };
     }, [])
 
-    function test() {
-        Alert.alert("태그 alert 타이틀", "1")
-    }
 
   return (
+    // 평가 보여주는 View
     <SafeAreaView style={styles.container}>
         <DataTable>
             <DataTable.Header>
@@ -119,18 +90,7 @@ export default function RecipeDetailOrder( {seq, setAvarage} :any) {
 
         </DataTable>
 
-        {/* <Rating
-                    type='star'
-                    ratingCount={5}
-                    imageSize={30}
-                    showRating
-                    tintColor="#EEEEEE"
-                    onFinishRating={(p:any) => setPoint(p)}
-                    readonly={true}
-                    startingValue={point}
-                    minValue={1}
-                    fractions={20}
-        /> */}
+        {/* 평가 작성하는 부분 */}
         <View style={styles.inputRating}>
             <TextInput style={{width:400, marginRight:10}}
                 label="평가작성하기"
@@ -174,7 +134,6 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginTop:10
     }
-
 
 }) //css
 

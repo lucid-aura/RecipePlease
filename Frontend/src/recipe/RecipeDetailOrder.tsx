@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 export default function RecipeDetailOrder({seq, category}:any) {
 
-    const [cookorder, setCookorder ]= useState([])
+    const [cookorder, setCookorder ]= useState([]) //  조리법 데이터 저장하는 변수
 
-    useEffect( () => {
+    useEffect( () => { // 첫 진입 시 랜더링
 
         let completed = false;
 
