@@ -9,7 +9,7 @@ export default function GoodsHomeScreen(){
     return(
         <View style={styles.container}>
             <Text>Goods Home Screen</Text>
-            <Button title="Pay로 이동" onPress={()=>navigation.navigate('paymentInfo')}></Button>
+            <Button title="Pay로 이동" onPress={()=>navigation.navigate('Pay')}></Button>
 
 
         </View>

@@ -2,11 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import GoodsHomeScreen from '../goods/GoodsHomeScreen';
-import Payment from '../goods/payment/Payment';
-import PaymentAddr from '../goods/payment/PaymentAddr';
-import PaymentFailed from '../goods/payment/PaymentFailed';
-import PaymentInfo from '../goods/payment/PaymentInfo';
-import PaymentResult from '../goods/payment/PaymentResult';
+import GoodsPayScreen from '../goods/GoodsPayScreen';
 
 /*
 npm install react-native-gesture-handler
@@ -25,11 +21,7 @@ export default function GoodsScreen(){
       <Stack.Navigator>
         <Stack.Screen name="Home" component={GoodsHomeScreen}></Stack.Screen>
 
-        <Stack.Screen name="paymentInfo" component={PaymentInfo} options={{title: "결제정보"}} />
-        <Stack.Screen name="payment" component={Payment} options={{title: "결제"}} />
-        <Stack.Screen name="paymentResult" component={PaymentResult} options={{title: "결제완료"}} />
-        <Stack.Screen name="paymentFailed" component={PaymentFailed} options={{title: "결제실패"}} />
-        <Stack.Screen name="paymentAddr" component={PaymentAddr} options={{title: "주소변환"}} />
+        <Stack.Screen name="Pay" component={GoodsPayScreen}></Stack.Screen>
 
       </Stack.Navigator>
     )
