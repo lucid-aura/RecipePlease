@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.recipe.a.dao.PaymentDao">
+
+	<select id="countPaymentList" resultType="Integer">
+		SELECT COUNT(*) FROM PAYMENT
+	</select>
+
+	<!-- [굿즈] 결제 성공 시 결제 정보 추가 -->
+	<insert id="addGoodsShoppingList" parameterType="com.recipe.a.dto.PaymentDto">
+		INSERT INTO PAYMENT(PAYMENTSEQ, MEMBERID, PAYMENTPAY,
+		                    PAYMENTDATE, PAYMENTDEL, PAYMENTMAIN_ADDR,
+							PAYMENTDETAILADDR, PAYMENTZIPCODE, PAYMENTCATEGORY,
+							PAYMENTCOUNT)
+		VALUES (NEXTVAL('PAYMENTSEQ'), #{memberId}, #{paymentPay},
+		        SYSDATE(), 0, #{paymentMainAddr},
+		        #{paymentDetailAddr}, #{paymentZipcode}, '굿즈',
+		        1)
+	</insert>
+	
+	<!-- [코인] 코인 구매 시 결제 정보 추가 -->
+	<insert id="chargeCoin" parameterType="com.recipe.a.dto.PaymentDto">
+		INSERT INTO PAYMENT(PAYMENTSEQ, MEMBERID, PAYMENTPAY,
+		                    PAYMENTDATE, PAYMENTDEL, PAYMENTMAINADDR,
+							PAYMENTDETAILADDR, PAYMENTZIPCODE, PAYMENTCATEGORY,
+							PAYMENTCOUNT)
+		VALUES (NEXTVAL('PAYMENTSEQ'), #{memberId}, #{paymentPay},
+		        SYSDATE(), 0, #{paymentMainAddr},
+		        #{paymentDetailAddr}, #{paymentZipcode}, '코인',
+		        1)
+	</insert> 
+	
+	<!-- 굿즈 환불 -->
+	<update id="refundGoods" parameterType="com.recipe.a.dto.PaymentDto">
+		UPDATE PAYMENT SET PAYMENTDEL = 1
+		WHERE MEMBERID = #{memberId} AND PAYMENTSEQ = #{paymentSeq}
+	</update>
+	
+	<!-- 결제내역 디테일 -->
+	<select id="getGoodsPurchaseDetail" parameterType="Integer" resultType="com.recipe.a.dto.PaymentDto">
+		SELECT * FROM PAYMENT
+		WHERE PAYMENTSEQ = #{paymentSeq}
+	</select>
+
+	<!-- 결제내역 조회 리스트 -->
+	<select id="goodsPurchaseList" parameterType="String" resultType="com.recipe.a.dto.PaymentDto">
+		SELECT * FROM PAYMENT
+		WHERE MEMBERID = #{memberId}
+		ORDER BY PAYMENTDATE DESC
+	</select>
+
+</mapper>
