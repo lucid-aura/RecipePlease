@@ -11,16 +11,21 @@ import { Alert,
     View } 
 from "react-native";
 
-// 환불 요청 성공시 새로고침 필요
+/* 테스트 페이지 : 구매 목록 리스트 */
+
+/* 이슈 체크
+    - 현재 사용자 아이디를 제대로 불러오지 못하는 문제가 있음.
+    - 코드 화면 저장 시 리스트를 제대로 로드함.
+*/
+
 
 // 플랫 리스트 안에 들어갈 아이템 컴포넌트
 const Item = ({userId, count, name, amount, del, 
     paymentSeq, paymentDate, props, confirm}:any) => {
 
     const [detailVisible, setDetailVisibla] = useState(false);
-    // const [confirm, setConfirm] = useState(false);
 
-    // 아이템 클릭시
+    // 각 아이템 클릭시
     function itemClick(paymentSeq:number) {
         console.log('itemClicked');
         axios.get("http://192.168.0.13:3000/payment/getPurchaseDetail", {
@@ -61,6 +66,8 @@ const Item = ({userId, count, name, amount, del,
 
     return (
         <ScrollView>
+
+            {/* 구매 목록 리스트 */}
             <TouchableOpacity style={styles.itemContainer} onPress={() => itemClick(paymentSeq)}>
                 <View style={styles.rowDirection}>
                     <Text style={styles.buyer}>{userId}</Text>
@@ -75,10 +82,14 @@ const Item = ({userId, count, name, amount, del,
                 <Text>{`결제금액 ${amount.toLocaleString('ko-KR')}원`}</Text>
                 <Text>{paymentSeq}</Text>
             </TouchableOpacity>
+
+            {/* 디테일 아래에 보여주기 */}
             { detailVisible 
                 ? <View style={styles.detailView}>
                     <View style={styles.rowDirection}>
                         <Text>{`${userId}님의 구매이력`}</Text>
+
+                        {/* 백엔드로부터 넘어온 paymentDel(구매 취소여부 체커)이 0이면 구매완료 상태이므로 환불접수 버튼을 보여줌.  */}
                         { del === 0
                             ? <TouchableOpacity style={styles.refundBtn}
                                 onPress={() => {
@@ -98,9 +109,9 @@ const Item = ({userId, count, name, amount, del,
                         }
                         
                     </View>
-                    <Text>{`구분: ${name}`}</Text>
-                    <Text>{`구매일: ${paymentDate}`}</Text>
-                    <Text>{`결제금액 ${amount.toLocaleString('ko-KR')}원`}</Text>
+                        <Text>{`구분: ${name}`}</Text>
+                        <Text>{`구매일: ${paymentDate}`}</Text>
+                        <Text>{`결제금액 ${amount.toLocaleString('ko-KR')}원`}</Text>
                   </View>
                 : <View style={{display: 'none'}}></View>
             }
@@ -114,6 +125,8 @@ export default function PurchaseList(props:any) {
 
     // 로그인 데이터(백엔드단에서 로그인된 아이디에 맞게 구매 이력를 조회하기 위해 로그인 세션 정보를 가져옴.)
     const [userId, setUserId] = useState('');
+
+    // useEffect를 사용할 경우 로그인 데이터가 불러와지지 않음.
     // useEffect(() => {
     const getLoginData = async () => {
         console.log('aaaaaaaaaaaa');
@@ -137,9 +150,9 @@ export default function PurchaseList(props:any) {
 
     getLoginData();
 
-    const [data, setData] = useState([]);
+    // 구매 리스트를 불러오는 요청
+    const [data, setData] = useState([]);       // 불러온 JSON 데이터 보관
     
-    // const getPurchaseListData = () => {
     useEffect(() => {
         console.log("구매 리스트 데이터 userId: " + userId);
         const getGoodsPurchaseList = async() => {
@@ -159,13 +172,8 @@ export default function PurchaseList(props:any) {
     }, []);
     
 
-    // getGoodsPurchaseList();
-
+    // 리스트로 렌더링할 아이템
     const renderItem = ({item}:any) => {
-
-        const reduceStr = (str:string) => {
-            return str.length > 20 ? str.trim().substring(0, 19) : str
-        }
 
         return(
             <Item
@@ -195,24 +203,24 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: '#fff',
         borderRadius: 5
-    },
+    },  // 구매목록 리스트 스타일
     buyer: {
         fontSize: 17,
         fontWeight: '700'
-    },
+    },  // 구매자 이름을 크게 보이게 하기
     rowDirection: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between'
-    },
+    },  // 가로로 떨어져서 배치
     detailView: {
         flex: 1,
         marginLeft: 15,
         marginRight: 15,
-    },
+    },  // 리스트 탭했을 때 상세 구매 내역 영역
     refundBtn: {
         padding: 3,
         borderRadius: 5,
         backgroundColor: '#bd4646'
-    }
+    }   // 환불버튼
 })
