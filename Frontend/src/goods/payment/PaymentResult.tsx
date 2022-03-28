@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function PaymentResult({ navigation, route }:any) {
@@ -18,29 +18,21 @@ export default function PaymentResult({ navigation, route }:any) {
     const paymentData = route.params.key;
     console.log(paymentData);
 
-    // 결제 성공시 배송 및 주문 정보를 axios로 백엔드에 넘겨서 처리
-    axios({
-        url: 'http://192.168.0.13:3000/payment/addGoodsShoppingList',
-        method: 'post',
-        headers: { "Content-Type": "application/json" },
-        data: {
+    // 결제 성공시 배송 및 주문 정보를 axios로 백엔드에 넘겨서 처리(서버에 저장)
+    useEffect(() => {
+        axios.post('http://192.168.0.13:3000/payment/addGoodsShoppingList', null, 
+        {
+            params: {
             memberId: paymentData.buyer_name,
             paymentPay: paymentData.amount,
             paymentMainAddr: paymentData.buyer_addr,
             paymentDetailAddr: paymentData.buyer_detail_addr,
-            detailAddr: paymentData.buyer_detail_addr,
             paymentZipcode: paymentData.buyer_postcode
-        },
-    })
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
-    // axios.post('http://192.168.0.13:3000/payment/addGoodsShoppingList', null, {params: {
-    //     memberId: paymentData.buyer_name,
-    //     amount: paymentData.amount,
-    //     mainAddr: paymentData.buyer_addr,
-    //     detailAddr: paymentData.buyer_detail_addr,
-    //     zipcode: paymentData.buyer_postcode
-    // }})
+        }})
+        .then((res) => console.log(res.data))
+        .catch((err) => console.log(err));
+    }, []);
+    
 
     return (
         <View style={styles.container}>

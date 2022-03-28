@@ -2,6 +2,7 @@ package com.recipe.a.dao;
 
 import java.util.List;
 
+import com.recipe.a.dto.MembersDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MembersDao {
 
-	public int countMembers();
+	int countMembers();
+
+	MembersDto login(String memberId, String memberPwd);
 }
