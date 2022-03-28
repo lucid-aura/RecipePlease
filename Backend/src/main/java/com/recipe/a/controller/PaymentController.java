@@ -53,23 +53,12 @@ public class PaymentController {
 		return "not-purchased";
 	}
 
-	// 굿즈 환불
-	@PostMapping("/payment/refundGoods")
-	public String refundGoods(PaymentDto dto) {
-		logger.info("PaymentController refundGoods()");
-		boolean res = service.refundGoods(dto);
-		if (res) {
-			return "applied";
-		}
-		return "not-applied";
-	}
-
 	// 굿즈 반품
 	@PostMapping("/payment/returnGoods")
-	public String returnGoods(PaymentDto dto) {
+	public String returnGoods(String memberId, int paymentSeq) {
 		logger.info("PaymentController returnGoods()");
-
-		return "";
+		boolean b = service.refundGoods(memberId, paymentSeq);
+		return b ? "환불완료" : "환불실패";
 	}
 
 	// 결제내역 조회
@@ -84,6 +73,7 @@ public class PaymentController {
 	@GetMapping("/payment/goodsPurchaseList")
 	public List<PaymentDto> goodsPurchaseList(String memberId) {
 		logger.info("PaymentController goodsPurchaseList()");
+		logger.info("memberId: " + memberId);
 		return service.goodsPurchaseList(memberId);
 	}
 	
@@ -91,7 +81,6 @@ public class PaymentController {
 	@GetMapping("/payment/getPurchaseDetail")
 	public PaymentDto getGoodsPurchaseDetail(int paymentSeq) {
 		logger.info("PaymentController getGoodsPurchaseDetail()");
-		logger.info("paymentSeq: "+paymentSeq);
 		
 		return service.getGoodsPurchaseDetail(paymentSeq);
 	}

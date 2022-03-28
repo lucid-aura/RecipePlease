@@ -1,9 +1,19 @@
 package com.recipe.a.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+/*
+	CREATE TABLE PAYMENT (
+		PAYMENTSEQ			INTEGER			NOT NULL,
+		MEMBERID			VARCHAR(20)		NOT NULL,
+		PAYMENTPAY			INTEGER			NOT NULL,
+		PAYMENTDATE			DATE			NOT NULL,
+		PAYMENTDEL			INTEGER			NULL,
+		PAYMENTMAINADDR		VARCHAR(100)	NULL,
+		PAYMENTDETAILADDR	VARCHAR(100)	NULL,
+		PAYMENTZIPCODE		INTEGER			NULL,
+		PAYMENTCATEGORY		VARCHAR(20)		NOT NULL,
+		PAYMENTCOUNT		INTEGER			NOT NULL
+	);
+*/
 
 public class PaymentDto {
 	

@@ -24,7 +24,7 @@
 	<!-- [코인] 코인 구매 시 결제 정보 추가 -->
 	<insert id="chargeCoin" parameterType="com.recipe.a.dto.PaymentDto">
 		INSERT INTO PAYMENT(PAYMENTSEQ, MEMBERID, PAYMENTPAY,
-		                    PAYMENTDATE, PAYMENTDEL, PAYMENTMAIN_ADDR,
+		                    PAYMENTDATE, PAYMENTDEL, PAYMENTMAINADDR,
 							PAYMENTDETAILADDR, PAYMENTZIPCODE, PAYMENTCATEGORY,
 							PAYMENTCOUNT)
 		VALUES (NEXTVAL('PAYMENTSEQ'), #{memberId}, #{paymentPay},
@@ -49,6 +49,7 @@
 	<select id="goodsPurchaseList" parameterType="String" resultType="com.recipe.a.dto.PaymentDto">
 		SELECT * FROM PAYMENT
 		WHERE MEMBERID = #{memberId}
+		ORDER BY PAYMENTDATE DESC
 	</select>
 
 </mapper>

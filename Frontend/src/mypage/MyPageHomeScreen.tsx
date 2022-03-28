@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
 import { View, Text,StyleSheet, Button, TextInput, TouchableOpacity } from "react-native";
 
@@ -43,7 +44,22 @@ export default function MyPageHomeScreen(){
                 </View>
 
                 {/* 로그인 버튼 */}
-                <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate('Home')
+
+                    axios.post("http://192.168.0.13:3000/login", null, {
+                        params: {
+                            memberId: id,
+                            memberPwd: pwd
+                        }
+                    })
+                    .then((res) => { 
+                        console.log(res.data);
+                        AsyncStorage.setItem("loginData", JSON.stringify(res.data));
+                    })
+                    .catch((err) => console.log(err));
+                    
+                }}>
                     <Text>로그인</Text>
                 </TouchableOpacity>
 

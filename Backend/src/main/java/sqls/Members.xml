@@ -5,9 +5,14 @@
 
 <mapper namespace="com.recipe.a.dao.MembersDao">
 
-<select id="countMembers" resultType="Integer">
-	SELECT COUNT(*) FROM MEMBERS
-</select>
+	<select id="countMembers" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBERS
+	</select>
+
+	<select id="login" parameterType="String" resultType="com.recipe.a.dto.MembersDto">
+		SELECT * FROM MEMBERS
+		WHERE MEMBERID = #{memberId} AND MEMBERPWD = #{memberPwd}
+	</select>
 
 
 </mapper>

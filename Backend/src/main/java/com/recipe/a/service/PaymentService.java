@@ -21,33 +21,34 @@ import java.util.List;
 //@RequiredArgsConstructor
 public class PaymentService {
 
+	// 필드에 생성자를 직접 주입하여 사용
 	private final PaymentDao paymentDao;
-	
-	
-	
-	
-	public PaymentService(PaymentDao paymentDao) {
 
+	public PaymentService(PaymentDao paymentDao) {
 		this.paymentDao = paymentDao;
-	
 	}
 
+	// 로거 사용
 	private Logger logger = LoggerFactory.getLogger(PaymentService.class);
-	
+
+	// 카운트(테스트용)
 	public int countPayment() {
 		System.out.println("PaymentService");
 		return paymentDao.countPayment();
 	}
 
+	// 결제 성공시 db에 구매품 추가
 	public int addGoodsShoppingList(PaymentDto dto) {
 		boolean b = paymentDao.addGoodsShoppingList(dto);
 		return b ? 1 : 0;
 	}
 
-	public boolean refundGoods(PaymentDto dto) {
-		return paymentDao.refundGoods(dto);
+	// 환불시 db에 반품관련 컬럼 업데이트
+	public boolean refundGoods(String memberId, int paymentSeq) {
+		return paymentDao.refundGoods(memberId, paymentSeq);
 	}
 
+	// 구매 목록
 	public List<PaymentDto> goodsPurchaseList(String memberId) {
 		
 		List<PaymentDto> testList = paymentDao.goodsPurchaseList(memberId);
@@ -55,13 +56,15 @@ public class PaymentService {
 		return testList;
 		
 	}
-	
-	public boolean chargeCoin(PaymentDto dto) {
-		return paymentDao.chargeCoin(dto);
-	}
-	
+
+	// 구매목록 디테일
 	public PaymentDto getGoodsPurchaseDetail(int paymentSeq) {
 		return paymentDao.getGoodsPurchaseDetail(paymentSeq);
+	}
+
+	// 코인 충전
+	public boolean chargeCoin(PaymentDto dto) {
+		return paymentDao.chargeCoin(dto);
 	}
 }
 

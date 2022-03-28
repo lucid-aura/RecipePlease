@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.recipe.a.dao.CoinTransactionDao">
+
+    <!-- tester -->
+    <select id="coinTransactionTester" resultType="com.recipe.a.dto.CoinTransactionDto">
+        SELECT * FROM COINTRANSACTION
+    </select>
+
+    <!-- 코인 충전시 -->
+
+    <!-- 코인 사용시 -->
+</mapper>

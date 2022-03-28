@@ -5,6 +5,9 @@ import { Alert, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpa
 import RNPickerSelect from 'react-native-picker-select';
 import { SafeAreaView } from "react-native-safe-area-context";
 
+// 결제 준비화면
+/* 로그아웃 했을 때 모든 AsyncStorage를 비워야 할 것 같음.. */
+
 // 주문번호를 iamport 관리자 콘솔에 전달하기 위해 사용
 const date = new Date()
 let random = Math.floor(Math.random() * 10 + 1)
@@ -19,28 +22,55 @@ const addHyphenToPhoneNumber = (phoneNum:String) => {
 
 export default function PaymentInfo({navigation}:any, props:any) {
 
-    // 결제관련 정보
-    const [buyerName, setBuyerName] = useState('카카오');
-    const [buyerPostcode, setBuyerPostcode] = useState();
-    const [buyerAddr, setBuyerAddr] = useState('');
-    const [buyerAddrDetail, setBuyerAddrDetail] = useState('');
-    const [buyerTel, setBuyerTel] = useState('');
-    const [pg, setPg] = useState('');
-    const amount = 20000
-    const [toPay, setToPay] = useState("결제 수단이 선택되지 않았습니다.");
+    // 결제관련 정보(상품 이미지, 상품명, 구매수량, 가격 추가 필요)
+    const [userId, setUserId] = useState('');                         // 구매자 아이디
+    const [buyerName, setBuyerName] = useState('');                   // 구매자 이름
+    const [buyerPostcode, setBuyerPostcode] = useState();             // 우편번호
+    const [buyerAddr, setBuyerAddr] = useState('');                   // 주소(도로명)
+    const [buyerAddrDetail, setBuyerAddrDetail] = useState('');       // 상세주소
+    const [buyerTel, setBuyerTel] = useState('');                     // 전화번호
+    const [buyerEmail, setBuyerEmail] = useState('');                 // 이메일
+    const [pg, setPg] = useState('');                                 // 결제수단
+    const amount = 20000                                              // 상품가격
+    const [toPay, setToPay] = useState("결제 수단이 선택되지 않았습니다.");   // 결제수단 선택시 메시지
+
+    
 
     // 주소 변경에서 가져온 값으로 화면상의 주소를 바꿔줌
     // 주소를 화면단으로 가져와 반영하여 새로고침 해주기 위해 useIsFocused, useEffect 사용
     const isFocused = useIsFocused();
     useEffect(() => {
+
+        // 로그인 시 db에서 가져온 회원정보를 바탕으로 기본 데이터 세팅
+        const getLoginData = async () => {
+            let loginData = await AsyncStorage.getItem("loginData");
+            try {
+                if (loginData !== null) {
+                    let data = JSON.parse(loginData);
+                    setUserId(data.memberId);
+                    setBuyerName(data.memberName);
+                    setBuyerPostcode(data.memberZipcode);
+                    setBuyerAddr(data.memberMainAddr);
+                    setBuyerAddrDetail(data.memberDetailAddr);
+                    setBuyerTel(data.memberPhone);
+                    setBuyerEmail(data.memberEmail);
+                }
+            } catch (err) {
+                console.log(err)
+            }
+        }
+    
+        getLoginData();
+
+        // 새로운 주소 입력 시 주소만 변경
         const getNewAddr = async () => {
-            let addrData = await AsyncStorage.getItem('addrData');
+            let addrData = await AsyncStorage.getItem('addrData');  // PaymentAddr 컴포넌트에서 가져온 주소 정보
             try {
                 if (addrData !== null) {
                     let data = JSON.parse(addrData);
                     // console.log(`넘겨받는 데이터: ${addrData}`);
-                    setBuyerPostcode(data.zipcode);
-                    setBuyerAddr(data.roadAddr);
+                    setBuyerPostcode(data.zipcode);                 // 우편번호 set
+                    setBuyerAddr(data.roadAddr);                    // 도로명주소 set
                 }
             } catch(err) {
                 console.log(err);
@@ -90,10 +120,12 @@ export default function PaymentInfo({navigation}:any, props:any) {
                                     <TextInput
                                         style={styles.textInput}
                                         placeholder="받는 사람 주소"
-                                        value={`[${buyerPostcode}] ${buyerAddr}`}
+                                        value={`[${buyerPostcode}] ${buyerAddr}`}       // 우편번호와 도로명주소 함께 기입됨.
                                         onChangeText={(addr) => setBuyerAddr(addr)}
                                         editable={false}
                                     />
+
+                                    {/* 주소 찾기 클릭시 PaymentAddr 컴포넌트로 이동 */}
                                     <TouchableOpacity 
                                         style={{
                                             backgroundColor: '#fff', 
@@ -137,10 +169,10 @@ export default function PaymentInfo({navigation}:any, props:any) {
                                     ]}
                                     onValueChange={(val) => {
                                         if (val === 'kakaopay') {
-                                            setToPay(`카카오페이로 ${amount}원을 결제합니다.`);
+                                            setToPay(`카카오페이로 ${amount.toLocaleString('ko-KR')}원을 결제합니다.`);
                                             setPg('kakaopay');
                                         } else if (val === 'tosspay') {
-                                            setToPay(`토스 페이먼츠로 ${amount}원을 결제합니다.`);
+                                            setToPay(`토스 페이먼츠로 ${amount.toLocaleString('ko-KR')}원을 결제합니다.`);
                                             setPg('tosspay');
                                         }
                                     }}
@@ -162,6 +194,7 @@ export default function PaymentInfo({navigation}:any, props:any) {
                                 <TouchableOpacity 
                                     style={[styles.paymentBtn, styles.btn]}
                                     onPress={() => {
+                                        // 버튼 클릭시 비어있는 정보가 없는 지 검사 후
                                         if (buyerName === '' || buyerName === null) {
                                             Alert.alert('배송지 정보 누락', '받는 사람의 이름이 입력되지 않았습니다.');
                                         } else if (buyerAddr === '' || buyerAddr === null) {
@@ -177,15 +210,16 @@ export default function PaymentInfo({navigation}:any, props:any) {
                                             AsyncStorage.setItem('payment', JSON.stringify({
                                                 pg: pg,
                                                 pay_method: 'card',
-                                                merchant_uid: `ORD-${uid}-userId`,   // 사용자 아이디를 추가
+                                                merchant_uid: `ORD-${uid}-${userId}`,   // 사용자 아이디를 추가
                                                 name: '카카오 도마 칼 세트',
                                                 amount: amount,
-                                                buyer_email: 'kakao@kakao.com',
+                                                buyer_email: buyerEmail,
                                                 buyer_name: buyerName,
                                                 buyer_tel: buyerTel,
                                                 buyer_addr: buyerAddr,
                                                 buyer_detail_addr: buyerAddrDetail,
                                                 buyer_postcode: buyerPostcode,
+                                                buyer_id: userId,
                                                 app_scheme: 'example',
                                                 escrow: false
                                             }));

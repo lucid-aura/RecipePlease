@@ -18,7 +18,7 @@ export default function PaymentResult({ navigation, route }:any) {
     const paymentData = route.params.key;
     console.log(paymentData);
 
-    // 결제 성공시 배송 및 주문 정보를 axios로 백엔드에 넘겨서 처리
+    // 결제 성공시 배송 및 주문 정보를 axios로 백엔드에 넘겨서 처리(서버에 저장)
     useEffect(() => {
         axios.post('http://192.168.0.13:3000/payment/addGoodsShoppingList', null, 
         {
