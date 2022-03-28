@@ -10,12 +10,12 @@
 </select>
 
 <insert id="insertRecipe" parameterType="com.recipe.a.dto.RecipeDto">
-	INSERT INTO RECIPE(RECIPESEQ, MEMBERID, RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING)
-	VALUES(NEXTVAL('RECIPESEQ'), #{memberId}, #{recipeTitle}, #{recipe_content}, #{recipeBigCategory}, #{recipeSmallCategory}, #{recipeGoodsTag}, #{recipePrice}, 0.0) 
+	INSERT INTO RECIPE(RECIPESEQ, MEMBERID, RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEVIDEOURL, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING)
+	VALUES(NEXTVAL('RECIPESEQ'), #{memberId}, #{recipeTitle}, #{recipe_content}, #{recipeBigCategory}, #{recipeSmallCategory}, #{recipeVideoUrl}, #{recipeGoodsTag}, #{recipePrice}, 0.0) 
 </insert>
 
 <select id="getOneRecipe" parameterType="Integer" resultType="com.recipe.a.dto.RecipeDto">
-	SELECT RECIPESEQ, MEMBERID, RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING
+	SELECT RECIPESEQ, MEMBERID, RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEVIDEOURL, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING
 	FROM RECIPE WHERE RECIPESEQ=#{recipeSeq}
 </select>
 
@@ -25,9 +25,13 @@
 	    SELECT ROUND(AVG(RATINGSCORE), 2)
 	    FROM RATING
 	    GROUP BY DOCSSEQ
+	    HAVING DOCSSEQ=#{docsSeq}
 	    )
-	WHERE RECIPESEQ=#{docsSeq};
+	WHERE RECIPESEQ=#{docsSeq}
 </update>
 
+<select id="getRecommentRecipe" parameterType="String" resultType="com.recipe.a.dto.RecipeDto">
+	SELECT * FROM RECIPE WHERE RECIPEBIGCATEGORY=#{category} ORDER BY RECIPERATING DESC LIMIT 3
+</select>
 
 </mapper>

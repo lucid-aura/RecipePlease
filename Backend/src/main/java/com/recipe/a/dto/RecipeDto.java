@@ -7,26 +7,28 @@ public class RecipeDto {
 	private String recipeContent;
 	private String recipeBigCategory;
 	private String recipeSmallCategory;
+	private String recipeVideoUrl;
 	private String recipeGoodsTag;
 	private int recipePrice;
 	private float recipeRating;
 	
 	
 	public RecipeDto(String memberId, String recipeTitle, String recipeContent, String recipeBigCategory,
-			String recipeSmallCategory, String recipeGoodsTag, int recipePrice) {
+			String recipeSmallCategory, String recipeVideoUrl, String recipeGoodsTag, int recipePrice) {
 		super();
 		this.memberId = memberId;
 		this.recipeTitle = recipeTitle;
 		this.recipeContent = recipeContent;
 		this.recipeBigCategory = recipeBigCategory;
 		this.recipeSmallCategory = recipeSmallCategory;
+		this.recipeVideoUrl = recipeVideoUrl;
 		this.recipeGoodsTag = recipeGoodsTag;
 		this.recipePrice = recipePrice;
 		this.recipeRating = 0.0F;
 	}
 
 	public RecipeDto(int recipeSeq, String memberId, String recipeTitle, String recipeContent, String recipeBigCategory,
-			String recipeSmallCategory, String recipeGoodsTag, int recipePrice, float recipeRating) {
+			String recipeSmallCategory, String recipeVideoUrl, String recipeGoodsTag, int recipePrice, float recipeRating) {
 		super();
 		this.recipeSeq = recipeSeq;
 		this.memberId = memberId;
@@ -34,6 +36,7 @@ public class RecipeDto {
 		this.recipeContent = recipeContent;
 		this.recipeBigCategory = recipeBigCategory;
 		this.recipeSmallCategory = recipeSmallCategory;
+		this.recipeVideoUrl = recipeVideoUrl;
 		this.recipeGoodsTag = recipeGoodsTag;
 		this.recipePrice = recipePrice;
 		this.recipeRating = recipeRating;
@@ -87,6 +90,14 @@ public class RecipeDto {
 		this.recipeSmallCategory = recipeSmallCategory;
 	}
 
+	public String getRecipeVideoUrl() {
+		return recipeVideoUrl;
+	}
+
+	public void setRecipeVideoUrl(String recipeVideoUrl) {
+		this.recipeVideoUrl = recipeVideoUrl;
+	}
+
 	public String getRecipeGoodsTag() {
 		return recipeGoodsTag;
 	}
@@ -115,10 +126,10 @@ public class RecipeDto {
 	public String toString() {
 		return "RecipeDto [recipeSeq=" + recipeSeq + ", memberId=" + memberId + ", recipeTitle=" + recipeTitle
 				+ ", recipeContent=" + recipeContent + ", recipeBigCategory=" + recipeBigCategory
-				+ ", recipeSmallCategory=" + recipeSmallCategory + ", recipeGoodsTag=" + recipeGoodsTag
-				+ ", recipePrice=" + recipePrice + ", recipeRating=" + recipeRating + "]";
+				+ ", recipeSmallCategory=" + recipeSmallCategory + ", recipeVideoUrl=" + recipeVideoUrl
+				+ ", recipeGoodsTag=" + recipeGoodsTag + ", recipePrice=" + recipePrice + ", recipeRating="
+				+ recipeRating + "]";
 	}
-	
 	
 	
 }

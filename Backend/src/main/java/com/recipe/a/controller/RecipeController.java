@@ -1,7 +1,9 @@
 package com.recipe.a.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,7 +54,7 @@ public class RecipeController {
 	@RequestMapping(value ="/insertRecipe", method = {RequestMethod.GET, RequestMethod.POST})
 	public String insertRecipe() {
 		System.out.println("RecipeController insertRecipe()");
-		RecipeDto temp = new RecipeDto("test", "title", "content", "big", "small", "tag", 0);
+		RecipeDto temp = new RecipeDto("test", "title", "content", "big", "small", "url", "tag", 0);
 
 		int res = recipeService.insertRecipe(temp);
 		System.out.println(res);
@@ -119,6 +121,27 @@ public class RecipeController {
 		//return Arrays.asList(recipeService.getOneRecipe(recipeSeq).getRecipeGoodsTag().split(","));
 	}	
 	
+	@RequestMapping(value = "/purchaseRecipeCheck", method = {RequestMethod.GET})
+	public int purchaseRecipeCheck(String memberId, int recipeSeq) {
+		System.out.println(memberId + " " + recipeSeq);
+		System.out.println("RecipeController purchaseRecipeCheck()");
+
+		return recipeService.purchaseRecipeCheck(memberId, recipeSeq);
+		//return recipeService.getPhoto(photoDto);
+	}
+
+	@RequestMapping(value = "/getRecommendRecipe", method = {RequestMethod.GET})
+	public Map<String, Object> getRecommendRecipe() {
+		System.out.println("RecipeController getRecommendRecipe()");
+		
+		Map<String, Object> res = new HashMap<String, Object>();
+		
+		res.put("livestock", recipeService.getRecommendRecipe("livestock"));
+		res.put("seafood", recipeService.getRecommendRecipe("seafood"));
+		return res;
+		//return recipeService.getPhoto(photoDto);
+	}
+	
 	@RequestMapping(value = "/test", method = {RequestMethod.GET})
 	public List<Integer> test(int docs_seq, String photo_category) {
 		System.out.println(docs_seq + " " + photo_category);
@@ -128,8 +151,8 @@ public class RecipeController {
 		List<Integer> dtos = recipeService.test();
 		System.out.println(dtos.get(0));
 		
+		
 		return dtos;
 		//return recipeService.getPhoto(photoDto);
 	}
-	
 }

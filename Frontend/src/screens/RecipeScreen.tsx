@@ -18,7 +18,7 @@ const Stack = createNativeStackNavigator() //스택 네비게이터 생성후 �
 export default function RecipeScreen(){
 
     return(
-      <Stack.Navigator>
+      <Stack.Navigator >
         <Stack.Screen name="RecipeHome" component={RecipeHomeScreen}></Stack.Screen>
 
         <Stack.Screen name="RecipeDetail" component={RecipeDetailScreen}></Stack.Screen>
