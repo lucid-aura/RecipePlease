@@ -29,6 +29,7 @@ public class MembersDto {
 	private String memberZipcode;
 	private String memberGender;
 	private String memberName;
+	private String memberGrade;
 	private String salt;
 	
 	public MembersDto(String memberId, String memberPwd, String memberNickname, String memberEmail, String memberPhone,
@@ -136,11 +137,11 @@ public class MembersDto {
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
-	public String getMember_grade() {
-		return member_grade;
+	public String getMemberGrade() {
+		return memberGrade;
 	}
-	public void setMember_grade(String member_grade) {
-		this.member_grade = member_grade;
+	public void setMember_grade(String memberGrade) {
+		this.memberGrade = memberGrade;
 	}
 	public String getSalt() {
 		return salt;

@@ -13,8 +13,6 @@ import com.recipe.a.dto.MembersDto;
 public class MembersService {
 
 	@Autowired
-	MembersDao dao;
-	
 	private MembersDao dao;
 
 	public MembersService(MembersDao dao) {
@@ -32,7 +30,7 @@ public class MembersService {
 		int n = dao.regist(dto);
 		
 		return n>0? true:false;
-		
+	}
 
 	public MembersDto login(String memberId, String memberPwd) {
 		return dao.login(memberId, memberPwd);
