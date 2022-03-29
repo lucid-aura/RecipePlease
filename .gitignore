@@ -33,7 +33,8 @@ Temporary Items
 
 # End of https://www.toptal.com/developers/gitignore/api/macos
 /.metadata/
-
+/.idea/
+*.log
 Backend.zip
 Frontend.zip
 RecipePlease.zip

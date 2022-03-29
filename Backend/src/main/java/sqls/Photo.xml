@@ -9,5 +9,31 @@
 	SELECT COUNT(*) FROM PHOTO
 </select>
 
+<select id="getPhoto" parameterType="com.recipe.a.dto.PhotoDto" resultType="com.recipe.a.dto.PhotoDto">
+	<!-- SELECT PHOTOSEQ, DOCSSEQ, PHOTOTITLE, PHOTOCONTENT, PHOTOCATEGORY, PHOTOURL  -->
+	SELECT *
+	FROM PHOTO 
+	WHERE DOCSSEQ=#{docsSeq} AND PHOTOCATEGORY=#{photoCategory}
+	
+</select>
 
+
+<select id="getThumbnailPhoto" parameterType="com.recipe.a.dto.PhotoDto" resultType="com.recipe.a.dto.PhotoDto">
+	<!-- SELECT PHOTO_SEQ, DOCS_SEQ, PHOTO_TITLE, PHOTO_CONTENT, PHOTO_CATEGORY, PHOTO_URL  -->
+	SELECT *
+	FROM PHOTO 
+	WHERE DOCSSEQ=#{docsSeq} AND PHOTOCATEGORY=#{photoCategory} AND PHOTOTITLE='thumbnail'
+	
+</select>
+
+<select id="test" resultType="Integer">
+	SELECT PHOTOSEQ FROM PHOTO
+</select>
+
+<select id="getRecommendThumnailPhoto" parameterType="List" resultType="com.recipe.a.dto.PhotoDto">
+	SELECT DOCSSEQ, PHOTOSEQ, PHOTOURL FROM PHOTO WHERE PHOTOTITLE='thumbnail' AND DOCSSEQ IN
+	<foreach collection="list" item="item" open="(" close=")" separator=",">
+		#{item}
+	</foreach>
+</select>
 </mapper>

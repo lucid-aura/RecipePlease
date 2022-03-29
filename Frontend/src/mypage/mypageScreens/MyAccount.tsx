@@ -1,10 +1,14 @@
+import Postcode from "@actbase/react-daum-postcode";
 import React, { useState } from "react";
-import { Text, TextInput, TouchableHighlight, View } from "react-native";
+import { Alert, Button, Modal, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
+import { RadioButton } from "react-native-paper";
 
 /* 
 
 npm i react-native-flexi-radio-button --save
 npm i @types/react-native-flexi-radio-button
+npm i @actbase/react-daum-postcode
+npm i react-native-webview
 
 */
 
@@ -15,14 +19,21 @@ export default function MyAccount() {
     const [nickName, setNickName] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [phone, setPhone] = useState<string>('')
-    const [gender, setGender] = useState<string>('')
+    const [mainAddress, setMainAddress] = useState<string>('')
+    const [detailAddress, setDetailAddress] = useState<string>('')
+    const [zipCode, setZipCode] = useState<string>('')
+    const [gender, setGender] = useState<string>('mail')
     const [name, setName] = useState<string>('')
 
     const [msg, setMsg] = useState<string>('msg')
 
+    const[isModal, setModal] = useState(false)
+    
+    
+    //zonecode => 우편번호 address => 주소
 
     return (
-        <View>
+        <View style={styles.container}>
             <Text>회원가입</Text>
             <View>
                 <TextInput 
@@ -64,8 +75,20 @@ export default function MyAccount() {
                     onChangeText={(nickName) => setNickName(nickName)}
                 />
             </View>
-            <View>
-           
+            <View style={{flexDirection: 'row'}}>
+            <Text>남자</Text>
+                <RadioButton
+                    value='mail'
+                    status={ gender === 'mail' ? 'checked' : 'unchecked'}
+                    onPress={()=> setGender('mail')}>
+                </RadioButton>
+                <Text>여자</Text>
+                <RadioButton
+                    value='femail'
+                    status={ gender === 'femail' ? 'checked' : 'unchecked'}
+                    onPress={()=> setGender('femail')}>
+                    
+                </RadioButton>
             </View>
             <View>
                 <TextInput 
@@ -83,6 +106,47 @@ export default function MyAccount() {
                     onChangeText={(phone) => setPhone(phone)}
                 />
             </View>
+
+            <View>
+                <Modal
+                    visible={isModal}
+                    animationType="slide">
+                    <Postcode 
+                        style={{ width: 320, height: 320 }}
+                        jsOptions={{ animation: true, hideMapBtn: true }}
+                        onSelected={data => {
+                            Alert.alert(JSON.stringify(data));
+                            console.log(JSON.stringify(data))
+                            setMainAddress(data.address) 
+                            setZipCode(data.zonecode.toString())
+                            console.log(mainAddress)
+                            console.log(zipCode)
+                            setModal(false);
+                        }} 
+                        onError={function (error: unknown): void {
+                            throw new Error("Function not implemented.");
+                        } }   />
+                    <Button title='되돌아가기' onPress={() => setModal(false)} />
+                </Modal>
+                <Button title='주소찾기' onPress={() => setModal(true)}></Button>
+                
+                <Text>{zipCode}</Text>
+                <Text>{mainAddress}</Text>
+                <TextInput 
+                    placeholder="상세주소"
+                    value={detailAddress}
+                    underlineColorAndroid='transparent'
+                    onChangeText={(detailAddress) => setDetailAddress(detailAddress)}
+                />
+            </View>
+
         </View>
     )
 }
+
+const styles = StyleSheet.create ({
+    container: {
+        flex: 1,
+        alignItems: 'center'
+    }
+})

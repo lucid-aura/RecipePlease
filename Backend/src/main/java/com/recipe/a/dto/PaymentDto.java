@@ -1,112 +1,140 @@
 package com.recipe.a.dto;
 
+/*
+	CREATE TABLE PAYMENT (
+		PAYMENTSEQ			INTEGER			NOT NULL,
+		MEMBERID			VARCHAR(20)		NOT NULL,
+		PAYMENTPAY			INTEGER			NOT NULL,
+		PAYMENTDATE			DATE			NOT NULL,
+		PAYMENTDEL			INTEGER			NULL,
+		PAYMENTMAINADDR		VARCHAR(100)	NULL,
+		PAYMENTDETAILADDR	VARCHAR(100)	NULL,
+		PAYMENTZIPCODE		INTEGER			NULL,
+		PAYMENTCATEGORY		VARCHAR(20)		NOT NULL,
+		PAYMENTCOUNT		INTEGER			NOT NULL
+	);
+*/
+
 public class PaymentDto {
-	private int payment_seq;
-	private String member_id;
-	private String payment_date;
-	private int payment_del;
-	private String payment_main_addr;
-	private String payment_detail_addr;
-	private Integer payment_zipcode;
-	private String payment_category;
-	private int payment_count;
 	
-	public PaymentDto(int payment_seq, String member_id, String payment_date, int payment_del, String payment_main_addr,
-			String payment_detail_addr, Integer payment_zipcoode, String payment_category, int payment_count) {
-		super();
-		this.payment_seq = payment_seq;
-		this.member_id = member_id;
-		this.payment_date = payment_date;
-		this.payment_del = payment_del;
-		this.payment_main_addr = payment_main_addr;
-		this.payment_detail_addr = payment_detail_addr;
-		this.payment_zipcode = payment_zipcoode;
-		this.payment_category = payment_category;
-		this.payment_count = payment_count;
+	private int paymentSeq;
+	private String memberId;
+	private int paymentPay;
+	private String paymentDate;
+	private int paymentDel;
+	private String paymentMainAddr;
+	private String paymentDetailAddr;
+	private int paymentZipcode;
+	private String paymentCategory;
+	private int paymentCount;
+
+	public PaymentDto() {
 	}
-	
-	public int getPayment_seq() {
-		return payment_seq;
+
+	public PaymentDto(int paymentSeq, String memberId, int paymentPay, String paymentDate, int paymentDel,
+			String paymentMainAddr, String paymentDetailAddr, int paymentZipcode, String paymentCategory,
+			int paymentCount) {
+		this.paymentSeq = paymentSeq;
+		this.memberId = memberId;
+		this.paymentPay = paymentPay;
+		this.paymentDate = paymentDate;
+		this.paymentDel = paymentDel;
+		this.paymentMainAddr = paymentMainAddr;
+		this.paymentDetailAddr = paymentDetailAddr;
+		this.paymentZipcode = paymentZipcode;
+		this.paymentCategory = paymentCategory;
+		this.paymentCount = paymentCount;
 	}
-	
-	public void setPayment_seq(int payment_seq) {
-		this.payment_seq = payment_seq;
+
+	public int getPaymentSeq() {
+		return paymentSeq;
 	}
-	
-	public String getMember_id() {
-		return member_id;
+
+	public void setPaymentSeq(int paymentSeq) {
+		this.paymentSeq = paymentSeq;
 	}
-	
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
+
+	public String getMemberId() {
+		return memberId;
 	}
-	
-	public String getPayment_date() {
-		return payment_date;
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
-	
-	public void setPayment_date(String payment_date) {
-		this.payment_date = payment_date;
+
+	public int getPaymentPay() {
+		return paymentPay;
 	}
-	
-	public int getPayment_del() {
-		return payment_del;
+
+	public void setPaymentPay(int paymentPay) {
+		this.paymentPay = paymentPay;
 	}
-	
-	public void setPayment_del(int payment_del) {
-		this.payment_del = payment_del;
+
+	public String getPaymentDate() {
+		return paymentDate;
 	}
-	
-	public String getPayment_main_addr() {
-		return payment_main_addr;
+
+	public void setPaymentDate(String paymentDate) {
+		this.paymentDate = paymentDate;
 	}
-	
-	public void setPayment_main_addr(String payment_main_addr) {
-		this.payment_main_addr = payment_main_addr;
+
+	public int getPaymentDel() {
+		return paymentDel;
 	}
-	
-	public String getPayment_detail_addr() {
-		return payment_detail_addr;
+
+	public void setPaymentDel(int paymentDel) {
+		this.paymentDel = paymentDel;
 	}
-	
-	public void setPayment_detail_addr(String payment_detail_addr) {
-		this.payment_detail_addr = payment_detail_addr;
+
+	public String getPaymentMainAddr() {
+		return paymentMainAddr;
 	}
-	
-	public Integer getPayment_zipcode() {
-		return payment_zipcode;
+
+	public void setPaymentMainAddr(String paymentMainAddr) {
+		this.paymentMainAddr = paymentMainAddr;
 	}
-	
-	public void setPayment_zipcode(Integer payment_zipcode) {
-		this.payment_zipcode = payment_zipcode;
+
+	public String getPaymentDetailAddr() {
+		return paymentDetailAddr;
 	}
-	
-	public String getPayment_category() {
-		return payment_category;
+
+	public void setPaymentDetailAddr(String paymentDetailAddr) {
+		this.paymentDetailAddr = paymentDetailAddr;
 	}
-	
-	public void setPayment_category(String payment_category) {
-		this.payment_category = payment_category;
+
+	public int getPaymentZipcode() {
+		return paymentZipcode;
 	}
-	
-	public int getPayment_count() {
-		return payment_count;
+
+	public void setPaymentZipcode(int paymentZipcode) {
+		this.paymentZipcode = paymentZipcode;
 	}
-	
-	public void setPayment_count(int payment_count) {
-		this.payment_count = payment_count;
+
+	public String getPaymentCategory() {
+		return paymentCategory;
 	}
-	
+
+	public void setPaymentCategory(String paymentCategory) {
+		this.paymentCategory = paymentCategory;
+	}
+
+	public int getPaymentCount() {
+		return paymentCount;
+	}
+
+	public void setPaymentCount(int paymentCount) {
+		this.paymentCount = paymentCount;
+	}
+
 	@Override
 	public String toString() {
-		return "PaymentDto [payment_seq=" + payment_seq + ", member_id=" + member_id + ", payment_date=" + payment_date
-				+ ", payment_del=" + payment_del + ", payment_main_addr=" + payment_main_addr + ", payment_detail_addr="
-				+ payment_detail_addr + ", payment_zipcode=" + payment_zipcode + ", payment_category="
-				+ payment_category + ", payment_count=" + payment_count + "]";
+		return "PaymentDto [paymentSeq=" + paymentSeq + ", memberId=" + memberId + ", paymentPay=" + paymentPay
+				+ ", paymentDate=" + paymentDate + ", paymentDel=" + paymentDel + ", paymentMainAddr=" + paymentMainAddr
+				+ ", paymentDetailAddr=" + paymentDetailAddr + ", paymentZipcode=" + paymentZipcode
+				+ ", paymentCategory=" + paymentCategory + ", paymentCount=" + paymentCount + "]";
 	}
+
 	
-	
-	
-	
+
 
 }

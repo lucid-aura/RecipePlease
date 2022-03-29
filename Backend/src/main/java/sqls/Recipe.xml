@@ -9,5 +9,40 @@
 	SELECT COUNT(*) FROM RECIPE
 </select>
 
+<insert id="insertRecipe" parameterType="com.recipe.a.dto.RecipeDto">
+	INSERT INTO RECIPE(RECIPESEQ, MEMBERID, RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEVIDEOURL, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING, RECIPEREADCOUNT)
+	VALUES(NEXTVAL('RECIPESEQ'), #{memberId}, #{recipeTitle}, #{recipe_content}, #{recipeBigCategory}, #{recipeSmallCategory}, #{recipeVideoUrl}, #{recipeGoodsTag}, #{recipePrice}, 0.0, 0) 
+</insert>
+
+<select id="getOneRecipe" parameterType="Integer" resultType="com.recipe.a.dto.RecipeDto">
+	SELECT RECIPESEQ, MEMBERID, RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEVIDEOURL, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING, RECIPEREADCOUNT
+	FROM RECIPE WHERE RECIPESEQ=#{recipeSeq}
+</select>
+
+<update id="oneUpReadcount" parameterType="Integer">
+	UPDATE RECIPE
+	SET RECIPEREADCOUNT=RECIPEREADCOUNT+1
+	WHERE RECIPESEQ=#{recipeSeq}
+</update>
+
+<update id="updateRecipeRating" parameterType="Integer">
+	UPDATE RECIPE
+	SET RECIPERATING=(
+	    SELECT ROUND(AVG(RATINGSCORE), 2)
+	    FROM RATING
+	    GROUP BY DOCSSEQ
+	    HAVING DOCSSEQ=#{docsSeq}
+	    )
+	WHERE RECIPESEQ=#{docsSeq}
+</update>
+
+<select id="getRecommendRecipe" parameterType="String" resultType="com.recipe.a.dto.RecipeDto">
+	SELECT * FROM RECIPE WHERE RECIPEBIGCATEGORY=#{category} ORDER BY RECIPERATING DESC LIMIT 3
+</select>
+
+<select id="getRecommendReadcountRecipe" resultType="com.recipe.a.dto.RecipeDto">
+	SELECT * FROM RECIPE ORDER BY RECIPEREADCOUNT DESC LIMIT 3;
+</select>
+
 
 </mapper>
