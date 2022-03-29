@@ -257,9 +257,7 @@ export default function UploadScreen() {
                 <View style={styles.goodsframe}>
                     <TextInput style={styles.textinput} value={(recipePrice)} onChangeText={(recipePrice) => setPrice(recipePrice)} ></TextInput>
                 </View>
-                <View style={styles.frame}>
-                    <Text style={styles.text}>별점?</Text>
-                </View>
+
                 <View style={styles.goodsframe}>
                     <TextInput style={styles.textinput} value={RECIPERATING} onChangeText={(RECIPERATING) => setRating(RECIPERATING)}></TextInput>
                 </View>
