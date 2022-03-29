@@ -13,7 +13,6 @@ target/
 .springBeans
 .sts4-cache
 /.metadata/
-.log
 
 ### IntelliJ IDEA ###
 .idea
@@ -35,4 +34,4 @@ build/
 .vscode/
 
 ### logger ###
-.log
+*.log

@@ -9,9 +9,10 @@ public class GoodsDto {
 	private int goodsView;
 	private float goodsRating;
 	private String goodsContent;
+	private int goodsReadcount;
 	
 	public GoodsDto(int goodsSeq, String goodsName, int goodsPrice, String goodsCategory, int goodsCount, int goodsView,
-			float goodsRating, String goodsContent) {
+			float goodsRating, String goodsContent, int goodsReadcount) {
 		super();
 		this.goodsSeq = goodsSeq;
 		this.goodsName = goodsName;
@@ -21,6 +22,7 @@ public class GoodsDto {
 		this.goodsView = goodsView;
 		this.goodsRating = goodsRating;
 		this.goodsContent = goodsContent;
+		this.goodsReadcount = goodsReadcount;
 	}
 
 	public int getGoodsSeq() {
@@ -86,12 +88,21 @@ public class GoodsDto {
 	public void setGoodsContent(String goodsContent) {
 		this.goodsContent = goodsContent;
 	}
+	
+	public int getGoodsReadcount() {
+		return goodsReadcount;
+	}
+
+	public void setGoodsReadcount(int goodsReadcount) {
+		this.goodsReadcount = goodsReadcount;
+	}
 
 	@Override
 	public String toString() {
 		return "GoodsDto [goodsSeq=" + goodsSeq + ", goodsName=" + goodsName + ", goodsPrice=" + goodsPrice
 				+ ", goodsCategory=" + goodsCategory + ", goodsCount=" + goodsCount + ", goodsView=" + goodsView
-				+ ", goodsRating=" + goodsRating + ", goodsContent=" + goodsContent + "]";
+				+ ", goodsRating=" + goodsRating + ", goodsContent=" + goodsContent + ", goodsReadcount="
+				+ goodsReadcount + "]";
 	}
 
 	

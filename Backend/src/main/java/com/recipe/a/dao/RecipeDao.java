@@ -19,5 +19,9 @@ public interface RecipeDao {
 
 	public int updateRecipeRating(int docsSeq);
 
-	public List<RecipeDto> getRecommentRecipe(String category);
+	public List<RecipeDto> getRecommendRecipe(String category);
+	
+	public List<RecipeDto> getRecommendReadcountRecipe();
+
+	public int oneUpReadcount(int recipeSeq);
 }

@@ -80,14 +80,6 @@
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>8.0.27</version>
 		</dependency>
-		
-		<!-- Lombok Project -->
-		<dependency>
-    		<groupId>org.projectlombok</groupId>
-    		<artifactId>lombok</artifactId>
-   			<version>1.18.20</version>
-    		<scope>provided</scope>
-		</dependency>
 		 
 		<!-- iamport module -->
 		<dependency>
