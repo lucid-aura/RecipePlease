@@ -2,6 +2,7 @@ import { DrawerActions, useNavigation } from '@react-navigation/native';
 import React, { useCallback } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { getProfile } from '../mypage/utils';
 import { NavigationHeader } from '../theme';
 
 
@@ -15,7 +16,7 @@ export default function HomeScreen(){
                 Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
                 Right= {() => <Icon name="cart-heart" size={30} />}
                 />
-        <Text>Home</Text>
+        <Text onPress={getProfile}>Home</Text>
       </View>
     )
   } //홈 메인 화면단

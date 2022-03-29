@@ -3,10 +3,10 @@ import { KakaoOAuthToken, KakaoProfile, login, logout, getProfile as getKakaoPro
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { View, Text,StyleSheet, Button, TextInput, TouchableOpacity } from "react-native";
+import { View, Text,StyleSheet, Button, TextInput, TouchableOpacity, Image } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { NavigationHeader } from "../theme";
-import { signOutWithKakao } from "./utils";
+import { signInWithKakao, signOutWithKakao } from "./utils";
 
 /* 
 npm i react-native-paper
@@ -22,9 +22,6 @@ export default function MyPageHome(){
     const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
     const [result, setResult] = useState<string>('');
 
-      
-
-    
     // 로그인 훅
     const [id, setId] = useState<string>('')
     const [pwd, setPwd] = useState<string>('')
@@ -57,15 +54,22 @@ export default function MyPageHome(){
                 </View>
 
                 {/* 로그인 버튼 */}
-                <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                    <Text>로그인</Text>
-                </TouchableOpacity>
-
+                <View>
+                    <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                        <Text>로그인</Text>
+                    </TouchableOpacity>
+                </View>
+                <View>
+                    <TouchableOpacity onPress={signInWithKakao}>
+                        <Image source={require("./utils/kakao_login_medium_narrow.png")} />
+                    </TouchableOpacity>
+                </View>
                 {/* 회원가입 버튼 */}
-                <TouchableOpacity onPress={() => navigation.navigate('MyAccount')}>
-                    <Text>회원가입</Text>
-                </TouchableOpacity>
-
+                <View>
+                    <TouchableOpacity onPress={() => navigation.navigate('MyAccount')}>
+                        <Text>회원가입</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     } else {
@@ -94,9 +98,7 @@ export default function MyPageHome(){
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+        flex: 1
     }
 }) //css
 
