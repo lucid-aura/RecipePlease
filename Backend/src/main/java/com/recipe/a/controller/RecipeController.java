@@ -64,7 +64,7 @@ public class RecipeController {
 	@RequestMapping(value = "/getOneRecipe", method = {RequestMethod.GET})
 	public RecipeDto getOneRecipe(int recipeSeq) {
 		System.out.println("RecipeController getOneRecipe()");
-			
+		recipeService.oneUpReadcount(recipeSeq);
 		return recipeService.getOneRecipe(recipeSeq);
 		//return recipeService.getPhoto(photoDto);
 	}
@@ -138,6 +138,7 @@ public class RecipeController {
 		
 		res.put("livestock", recipeService.getRecommendRecipe("livestock"));
 		res.put("seafood", recipeService.getRecommendRecipe("seafood"));
+		res.put("readcount", recipeService.getRecommendReadcountRecipe());
 		return res;
 		//return recipeService.getPhoto(photoDto);
 	}

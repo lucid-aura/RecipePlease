@@ -22,10 +22,10 @@ npm install watcher
 
 const Stack = createNativeStackNavigator() //스택 네비게이터 생성후 스택함수 정의
 
-export default function GoodsScreen(){
+export default function GoodsNavigator(){
 
     return(
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{headerShown:false}}>
         <Stack.Screen name="Home" component={GoodsHomeScreen}></Stack.Screen>
 
         <Stack.Screen name="paymentInfo" component={PaymentInfo} options={{title: "결제정보"}} />

@@ -136,15 +136,18 @@ public class MembersDto {
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
-
+	public String getMember_grade() {
+		return member_grade;
+	}
+	public void setMember_grade(String member_grade) {
+		this.member_grade = member_grade;
+	}
 	public String getSalt() {
 		return salt;
 	}
-
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
-
 	@Override
 	public String toString() {
 		return "MembersDto [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberNickname=" + memberNickname

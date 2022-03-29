@@ -5,7 +5,7 @@
 
 <mapper namespace="com.recipe.a.dao.PaymentDao">
 
-	<select id="countPaymentList" resultType="Integer">
+	<select id="countPayment" resultType="Integer">
 		SELECT COUNT(*) FROM PAYMENT
 	</select>
 

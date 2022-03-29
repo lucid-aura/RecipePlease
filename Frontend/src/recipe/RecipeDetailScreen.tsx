@@ -76,6 +76,7 @@ export default function RecipeDetailScreen({ route, navigation }:any){
                 {/* 타이틀과 사진이 들어가는 View */}
                 <View>
                     <Text style={styles.title}>{recipe.recipeTitle}</Text>
+                    <Text>조회수 : {recipe.recipeReadcount}</Text>
                     <Image source={{ uri:thumbnail.photoUrl, width:600, height:300 }} />
                 </View>
                 <View>

@@ -1,8 +1,10 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "@react-navigation/native";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { View, Text,StyleSheet, Button, TextInput, TouchableOpacity } from "react-native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { NavigationHeader } from "../theme";
 
 /* 
 npm i react-native-paper
@@ -91,6 +93,7 @@ npm i axios
 export default function MyPageHomeScreen(){
 
     const navigation = useNavigation()
+    const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
     
     // 로그인 훅
     const [id, setId] = useState<string>('')
@@ -102,6 +105,10 @@ export default function MyPageHomeScreen(){
     if(screenChange == '') {
         return(
             <View style={styles.container}>
+                <NavigationHeader title="홈" 
+                Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
+                Right= {() => <Icon name="cart-heart" size={30} />}
+                />
                 {/* 아이디 입력 */}
                 <View>
                     <TextInput
