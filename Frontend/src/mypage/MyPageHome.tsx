@@ -1,10 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { KakaoOAuthToken, KakaoProfile, login, logout, getProfile as getKakaoProfile, unlink } from "@react-native-seoul/kakao-login";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { View, Text,StyleSheet, Button, TextInput, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { NavigationHeader } from "../theme";
+import { signOutWithKakao } from "./utils";
 
 /* 
 npm i react-native-paper
@@ -14,10 +16,14 @@ npm i axios
 
 */
 
-export default function MyPageHomeScreen(){
+export default function MyPageHome(){
 
     const navigation = useNavigation()
     const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
+    const [result, setResult] = useState<string>('');
+
+      
+
     
     // 로그인 훅
     const [id, setId] = useState<string>('')
