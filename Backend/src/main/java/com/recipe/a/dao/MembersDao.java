@@ -16,7 +16,6 @@ public interface MembersDao {
 	
 	// 회원가입 - 노승현
 	public int regist(MembersDto dto);	// 회원가입 - 노승현
-	int countMembers();
 
 	MembersDto login(String memberId, String memberPwd);
 }

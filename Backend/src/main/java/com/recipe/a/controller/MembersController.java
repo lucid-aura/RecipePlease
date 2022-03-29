@@ -20,17 +20,13 @@ import com.recipe.a.service.RecipeLikeService;
 public class MembersController {
 	
 	@Autowired
-	MembersService memberService;
+	private MembersService memberService;
 	
 	@Autowired
-	RecipeLikeService recipeLikeService;
+	private RecipeLikeService recipeLikeService;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
-	
-	private MembersService memberService;
-	private RecipeLikeService recipeLikeService;
 
 	public MembersController(MembersService memberService) {
 		this.memberService = memberService;
@@ -56,12 +52,12 @@ public class MembersController {
 			salt += str[i];
 		}
 		dto.setSalt(salt);
-		String secretNum = dto.getMember_pwd() + salt;
+		String secretNum = dto.getMemberPwd() + salt;
 		System.out.println("secretNum: "+ secretNum);
 		
 		String encodedPassword = passwordEncoder.encode(secretNum);
-		dto.setMember_pwd(encodedPassword);
-		System.out.println("dto.getMember_pwd: " + dto.getMember_pwd() );
+		dto.setMemberPwd(encodedPassword);
+		System.out.println("dto.getMember_pwd: " + dto.getMemberPwd() );
 		
 		boolean b = memberService.regist(dto);
 		
@@ -70,7 +66,7 @@ public class MembersController {
 		} else {
 			return "no";
 		}
-		
+	}
 
 	@PostMapping("/login")
 	public MembersDto login(String memberId, String memberPwd) {
