@@ -23,13 +23,13 @@ npm i axios
 const Stack = createNativeStackNavigator() //스택 네비게이터 생성후 스택함수 정의
 
 
-export default function MyScreen(){
+export default function MyNavigator(){
 
 
   return(
 
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={MyPageHomeScreen}></Stack.Screen>
+    <Stack.Navigator screenOptions={{headerShown:false}}>
+      <Stack.Screen name="MyPage" component={MyPageHomeScreen}></Stack.Screen>
 
       <Stack.Screen name="MyAccount" component={MyAccount}></Stack.Screen>
 
