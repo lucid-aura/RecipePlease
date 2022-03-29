@@ -27,9 +27,11 @@ export default function RecipeHomeScreen(){
 
     const [livestockIndex, setLivestockIndex] = useState(0) // 축산물 추천 레시피 인덱스
     const [seafoodIndex, setSeafoodIndex] = useState(0) // 수산물 추천 레시피 인덱스
+    const [readcountIndex, setReadcountIndex] = useState(0) // 수산물 추천 레시피 인덱스
     
     const [livestockAvarage, setLivestockAvarage] = useState(0.0)
     const [seafoodAvarage, setSeafoodAvarage] = useState(0.0)
+    const [readcountAvarage, setReadcountAvarage] = useState(0.0)
 
     const [data, setData] = useState({ // Axios를 통해 받아온 데이터 변수 선언 및 구조
         "livestock":{
@@ -41,6 +43,14 @@ export default function RecipeHomeScreen(){
             "videoUrl":[]
         },
         "seafood":{
+            "recipePrice":[],
+            "recipeSeq": [],
+            "recipeRating":[],
+            "thumbnailPhoto":[],
+            "title":[],
+            "videoUrl":[]
+        },
+        "readcount":{
             "recipePrice":[],
             "recipeSeq": [],
             "recipeRating":[],
@@ -96,8 +106,8 @@ export default function RecipeHomeScreen(){
                 })
             }
         }
-        else{ // 수산물
-            if (data.livestock.recipePrice[index] > 0){ // 유료 레시피일 경우
+        else if (category == "seafood"){ // 수산물
+            if (data.seafood.recipePrice[index] > 0){ // 유료 레시피일 경우
                 const purchaseCheckRes = axios.get("http://192.168.0.4:3000/purchaseRecipeCheck?memberId=" + "test"/* 이후 사용자 id로 변경 필요 */ + "&seq=" + data.seafood.recipeSeq[index] )
                 .then(function(res){
                     if (res.data > 0){ // 데이터 전송 후 OK사인(구매확인)을 받으면 페이지 변경
@@ -124,6 +134,39 @@ export default function RecipeHomeScreen(){
                 navigation.navigate('RecipeDetail',{
                     avarage: seafoodAvarage,
                     seq: data.seafood.recipeSeq[index], 
+                    star: star,
+                    category: 'recipe'
+                })
+            }
+        }
+        else {
+            if (data.readcount.recipePrice[index] > 0){ // 유료 레시피일 경우
+                const purchaseCheckRes = axios.get("http://192.168.0.4:3000/purchaseRecipeCheck?memberId=" + "test"/* 이후 사용자 id로 변경 필요 */ + "&seq=" + data.seafood.recipeSeq[index] )
+                .then(function(res){
+                    if (res.data > 0){ // 데이터 전송 후 OK사인(구매확인)을 받으면 페이지 변경
+                        /*
+                        navigation.navigate('RecipeDetail',{
+                            url: testImage[index],
+                            seq: index, 
+                            category: 'recipe'
+                        })
+                        */
+                    console.log(res.data)
+                    }
+                    else{
+                        Alert.alert("", "구매가 필요합니다.")
+                    }
+                })
+                .catch(function(err) {
+                    console.log(err)
+                })     
+
+            }
+            else{ // 무료 레시피일 경우
+                setReadcountAvarage(data.readcount.recipeRating[index])
+                navigation.navigate('RecipeDetail',{
+                    avarage: readcountAvarage,
+                    seq: data.readcount.recipeSeq[index], 
                     star: star,
                     category: 'recipe'
                 })
@@ -208,7 +251,8 @@ export default function RecipeHomeScreen(){
                         startingValue={data.livestock.recipeRating[livestockIndex]}
                         // minValue={1}
                     />
-
+                </View>
+                <View>
                     <Text style={styles.recipeTitle}>해산물 추천 레시피</Text>
                     <SliderBox
                         images={data.seafood.thumbnailPhoto}
@@ -246,6 +290,47 @@ export default function RecipeHomeScreen(){
                         readonly={true}
                         fractions={20}
                         startingValue={data.seafood.recipeRating[seafoodIndex]}
+                        // minValue={1}
+                    />
+                </View>
+                <View>
+                    <Text style={styles.recipeTitle}>조회순 추천 레시피</Text>
+                        <SliderBox
+                            images={data.readcount.thumbnailPhoto}
+                            sliderBoxHeight={300}
+                            parentWidth={500}
+                            onCurrentImagePressed={(index:number) => 
+                                checkRecipe("readcount", index) // 이후에 해당 recipe의 seq로 변경해야함.
+                            }
+                            currentImageEmitter={  (index:number) => {
+                                setReadcountIndex(index)
+                                setReadcountAvarage(data.readcount.recipeRating[index])
+                            }}
+                            paginationBoxVerticalPadding={10}
+                            autoplay
+                            circleLoop
+                            dotColor="#FFEE58"
+                            inactiveDotColor="#90A4AE"
+                            dotStyle={{
+                                width: 15,
+                                height: 15,
+                                borderRadius: 15,
+                                marginHorizontal: 10,
+                                padding: 0,
+                                margin: 0
+                            }}
+                        />
+                    
+                    <Text>{data.readcount.title[readcountIndex]}</Text>
+                    <Text style={styles.ratingText}>{readcountAvarage}</Text>
+                    <Rating
+                        type='star'
+                        ratingCount={5}
+                        imageSize={50}
+                        tintColor="#EEEEEE"
+                        readonly={true}
+                        fractions={20}
+                        startingValue={data.readcount.recipeRating[readcountIndex]}
                         // minValue={1}
                     />
                 </View>

@@ -12,6 +12,11 @@ public class CoinTransactionDto {
     public CoinTransactionDto() {
     }
 
+    public CoinTransactionDto(String memberId, int docsSeq) {
+    	this.memberId = memberId;
+    	this.docsSeq = docsSeq;
+    }
+    
     public CoinTransactionDto(int coinTransactionSeq, String memberId, int docsSeq, int coinCount, String coinInOut, String coinDate) {
         this.coinTransactionSeq = coinTransactionSeq;
         this.memberId = memberId;
