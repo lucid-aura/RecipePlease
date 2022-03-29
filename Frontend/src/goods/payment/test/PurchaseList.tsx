@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useIsFocused } from "@react-navigation/native";
+import { CommonActions, CurrentRenderContext, useIsFocused } from "@react-navigation/native";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Alert, 
@@ -14,8 +14,7 @@ from "react-native";
 /* 테스트 페이지 : 구매 목록 리스트 */
 
 // 플랫 리스트 안에 들어갈 아이템 컴포넌트
-const Item = ({userId, count, name, amount, del, 
-    paymentSeq, paymentDate, props, confirm}:any) => {
+const Item = ({userId, count, name, amount, del, paymentSeq, paymentDate, props, confirm}:any, { navigation }:any) => {
 
     const [detailVisible, setDetailVisibla] = useState(false);
 
@@ -38,7 +37,6 @@ const Item = ({userId, count, name, amount, del,
     const onClickOrderCancel = (confirm:boolean) => {
         
         if (confirm) {
-
             const orderCancelHandler = async () => {
                 await axios.post("http://192.168.0.13:3000/payment/returnGoods", null, {
                     params: {
@@ -48,14 +46,19 @@ const Item = ({userId, count, name, amount, del,
                 })
                 .then((res) => {
                     console.log(res.data);
-                    // 환불 요청 성공시 새로고침 작성
+                    // 새로고침
+                    if (res.data === "환불완료") {
+                        Alert.alert("환불 접수 완료", "환불접수가 완료되었습니다. 매출 취소까지 최대 7영업일이 소요됩니다.");
+                        
+                    }
+                    else console.log("no")
                 })
                 .catch((err) => console.log(err));
             }
-
             orderCancelHandler();
         }
 
+        
     }
 
     return (
@@ -117,10 +120,28 @@ const Item = ({userId, count, name, amount, del,
 // 구매리스트
 export default function PurchaseList(props:any, { route }:any) {
 
-    // 로그인 데이터(백엔드단에서 로그인된 아이디에 맞게 구매 이력를 조회하기 위해 로그인 세션 정보를 가져옴.)
+    // 1. 로그인 데이터 가져오기(이전 페이지에서 props로 넘겨서 받아오는 방법)
     const memberId = props.route.params.loginId;
     console.log("memberId: " + memberId);
     const [userId, setUserId] = useState(memberId);
+
+    /* 2. 로그인 데이터 가져오기(AsyncStorage에 저장된 로그인 세션 정보를 가져오는 방법)
+    // useEffect를 적용할 경우 데이터를 불러올 수 없음.
+    const getLoginData = async () => {
+        
+        let loginData = await AsyncStorage.getItem("loginData");
+        try {
+            if (loginData !== null) {
+                const parseData = JSON.parse(loginData);
+                setUserId(parseData.userId);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    getLoginData();
+    */
 
     // 구매 리스트를 불러오는 요청
     const [data, setData] = useState([]);       // 불러온 JSON 데이터 보관

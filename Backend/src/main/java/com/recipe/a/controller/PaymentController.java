@@ -2,12 +2,11 @@ package com.recipe.a.controller;
 
 import com.recipe.a.dto.PaymentDto;
 import com.recipe.a.service.PaymentService;
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -15,11 +14,9 @@ import java.util.List;
 @RequestMapping("/payment")
 public class PaymentController {
 	
-	
-	private final Logger logger = LoggerFactory.getLogger(PaymentController.class);
-	
 	private final PaymentService service;
-	
+
+	private final Logger logger = Logger.getLogger(PaymentController.class);
 
 	public PaymentController(PaymentService service) {
 		this.service = service;
@@ -62,19 +59,10 @@ public class PaymentController {
 	}
 
 	// 결제내역 조회
-//	@GetMapping("/payment/goodsPurchaseList")
-//	public ResponseEntity<List<PaymentDto>> goodsPurchaseList(String memberId) {
-//		logger.info("PaymentController goodsPurchaseList()");
-//		return Optional.ofNullable(service.goodsPurchaseList(memberId))
-//				.map(li -> ResponseEntity.ok(li))
-//				.orElse(ResponseEntity.noContent().build());
-//	}
-	
 	@GetMapping("/goodsPurchaseList")
 	public List<PaymentDto> goodsPurchaseList(String memberId) {
 		logger.info("PaymentController goodsPurchaseList()");
-//		logger.info("memberId: " + memberId);
-		System.out.println("memberId: " + memberId);
+		logger.info("memberId: " + memberId);
 		return service.goodsPurchaseList(memberId);
 	}
 	

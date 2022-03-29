@@ -1,16 +1,11 @@
 package com.recipe.a.service;
 
 import com.recipe.a.dto.PaymentDto;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.recipe.a.dao.PaymentDao;
-import com.recipe.a.dao.PaymentListDao;
-
 import java.util.List;
 
 @Service
@@ -25,7 +20,7 @@ public class PaymentService {
 	}
 
 	// 로거 사용
-	private Logger logger = LoggerFactory.getLogger(PaymentService.class);
+	private final Logger logger = Logger.getLogger(PaymentService.class);
 
 	// 카운트(테스트용)
 	public int countPayment() {
