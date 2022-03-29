@@ -4,15 +4,15 @@ import com.recipe.a.dto.PaymentDto;
 import com.recipe.a.service.PaymentService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-@Slf4j
 @RestController
+@RequestMapping("/payment")
 public class PaymentController {
 	
 	
@@ -26,13 +26,13 @@ public class PaymentController {
 	}
 
 	// 테스트모드 1
-	@GetMapping("payment/testMode")
+	@GetMapping("/testMode")
 	public void testMode() {
 		logger.info("테스트모드 접근 성공");
 	}
 
 	// 테스트모드 2
-	@GetMapping("/payment/countTest")
+	@GetMapping("/countTest")
 	public String countTest() {
 		logger.info("PaymentController testMode");
 		int res = service.countPayment();
@@ -43,7 +43,7 @@ public class PaymentController {
 	}
 
 	// 결제완료 후 구매내역을 테이블에 추가
-	@PostMapping("/payment/addGoodsShoppingList")
+	@PostMapping("/addGoodsShoppingList")
 	public String addGoodsShoppingList(PaymentDto dto) {
 		logger.info("PaymentController addGoodsShoppingList()");
 		int res = service.addGoodsShoppingList(dto);
@@ -54,7 +54,7 @@ public class PaymentController {
 	}
 
 	// 굿즈 반품
-	@PostMapping("/payment/returnGoods")
+	@PostMapping("/returnGoods")
 	public String returnGoods(String memberId, int paymentSeq) {
 		logger.info("PaymentController returnGoods()");
 		boolean b = service.refundGoods(memberId, paymentSeq);
@@ -70,15 +70,16 @@ public class PaymentController {
 //				.orElse(ResponseEntity.noContent().build());
 //	}
 	
-	@GetMapping("/payment/goodsPurchaseList")
+	@GetMapping("/goodsPurchaseList")
 	public List<PaymentDto> goodsPurchaseList(String memberId) {
 		logger.info("PaymentController goodsPurchaseList()");
-		logger.info("memberId: " + memberId);
+//		logger.info("memberId: " + memberId);
+		System.out.println("memberId: " + memberId);
 		return service.goodsPurchaseList(memberId);
 	}
 	
 	// 결제 내역 상세
-	@GetMapping("/payment/getPurchaseDetail")
+	@GetMapping("/getPurchaseDetail")
 	public PaymentDto getGoodsPurchaseDetail(int paymentSeq) {
 		logger.info("PaymentController getGoodsPurchaseDetail()");
 		
@@ -86,7 +87,7 @@ public class PaymentController {
 	}
 	
 	// 코인 구매
-	@PostMapping("/payment/chargeCoin")
+	@PostMapping("/chargeCoin")
 	public int chargeCoin(PaymentDto dto) {
 		logger.info("PaymentController chargeCoin()");
 		boolean resp = service.chargeCoin(dto);

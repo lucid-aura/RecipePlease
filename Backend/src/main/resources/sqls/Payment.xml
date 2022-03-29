@@ -12,7 +12,7 @@
 	<!-- [굿즈] 결제 성공 시 결제 정보 추가 -->
 	<insert id="addGoodsShoppingList" parameterType="com.recipe.a.dto.PaymentDto">
 		INSERT INTO PAYMENT(PAYMENTSEQ, MEMBERID, PAYMENTPAY,
-		                    PAYMENTDATE, PAYMENTDEL, PAYMENTMAIN_ADDR,
+		                    PAYMENTDATE, PAYMENTDEL, PAYMENTMAINADDR,
 							PAYMENTDETAILADDR, PAYMENTZIPCODE, PAYMENTCATEGORY,
 							PAYMENTCOUNT)
 		VALUES (NEXTVAL('PAYMENTSEQ'), #{memberId}, #{paymentPay},

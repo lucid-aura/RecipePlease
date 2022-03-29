@@ -83,10 +83,10 @@ public class RecipeService {
 		return recipeDao.updateRecipeRating(ratingDto.getDocsSeq());
 	}
 
-	public int purchaseRecipeCheck(String memberId, int recipeSeq) {
-		CoinTransactionDto coinDto = new CoinTransactionDto(memberId, recipeSeq);
-		return coinTransactionDao.purchaseRecipeCheck(coinDto);
-	}
+//	public int purchaseRecipeCheck(String memberId, int recipeSeq) {
+//		CoinTransactionDto coinDto = new CoinTransactionDto(memberId, recipeSeq);
+//		return coinTransactionDao.purchaseRecipeCheck(coinDto);
+//	}
 	
 	public Map<String, Object> getRecommendRecipe(String category) {
 		List<RecipeDto> recipes = recipeDao.getRecommentRecipe(category);

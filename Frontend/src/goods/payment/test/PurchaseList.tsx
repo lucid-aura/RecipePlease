@@ -13,12 +13,6 @@ from "react-native";
 
 /* 테스트 페이지 : 구매 목록 리스트 */
 
-/* 이슈 체크
-    - 현재 사용자 아이디를 제대로 불러오지 못하는 문제가 있음.
-    - 코드 화면 저장 시 리스트를 제대로 로드함.
-*/
-
-
 // 플랫 리스트 안에 들어갈 아이템 컴포넌트
 const Item = ({userId, count, name, amount, del, 
     paymentSeq, paymentDate, props, confirm}:any) => {
@@ -121,39 +115,19 @@ const Item = ({userId, count, name, amount, del,
 
 
 // 구매리스트
-export default function PurchaseList(props:any) {
+export default function PurchaseList(props:any, { route }:any) {
 
     // 로그인 데이터(백엔드단에서 로그인된 아이디에 맞게 구매 이력를 조회하기 위해 로그인 세션 정보를 가져옴.)
-    const [userId, setUserId] = useState('');
-
-    // useEffect를 사용할 경우 로그인 데이터가 불러와지지 않음.
-    // useEffect(() => {
-    const getLoginData = async () => {
-        console.log('aaaaaaaaaaaa');
-        let loginData = await AsyncStorage.getItem("loginData");
-        
-        try {
-            if (loginData !== null) {
-                let data = JSON.parse(loginData);
-                setUserId(data.memberId);
-                console.log("로그인 데이터 userId: " + data.memberId);
-            } else {
-                console.log("login data가 없음");
-            }
-        } catch (err) {
-            console.log(err);
-        }
-
-        // getLoginData();
-    }
-    // }}, [])
-
-    getLoginData();
+    const memberId = props.route.params.loginId;
+    console.log("memberId: " + memberId);
+    const [userId, setUserId] = useState(memberId);
 
     // 구매 리스트를 불러오는 요청
     const [data, setData] = useState([]);       // 불러온 JSON 데이터 보관
     
     useEffect(() => {
+        //getLoginData();        
+
         console.log("구매 리스트 데이터 userId: " + userId);
         const getGoodsPurchaseList = async() => {
             await axios.get("http://192.168.0.13:3000/payment/goodsPurchaseList", {

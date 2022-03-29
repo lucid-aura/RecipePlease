@@ -1,8 +1,6 @@
 package com.recipe.a.service;
 
 import com.recipe.a.dto.PaymentDto;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +15,6 @@ import java.util.List;
 
 @Service
 @Transactional
-@Slf4j
-//@RequiredArgsConstructor
 public class PaymentService {
 
 	// 필드에 생성자를 직접 주입하여 사용

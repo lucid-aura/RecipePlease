@@ -121,14 +121,14 @@ public class RecipeController {
 		//return Arrays.asList(recipeService.getOneRecipe(recipeSeq).getRecipeGoodsTag().split(","));
 	}	
 	
-	@RequestMapping(value = "/purchaseRecipeCheck", method = {RequestMethod.GET})
-	public int purchaseRecipeCheck(String memberId, int recipeSeq) {
-		System.out.println(memberId + " " + recipeSeq);
-		System.out.println("RecipeController purchaseRecipeCheck()");
-
-		return recipeService.purchaseRecipeCheck(memberId, recipeSeq);
-		//return recipeService.getPhoto(photoDto);
-	}
+//	@RequestMapping(value = "/purchaseRecipeCheck", method = {RequestMethod.GET})
+//	public int purchaseRecipeCheck(String memberId, int recipeSeq) {
+//		System.out.println(memberId + " " + recipeSeq);
+//		System.out.println("RecipeController purchaseRecipeCheck()");
+//
+//		return recipeService.purchaseRecipeCheck(memberId, recipeSeq);
+//		//return recipeService.getPhoto(photoDto);
+//	}
 
 	@RequestMapping(value = "/getRecommendRecipe", method = {RequestMethod.GET})
 	public Map<String, Object> getRecommendRecipe() {
