@@ -89,7 +89,7 @@ public class RecipeService {
 	}
 	
 	public Map<String, Object> getRecommendRecipe(String category) {
-		List<RecipeDto> recipes = recipeDao.getRecommentRecipe(category);
+		List<RecipeDto> recipes = recipeDao.getRecommendRecipe(category);
 		
 		List<Integer> recipeSeqList = new ArrayList<Integer>();
 		List<String> titleList = new ArrayList<String>();
@@ -128,6 +128,52 @@ public class RecipeService {
 		
 		
 		return res;
+	}
+
+	public Map<String, Object> getRecommendReadcountRecipe() {
+		List<RecipeDto> recipes = recipeDao.getRecommendReadcountRecipe();
+		List<Integer> recipeSeqList = new ArrayList<Integer>();
+		List<String> titleList = new ArrayList<String>();
+		List<String> videoList = new ArrayList<String>();
+		List<Integer> recipePrice = new ArrayList<Integer>();		
+		List<Float> recipeRatingList = new ArrayList<Float>();
+		List<String> thumbnailPhotoList = new ArrayList<String>();
+		
+		for (RecipeDto recipe : recipes) {
+			recipeSeqList.add(recipe.getRecipeSeq());
+			titleList.add(recipe.getRecipeTitle());
+			videoList.add(recipe.getRecipeVideoUrl());
+			recipePrice.add(recipe.getRecipePrice());
+			recipeRatingList.add(recipe.getRecipeRating());
+		}
+		List<PhotoDto> thumbnails = photoDao.getRecommendThumnailPhoto(recipeSeqList);
+		
+		
+		for (int seq : recipeSeqList) {
+			for (PhotoDto thumbnail : thumbnails) {
+				if (seq == thumbnail.getDocsSeq()) {
+					thumbnailPhotoList.add(thumbnail.getPhotoUrl());
+					break;
+				}
+			}
+		}
+		
+		
+		Map<String, Object> res = new HashMap<String, Object>();
+		res.put("recipeSeq", recipeSeqList);
+		res.put("title", titleList);
+		res.put("videoUrl", videoList);
+		res.put("recipeRating", recipeRatingList);
+		res.put("recipePrice", recipePrice);
+		res.put("thumbnailPhoto", thumbnailPhotoList);
+		
+		
+		return res;
+	}
+	
+	public int oneUpReadcount(int recipeSeq) {
+		return recipeDao.oneUpReadcount(recipeSeq);
+		
 	}
 	
 }

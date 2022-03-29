@@ -11,7 +11,7 @@ public class RecipeDto {
 	private String recipeGoodsTag;
 	private int recipePrice;
 	private float recipeRating;
-	
+	private int recipeReadcount;
 	
 	public RecipeDto(String memberId, String recipeTitle, String recipeContent, String recipeBigCategory,
 			String recipeSmallCategory, String recipeVideoUrl, String recipeGoodsTag, int recipePrice) {
@@ -25,8 +25,25 @@ public class RecipeDto {
 		this.recipeGoodsTag = recipeGoodsTag;
 		this.recipePrice = recipePrice;
 		this.recipeRating = 0.0F;
+		this.recipeReadcount = 0;
 	}
 
+	public RecipeDto(int recipeSeq, String memberId, String recipeTitle, String recipeContent, String recipeBigCategory,
+			String recipeSmallCategory, String recipeVideoUrl, String recipeGoodsTag, int recipePrice, float recipeRating, int recipeReadcount) {
+		super();
+		this.recipeSeq = recipeSeq;
+		this.memberId = memberId;
+		this.recipeTitle = recipeTitle;
+		this.recipeContent = recipeContent;
+		this.recipeBigCategory = recipeBigCategory;
+		this.recipeSmallCategory = recipeSmallCategory;
+		this.recipeVideoUrl = recipeVideoUrl;
+		this.recipeGoodsTag = recipeGoodsTag;
+		this.recipePrice = recipePrice;
+		this.recipeRating = recipeRating;
+		this.recipeReadcount = recipeReadcount;
+	}
+	
 	public RecipeDto(int recipeSeq, String memberId, String recipeTitle, String recipeContent, String recipeBigCategory,
 			String recipeSmallCategory, String recipeVideoUrl, String recipeGoodsTag, int recipePrice, float recipeRating) {
 		super();
@@ -40,6 +57,7 @@ public class RecipeDto {
 		this.recipeGoodsTag = recipeGoodsTag;
 		this.recipePrice = recipePrice;
 		this.recipeRating = recipeRating;
+		this.recipeReadcount = 0;
 	}
 
 	public int getRecipeSeq() {
@@ -122,14 +140,24 @@ public class RecipeDto {
 		this.recipeRating = recipeRating;
 	}
 
+	public int getRecipeReadcount() {
+		return recipeReadcount;
+	}
+
+	public void setRecipeReadcount(int recipeReadcount) {
+		this.recipeReadcount = recipeReadcount;
+	}
+
 	@Override
 	public String toString() {
 		return "RecipeDto [recipeSeq=" + recipeSeq + ", memberId=" + memberId + ", recipeTitle=" + recipeTitle
 				+ ", recipeContent=" + recipeContent + ", recipeBigCategory=" + recipeBigCategory
 				+ ", recipeSmallCategory=" + recipeSmallCategory + ", recipeVideoUrl=" + recipeVideoUrl
 				+ ", recipeGoodsTag=" + recipeGoodsTag + ", recipePrice=" + recipePrice + ", recipeRating="
-				+ recipeRating + "]";
+				+ recipeRating + ", recipeReadcount=" + recipeReadcount + "]";
 	}
+
+	
 	
 	
 }
