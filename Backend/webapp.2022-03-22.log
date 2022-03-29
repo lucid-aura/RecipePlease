@@ -1,0 +1,664 @@
+2022-03-22 15:09:04.527 INFO  762  --- [ main ] com.recipe.a.BackendApplication - Starting BackendApplication using Java 17.0.1 on DESKTOP-MSBT69K with PID 21952 (C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes started by zxc82 in C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend)
+2022-03-22 15:09:04.530 DEBUG 765  --- [ main ] com.recipe.a.BackendApplication - Running with Spring Boot v2.6.4, Spring v5.3.16
+2022-03-22 15:09:04.531 INFO  766  --- [ main ] com.recipe.a.BackendApplication - No active profile set, falling back to 1 default profile: "default"
+2022-03-22 15:09:05.483 DEBUG 1718 --- [ main ] o.m.s.b.a.MybatisAutoConfiguration - Searching for mappers annotated with @Mapper
+2022-03-22 15:09:05.483 DEBUG 1718 --- [ main ] o.m.s.b.a.MybatisAutoConfiguration - Using auto-configuration base package 'com.recipe.a'
+2022-03-22 15:09:05.625 DEBUG 1860 --- [ main ] o.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2022-03-22 15:09:05.632 DEBUG 1867 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\com\recipe\a\dao\GoodsDao.class]
+2022-03-22 15:09:05.633 DEBUG 1868 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\com\recipe\a\dao\MembersDao.class]
+2022-03-22 15:09:05.633 DEBUG 1868 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\com\recipe\a\dao\PaymentDao.class]
+2022-03-22 15:09:05.633 DEBUG 1868 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\com\recipe\a\dao\PaymentListDao.class]
+2022-03-22 15:09:05.633 DEBUG 1868 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\com\recipe\a\dao\PhotoDao.class]
+2022-03-22 15:09:05.633 DEBUG 1868 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\com\recipe\a\dao\RatingDao.class]
+2022-03-22 15:09:05.633 DEBUG 1868 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\com\recipe\a\dao\RecipeDao.class]
+2022-03-22 15:09:05.633 DEBUG 1868 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\com\recipe\a\dao\RecipeLikeDao.class]
+2022-03-22 15:09:05.635 DEBUG 1870 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'goodsDao' and 'com.recipe.a.dao.GoodsDao' mapperInterface
+2022-03-22 15:09:05.636 DEBUG 1871 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'goodsDao'.
+2022-03-22 15:09:05.636 DEBUG 1871 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'membersDao' and 'com.recipe.a.dao.MembersDao' mapperInterface
+2022-03-22 15:09:05.636 DEBUG 1871 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'membersDao'.
+2022-03-22 15:09:05.636 DEBUG 1871 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'paymentDao' and 'com.recipe.a.dao.PaymentDao' mapperInterface
+2022-03-22 15:09:05.636 DEBUG 1871 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'paymentDao'.
+2022-03-22 15:09:05.636 DEBUG 1871 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'paymentListDao' and 'com.recipe.a.dao.PaymentListDao' mapperInterface
+2022-03-22 15:09:05.637 DEBUG 1872 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'paymentListDao'.
+2022-03-22 15:09:05.637 DEBUG 1872 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'photoDao' and 'com.recipe.a.dao.PhotoDao' mapperInterface
+2022-03-22 15:09:05.637 DEBUG 1872 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'photoDao'.
+2022-03-22 15:09:05.637 DEBUG 1872 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'ratingDao' and 'com.recipe.a.dao.RatingDao' mapperInterface
+2022-03-22 15:09:05.637 DEBUG 1872 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'ratingDao'.
+2022-03-22 15:09:05.637 DEBUG 1872 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'recipeDao' and 'com.recipe.a.dao.RecipeDao' mapperInterface
+2022-03-22 15:09:05.637 DEBUG 1872 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'recipeDao'.
+2022-03-22 15:09:05.637 DEBUG 1872 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'recipeLikeDao' and 'com.recipe.a.dao.RecipeLikeDao' mapperInterface
+2022-03-22 15:09:05.637 DEBUG 1872 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'recipeLikeDao'.
+2022-03-22 15:09:06.188 INFO  2423 --- [ main ] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 3000 (http)
+2022-03-22 15:09:06.201 INFO  2436 --- [ main ] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-3000"]
+2022-03-22 15:09:06.202 INFO  2437 --- [ main ] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2022-03-22 15:09:06.202 INFO  2437 --- [ main ] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.58]
+2022-03-22 15:09:06.328 INFO  2563 --- [ main ] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-03-22 15:09:06.329 INFO  2564 --- [ main ] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1749 ms
+2022-03-22 15:09:06.409 DEBUG 2644 --- [ main ] com.zaxxer.hikari.HikariConfig - Driver class com.mysql.cj.jdbc.Driver found in Thread context class loader jdk.internal.loader.ClassLoaders$AppClassLoader@136432db
+2022-03-22 15:09:06.421 DEBUG 2656 --- [ main ] com.zaxxer.hikari.HikariConfig - HikariPool-1 - configuration:
+2022-03-22 15:09:06.423 DEBUG 2658 --- [ main ] com.zaxxer.hikari.HikariConfig - allowPoolSuspension................................false
+2022-03-22 15:09:06.424 DEBUG 2659 --- [ main ] com.zaxxer.hikari.HikariConfig - autoCommit................................true
+2022-03-22 15:09:06.424 DEBUG 2659 --- [ main ] com.zaxxer.hikari.HikariConfig - catalog................................none
+2022-03-22 15:09:06.424 DEBUG 2659 --- [ main ] com.zaxxer.hikari.HikariConfig - connectionInitSql................................none
+2022-03-22 15:09:06.424 DEBUG 2659 --- [ main ] com.zaxxer.hikari.HikariConfig - connectionTestQuery................................none
+2022-03-22 15:09:06.424 DEBUG 2659 --- [ main ] com.zaxxer.hikari.HikariConfig - connectionTimeout................................30000
+2022-03-22 15:09:06.424 DEBUG 2659 --- [ main ] com.zaxxer.hikari.HikariConfig - dataSource................................none
+2022-03-22 15:09:06.424 DEBUG 2659 --- [ main ] com.zaxxer.hikari.HikariConfig - dataSourceClassName................................none
+2022-03-22 15:09:06.424 DEBUG 2659 --- [ main ] com.zaxxer.hikari.HikariConfig - dataSourceJNDI................................none
+2022-03-22 15:09:06.425 DEBUG 2660 --- [ main ] com.zaxxer.hikari.HikariConfig - dataSourceProperties................................{password=<masked>}
+2022-03-22 15:09:06.425 DEBUG 2660 --- [ main ] com.zaxxer.hikari.HikariConfig - driverClassName................................"com.mysql.cj.jdbc.Driver"
+2022-03-22 15:09:06.425 DEBUG 2660 --- [ main ] com.zaxxer.hikari.HikariConfig - exceptionOverrideClassName................................none
+2022-03-22 15:09:06.426 DEBUG 2661 --- [ main ] com.zaxxer.hikari.HikariConfig - healthCheckProperties................................{}
+2022-03-22 15:09:06.426 DEBUG 2661 --- [ main ] com.zaxxer.hikari.HikariConfig - healthCheckRegistry................................none
+2022-03-22 15:09:06.426 DEBUG 2661 --- [ main ] com.zaxxer.hikari.HikariConfig - idleTimeout................................600000
+2022-03-22 15:09:06.426 DEBUG 2661 --- [ main ] com.zaxxer.hikari.HikariConfig - initializationFailTimeout................................1
+2022-03-22 15:09:06.426 DEBUG 2661 --- [ main ] com.zaxxer.hikari.HikariConfig - isolateInternalQueries................................false
+2022-03-22 15:09:06.426 DEBUG 2661 --- [ main ] com.zaxxer.hikari.HikariConfig - jdbcUrl................................jdbc:mysql://localhost:3306/mysql
+2022-03-22 15:09:06.426 DEBUG 2661 --- [ main ] com.zaxxer.hikari.HikariConfig - keepaliveTime................................0
+2022-03-22 15:09:06.426 DEBUG 2661 --- [ main ] com.zaxxer.hikari.HikariConfig - leakDetectionThreshold................................0
+2022-03-22 15:09:06.426 DEBUG 2661 --- [ main ] com.zaxxer.hikari.HikariConfig - maxLifetime................................1800000
+2022-03-22 15:09:06.426 DEBUG 2661 --- [ main ] com.zaxxer.hikari.HikariConfig - maximumPoolSize................................10
+2022-03-22 15:09:06.426 DEBUG 2661 --- [ main ] com.zaxxer.hikari.HikariConfig - metricRegistry................................none
+2022-03-22 15:09:06.426 DEBUG 2661 --- [ main ] com.zaxxer.hikari.HikariConfig - metricsTrackerFactory................................none
+2022-03-22 15:09:06.426 DEBUG 2661 --- [ main ] com.zaxxer.hikari.HikariConfig - minimumIdle................................10
+2022-03-22 15:09:06.426 DEBUG 2661 --- [ main ] com.zaxxer.hikari.HikariConfig - password................................<masked>
+2022-03-22 15:09:06.426 DEBUG 2661 --- [ main ] com.zaxxer.hikari.HikariConfig - poolName................................"HikariPool-1"
+2022-03-22 15:09:06.427 DEBUG 2662 --- [ main ] com.zaxxer.hikari.HikariConfig - readOnly................................false
+2022-03-22 15:09:06.427 DEBUG 2662 --- [ main ] com.zaxxer.hikari.HikariConfig - registerMbeans................................false
+2022-03-22 15:09:06.427 DEBUG 2662 --- [ main ] com.zaxxer.hikari.HikariConfig - scheduledExecutor................................none
+2022-03-22 15:09:06.427 DEBUG 2662 --- [ main ] com.zaxxer.hikari.HikariConfig - schema................................none
+2022-03-22 15:09:06.427 DEBUG 2662 --- [ main ] com.zaxxer.hikari.HikariConfig - threadFactory................................internal
+2022-03-22 15:09:06.427 DEBUG 2662 --- [ main ] com.zaxxer.hikari.HikariConfig - transactionIsolation................................default
+2022-03-22 15:09:06.427 DEBUG 2662 --- [ main ] com.zaxxer.hikari.HikariConfig - username................................"root"
+2022-03-22 15:09:06.427 DEBUG 2662 --- [ main ] com.zaxxer.hikari.HikariConfig - validationTimeout................................5000
+2022-03-22 15:09:06.429 INFO  2664 --- [ main ] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-03-22 15:09:06.871 DEBUG 3106 --- [ main ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@392781e
+2022-03-22 15:09:06.872 INFO  3107 --- [ main ] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-03-22 15:09:06.881 DEBUG 3116 --- [ main ] o.m.spring.SqlSessionFactoryBean - Property 'configuration' or 'configLocation' not specified, using default MyBatis Configuration
+2022-03-22 15:09:06.985 DEBUG 3220 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=1, active=0, idle=1, waiting=0)
+2022-03-22 15:09:07.018 DEBUG 3253 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3ff6a80a
+2022-03-22 15:09:07.037 DEBUG 3272 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\sqls\Goods.xml]'
+2022-03-22 15:09:07.048 DEBUG 3283 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6e1d9c14
+2022-03-22 15:09:07.055 DEBUG 3290 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\sqls\Members.xml]'
+2022-03-22 15:09:07.074 DEBUG 3309 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5b3becea
+2022-03-22 15:09:07.075 DEBUG 3310 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\sqls\Payment.xml]'
+2022-03-22 15:09:07.087 DEBUG 3322 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\sqls\Payment_List.xml]'
+2022-03-22 15:09:07.103 DEBUG 3338 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6a5386b8
+2022-03-22 15:09:07.104 DEBUG 3339 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\sqls\Photo.xml]'
+2022-03-22 15:09:07.114 DEBUG 3349 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\sqls\Rating.xml]'
+2022-03-22 15:09:07.126 DEBUG 3361 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\sqls\Recipe.xml]'
+2022-03-22 15:09:07.130 DEBUG 3365 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2a1c52b
+2022-03-22 15:09:07.141 DEBUG 3376 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\sqls\Recipelike.xml]'
+2022-03-22 15:09:07.155 DEBUG 3390 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7ec37eec
+2022-03-22 15:09:07.174 DEBUG 3409 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4a341f0c
+2022-03-22 15:09:07.197 DEBUG 3432 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@a451452
+2022-03-22 15:09:07.218 DEBUG 3453 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@12e8eb82
+2022-03-22 15:09:07.218 DEBUG 3453 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - After adding stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:09:07.436 DEBUG 3671 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 
+	c.r.a.c.GoodsController:
+	{[GET, POST] [/countGoods]}: countMembers()
+2022-03-22 15:09:07.438 DEBUG 3673 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 
+	c.r.a.c.MembersController:
+	{[GET, POST] [/countMembers]}: countMembers()
+2022-03-22 15:09:07.438 DEBUG 3673 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 
+	c.r.a.c.PaymentController:
+	{POST [/addGoodsShoppingList]}: addGoodsShoppingList(PaymentDto)
+2022-03-22 15:09:07.440 DEBUG 3675 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 
+	c.r.a.c.RecipeController:
+	{[GET, POST] [/main]}: main()
+	{GET [/test]}: test(int,String)
+	{GET [/getOneRecipe]}: getOneRecipe(int)
+	{[GET, POST] [/countPhoto]}: countPhoto()
+	{[GET, POST] [/countRecipe]}: countRecipe()
+	{[GET, POST] [/uploadRecipe]}: countRecipe(RecipeDto)
+	{GET [/getPhoto]}: getPhoto(int,String)
+2022-03-22 15:09:07.443 DEBUG 3678 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2022-03-22 15:09:07.460 DEBUG 3695 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 'beanNameHandlerMapping' {}
+2022-03-22 15:09:07.475 DEBUG 3710 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2022-03-22 15:09:07.511 DEBUG 3746 --- [ main ] o.m.s.b.a.MybatisAutoConfiguration - Not found configuration for registering mapper bean using @MapperScan, MapperFactoryBean and MapperScannerConfigurer.
+2022-03-22 15:09:07.661 INFO  3896 --- [ main ] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-3000"]
+2022-03-22 15:09:07.695 INFO  3930 --- [ main ] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 3000 (http) with context path ''
+2022-03-22 15:09:07.705 INFO  3940 --- [ main ] com.recipe.a.BackendApplication - Started BackendApplication in 3.615 seconds (JVM running for 4.755)
+2022-03-22 15:09:33.334 INFO  29569 --- [ http-nio-3000-exec-1 ] o.a.coyote.http11.Http11Processor - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in the request target [/uploadRecipe?recipeTitle=%E3%85%82%E3%85%88%E3%84%B7&recipeContent=%E3%85%82%E3%85%88%E3%84%B7&recipeBigCategory=%EC%B6%95%EC%82%B0%EB%AC%BC&recipeSmallCategory=%EC%A0%91%EB%8C%80%EC%9A%A9&recipeGoodsTag[]=%E3%85%81%E3%85%87%E3%84%B9&recipeGoodsTag[]=%EC%98%A4%E3%85%93&recipePrice=1234 ]. The valid characters are defined in RFC 7230 and RFC 3986
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:494)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:271)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:889)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1735)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-03-22 15:09:37.000 DEBUG 33235 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:09:37.000 DEBUG 33235 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:10:07.010 DEBUG 63245 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:10:07.010 DEBUG 63245 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:10:37.011 DEBUG 93246 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:10:37.011 DEBUG 93246 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:11:07.012 DEBUG 123247 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:11:07.012 DEBUG 123247 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:11:37.015 DEBUG 153250 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:11:37.015 DEBUG 153250 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:12:07.025 DEBUG 183260 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:12:07.026 DEBUG 183261 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:12:32.199 INFO  208434 --- [ http-nio-3000-exec-3 ] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-03-22 15:12:32.199 INFO  208434 --- [ http-nio-3000-exec-3 ] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-03-22 15:12:32.201 INFO  208436 --- [ http-nio-3000-exec-3 ] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2022-03-22 15:12:32.275 DEBUG 208510 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:12:32.279 DEBUG 208514 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@8d46d00]
+2022-03-22 15:12:32.287 DEBUG 208522 --- [ http-nio-3000-exec-3 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@645932202 wrapping com.mysql.cj.jdbc.ConnectionImpl@392781e] will be managed by Spring
+2022-03-22 15:12:32.293 DEBUG 208528 --- [ http-nio-3000-exec-3 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:12:32.327 DEBUG 208562 --- [ http-nio-3000-exec-3 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: ㅂㅈㄷ(String), ㅂㅈㄷ(String), 축산물(String), 접대용(String), ㅂㄷㄷ(String), 1234(Integer)
+2022-03-22 15:12:32.402 DEBUG 208637 --- [ http-nio-3000-exec-3 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:12:32.403 DEBUG 208638 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@8d46d00]
+2022-03-22 15:12:32.403 DEBUG 208638 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@8d46d00]
+2022-03-22 15:12:32.403 DEBUG 208638 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@8d46d00]
+2022-03-22 15:12:32.403 DEBUG 208638 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@8d46d00]
+2022-03-22 15:12:37.027 DEBUG 213262 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:12:37.027 DEBUG 213262 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:13:07.033 DEBUG 243268 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:13:07.034 DEBUG 243269 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:13:37.037 DEBUG 273272 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:13:37.037 DEBUG 273272 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:14:07.039 DEBUG 303274 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:14:07.039 DEBUG 303274 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:14:28.085 DEBUG 324320 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:14:28.085 DEBUG 324320 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@e0d6000]
+2022-03-22 15:14:28.085 DEBUG 324320 --- [ http-nio-3000-exec-5 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@83168112 wrapping com.mysql.cj.jdbc.ConnectionImpl@392781e] will be managed by Spring
+2022-03-22 15:14:28.085 DEBUG 324320 --- [ http-nio-3000-exec-5 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:14:28.086 DEBUG 324321 --- [ http-nio-3000-exec-5 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: ㅂㅈㄷ(String), ㅂㅈㄷ(String), 축산물(String), 접대용(String), (String), 1234(Integer)
+2022-03-22 15:14:28.090 DEBUG 324325 --- [ http-nio-3000-exec-5 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:14:28.090 DEBUG 324325 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@e0d6000]
+2022-03-22 15:14:28.090 DEBUG 324325 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@e0d6000]
+2022-03-22 15:14:28.090 DEBUG 324325 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@e0d6000]
+2022-03-22 15:14:28.090 DEBUG 324325 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@e0d6000]
+2022-03-22 15:14:37.046 DEBUG 333281 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:14:37.046 DEBUG 333281 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:15:07.047 DEBUG 363282 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:15:07.047 DEBUG 363282 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:15:37.050 DEBUG 393285 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:15:37.050 DEBUG 393285 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:16:07.060 DEBUG 423295 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:16:07.060 DEBUG 423295 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:16:37.064 DEBUG 453299 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:16:37.064 DEBUG 453299 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:16:44.938 DEBUG 461173 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:16:44.938 DEBUG 461173 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5f9f9b88]
+2022-03-22 15:16:44.938 DEBUG 461173 --- [ http-nio-3000-exec-7 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1432875256 wrapping com.mysql.cj.jdbc.ConnectionImpl@392781e] will be managed by Spring
+2022-03-22 15:16:44.938 DEBUG 461173 --- [ http-nio-3000-exec-7 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:16:44.939 DEBUG 461174 --- [ http-nio-3000-exec-7 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: 김칮ㅈㅈ(String), ㅂㅎㅈㅎ조(String), 축산물(String), 1인용(String), (String), 111(Integer)
+2022-03-22 15:16:44.942 DEBUG 461177 --- [ http-nio-3000-exec-7 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:16:44.942 DEBUG 461177 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5f9f9b88]
+2022-03-22 15:16:44.942 DEBUG 461177 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5f9f9b88]
+2022-03-22 15:16:44.942 DEBUG 461177 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5f9f9b88]
+2022-03-22 15:16:44.942 DEBUG 461177 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5f9f9b88]
+2022-03-22 15:17:07.067 DEBUG 483302 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:17:07.068 DEBUG 483303 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:17:37.072 DEBUG 513307 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:17:37.072 DEBUG 513307 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:18:07.085 DEBUG 543320 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:18:07.085 DEBUG 543320 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:18:37.096 DEBUG 573331 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:18:37.096 DEBUG 573331 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:19:07.105 DEBUG 603340 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:19:07.105 DEBUG 603340 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:19:37.111 DEBUG 633346 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:19:37.111 DEBUG 633346 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:19:41.964 DEBUG 638199 --- [ http-nio-3000-exec-9 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:19:41.964 DEBUG 638199 --- [ http-nio-3000-exec-9 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1ee437c]
+2022-03-22 15:19:41.964 DEBUG 638199 --- [ http-nio-3000-exec-9 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@186001420 wrapping com.mysql.cj.jdbc.ConnectionImpl@392781e] will be managed by Spring
+2022-03-22 15:19:41.964 DEBUG 638199 --- [ http-nio-3000-exec-9 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:19:41.966 DEBUG 638201 --- [ http-nio-3000-exec-9 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: ㅂㅂ(String), ㅂㅂ(String), 해산물(String), 야식용(String), (String), 1234(Integer)
+2022-03-22 15:19:41.969 DEBUG 638204 --- [ http-nio-3000-exec-9 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:19:41.969 DEBUG 638204 --- [ http-nio-3000-exec-9 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1ee437c]
+2022-03-22 15:19:41.970 DEBUG 638205 --- [ http-nio-3000-exec-9 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1ee437c]
+2022-03-22 15:19:41.970 DEBUG 638205 --- [ http-nio-3000-exec-9 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1ee437c]
+2022-03-22 15:19:41.970 DEBUG 638205 --- [ http-nio-3000-exec-9 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1ee437c]
+2022-03-22 15:20:07.119 DEBUG 663354 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:20:07.119 DEBUG 663354 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:20:37.124 DEBUG 693359 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:20:37.124 DEBUG 693359 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:21:07.132 DEBUG 723367 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:21:07.132 DEBUG 723367 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:21:37.143 DEBUG 753378 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:21:37.143 DEBUG 753378 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:21:41.450 DEBUG 757685 --- [ http-nio-3000-exec-1 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:21:41.451 DEBUG 757686 --- [ http-nio-3000-exec-1 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4c242fd1]
+2022-03-22 15:21:41.451 DEBUG 757686 --- [ http-nio-3000-exec-1 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1874168488 wrapping com.mysql.cj.jdbc.ConnectionImpl@392781e] will be managed by Spring
+2022-03-22 15:21:41.451 DEBUG 757686 --- [ http-nio-3000-exec-1 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:21:41.451 DEBUG 757686 --- [ http-nio-3000-exec-1 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: ㅂㅂ(String), (String), 해산물(String), 1인용(String), ㅂㅂ(String), 1234(Integer)
+2022-03-22 15:21:41.453 DEBUG 757688 --- [ http-nio-3000-exec-1 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:21:41.454 DEBUG 757689 --- [ http-nio-3000-exec-1 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4c242fd1]
+2022-03-22 15:21:41.454 DEBUG 757689 --- [ http-nio-3000-exec-1 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4c242fd1]
+2022-03-22 15:21:41.454 DEBUG 757689 --- [ http-nio-3000-exec-1 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4c242fd1]
+2022-03-22 15:21:41.454 DEBUG 757689 --- [ http-nio-3000-exec-1 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4c242fd1]
+2022-03-22 15:21:56.829 DEBUG 773064 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:21:56.830 DEBUG 773065 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4263ab5e]
+2022-03-22 15:21:56.830 DEBUG 773065 --- [ http-nio-3000-exec-2 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1218166830 wrapping com.mysql.cj.jdbc.ConnectionImpl@392781e] will be managed by Spring
+2022-03-22 15:21:56.830 DEBUG 773065 --- [ http-nio-3000-exec-2 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:21:56.830 DEBUG 773065 --- [ http-nio-3000-exec-2 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: ㅂㅂ(String), (String), 해산물(String), 1인용(String), ㅂㅂ(String), 1234(Integer)
+2022-03-22 15:21:56.833 DEBUG 773068 --- [ http-nio-3000-exec-2 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:21:56.833 DEBUG 773068 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4263ab5e]
+2022-03-22 15:21:56.833 DEBUG 773068 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4263ab5e]
+2022-03-22 15:21:56.833 DEBUG 773068 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4263ab5e]
+2022-03-22 15:21:56.833 DEBUG 773068 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4263ab5e]
+2022-03-22 15:22:07.149 DEBUG 783384 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:22:07.149 DEBUG 783384 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:22:37.160 DEBUG 813395 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:22:37.160 DEBUG 813395 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:23:06.031 DEBUG 842266 --- [ http-nio-3000-exec-4 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:23:06.031 DEBUG 842266 --- [ http-nio-3000-exec-4 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5742e6ba]
+2022-03-22 15:23:06.031 DEBUG 842266 --- [ http-nio-3000-exec-4 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1572507082 wrapping com.mysql.cj.jdbc.ConnectionImpl@392781e] will be managed by Spring
+2022-03-22 15:23:06.031 DEBUG 842266 --- [ http-nio-3000-exec-4 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:23:06.031 DEBUG 842266 --- [ http-nio-3000-exec-4 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: 김치찌개(String), ㄱ.ㅁ치(String), 축산물(String), 1인용(String), (String), 1234(Integer)
+2022-03-22 15:23:06.034 DEBUG 842269 --- [ http-nio-3000-exec-4 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:23:06.034 DEBUG 842269 --- [ http-nio-3000-exec-4 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5742e6ba]
+2022-03-22 15:23:06.034 DEBUG 842269 --- [ http-nio-3000-exec-4 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5742e6ba]
+2022-03-22 15:23:06.034 DEBUG 842269 --- [ http-nio-3000-exec-4 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5742e6ba]
+2022-03-22 15:23:06.034 DEBUG 842269 --- [ http-nio-3000-exec-4 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5742e6ba]
+2022-03-22 15:23:07.163 DEBUG 843398 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:23:07.163 DEBUG 843398 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:23:21.465 DEBUG 857700 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:23:21.465 DEBUG 857700 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@707cd4e1]
+2022-03-22 15:23:21.465 DEBUG 857700 --- [ http-nio-3000-exec-5 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@567831237 wrapping com.mysql.cj.jdbc.ConnectionImpl@392781e] will be managed by Spring
+2022-03-22 15:23:21.465 DEBUG 857700 --- [ http-nio-3000-exec-5 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:23:21.466 DEBUG 857701 --- [ http-nio-3000-exec-5 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: 김치찌개(String), ㄱ.ㅁ치(String), 축산물(String), 1인용(String), ㅂㅈㄷ,ㅈㄱㄱ(String), 1234(Integer)
+2022-03-22 15:23:21.469 DEBUG 857704 --- [ http-nio-3000-exec-5 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:23:21.469 DEBUG 857704 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@707cd4e1]
+2022-03-22 15:23:21.469 DEBUG 857704 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@707cd4e1]
+2022-03-22 15:23:21.469 DEBUG 857704 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@707cd4e1]
+2022-03-22 15:23:21.469 DEBUG 857704 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@707cd4e1]
+2022-03-22 15:23:37.175 DEBUG 873410 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:23:37.175 DEBUG 873410 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:23:45.539 DEBUG 881774 --- [ http-nio-3000-exec-6 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:23:45.539 DEBUG 881774 --- [ http-nio-3000-exec-6 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7a3641f9]
+2022-03-22 15:23:45.539 DEBUG 881774 --- [ http-nio-3000-exec-6 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1892559497 wrapping com.mysql.cj.jdbc.ConnectionImpl@392781e] will be managed by Spring
+2022-03-22 15:23:45.540 DEBUG 881775 --- [ http-nio-3000-exec-6 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:23:45.540 DEBUG 881775 --- [ http-nio-3000-exec-6 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: 김치찌개(String), ㄱ.ㅁ치(String), 축산물(String), 1인용(String), ㅂㅈㄷ(String), 1234(Integer)
+2022-03-22 15:23:45.548 DEBUG 881783 --- [ http-nio-3000-exec-6 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:23:45.548 DEBUG 881783 --- [ http-nio-3000-exec-6 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7a3641f9]
+2022-03-22 15:23:45.548 DEBUG 881783 --- [ http-nio-3000-exec-6 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7a3641f9]
+2022-03-22 15:23:45.549 DEBUG 881784 --- [ http-nio-3000-exec-6 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7a3641f9]
+2022-03-22 15:23:45.549 DEBUG 881784 --- [ http-nio-3000-exec-6 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7a3641f9]
+2022-03-22 15:24:07.185 DEBUG 903420 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:24:07.185 DEBUG 903420 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:24:30.951 DEBUG 927186 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:24:30.952 DEBUG 927187 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3385ee6f]
+2022-03-22 15:24:30.952 DEBUG 927187 --- [ http-nio-3000-exec-7 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1270162141 wrapping com.mysql.cj.jdbc.ConnectionImpl@392781e] will be managed by Spring
+2022-03-22 15:24:30.952 DEBUG 927187 --- [ http-nio-3000-exec-7 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:24:30.952 DEBUG 927187 --- [ http-nio-3000-exec-7 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: 김치찌개(String), ㄱ.ㅁ치(String), 축산물(String), 1인용(String), ㅂㅈㄷ,ㅁㅇㄹ(String), 1234(Integer)
+2022-03-22 15:24:30.955 DEBUG 927190 --- [ http-nio-3000-exec-7 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:24:30.955 DEBUG 927190 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3385ee6f]
+2022-03-22 15:24:30.955 DEBUG 927190 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3385ee6f]
+2022-03-22 15:24:30.956 DEBUG 927191 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3385ee6f]
+2022-03-22 15:24:30.956 DEBUG 927191 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3385ee6f]
+2022-03-22 15:24:37.192 DEBUG 933427 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:24:37.192 DEBUG 933427 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:25:00.147 DEBUG 956382 --- [ http-nio-3000-exec-8 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:25:00.147 DEBUG 956382 --- [ http-nio-3000-exec-8 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@603400ec]
+2022-03-22 15:25:00.147 DEBUG 956382 --- [ http-nio-3000-exec-8 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1791781788 wrapping com.mysql.cj.jdbc.ConnectionImpl@392781e] will be managed by Spring
+2022-03-22 15:25:00.148 DEBUG 956383 --- [ http-nio-3000-exec-8 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:25:00.148 DEBUG 956383 --- [ http-nio-3000-exec-8 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: 김치찌개(String), ㄱ.ㅁ치(String), 축산물(String), 1인용(String), ㅂㅈㄷ,ㅁㅇㄹ(String), 1234(Integer)
+2022-03-22 15:25:00.150 DEBUG 956385 --- [ http-nio-3000-exec-8 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:25:00.150 DEBUG 956385 --- [ http-nio-3000-exec-8 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@603400ec]
+2022-03-22 15:25:00.150 DEBUG 956385 --- [ http-nio-3000-exec-8 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@603400ec]
+2022-03-22 15:25:00.150 DEBUG 956385 --- [ http-nio-3000-exec-8 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@603400ec]
+2022-03-22 15:25:00.151 DEBUG 956386 --- [ http-nio-3000-exec-8 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@603400ec]
+2022-03-22 15:25:07.204 DEBUG 963439 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:25:07.204 DEBUG 963439 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:25:09.841 DEBUG 966076 --- [ http-nio-3000-exec-9 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:25:09.841 DEBUG 966076 --- [ http-nio-3000-exec-9 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@45fc8b07]
+2022-03-22 15:25:09.842 DEBUG 966077 --- [ http-nio-3000-exec-9 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@79945685 wrapping com.mysql.cj.jdbc.ConnectionImpl@392781e] will be managed by Spring
+2022-03-22 15:25:09.842 DEBUG 966077 --- [ http-nio-3000-exec-9 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:25:09.842 DEBUG 966077 --- [ http-nio-3000-exec-9 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: 김치찌개(String), ㄱ.ㅁ치(String), 축산물(String), 1인용(String), ㅂㅈㄷ,ㅁㅇㄹ,2ㅁㅇㄹㅎ(String), 1234(Integer)
+2022-03-22 15:25:09.844 DEBUG 966079 --- [ http-nio-3000-exec-9 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:25:09.844 DEBUG 966079 --- [ http-nio-3000-exec-9 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@45fc8b07]
+2022-03-22 15:25:09.844 DEBUG 966079 --- [ http-nio-3000-exec-9 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@45fc8b07]
+2022-03-22 15:25:09.844 DEBUG 966079 --- [ http-nio-3000-exec-9 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@45fc8b07]
+2022-03-22 15:25:09.844 DEBUG 966079 --- [ http-nio-3000-exec-9 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@45fc8b07]
+2022-03-22 15:25:37.213 DEBUG 993448 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:25:37.213 DEBUG 993448 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:26:07.218 DEBUG 1023453 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:26:07.218 DEBUG 1023453 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:26:34.678 DEBUG 1050913 --- [ http-nio-3000-exec-1 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:26:34.678 DEBUG 1050913 --- [ http-nio-3000-exec-1 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1800e996]
+2022-03-22 15:26:34.679 DEBUG 1050914 --- [ http-nio-3000-exec-1 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@2146735573 wrapping com.mysql.cj.jdbc.ConnectionImpl@392781e] will be managed by Spring
+2022-03-22 15:26:34.679 DEBUG 1050914 --- [ http-nio-3000-exec-1 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:26:34.679 DEBUG 1050914 --- [ http-nio-3000-exec-1 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: 김치찌개(String), ㄱ.ㅁ치(String), 축산물(String), 1인용(String), ㅂㅈㄷ,ㅁㅇㄹ,2ㅁㅇㄹㅎ(String), 1234(Integer)
+2022-03-22 15:26:34.681 DEBUG 1050916 --- [ http-nio-3000-exec-1 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:26:34.681 DEBUG 1050916 --- [ http-nio-3000-exec-1 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1800e996]
+2022-03-22 15:26:34.681 DEBUG 1050916 --- [ http-nio-3000-exec-1 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1800e996]
+2022-03-22 15:26:34.681 DEBUG 1050916 --- [ http-nio-3000-exec-1 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1800e996]
+2022-03-22 15:26:34.681 DEBUG 1050916 --- [ http-nio-3000-exec-1 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1800e996]
+2022-03-22 15:26:37.233 DEBUG 1053468 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:26:37.233 DEBUG 1053468 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:26:45.470 DEBUG 1061705 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:26:45.470 DEBUG 1061705 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@52ff24ef]
+2022-03-22 15:26:45.470 DEBUG 1061705 --- [ http-nio-3000-exec-2 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@718410122 wrapping com.mysql.cj.jdbc.ConnectionImpl@392781e] will be managed by Spring
+2022-03-22 15:26:45.470 DEBUG 1061705 --- [ http-nio-3000-exec-2 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:26:45.470 DEBUG 1061705 --- [ http-nio-3000-exec-2 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: 김치찌개(String), ㄱ.ㅁ치(String), 축산물(String), 1인용(String), ㅂㅈㄷ,ㅁㅇㄹ,2ㅁㅇㄹㅎ(String), 1234(Integer)
+2022-03-22 15:26:45.474 DEBUG 1061709 --- [ http-nio-3000-exec-2 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:26:45.474 DEBUG 1061709 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@52ff24ef]
+2022-03-22 15:26:45.474 DEBUG 1061709 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@52ff24ef]
+2022-03-22 15:26:45.474 DEBUG 1061709 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@52ff24ef]
+2022-03-22 15:26:45.474 DEBUG 1061709 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@52ff24ef]
+2022-03-22 15:27:01.805 DEBUG 1078040 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:27:01.805 DEBUG 1078040 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1cc1a6cc]
+2022-03-22 15:27:01.805 DEBUG 1078040 --- [ http-nio-3000-exec-3 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1917994361 wrapping com.mysql.cj.jdbc.ConnectionImpl@392781e] will be managed by Spring
+2022-03-22 15:27:01.806 DEBUG 1078041 --- [ http-nio-3000-exec-3 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:27:01.806 DEBUG 1078041 --- [ http-nio-3000-exec-3 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: 김치찌개(String), ㄱ.ㅁ치(String), 축산물(String), 1인용(String), ㅂㅈㄷ,ㅁㅇㄹ,2ㅁㅇㄹㅎ(String), 1234(Integer)
+2022-03-22 15:27:01.808 DEBUG 1078043 --- [ http-nio-3000-exec-3 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:27:01.809 DEBUG 1078044 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1cc1a6cc]
+2022-03-22 15:27:01.809 DEBUG 1078044 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1cc1a6cc]
+2022-03-22 15:27:01.809 DEBUG 1078044 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1cc1a6cc]
+2022-03-22 15:27:01.809 DEBUG 1078044 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1cc1a6cc]
+2022-03-22 15:27:07.234 DEBUG 1083469 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:27:07.234 DEBUG 1083469 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:27:10.912 DEBUG 1087147 --- [ http-nio-3000-exec-4 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:27:10.912 DEBUG 1087147 --- [ http-nio-3000-exec-4 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@251e2ce2]
+2022-03-22 15:27:10.912 DEBUG 1087147 --- [ http-nio-3000-exec-4 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1082819092 wrapping com.mysql.cj.jdbc.ConnectionImpl@392781e] will be managed by Spring
+2022-03-22 15:27:10.912 DEBUG 1087147 --- [ http-nio-3000-exec-4 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:27:10.914 DEBUG 1087149 --- [ http-nio-3000-exec-4 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: 김치찌개(String), ㄱ.ㅁ치(String), 축산물(String), 1인용(String), ㅂㅈㄷ,ㅁㅇㄹ,2ㅁㅇㄹㅎ(String), 1234(Integer)
+2022-03-22 15:27:10.916 DEBUG 1087151 --- [ http-nio-3000-exec-4 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:27:10.916 DEBUG 1087151 --- [ http-nio-3000-exec-4 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@251e2ce2]
+2022-03-22 15:27:10.916 DEBUG 1087151 --- [ http-nio-3000-exec-4 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@251e2ce2]
+2022-03-22 15:27:10.917 DEBUG 1087152 --- [ http-nio-3000-exec-4 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@251e2ce2]
+2022-03-22 15:27:10.917 DEBUG 1087152 --- [ http-nio-3000-exec-4 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@251e2ce2]
+2022-03-22 15:27:23.382 DEBUG 1099617 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:27:23.382 DEBUG 1099617 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c57bf14]
+2022-03-22 15:27:23.382 DEBUG 1099617 --- [ http-nio-3000-exec-5 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@630601636 wrapping com.mysql.cj.jdbc.ConnectionImpl@392781e] will be managed by Spring
+2022-03-22 15:27:23.383 DEBUG 1099618 --- [ http-nio-3000-exec-5 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:27:23.383 DEBUG 1099618 --- [ http-nio-3000-exec-5 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: 김치찌개(String), ㄱ.ㅁ치(String), 축산물(String), 1인용(String), ㅂㅈㄷ,ㅁㅇㄹ,2ㅁㅇㄹㅎ(String), 1234(Integer)
+2022-03-22 15:27:23.390 DEBUG 1099625 --- [ http-nio-3000-exec-5 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:27:23.390 DEBUG 1099625 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c57bf14]
+2022-03-22 15:27:23.390 DEBUG 1099625 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c57bf14]
+2022-03-22 15:27:23.390 DEBUG 1099625 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c57bf14]
+2022-03-22 15:27:23.390 DEBUG 1099625 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c57bf14]
+2022-03-22 15:27:37.236 DEBUG 1113471 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:27:37.236 DEBUG 1113471 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:28:07.251 DEBUG 1143486 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:28:07.251 DEBUG 1143486 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:28:37.263 DEBUG 1173498 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:28:37.263 DEBUG 1173498 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:28:38.307 DEBUG 1174542 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:28:38.307 DEBUG 1174542 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6ca0f58f]
+2022-03-22 15:28:38.307 DEBUG 1174542 --- [ http-nio-3000-exec-7 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1353805702 wrapping com.mysql.cj.jdbc.ConnectionImpl@392781e] will be managed by Spring
+2022-03-22 15:28:38.307 DEBUG 1174542 --- [ http-nio-3000-exec-7 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:28:38.308 DEBUG 1174543 --- [ http-nio-3000-exec-7 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: 111(String), 111(String), 축산물(String), 접대용(String), (String), 1111(Integer)
+2022-03-22 15:28:38.310 DEBUG 1174545 --- [ http-nio-3000-exec-7 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:28:38.311 DEBUG 1174546 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6ca0f58f]
+2022-03-22 15:28:38.311 DEBUG 1174546 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6ca0f58f]
+2022-03-22 15:28:38.311 DEBUG 1174546 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6ca0f58f]
+2022-03-22 15:28:38.311 DEBUG 1174546 --- [ http-nio-3000-exec-7 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6ca0f58f]
+2022-03-22 15:29:07.268 DEBUG 1203503 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:29:07.268 DEBUG 1203503 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:29:37.279 DEBUG 1233514 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:29:37.279 DEBUG 1233514 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:30:07.281 DEBUG 1263516 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:30:07.281 DEBUG 1263516 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:30:37.285 DEBUG 1293520 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:30:37.285 DEBUG 1293520 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:31:07.292 DEBUG 1323527 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:31:07.292 DEBUG 1323527 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:31:17.989 INFO  1334224 --- [ RMI TCP Connection(24)-127.0.0.1 ] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2022-03-22 15:31:18.019 INFO  1334254 --- [ RMI TCP Connection(24)-127.0.0.1 ] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-03-22 15:31:18.020 DEBUG 1334255 --- [ RMI TCP Connection(24)-127.0.0.1 ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Before shutdown stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:31:18.021 DEBUG 1334256 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@392781e: (connection evicted)
+2022-03-22 15:31:18.023 DEBUG 1334258 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@3ff6a80a: (connection evicted)
+2022-03-22 15:31:18.024 DEBUG 1334259 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@6e1d9c14: (connection evicted)
+2022-03-22 15:31:18.024 DEBUG 1334259 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@5b3becea: (connection evicted)
+2022-03-22 15:31:18.025 DEBUG 1334260 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@6a5386b8: (connection evicted)
+2022-03-22 15:31:18.026 DEBUG 1334261 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@2a1c52b: (connection evicted)
+2022-03-22 15:31:18.026 DEBUG 1334261 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@7ec37eec: (connection evicted)
+2022-03-22 15:31:18.026 DEBUG 1334261 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@4a341f0c: (connection evicted)
+2022-03-22 15:31:18.027 DEBUG 1334262 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@a451452: (connection evicted)
+2022-03-22 15:31:18.027 DEBUG 1334262 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@12e8eb82: (connection evicted)
+2022-03-22 15:31:18.028 DEBUG 1334263 --- [ RMI TCP Connection(24)-127.0.0.1 ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - After shutdown stats (total=0, active=0, idle=0, waiting=0)
+2022-03-22 15:31:18.028 INFO  1334263 --- [ RMI TCP Connection(24)-127.0.0.1 ] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-03-22 15:31:25.034 INFO  653  --- [ main ] com.recipe.a.BackendApplication - Starting BackendApplication using Java 17.0.1 on DESKTOP-MSBT69K with PID 40128 (C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes started by zxc82 in C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend)
+2022-03-22 15:31:25.037 DEBUG 656  --- [ main ] com.recipe.a.BackendApplication - Running with Spring Boot v2.6.4, Spring v5.3.16
+2022-03-22 15:31:25.038 INFO  657  --- [ main ] com.recipe.a.BackendApplication - No active profile set, falling back to 1 default profile: "default"
+2022-03-22 15:31:25.654 DEBUG 1273 --- [ main ] o.m.s.b.a.MybatisAutoConfiguration - Searching for mappers annotated with @Mapper
+2022-03-22 15:31:25.655 DEBUG 1274 --- [ main ] o.m.s.b.a.MybatisAutoConfiguration - Using auto-configuration base package 'com.recipe.a'
+2022-03-22 15:31:25.789 DEBUG 1408 --- [ main ] o.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2022-03-22 15:31:25.801 DEBUG 1420 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\com\recipe\a\dao\GoodsDao.class]
+2022-03-22 15:31:25.801 DEBUG 1420 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\com\recipe\a\dao\MembersDao.class]
+2022-03-22 15:31:25.801 DEBUG 1420 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\com\recipe\a\dao\PaymentDao.class]
+2022-03-22 15:31:25.801 DEBUG 1420 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\com\recipe\a\dao\PaymentListDao.class]
+2022-03-22 15:31:25.801 DEBUG 1420 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\com\recipe\a\dao\PhotoDao.class]
+2022-03-22 15:31:25.802 DEBUG 1421 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\com\recipe\a\dao\RatingDao.class]
+2022-03-22 15:31:25.802 DEBUG 1421 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\com\recipe\a\dao\RecipeDao.class]
+2022-03-22 15:31:25.802 DEBUG 1421 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\com\recipe\a\dao\RecipeLikeDao.class]
+2022-03-22 15:31:25.803 DEBUG 1422 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'goodsDao' and 'com.recipe.a.dao.GoodsDao' mapperInterface
+2022-03-22 15:31:25.805 DEBUG 1424 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'goodsDao'.
+2022-03-22 15:31:25.805 DEBUG 1424 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'membersDao' and 'com.recipe.a.dao.MembersDao' mapperInterface
+2022-03-22 15:31:25.805 DEBUG 1424 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'membersDao'.
+2022-03-22 15:31:25.806 DEBUG 1425 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'paymentDao' and 'com.recipe.a.dao.PaymentDao' mapperInterface
+2022-03-22 15:31:25.806 DEBUG 1425 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'paymentDao'.
+2022-03-22 15:31:25.806 DEBUG 1425 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'paymentListDao' and 'com.recipe.a.dao.PaymentListDao' mapperInterface
+2022-03-22 15:31:25.806 DEBUG 1425 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'paymentListDao'.
+2022-03-22 15:31:25.806 DEBUG 1425 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'photoDao' and 'com.recipe.a.dao.PhotoDao' mapperInterface
+2022-03-22 15:31:25.806 DEBUG 1425 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'photoDao'.
+2022-03-22 15:31:25.807 DEBUG 1426 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'ratingDao' and 'com.recipe.a.dao.RatingDao' mapperInterface
+2022-03-22 15:31:25.807 DEBUG 1426 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'ratingDao'.
+2022-03-22 15:31:25.807 DEBUG 1426 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'recipeDao' and 'com.recipe.a.dao.RecipeDao' mapperInterface
+2022-03-22 15:31:25.807 DEBUG 1426 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'recipeDao'.
+2022-03-22 15:31:25.807 DEBUG 1426 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'recipeLikeDao' and 'com.recipe.a.dao.RecipeLikeDao' mapperInterface
+2022-03-22 15:31:25.807 DEBUG 1426 --- [ main ] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'recipeLikeDao'.
+2022-03-22 15:31:26.318 INFO  1937 --- [ main ] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 3000 (http)
+2022-03-22 15:31:26.331 INFO  1950 --- [ main ] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-3000"]
+2022-03-22 15:31:26.332 INFO  1951 --- [ main ] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2022-03-22 15:31:26.332 INFO  1951 --- [ main ] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.58]
+2022-03-22 15:31:26.465 INFO  2084 --- [ main ] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-03-22 15:31:26.466 INFO  2085 --- [ main ] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1382 ms
+2022-03-22 15:31:26.550 DEBUG 2169 --- [ main ] com.zaxxer.hikari.HikariConfig - Driver class com.mysql.cj.jdbc.Driver found in Thread context class loader jdk.internal.loader.ClassLoaders$AppClassLoader@136432db
+2022-03-22 15:31:26.562 DEBUG 2181 --- [ main ] com.zaxxer.hikari.HikariConfig - HikariPool-1 - configuration:
+2022-03-22 15:31:26.565 DEBUG 2184 --- [ main ] com.zaxxer.hikari.HikariConfig - allowPoolSuspension................................false
+2022-03-22 15:31:26.565 DEBUG 2184 --- [ main ] com.zaxxer.hikari.HikariConfig - autoCommit................................true
+2022-03-22 15:31:26.566 DEBUG 2185 --- [ main ] com.zaxxer.hikari.HikariConfig - catalog................................none
+2022-03-22 15:31:26.566 DEBUG 2185 --- [ main ] com.zaxxer.hikari.HikariConfig - connectionInitSql................................none
+2022-03-22 15:31:26.566 DEBUG 2185 --- [ main ] com.zaxxer.hikari.HikariConfig - connectionTestQuery................................none
+2022-03-22 15:31:26.566 DEBUG 2185 --- [ main ] com.zaxxer.hikari.HikariConfig - connectionTimeout................................30000
+2022-03-22 15:31:26.566 DEBUG 2185 --- [ main ] com.zaxxer.hikari.HikariConfig - dataSource................................none
+2022-03-22 15:31:26.566 DEBUG 2185 --- [ main ] com.zaxxer.hikari.HikariConfig - dataSourceClassName................................none
+2022-03-22 15:31:26.566 DEBUG 2185 --- [ main ] com.zaxxer.hikari.HikariConfig - dataSourceJNDI................................none
+2022-03-22 15:31:26.567 DEBUG 2186 --- [ main ] com.zaxxer.hikari.HikariConfig - dataSourceProperties................................{password=<masked>}
+2022-03-22 15:31:26.567 DEBUG 2186 --- [ main ] com.zaxxer.hikari.HikariConfig - driverClassName................................"com.mysql.cj.jdbc.Driver"
+2022-03-22 15:31:26.567 DEBUG 2186 --- [ main ] com.zaxxer.hikari.HikariConfig - exceptionOverrideClassName................................none
+2022-03-22 15:31:26.567 DEBUG 2186 --- [ main ] com.zaxxer.hikari.HikariConfig - healthCheckProperties................................{}
+2022-03-22 15:31:26.567 DEBUG 2186 --- [ main ] com.zaxxer.hikari.HikariConfig - healthCheckRegistry................................none
+2022-03-22 15:31:26.567 DEBUG 2186 --- [ main ] com.zaxxer.hikari.HikariConfig - idleTimeout................................600000
+2022-03-22 15:31:26.567 DEBUG 2186 --- [ main ] com.zaxxer.hikari.HikariConfig - initializationFailTimeout................................1
+2022-03-22 15:31:26.567 DEBUG 2186 --- [ main ] com.zaxxer.hikari.HikariConfig - isolateInternalQueries................................false
+2022-03-22 15:31:26.567 DEBUG 2186 --- [ main ] com.zaxxer.hikari.HikariConfig - jdbcUrl................................jdbc:mysql://localhost:3306/mysql
+2022-03-22 15:31:26.568 DEBUG 2187 --- [ main ] com.zaxxer.hikari.HikariConfig - keepaliveTime................................0
+2022-03-22 15:31:26.568 DEBUG 2187 --- [ main ] com.zaxxer.hikari.HikariConfig - leakDetectionThreshold................................0
+2022-03-22 15:31:26.568 DEBUG 2187 --- [ main ] com.zaxxer.hikari.HikariConfig - maxLifetime................................1800000
+2022-03-22 15:31:26.568 DEBUG 2187 --- [ main ] com.zaxxer.hikari.HikariConfig - maximumPoolSize................................10
+2022-03-22 15:31:26.568 DEBUG 2187 --- [ main ] com.zaxxer.hikari.HikariConfig - metricRegistry................................none
+2022-03-22 15:31:26.568 DEBUG 2187 --- [ main ] com.zaxxer.hikari.HikariConfig - metricsTrackerFactory................................none
+2022-03-22 15:31:26.568 DEBUG 2187 --- [ main ] com.zaxxer.hikari.HikariConfig - minimumIdle................................10
+2022-03-22 15:31:26.569 DEBUG 2188 --- [ main ] com.zaxxer.hikari.HikariConfig - password................................<masked>
+2022-03-22 15:31:26.569 DEBUG 2188 --- [ main ] com.zaxxer.hikari.HikariConfig - poolName................................"HikariPool-1"
+2022-03-22 15:31:26.569 DEBUG 2188 --- [ main ] com.zaxxer.hikari.HikariConfig - readOnly................................false
+2022-03-22 15:31:26.569 DEBUG 2188 --- [ main ] com.zaxxer.hikari.HikariConfig - registerMbeans................................false
+2022-03-22 15:31:26.569 DEBUG 2188 --- [ main ] com.zaxxer.hikari.HikariConfig - scheduledExecutor................................none
+2022-03-22 15:31:26.569 DEBUG 2188 --- [ main ] com.zaxxer.hikari.HikariConfig - schema................................none
+2022-03-22 15:31:26.569 DEBUG 2188 --- [ main ] com.zaxxer.hikari.HikariConfig - threadFactory................................internal
+2022-03-22 15:31:26.569 DEBUG 2188 --- [ main ] com.zaxxer.hikari.HikariConfig - transactionIsolation................................default
+2022-03-22 15:31:26.570 DEBUG 2189 --- [ main ] com.zaxxer.hikari.HikariConfig - username................................"root"
+2022-03-22 15:31:26.570 DEBUG 2189 --- [ main ] com.zaxxer.hikari.HikariConfig - validationTimeout................................5000
+2022-03-22 15:31:26.571 INFO  2190 --- [ main ] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-03-22 15:31:26.961 DEBUG 2580 --- [ main ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@764b14b8
+2022-03-22 15:31:26.963 INFO  2582 --- [ main ] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-03-22 15:31:26.971 DEBUG 2590 --- [ main ] o.m.spring.SqlSessionFactoryBean - Property 'configuration' or 'configLocation' not specified, using default MyBatis Configuration
+2022-03-22 15:31:27.075 DEBUG 2694 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=1, active=0, idle=1, waiting=0)
+2022-03-22 15:31:27.103 DEBUG 2722 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7e01845
+2022-03-22 15:31:27.128 DEBUG 2747 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\sqls\Goods.xml]'
+2022-03-22 15:31:27.128 DEBUG 2747 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@563332d4
+2022-03-22 15:31:27.136 DEBUG 2755 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\sqls\Members.xml]'
+2022-03-22 15:31:27.153 DEBUG 2772 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1241489
+2022-03-22 15:31:27.158 DEBUG 2777 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\sqls\Payment.xml]'
+2022-03-22 15:31:27.169 DEBUG 2788 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\sqls\Payment_List.xml]'
+2022-03-22 15:31:27.177 DEBUG 2796 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@527d0846
+2022-03-22 15:31:27.179 DEBUG 2798 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\sqls\Photo.xml]'
+2022-03-22 15:31:27.185 DEBUG 2804 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\sqls\Rating.xml]'
+2022-03-22 15:31:27.194 DEBUG 2813 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\sqls\Recipe.xml]'
+2022-03-22 15:31:27.198 DEBUG 2817 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7d62839e
+2022-03-22 15:31:27.200 DEBUG 2819 --- [ main ] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\zxc82\Documents\GitHub\RecipePlease\Backend\target\classes\sqls\Recipelike.xml]'
+2022-03-22 15:31:27.220 DEBUG 2839 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@63314ee4
+2022-03-22 15:31:27.242 DEBUG 2861 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5e7056bd
+2022-03-22 15:31:27.263 DEBUG 2882 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1fb00f11
+2022-03-22 15:31:27.283 DEBUG 2902 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5f41db50
+2022-03-22 15:31:27.283 DEBUG 2902 --- [ HikariPool-1 connection adder ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - After adding stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:31:27.511 DEBUG 3130 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 
+	c.r.a.c.GoodsController:
+	{[GET, POST] [/countGoods]}: countMembers()
+2022-03-22 15:31:27.513 DEBUG 3132 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 
+	c.r.a.c.MembersController:
+	{[GET, POST] [/countMembers]}: countMembers()
+2022-03-22 15:31:27.513 DEBUG 3132 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 
+	c.r.a.c.PaymentController:
+	{POST [/addGoodsShoppingList]}: addGoodsShoppingList(PaymentDto)
+2022-03-22 15:31:27.516 DEBUG 3135 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 
+	c.r.a.c.RecipeController:
+	{[GET, POST] [/main]}: main()
+	{GET [/test]}: test(int,String)
+	{[GET, POST] [/uploadRecipe]}: countRecipe(RecipeDto)
+	{[GET, POST] [/countRecipe]}: countRecipe()
+	{GET [/getPhoto]}: getPhoto(int,String)
+	{[GET, POST] [/countPhoto]}: countPhoto()
+	{GET [/getOneRecipe]}: getOneRecipe(int)
+2022-03-22 15:31:27.519 DEBUG 3138 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2022-03-22 15:31:27.540 DEBUG 3159 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 'beanNameHandlerMapping' {}
+2022-03-22 15:31:27.558 DEBUG 3177 --- [ main ] _.s.w.s.HandlerMapping.Mappings - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2022-03-22 15:31:27.598 DEBUG 3217 --- [ main ] o.m.s.b.a.MybatisAutoConfiguration - Not found configuration for registering mapper bean using @MapperScan, MapperFactoryBean and MapperScannerConfigurer.
+2022-03-22 15:31:27.748 INFO  3367 --- [ main ] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-3000"]
+2022-03-22 15:31:27.780 INFO  3399 --- [ main ] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 3000 (http) with context path ''
+2022-03-22 15:31:27.791 INFO  3410 --- [ main ] com.recipe.a.BackendApplication - Started BackendApplication in 3.129 seconds (JVM running for 4.152)
+2022-03-22 15:31:57.087 DEBUG 32706 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:31:57.087 DEBUG 32706 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:32:27.091 DEBUG 62710 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:32:27.091 DEBUG 62710 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:32:57.102 DEBUG 92721 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:32:57.103 DEBUG 92722 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:33:27.110 DEBUG 122729 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:33:27.110 DEBUG 122729 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:33:32.077 INFO  127696 --- [ http-nio-3000-exec-3 ] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-03-22 15:33:32.077 INFO  127696 --- [ http-nio-3000-exec-3 ] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-03-22 15:33:32.078 INFO  127697 --- [ http-nio-3000-exec-3 ] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2022-03-22 15:33:32.147 DEBUG 127766 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:33:32.151 DEBUG 127770 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4838649]
+2022-03-22 15:33:32.158 DEBUG 127777 --- [ http-nio-3000-exec-3 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@993948139 wrapping com.mysql.cj.jdbc.ConnectionImpl@764b14b8] will be managed by Spring
+2022-03-22 15:33:32.165 DEBUG 127784 --- [ http-nio-3000-exec-3 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:33:32.199 DEBUG 127818 --- [ http-nio-3000-exec-3 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: ㅂㅈㄷㄱ(String), ㅂㅈㄷㅅ(String), 축산물(String), 1인용(String), (String), 1234(Integer)
+2022-03-22 15:33:32.203 DEBUG 127822 --- [ http-nio-3000-exec-3 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:33:32.204 DEBUG 127823 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4838649]
+2022-03-22 15:33:32.205 DEBUG 127824 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4838649]
+2022-03-22 15:33:32.205 DEBUG 127824 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4838649]
+2022-03-22 15:33:32.205 DEBUG 127824 --- [ http-nio-3000-exec-3 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4838649]
+2022-03-22 15:33:50.255 DEBUG 145874 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:33:50.255 DEBUG 145874 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67ce7903]
+2022-03-22 15:33:50.255 DEBUG 145874 --- [ http-nio-3000-exec-2 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1832260211 wrapping com.mysql.cj.jdbc.ConnectionImpl@764b14b8] will be managed by Spring
+2022-03-22 15:33:50.256 DEBUG 145875 --- [ http-nio-3000-exec-2 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:33:50.256 DEBUG 145875 --- [ http-nio-3000-exec-2 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: ㅂㅈㄷㄱ(String), ㅂㅈㄷㅅ(String), 축산물(String), 1인용(String), ㅁㄴㅇ,츄ㅗ(String), 1234(Integer)
+2022-03-22 15:33:50.258 DEBUG 145877 --- [ http-nio-3000-exec-2 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:33:50.258 DEBUG 145877 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67ce7903]
+2022-03-22 15:33:50.259 DEBUG 145878 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67ce7903]
+2022-03-22 15:33:50.259 DEBUG 145878 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67ce7903]
+2022-03-22 15:33:50.259 DEBUG 145878 --- [ http-nio-3000-exec-2 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67ce7903]
+2022-03-22 15:33:57.121 DEBUG 152740 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:33:57.121 DEBUG 152740 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:34:27.127 DEBUG 182746 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:34:27.127 DEBUG 182746 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:34:57.139 DEBUG 212758 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:34:57.139 DEBUG 212758 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:35:06.228 INFO  221847 --- [ http-nio-3000-exec-4 ] o.a.coyote.http11.Http11Processor - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in the request target [/uploadRecipe?recipeTitle=%E3%85%82%E3%85%88%E3%84%B7%E3%84%B1&recipeContent=%E3%85%82%E3%85%88%E3%84%B7%E3%85%85&recipeBigCategory=%EC%B6%95%EC%82%B0%EB%AC%BC&recipeSmallCategory=1%EC%9D%B8%EC%9A%A9&recipeGoodsTag[]=%E3%85%81%E3%84%B4%E3%85%87&recipeGoodsTag[]=%EC%B8%84%E3%85%97&recipePrice=1234 ]. The valid characters are defined in RFC 7230 and RFC 3986
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:494)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:271)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:889)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1735)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-03-22 15:35:26.217 DEBUG 241836 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:35:26.217 DEBUG 241836 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5742e6ba]
+2022-03-22 15:35:26.217 DEBUG 241836 --- [ http-nio-3000-exec-5 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1572507082 wrapping com.mysql.cj.jdbc.ConnectionImpl@764b14b8] will be managed by Spring
+2022-03-22 15:35:26.217 DEBUG 241836 --- [ http-nio-3000-exec-5 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:35:26.218 DEBUG 241837 --- [ http-nio-3000-exec-5 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: ㅂㅈㄷㄱ(String), ㅂㅈㄷㅅ(String), 축산물(String), 1인용(String), ㅁㄴㅇ,츄ㅗ(String), 1234(Integer)
+2022-03-22 15:35:26.225 DEBUG 241844 --- [ http-nio-3000-exec-5 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:35:26.225 DEBUG 241844 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5742e6ba]
+2022-03-22 15:35:26.225 DEBUG 241844 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5742e6ba]
+2022-03-22 15:35:26.225 DEBUG 241844 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5742e6ba]
+2022-03-22 15:35:26.225 DEBUG 241844 --- [ http-nio-3000-exec-5 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5742e6ba]
+2022-03-22 15:35:27.148 DEBUG 242767 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:35:27.148 DEBUG 242767 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:35:35.848 DEBUG 251467 --- [ http-nio-3000-exec-6 ] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2022-03-22 15:35:35.849 DEBUG 251468 --- [ http-nio-3000-exec-6 ] org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@e0d6000]
+2022-03-22 15:35:35.849 DEBUG 251468 --- [ http-nio-3000-exec-6 ] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@83168112 wrapping com.mysql.cj.jdbc.ConnectionImpl@764b14b8] will be managed by Spring
+2022-03-22 15:35:35.849 DEBUG 251468 --- [ http-nio-3000-exec-6 ] c.r.a.dao.RecipeDao.uploadRecipe - ==>  Preparing: INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING) VALUES(NEXTVAL('SEQRECIPE'), ?, ?, ?, ?, ?, ?, 0)
+2022-03-22 15:35:35.850 DEBUG 251469 --- [ http-nio-3000-exec-6 ] c.r.a.dao.RecipeDao.uploadRecipe - ==> Parameters: ㅂㅈㄷㄱ(String), ㅂㅈㄷㅅ(String), 축산물(String), 1인용(String), ㅁㄴㅇ,츄ㅗ,ㅁㄹㅎ(String), 1234(Integer)
+2022-03-22 15:35:35.851 DEBUG 251470 --- [ http-nio-3000-exec-6 ] c.r.a.dao.RecipeDao.uploadRecipe - <==    Updates: 1
+2022-03-22 15:35:35.852 DEBUG 251471 --- [ http-nio-3000-exec-6 ] org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@e0d6000]
+2022-03-22 15:35:35.852 DEBUG 251471 --- [ http-nio-3000-exec-6 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@e0d6000]
+2022-03-22 15:35:35.852 DEBUG 251471 --- [ http-nio-3000-exec-6 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@e0d6000]
+2022-03-22 15:35:35.852 DEBUG 251471 --- [ http-nio-3000-exec-6 ] org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@e0d6000]
+2022-03-22 15:35:57.154 DEBUG 272773 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:35:57.154 DEBUG 272773 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:36:27.165 DEBUG 302784 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:36:27.165 DEBUG 302784 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:36:57.176 DEBUG 332795 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:36:57.176 DEBUG 332795 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:37:27.179 DEBUG 362798 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:37:27.179 DEBUG 362798 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:37:57.183 DEBUG 392802 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:37:57.183 DEBUG 392802 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:38:27.193 DEBUG 422812 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:38:27.193 DEBUG 422812 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:38:57.194 DEBUG 452813 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:38:57.194 DEBUG 452813 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:39:27.206 DEBUG 482825 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:39:27.206 DEBUG 482825 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:39:57.215 DEBUG 512834 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:39:57.215 DEBUG 512834 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:40:27.220 DEBUG 542839 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:40:27.221 DEBUG 542840 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:40:57.222 DEBUG 572841 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:40:57.222 DEBUG 572841 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:41:27.227 DEBUG 602846 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:41:27.227 DEBUG 602846 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:41:57.239 DEBUG 632858 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:41:57.239 DEBUG 632858 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:42:27.242 DEBUG 662861 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:42:27.242 DEBUG 662861 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:42:57.249 DEBUG 692868 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:42:57.249 DEBUG 692868 --- [ HikariPool-1 housekeeper ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2022-03-22 15:43:14.200 INFO  709819 --- [ RMI TCP Connection(15)-127.0.0.1 ] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2022-03-22 15:43:14.220 INFO  709839 --- [ RMI TCP Connection(15)-127.0.0.1 ] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-03-22 15:43:14.220 DEBUG 709839 --- [ RMI TCP Connection(15)-127.0.0.1 ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Before shutdown stats (total=10, active=0, idle=10, waiting=0)
+2022-03-22 15:43:14.221 DEBUG 709840 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@764b14b8: (connection evicted)
+2022-03-22 15:43:14.222 DEBUG 709841 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@7e01845: (connection evicted)
+2022-03-22 15:43:14.224 DEBUG 709843 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@563332d4: (connection evicted)
+2022-03-22 15:43:14.224 DEBUG 709843 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@1241489: (connection evicted)
+2022-03-22 15:43:14.225 DEBUG 709844 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@527d0846: (connection evicted)
+2022-03-22 15:43:14.225 DEBUG 709844 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@7d62839e: (connection evicted)
+2022-03-22 15:43:14.226 DEBUG 709845 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@63314ee4: (connection evicted)
+2022-03-22 15:43:14.226 DEBUG 709845 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@5e7056bd: (connection evicted)
+2022-03-22 15:43:14.227 DEBUG 709846 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@1fb00f11: (connection evicted)
+2022-03-22 15:43:14.227 DEBUG 709846 --- [ HikariPool-1 connection closer ] com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@5f41db50: (connection evicted)
+2022-03-22 15:43:14.228 DEBUG 709847 --- [ RMI TCP Connection(15)-127.0.0.1 ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - After shutdown stats (total=0, active=0, idle=0, waiting=0)
+2022-03-22 15:43:14.228 INFO  709847 --- [ RMI TCP Connection(15)-127.0.0.1 ] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

@@ -34,20 +34,26 @@ public class RecipeService {
 		return recipeDao.countRecipe();
 	}
 
-	public int insertRecipe(RecipeDto newRecipe) {
-		recipeDao.insertRecipe(newRecipe);
-		return 0;
+	public int uploadRecipe(RecipeDto dto) {
+		return recipeDao.uploadRecipe(dto);
+	}
+	
+	public boolean uploadRecipeImg(PhotoDto dto) {
+		int p = recipeDao.uploadRecipeImg(dto);
+		return p>0?true:false;
 	}
 
-	public List<PhotoDto> getPhoto(PhotoDto photoDto) {
-		List<PhotoDto> dtos = photoDao.getPhoto(photoDto);
-		
-		System.out.println("PhotoDto photoDto - " + dtos.size());
-		return dtos;
-		// return photoDao.getPhoto(photoDto);
-		
-	}
-
+	
+//	public List<PhotoDto> getPhoto(PhotoDto photoDto) {
+//		List<PhotoDto> dtos = photoDao.getPhoto(photoDto);
+//		
+//		System.out.println("PhotoDto photoDto - " + dtos.size());
+//		return dtos;
+//		// return photoDao.getPhoto(photoDto);
+//		
+//	}
+	
+	
 	public int countPhoto() {
 		return photoDao.countPhoto();
 	}

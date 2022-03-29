@@ -1,92 +1,106 @@
 package com.recipe.a.dto;
 
+//dto
 public class RecipeDto {
-	private int RECIPESEQ;
-	private String RECIPETITLE;
-	private String RECIPECONTENT;
-	private String RECIPEBIGCATEGORY;
-	private String RECIPESMALLCATEGORY;
-	private String RECIPEGOODSTAG;
-	private int RECIPEPRICE;	// RECIPEPRICE
+	private int recipeSeq;
+	private String recipeTitle;
+	private String recipeContent;
+	private String recipeBigCategory;
+	private String recipeSmallCategory;
+	private String recipeGoodsTag;
+	private int recipePrice;
+	private float recipeRating;
 	
 	public RecipeDto() {
 	}
 
-	public RecipeDto(int rECIPESEQ, String rECIPETITLE, String rECIPECONTENT, String rECIPEBIGCATEGORY,
-			String rECIPESMALLCATEGORY, String rECIPEGOODSTAG, int rECIPEPRICE) {
+	public RecipeDto(int recipeSeq, String recipeTitle, String recipeContent, String recipeBigCategory,
+			String recipeSmallCategory, String recipeGoodsTag, int recipePrice, float recipeRating) {
 		super();
-		RECIPESEQ = rECIPESEQ;
-		RECIPETITLE = rECIPETITLE;
-		RECIPECONTENT = rECIPECONTENT;
-		RECIPEBIGCATEGORY = rECIPEBIGCATEGORY;
-		RECIPESMALLCATEGORY = rECIPESMALLCATEGORY;
-		RECIPEGOODSTAG = rECIPEGOODSTAG;
-		RECIPEPRICE = rECIPEPRICE;
+		this.recipeSeq = recipeSeq;
+		this.recipeTitle = recipeTitle;
+		this.recipeContent = recipeContent;
+		this.recipeBigCategory = recipeBigCategory;
+		this.recipeSmallCategory = recipeSmallCategory;
+		this.recipeGoodsTag = recipeGoodsTag;
+		this.recipePrice = recipePrice;
+		this.recipeRating = recipeRating;
 	}
 
-	public int getRECIPESEQ() {
-		return RECIPESEQ;
+	public int getRecipeSeq() {
+		return recipeSeq;
 	}
 
-	public void setRECIPESEQ(int rECIPESEQ) {
-		RECIPESEQ = rECIPESEQ;
+	public void setRecipeSeq(int recipeSeq) {
+		this.recipeSeq = recipeSeq;
 	}
 
-	public String getRECIPETITLE() {
-		return RECIPETITLE;
+	public String getRecipeTitle() {
+		return recipeTitle;
 	}
 
-	public void setRECIPETITLE(String rECIPETITLE) {
-		RECIPETITLE = rECIPETITLE;
+	public void setRecipeTitle(String recipeTitle) {
+		this.recipeTitle = recipeTitle;
 	}
 
-	public String getRECIPECONTENT() {
-		return RECIPECONTENT;
+	public String getRecipeContent() {
+		return recipeContent;
 	}
 
-	public void setRECIPECONTENT(String rECIPECONTENT) {
-		RECIPECONTENT = rECIPECONTENT;
+	public void setRecipeContent(String recipeContent) {
+		this.recipeContent = recipeContent;
 	}
 
-	public String getRECIPEBIGCATEGORY() {
-		return RECIPEBIGCATEGORY;
+	public String getRecipeBigCategory() {
+		return recipeBigCategory;
 	}
 
-	public void setRECIPEBIGCATEGORY(String rECIPEBIGCATEGORY) {
-		RECIPEBIGCATEGORY = rECIPEBIGCATEGORY;
+	public void setRecipeBigCategory(String recipeBigCategory) {
+		this.recipeBigCategory = recipeBigCategory;
 	}
 
-	public String getRECIPESMALLCATEGORY() {
-		return RECIPESMALLCATEGORY;
+	public String getRecipeSmallCategory() {
+		return recipeSmallCategory;
 	}
 
-	public void setRECIPESMALLCATEGORY(String rECIPESMALLCATEGORY) {
-		RECIPESMALLCATEGORY = rECIPESMALLCATEGORY;
+	public void setRecipeSmallCategory(String recipeSmallCategory) {
+		this.recipeSmallCategory = recipeSmallCategory;
 	}
 
-	public String getRECIPEGOODSTAG() {
-		return RECIPEGOODSTAG;
+	public String getRecipeGoodsTag() {
+		return recipeGoodsTag;
 	}
 
-	public void setRECIPEGOODSTAG(String rECIPEGOODSTAG) {
-		RECIPEGOODSTAG = rECIPEGOODSTAG;
+	public void setRecipeGoodsTag(String recipeGoodsTag) {
+		this.recipeGoodsTag = recipeGoodsTag;
 	}
 
-	public int getRECIPEPRICE() {
-		return RECIPEPRICE;
+	public int getRecipePrice() {
+		return recipePrice;
 	}
 
-	public void setRECIPEPRICE(int rECIPEPRICE) {
-		RECIPEPRICE = rECIPEPRICE;
+	public void setRecipePrice(int recipePrice) {
+		this.recipePrice = recipePrice;
+	}
+
+	public float getRecipeRating() {
+		return recipeRating;
+	}
+
+	public void setRecipeRating(float recipeRating) {
+		this.recipeRating = recipeRating;
 	}
 
 	@Override
 	public String toString() {
-		return "RecipeDto [RECIPESEQ=" + RECIPESEQ + ", RECIPETITLE=" + RECIPETITLE + ", RECIPECONTENT=" + RECIPECONTENT
-				+ ", RECIPEBIGCATEGORY=" + RECIPEBIGCATEGORY + ", RECIPESMALLCATEGORY=" + RECIPESMALLCATEGORY
-				+ ", RECIPEGOODSTAG=" + RECIPEGOODSTAG + ", RECIPEPRICE=" + RECIPEPRICE + "]";
+		return "RecipeDto [recipeSeq=" + recipeSeq + ", recipeTitle=" + recipeTitle + ", recipeContent=" + recipeContent
+				+ ", recipeBigCategory=" + recipeBigCategory + ", recipeSmallCategory=" + recipeSmallCategory
+				+ ", recipeGoodsTag=" + recipeGoodsTag + ", recipePrice=" + recipePrice + ", recipeRating="
+				+ recipeRating + "]";
 	}
+
 	
 	
 	
 }
+

@@ -12,7 +12,9 @@ import com.recipe.a.dto.PhotoDto;
 public interface PhotoDao {
 
 	public int countPhoto();
+	
 
+	
 	public List<PhotoDto> getPhoto(PhotoDto photoDto);
 	
 	public List<Integer> test(); 
