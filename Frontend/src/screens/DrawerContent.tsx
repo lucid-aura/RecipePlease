@@ -13,7 +13,7 @@ const DrawerContent: FC<DrawerContentComponentProps> = (props) => {
     return (
         <DrawerContentScrollView {...props} contentContainerStyle={[styles.view]}>
             <NavigationHeader viewStyle={{backgroundColor:'white'}} 
-                    Left= {() => (<Icon name="arrow-left" size={50} />)}
+                    Left= {() => (<Icon name="arrow-left" size={50} onPress={Drawerclose}/>)}
                     Right={() => (<Icon name="close" size={24} onPress={Drawerclose} />)} />
             <Text>DrawerContent</Text>
         </DrawerContentScrollView>

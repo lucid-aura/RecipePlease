@@ -2,6 +2,7 @@ import Postcode from "@actbase/react-daum-postcode";
 import React, { useState } from "react";
 import { Alert, Button, Modal, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
 import { RadioButton } from "react-native-paper";
+import { getProfile } from "../utils";
 
 /* 
 
@@ -46,7 +47,7 @@ export default function MyAccount() {
 
             <View>
                 <Text>{msg}</Text>
-                <TouchableHighlight>
+                <TouchableHighlight onPress={getProfile}>
                     <Text>id 확인</Text>
                 </TouchableHighlight>
             </View>
