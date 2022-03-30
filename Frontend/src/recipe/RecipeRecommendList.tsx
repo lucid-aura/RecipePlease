@@ -5,7 +5,7 @@ import { Alert,  StyleSheet, Text, View } from "react-native";
 import { Rating } from "react-native-ratings";
 import { SliderBox } from "react-native-image-slider-box";
 
-export default function RecipeRecommendList( { category, star } :any) { // 굿즈 태그 연결 부분
+export default function RecipeRecommendList( { category } :any) { // 굿즈 태그 연결 부분
     
     const navigation = useNavigation()
     const [recipeData, setRecipeData] = useState({
@@ -18,18 +18,21 @@ export default function RecipeRecommendList( { category, star } :any) { // 굿�
         "readcount":[]
     })
 
-    const [avarage, setAvarage] = useState(0.0)
     const [index, setIndex] = useState(0) // 추천 레시피 인덱스
 
-    useEffect( () => {
+    const changeAvarage = (index:number, newAvarage:any) =>{
+        console.log(index + "번에 들어온 새로운 평균 : " + newAvarage)
+       let  newData = recipeData;
+       newData.recipeRating[index] = newAvarage;
+       setRecipeData(newData)
+    }
 
+    useEffect( () => {
         const fetchRecipe = async() =>{
             const recipeRes =await axios.get("http://192.168.0.4:3000/getRecommendRecipe?category=" + category)
-            setRecipeData(recipeRes.data)
-            
+            setRecipeData(recipeRes.data)          
         }
         fetchRecipe()
-        console.log(recipeData)
     }, [])
 
     function checkRecipe(index:number){ // 특정 레시피 선택 시
@@ -44,7 +47,7 @@ export default function RecipeRecommendList( { category, star } :any) { // 굿�
                         category: 'recipe'
                     })
                     */
-                console.log(res.data)
+                    console.log(res.data)
                 }
                 else{
                     Alert.alert("", "구매가 필요합니다.")
@@ -56,12 +59,11 @@ export default function RecipeRecommendList( { category, star } :any) { // 굿�
     
         }
         else{ // 무료 레시피일 경우
-            setAvarage(recipeData.recipeRating[index])
             navigation.navigate('RecipeDetail',{
-                avarage: avarage,
                 seq: recipeData.recipeSeq[index], 
-                star: star,
-                category: 'recipe'
+                category: 'recipe',
+                index:index,
+                changeAvarage : changeAvarage
             })
         }
     }
@@ -77,7 +79,7 @@ export default function RecipeRecommendList( { category, star } :any) { // 굿�
             }
             currentImageEmitter={  (index:number) => {
                 setIndex(index)
-                setAvarage(recipeData.recipeRating[index])
+                
             }}
             paginationBoxVerticalPadding={10}
             autoplay
@@ -96,7 +98,7 @@ export default function RecipeRecommendList( { category, star } :any) { // 굿�
         
         <Text>{recipeData.title[index]}</Text>
         <Text>{recipeData.readcount[index]}</Text>
-        <Text style={styles.ratingText}>{avarage}</Text>
+        <Text style={styles.ratingText}>{recipeData.recipeRating[index]}</Text>
         <Rating
             type='star'
             ratingCount={5}
@@ -111,11 +113,11 @@ export default function RecipeRecommendList( { category, star } :any) { // 굿�
   );
 }
 
-
 const styles = StyleSheet.create({
     contentContainer: {
         paddingVertical: 0
       },
+      
     container: {
         alignItems: 'center',
     },
