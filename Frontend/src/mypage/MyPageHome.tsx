@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { View, Text,StyleSheet, Button, TextInput, TouchableOpacity, Image } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { NavigationHeader } from "../theme";
-import { getProfile, signInWithKakao } from '../mypage/utils';
+import { getProfile, signInWithKakao, signOutWithKakao } from '../mypage/utils';
 
 /* 
 npm i react-native-paper
@@ -65,6 +65,11 @@ export default function MyPageHome(){
                 <View>
                     <TouchableOpacity onPress={() =>signInWithKakao()}>
                         <Image source={require("./utils/kakao_login_medium_narrow.png")} />
+                    </TouchableOpacity>
+                </View>
+                <View>
+                    <TouchableOpacity onPress={() =>signOutWithKakao()}>
+                       <Text>로그아웃</Text>
                     </TouchableOpacity>
                 </View>
                 <View>
