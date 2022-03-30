@@ -28,7 +28,7 @@ export default function MyAccount() {
 
     const [msg, setMsg] = useState<string>('msg')
 
-    const[isModal, setModal] = useState(false)
+    const [isModal, setModal] = useState(false)
     
     
     //zonecode => 우편번호 address => 주소
