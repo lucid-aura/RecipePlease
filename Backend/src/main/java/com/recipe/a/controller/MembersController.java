@@ -54,18 +54,25 @@ public class MembersController {
 		dto.setSalt(salt);
 		String secretNum = dto.getMemberPwd() + salt;
 		System.out.println("secretNum: "+ secretNum);
+		String encodedPassword ="";
 		
-		String encodedPassword = passwordEncoder.encode(secretNum);
+		if(dto.getMemberPwd() == "") {	// 카카오 로그인 한 경우
+			encodedPassword = passwordEncoder.encode(salt);
+			
+		} else {	// 일반 회원가입한 경우
+			encodedPassword = passwordEncoder.encode(secretNum);
+		}
 		dto.setMemberPwd(encodedPassword);
 		System.out.println("dto.getMember_pwd: " + dto.getMemberPwd() );
 		
 		boolean b = memberService.regist(dto);
-		
 		if (b) {
 			return "yes";
 		} else {
 			return "no";
 		}
+		
+		
 	}
 
 	@PostMapping("/login")
