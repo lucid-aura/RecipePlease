@@ -128,7 +128,7 @@ export default function MyPageHomeScreen(){
 
                 {/* 로그인 버튼 */}
                 <TouchableOpacity onPress={() => {
-                    navigation.navigate('Home')
+                    navigation.navigate('HomeScreen')
 
                     axios.post("http://192.168.0.13:3000/login", null, {
                         params: {

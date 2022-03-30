@@ -11,6 +11,14 @@
     </select>
 
     <!-- 코인 충전시 -->
+    <insert id="chargeCoin" parameterType="com.recipe.a.dto.CoinTransactionDto">
+        INSERT INTO COINTRANSACTION(COINTRANSACTIONSEQ, MEMBERID, DOCSSEQ, COINCOUNT, COININOUT, COINDATE)
+        VALUES (NEXTVAL('COINTRANSACTIONSEQ'), #{memberId}, #{docsSeq}, #{coinCount}, '구매', SYSDATE())
+    </insert>
 
     <!-- 코인 사용시 -->
+    <insert id="useCoin" parameterType="com.recipe.a.dto.CoinTransactionDto">
+        INSERT INTO COINTRANSACTION(COINTRANSACTIONSEQ, MEMBERID, DOCSSEQ, COINCOUNT, COININOUT, COINDATE)
+        VALUES (NEXTVAL('COINTRANSACTIONSEQ'), #{memberId}, #{docsSeq}, #{coinCount}, '사용', SYSDATE())
+    </insert>
 </mapper>

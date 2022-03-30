@@ -1,8 +1,7 @@
 package com.recipe.a.service;
 
 import com.recipe.a.dao.CoinTransactionDao;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.recipe.a.dto.CoinTransactionDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +16,17 @@ public class CoinTransactionService {
     }
 
     // test mode
-    public int coinTransactionTester() {
+    public CoinTransactionDto coinTransactionTester() {
         return coinTransactionDao.coinTransactionTester();
+    }
+
+    // 코인 충전
+    public boolean chargeCoin(CoinTransactionDto dto) {
+        return coinTransactionDao.chargeCoin(dto);
+    }
+
+    // 코인 사용
+    public boolean useCoin(CoinTransactionDto dto) {
+        return coinTransactionDao.useCoin(dto);
     }
 }

@@ -1,13 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Alert, Animated, Button, Dimensions, Modal, PanResponder, Pressable, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 
-// 레시피 구매 버튼 tap할 때 구매 요청을 보낼 함수
-const requestPurchaseRecipe = () => {
-
-}
-
-export default function PurchaseRecipe() {
+export default function PurchaseRecipe({navigation}:any) {
 
     // 로그인 세션 정보
     const [loginData, setLoginData] = useState(Object);
@@ -29,6 +25,22 @@ export default function PurchaseRecipe() {
         }
     }
     getLoginData();
+
+    // 레시피 구매 버튼 tap할 때 구매 요청을 보낼 함수
+    const requestPurchaseRecipe = async () => {
+        await axios.post("http://192.168.0.13:3000/coin/useCoin", null, {params: {
+            memberId: loginData.memberId,
+            docsSeq: 1,
+            coinCount: 1100
+        }})
+        .then((res) => {
+            console.log(res.data);
+            Alert.alert("구매 성공", "구매가 완료되었습니다.", [
+                {text: "확인", onPress: () => navigation.navigate("Home")}
+            ]);
+        })
+        .catch((err) => console.log(err));
+    }
     
 
 
@@ -113,12 +125,8 @@ export default function PurchaseRecipe() {
                                 <TouchableOpacity 
                                     style={styles.modalBtn}
                                     onPress={() => {
-                                        if (loginData.memberCoin < 1100) {
-                                            Alert.alert("결제 코인 수량 부족", "코인 충전이 필요합니다. 충전 페이지로 이동하시겠습니까?", [{text: "예"}, {"text": "아니오"}])
-                                        } else {
-                                            requestPurchaseRecipe()}}
-                                        }
-                                        
+                                        requestPurchaseRecipe();
+                                    }}    
                                 >
                                     <Text>버튼을 탭하여 구매하기</Text>
                                 </TouchableOpacity>

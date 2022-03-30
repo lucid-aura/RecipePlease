@@ -1,6 +1,7 @@
 package com.recipe.a.controller;
 
 import com.recipe.a.dto.PaymentDto;
+import com.recipe.a.dto.PaymentListDto;
 import com.recipe.a.service.PaymentService;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,6 +51,13 @@ public class PaymentController {
 		return "not-purchased";
 	}
 
+	@PostMapping("/addPaymentList")
+	public String addPaymentList(PaymentListDto dto) {
+		logger.info("PaymentController addPaymentList()");
+		boolean checker = service.addPaymentList(dto);
+		return checker ? "added" : "fail";
+	}
+
 	// 굿즈 반품
 	@PostMapping("/returnGoods")
 	public String returnGoods(String memberId, int paymentSeq) {
@@ -70,7 +78,6 @@ public class PaymentController {
 	@GetMapping("/getPurchaseDetail")
 	public PaymentDto getGoodsPurchaseDetail(int paymentSeq) {
 		logger.info("PaymentController getGoodsPurchaseDetail()");
-		
 		return service.getGoodsPurchaseDetail(paymentSeq);
 	}
 	

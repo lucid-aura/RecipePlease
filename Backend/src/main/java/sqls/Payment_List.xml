@@ -12,9 +12,7 @@
 	<!-- 물품 구매시 추가 -->
 	<insert id="addPaymentList" parameterType="com.recipe.a.dto.PaymentListDto">
 		INSERT INTO PAYMENTLIST(PAYMENTLISTSEQ, PAYMENTSEQ, MEMBERID, PURCHASEPRODUCTSEQ, PAYMENTLISTCATEGORY, PAYMENTCOUNT, PAYMENTLISTPAY)
-		VALUES (NEXTVAL('PAYMENTLISTSEQ'), #{paymentSeq}, #{memberId}, #{purchaseProductSeq}, #{paymentListCategory}, #{paymentCount}, #{paymentListPay})
+		VALUES (NEXTVAL('PAYMENTLISTSEQ'), #{paymentSeq}, #{memberId}, #{purchaseProductSeq}, #{paymentListCategory}, 1, #{paymentListPay})
 	</insert>
-	
-	
 
 </mapper>

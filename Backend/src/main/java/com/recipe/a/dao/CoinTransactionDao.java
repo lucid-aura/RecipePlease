@@ -9,8 +9,12 @@ import com.recipe.a.dto.CoinTransactionDto;
 @Repository
 public interface CoinTransactionDao {
 
-    int coinTransactionTester();
-    
-    public int purchaseRecipeCheck(CoinTransactionDto coinDto);
+    // 테스트
+    CoinTransactionDto coinTransactionTester();
 
+    // 코인을 구매한 경우
+    boolean chargeCoin(CoinTransactionDto dto);
+
+    // 코인을 사용한 경우
+    boolean useCoin(CoinTransactionDto dto);
 }

@@ -12,8 +12,6 @@ import com.recipe.a.dto.MembersDto;
 @Repository
 public interface MembersDao {
 
-	public int countMembers();
-	
 	// 회원가입 - 노승현
 	public int regist(MembersDto dto);	// 회원가입 - 노승현
 	int countMembers();

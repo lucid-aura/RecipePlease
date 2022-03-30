@@ -27,10 +27,6 @@ public class MembersController {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
-	
-	private MembersService memberService;
-	private RecipeLikeService recipeLikeService;
 
 	public MembersController(MembersService memberService) {
 		this.memberService = memberService;
@@ -51,26 +47,26 @@ public class MembersController {
 		Random rnd = new Random();
 		String str[] = new String[4];
 		String salt = "";
-		for(int i=0; i<str.length; i++) {
+		for (int i = 0; i < str.length; i++) {
 			str[i] = String.valueOf((char) ((int) (rnd.nextInt(26)) + 97));
 			salt += str[i];
 		}
 		dto.setSalt(salt);
-		String secretNum = dto.getMember_pwd() + salt;
-		System.out.println("secretNum: "+ secretNum);
-		
+		String secretNum = dto.getMemberPwd() + salt;
+		System.out.println("secretNum: " + secretNum);
+
 		String encodedPassword = passwordEncoder.encode(secretNum);
-		dto.setMember_pwd(encodedPassword);
-		System.out.println("dto.getMember_pwd: " + dto.getMember_pwd() );
-		
+		dto.setMemberPwd(encodedPassword);
+		System.out.println("dto.getMember_pwd: " + dto.getMemberPwd());
+
 		boolean b = memberService.regist(dto);
-		
+
 		if (b) {
 			return "yes";
 		} else {
 			return "no";
 		}
-		
+	}
 
 	@PostMapping("/login")
 	public MembersDto login(String memberId, String memberPwd) {
