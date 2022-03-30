@@ -11,7 +11,6 @@ import com.recipe.a.dto.MembersDto;
 @Transactional
 public class MembersService {
 
-	@Autowired
 	private MembersDao dao;
 
 	public MembersService(MembersDao dao) {

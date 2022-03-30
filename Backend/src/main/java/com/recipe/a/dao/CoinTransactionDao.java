@@ -1,5 +1,6 @@
 package com.recipe.a.dao;
 
+import com.recipe.a.dto.ChargeCoinDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -13,8 +14,10 @@ public interface CoinTransactionDao {
     CoinTransactionDto coinTransactionTester();
 
     // 코인을 구매한 경우
-    boolean chargeCoin(CoinTransactionDto dto);
+    boolean chargeCoin(CoinTransactionDto coinTransactionDto);
+    boolean chargeCoinUpdate(ChargeCoinDto chargeCoinDto);
 
     // 코인을 사용한 경우
-    boolean useCoin(CoinTransactionDto dto);
+    boolean useCoin(CoinTransactionDto coinTransactionDto);
+    boolean useCoinUpdate(ChargeCoinDto chargeCoinDto);
 }

@@ -28,7 +28,7 @@ public class CoinTransactionController {
     }
 
     // 코인 충전
-    @PostMapping("/chageCoin")
+    @PostMapping("/chargeCoin")
     public String chargeCoin(CoinTransactionDto dto) {
         logger.info("CoinTransactionController chargeCoin()");
         boolean checker = coinTransactionService.chargeCoin(dto);
