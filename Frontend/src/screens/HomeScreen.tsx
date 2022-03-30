@@ -1,25 +1,13 @@
 import React, { useCallback } from 'react';
-import {
-  Dimensions,
-  Image,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import {
-  FlatList,
-  ScrollView,
-  TextInput,
-  TouchableHighlight,
-  TouchableOpacity,
-} from 'react-native-gesture-handler';
+import { Dimensions, Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, ScrollView, TextInput, TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {default as Icons } from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import COLORS from '../consts/colors';
 import categories from '../consts/categories';
 import foods from '../consts/foods';
+
 import { NavigationHeader } from '../theme';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 
