@@ -13,6 +13,22 @@
 		SELECT * FROM MEMBERS
 		WHERE MEMBERID = #{memberId} AND MEMBERPWD = #{memberPwd}
 	</select>
+	
+	<!-- 회원가입(중복체크) -->
+	<select id="idCheck" parameterType="com.recipe.a.dto.MembersDto" resultType="Integer">
+		SELECT COUNT(*)
+		FROM MEMBERS
+		WHERE MEMBERID = #{memberId} 
+	</select>
+	<insert id="regist" parameterType="com.recipe.a.dto.MembersDto">
+		INSERT INTO MEMBERS(
+			memberId, memberPwd, memberNickname, memberEmail,
+			memberPhone, memberCoin, memberMainAddr, memberDetailAddr,
+			memberZipcode, memberGender, memberName, memberGrade, salt)
+		VALUES(#{memberId}, #{memberPwd}, #{memberNickname}, #{memberEmail},
+			   #{memberPhone}, #{memberCoin}, #{memberMainAddr}, #{memberDetailAddr},
+			   #{memberZipcode}, #{memberGender}, #{memberName}, #{memberGrade}, #{salt})
+	</insert>
 
 
 </mapper>

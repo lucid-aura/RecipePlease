@@ -10,6 +10,7 @@ import foods from '../consts/foods';
 
 import { NavigationHeader } from '../theme';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
+import { getProfile } from '../mypage/utils';
 
 const {width} = Dimensions.get('screen'); //스크린 
 const cardWidth = width / 2 - 20; //카드값 길이시 2개에서 부터 20개까지 설정
