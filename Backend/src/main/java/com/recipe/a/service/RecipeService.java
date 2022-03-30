@@ -36,9 +36,9 @@ public class RecipeService {
 	@Autowired
 	PhotoDao photoDao;
 	
-	@Autowired
-	CoinTransactionDao coinTransactionDao;
-	
+	/*
+	 * @Autowired CoinTransactionDao coinTransactionDao;
+	 */
 	public int countRecipe() {
 		System.out.println("RecipeService");
 		return recipeDao.countRecipe();
@@ -83,11 +83,11 @@ public class RecipeService {
 		return recipeDao.updateRecipeRating(ratingDto.getDocsSeq());
 	}
 
-//	public int purchaseRecipeCheck(String memberId, int recipeSeq) {
-//		CoinTransactionDto coinDto = new CoinTransactionDto(memberId, recipeSeq);
-//		return coinTransactionDao.purchaseRecipeCheck(coinDto);
-//	}
-	
+	/*
+	 * public int purchaseRecipeCheck(String memberId, int recipeSeq) {
+	 * CoinTransactionDto coinDto = new CoinTransactionDto(memberId, recipeSeq);
+	 * return coinTransactionDao.purchaseRecipeCheck(coinDto); }
+	 */
 	public Map<String, Object> getRecommendRecipe(String category) {
 		List<RecipeDto> recipes = recipeDao.getRecommendRecipe(category);
 		

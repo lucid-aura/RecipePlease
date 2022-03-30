@@ -11,7 +11,8 @@ import com.recipe.a.dto.MembersDto;
 @Transactional
 public class MembersService {
 
-	private final MembersDao dao;
+	@Autowired
+	private MembersDao dao;
 
 	public MembersService(MembersDao dao) {
 		this.dao = dao;
@@ -23,11 +24,16 @@ public class MembersService {
 	}
 	
 	// 회원가입 - 노승현
-	public boolean regist(MembersDto dto) {
-
-		int n = dao.regist(dto);
-
-		return n > 0 ? true : false;
+	public boolean regist(MembersDto dto) {	
+		int b = dao.idCheck(dto);
+		
+		if(b == 1) {
+			return false;
+		} else {
+			int n = dao.regist(dto);
+			
+			return n>0? true:false;
+		}
 	}
 
 	public MembersDto login(String memberId, String memberPwd) {

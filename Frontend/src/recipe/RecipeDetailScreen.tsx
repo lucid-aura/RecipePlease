@@ -10,12 +10,13 @@ import React, { createContext, useCallback, useContext, useEffect, useRef, useSt
 import { Button, StyleSheet, Text, View, Image, SafeAreaView, ScrollView, Dimensions, Alert } from "react-native";
 import axios from 'axios';
 import RecipeDetailOrder from "./RecipeDetailOrder";
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import RecipeTags from './RecipeTags'
 import RecipeDetailRating from './RecipeDetailRating'
 import { Rating } from "react-native-ratings";
 //import RecipeDetailYoutube from "./RecipeDetailYoutube";
 import YoutubePlayer, {YoutubeIframeRef} from "react-native-youtube-iframe";
+import { NavigationHeader } from "../theme";
 
 
 
@@ -70,9 +71,16 @@ export default function RecipeDetailScreen({ route, navigation }:any){
           };
     }, [])
 
+    const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
+
     return(
+        
         <SafeAreaView style={styles.container}>
-            <ScrollView style={styles.contentContainer}>
+            <NavigationHeader title="홈" 
+                Left= {() => <Icon name="arrow-left-bold" size={30} onPress={goBack} />}
+                Right= {() => <Icon name="cart-heart" size={30} />} />
+
+            <ScrollView overScrollMode="never" style={styles.contentContainer}>
                 {/* 타이틀과 사진이 들어가는 View */}
                 <View>
                     <Text style={styles.title}>{recipe.recipeTitle}</Text>
@@ -112,10 +120,14 @@ export default function RecipeDetailScreen({ route, navigation }:any){
                 {/* 유튜브 링크 View */}
                 <View>
                     <YoutubePlayer
+                        webViewStyle={{opacity: 0.99}}
+                        useLocalHTML={true}
                         ref={playerRef}
                         height={600}
                         width={600}
                         videoId={url}
+                        onError={(err) => console.log(err)}
+                        onChangeState={(a) => console.log(a)}
                     />
                 </View>
 
