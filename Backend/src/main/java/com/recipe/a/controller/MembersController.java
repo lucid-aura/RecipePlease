@@ -55,8 +55,9 @@ public class MembersController {
 		String secretNum = dto.getMemberPwd() + salt;
 		System.out.println("secretNum: "+ secretNum);
 		String encodedPassword ="";
+		System.out.println(dto.toString());
 		
-		if(dto.getMemberPwd() == "") {	// 카카오 로그인 한 경우
+		if(dto.getMemberPwd() == null) {	// 카카오 로그인 한 경우
 			encodedPassword = passwordEncoder.encode(salt);
 			
 		} else {	// 일반 회원가입한 경우

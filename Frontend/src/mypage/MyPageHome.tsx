@@ -23,7 +23,7 @@ export default function MyPageHome(){
     // 로그인 훅
     const [id, setId] = useState<string>('')
     const [pwd, setPwd] = useState<string>('')
-    
+    const [nickName, setNickName] = useState<string>('')
     //카카오 아이디 가져오기
     getProfile()
         .then(value => console.log(value) )
