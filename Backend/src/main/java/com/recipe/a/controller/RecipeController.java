@@ -131,6 +131,16 @@ public class RecipeController {
 	}
 
 	@RequestMapping(value = "/getRecommendRecipe", method = {RequestMethod.GET})
+	public Map<String, Object> getRecommendRecipe(String category) {
+		
+		System.out.println("RecipeController getRecommendRecipe() " + category);
+
+		return recipeService.getRecommendRecipe(category);
+		//return recipeService.getPhoto(photoDto);
+	}
+	
+	/*
+	@RequestMapping(value = "/getRecommendRecipe", method = {RequestMethod.GET})
 	public Map<String, Object> getRecommendRecipe() {
 		System.out.println("RecipeController getRecommendRecipe()");
 		
@@ -141,7 +151,8 @@ public class RecipeController {
 		res.put("readcount", recipeService.getRecommendReadcountRecipe());
 		return res;
 		//return recipeService.getPhoto(photoDto);
-	}
+	}*/
+	
 	
 	@RequestMapping(value = "/test", method = {RequestMethod.GET})
 	public List<Integer> test(int docs_seq, String photo_category) {

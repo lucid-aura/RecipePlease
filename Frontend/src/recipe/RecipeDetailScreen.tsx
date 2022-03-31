@@ -34,8 +34,8 @@ export default function RecipeDetailScreen({ route, navigation }:any){
 
     const { seq } = route.params; // 받아온 레시피 seq
     const { category } = route.params; // 받아온 카테고리
-    const { star } = route.params; // 별점 반영 용 홈 setter 함수
-    
+    const { index } = route.params;
+    const { changeAvarage } = route.params;
 
     useEffect( () => {
         let completed = false;  // 한번 실행을 위한 변수
@@ -141,7 +141,7 @@ export default function RecipeDetailScreen({ route, navigation }:any){
                 <View>
                     {/* 평점 리스트 및 입력 부분 자식 컴포넌트 */}
                     <Text style={styles.subTitle}>평가</Text>
-                    <RecipeDetailRating  seq={seq} setAvarage={setAvarage} avarage={avarage}  star={star} />
+                    <RecipeDetailRating  seq={seq} setAvarage={setAvarage} avarage={avarage} index={index} changeAvarage={changeAvarage} />
                 </View>
 
             </ScrollView>

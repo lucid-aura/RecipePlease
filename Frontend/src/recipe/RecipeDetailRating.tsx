@@ -8,7 +8,7 @@ import { Button, DataTable, TextInput } from 'react-native-paper';
 /*
 npm install react-native-table-component
 */
-export default function RecipeDetailOrder( {seq, setAvarage, star} :any) { // 평가 및 별점 부여 컴포넌트
+export default function RecipeDetailOrder( { seq, setAvarage, setAvg, index, changeAvarage } :any) { // 평가 및 별점 부여 컴포넌트
 
     const [point, setPoint] = useState(3) // 댓글 입력시 기본 3점 default 값
     const [rating, setRating] = useState([]) // 해당 레시피의 평가글들을 모아놓은 배열
@@ -35,8 +35,8 @@ export default function RecipeDetailOrder( {seq, setAvarage, star} :any) { // �
             })
             let avg = (sum/res.data.length).toFixed(2)
             setAvarage(parseFloat(avg)) // 여기있는 이  setter함수는 부모 컴포넌트(RecipeDetailScreen)에서 받아온 함수
-
-            star() // 부모의 자매 컴포넌트에서 받아온 레시피 평균 값 변경 시 추천 레시피 리로드 함수
+            changeAvarage(index, parseFloat(avg))
+            //updateRecipeDataAfterComment() // 부모의 자매 컴포넌트에서 받아온 레시피 평균 값 변경 시 추천 레시피 리로드 함수
         }).catch(function(err){
             console.log(err)
         })
