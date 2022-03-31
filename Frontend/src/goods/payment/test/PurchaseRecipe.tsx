@@ -1,34 +1,48 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Alert, Animated, Button, Dimensions, Modal, PanResponder, Pressable, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 
-// 레시피 구매 버튼 tap할 때 구매 요청을 보낼 함수
-const requestPurchaseRecipe = () => {
-
-}
-
-export default function PurchaseRecipe() {
+export default function PurchaseRecipe({navigation}:any) {
 
     // 로그인 세션 정보
     const [loginData, setLoginData] = useState(Object);
 
     // 보유코인 및 레시피 가격 세팅
-    // const [userCoin, setUserCoin] = useState(0);
-    // const [recipePrice, setRecipePrice] = useState(1100);
-
-    const getLoginData = async () => {
-        let data = await AsyncStorage.getItem("loginData");
-        try {
-            if (data !== null) {
-                let loginSessionData = JSON.parse(data);
-                setLoginData(loginSessionData);
-                // setUserCoin(loginData.memberCoin);
+    const [userCoin, setUserCoin] = useState(0);
+    const [recipePrice, setRecipePrice] = useState(3000);
+    
+    useEffect(() => {
+        const getLoginData = async () => {
+            let data = await AsyncStorage.getItem("loginData");
+            try {
+                if (data !== null) {
+                    let loginSessionData = JSON.parse(data);
+                    setLoginData(loginSessionData);
+                    setUserCoin(loginData.memberCoin);
+                }
+            } catch (err) {
+                console.log(err);
             }
-        } catch (err) {
-            console.log(err);
         }
+        getLoginData();
+    }, [userCoin]);
+
+    // 레시피 구매 버튼 tap할 때 구매 요청을 보낼 함수
+    const requestPurchaseRecipe = async () => {
+        await axios.post("http://192.168.0.13:3000/coin/useCoin", null, {params: {
+            memberId: loginData.memberId,
+            docsSeq: 1,
+            coinCount: recipePrice
+        }})
+        .then((res) => {
+            console.log(res.data);
+            Alert.alert("구매 성공", "구매가 완료되었습니다.", [
+                {text: "확인", onPress: () => navigation.navigate("Home")}
+            ]);
+        })
+        .catch((err) => console.log(err));
     }
-    getLoginData();
     
 
 
@@ -106,24 +120,20 @@ export default function PurchaseRecipe() {
 
                             {/* 모달에 들어갈 내용을 아래에 작성 */}
                             <View>
-                                <Text>레시피 제목</Text>
-                                <Text>보유코인 {loginData.memberCoin}원</Text>
-                                <Text>구매가격 10000원</Text>
+                                <Text style={modalInnerStyle.recipeTitle}>레시피 제목</Text>
+                                <Text style={[modalInnerStyle.coin, {color: '#00f'}]}>보유코인 {userCoin}원</Text>
+                                <Text style={[modalInnerStyle.coin, { color: '#f00'}]}>구매가격 {recipePrice}원</Text>
 
                                 <TouchableOpacity 
-                                    style={styles.modalBtn}
+                                    style={modalInnerStyle.modalBtn}
                                     onPress={() => {
-                                        if (loginData.memberCoin < 1100) {
-                                            Alert.alert("결제 코인 수량 부족", "코인 충전이 필요합니다. 충전 페이지로 이동하시겠습니까?", [{text: "예"}, {"text": "아니오"}])
-                                        } else {
-                                            requestPurchaseRecipe()}}
-                                        }
-                                        
+                                        Alert.alert("구매 의사 재확인", "보유하고 있는 코인으로 레시피를 구매하시겠습니까? \n 코인으로 구매한 상품은 환불이 어렵습니다.", [{text: "취소"}, {text: "확인", onPress: () => requestPurchaseRecipe()}])
+                                    }}    
                                 >
-                                    <Text>버튼을 탭하여 구매하기</Text>
+                                    <Text style={modalInnerStyle.btnText}>버튼을 탭하여 구매하기</Text>
                                 </TouchableOpacity>
 
-                                <Text>레시피는 결제완료시 환불이 어렵습니다.</Text>
+                                <Text style={modalInnerStyle.warningText}>레시피는 결제완료시 환불이 어렵습니다.</Text>
                             </View>
 
                         </Animated.View>
@@ -156,9 +166,36 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 7,
         padding: 20
     },  // 모달 스타일
+})
+
+const modalInnerStyle = StyleSheet.create({
+    recipeTitle: {
+        fontSize: 22,
+        fontWeight: '700'
+    },
+    coin: {
+        fontSize: 17,
+        fontWeight: '700',
+        paddingTop: 10,
+        textAlign: 'right'
+    },
     modalBtn: {
         padding: 10,
-        backgroundColor: '#ff47bb',
-        borderRadius: 7
-    }   // 모달 내 결제버튼
+        backgroundColor: '#4852c7',
+        borderRadius: 7,
+        marginTop: 30,
+        marginBottom: 30
+    },   // 모달 내 결제버튼
+    btnText: {
+        padding: 6,
+        fontSize: 17,
+        fontWeight: '700',
+        color: '#fff',
+        textAlign: 'center'
+    },
+    warningText: {
+        color: '#f00',
+        textAlign: 'center',
+        fontSize: 16,
+    }
 })

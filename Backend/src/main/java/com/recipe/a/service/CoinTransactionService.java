@@ -1,25 +1,44 @@
 package com.recipe.a.service;
 
 import com.recipe.a.dao.CoinTransactionDao;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.recipe.a.dto.ChargeCoinDto;
+import com.recipe.a.dto.CoinTransactionDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
 public class CoinTransactionService {
 
     private final CoinTransactionDao coinTransactionDao;
-    private Logger logger = LoggerFactory.getLogger(CoinTransactionService.class);
 
     public CoinTransactionService(CoinTransactionDao coinTransactionDao) {
         this.coinTransactionDao = coinTransactionDao;
     }
 
     // test mode
-    public int coinTransactionTester() {
-        logger.info("coinTransactionTester()");
+    public CoinTransactionDto coinTransactionTester() {
         return coinTransactionDao.coinTransactionTester();
+    }
+
+    // 사용한 모든 코인 데이터 가져오기
+    public List<CoinTransactionDto> getCoinData(String memberId) {
+        return coinTransactionDao.getCoinData(memberId);
+    }
+
+    // 코인 충전
+    public boolean chargeCoin(CoinTransactionDto coinTransactionDto) {
+        coinTransactionDao.chargeCoin(coinTransactionDto);
+        ChargeCoinDto dto = new ChargeCoinDto(coinTransactionDto.getCoinCount(), coinTransactionDto.getMemberId());
+        return coinTransactionDao.chargeCoinUpdate(dto);
+    }
+
+    // 코인 사용
+    public boolean useCoin(CoinTransactionDto coinTransactionDto) {
+        coinTransactionDao.useCoin(coinTransactionDto);
+        ChargeCoinDto dto = new ChargeCoinDto(coinTransactionDto.getCoinCount(), coinTransactionDto.getMemberId());
+        return coinTransactionDao.useCoinUpdate(dto);
     }
 }

@@ -1,7 +1,6 @@
 package com.recipe.a.service;
 
 import com.recipe.a.dto.MembersDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +11,6 @@ import com.recipe.a.dto.MembersDto;
 @Transactional
 public class MembersService {
 
-	@Autowired
 	private MembersDao dao;
 
 	public MembersService(MembersDao dao) {
