@@ -113,12 +113,11 @@ import { resolvePath } from "react-native-reanimated/src/reanimated2/animation/s
 
 
 // 구매리스트
-export default function PurchaseList(props:any, { route }:any) {
+export default function PurchaseList({user}:any, props:any) {
 
     // 1. 로그인 데이터 가져오기(이전 페이지[TestPage.tsx]에서 props로 넘겨서 받아오는 방법)
-    const memberId = props.route.params.loginId;
-    // console.log("memberId: " + memberId);
-    const [userId, setUserId] = useState(memberId);
+    console.log(`memberId는 ${user}`);
+    const [userId, setUserId] = useState(user);
     const [completed, setCompleted] = useState(false);
 
     /* 2. 로그인 데이터 가져오기(AsyncStorage에 저장된 로그인 세션 정보를 가져오는 방법)
@@ -140,7 +139,7 @@ export default function PurchaseList(props:any, { route }:any) {
 
     const Item = ({userId, count, name, amount, del, paymentSeq, paymentDate, props, confirm}:any) => {
 
-        const [detailVisible, setDetailVisibla] = useState(false);
+        const [detailVisible, setDetailVisible] = useState(false);
     
         // 각 아이템 클릭시
         function itemClick(paymentSeq:number) {
@@ -152,7 +151,7 @@ export default function PurchaseList(props:any, { route }:any) {
             })
             .then((res) => {
                 console.log(res.data);
-                setDetailVisibla(!detailVisible);
+                setDetailVisible(!detailVisible);
             })
             .catch((err) => console.log(err));
         }
@@ -180,7 +179,7 @@ export default function PurchaseList(props:any, { route }:any) {
         }
         // 구매 목록 리스트 
         return (
-            <ScrollView>            
+            <View>            
                 <TouchableOpacity style={styles.itemContainer} onPress={() => itemClick(paymentSeq)}>
                     <View style={styles.rowDirection}>
                         <Text style={styles.buyer}>{userId}</Text>                    
@@ -232,7 +231,7 @@ export default function PurchaseList(props:any, { route }:any) {
                         </View>
                     : <View style={{display: 'none'}}></View>
                 }
-            </ScrollView>
+            </View>
         )
     } 
 
@@ -280,7 +279,8 @@ export default function PurchaseList(props:any, { route }:any) {
     }
 
     return (
-        <View>
+        <View style={styles.scrView}>
+            <Text style={styles.titleText}>상품 구매 이력</Text>
             <FlatList data={data} renderItem={renderItem} />
         </View>
     )
@@ -313,5 +313,13 @@ const styles = StyleSheet.create({
         padding: 3,
         borderRadius: 5,
         backgroundColor: '#bd4646',
-    }   // 환불버튼
+    },   // 환불버튼
+    titleText: {
+        fontSize: 25,
+        padding: 10,
+        fontWeight: '600'
+    },  // 페이지 제목
+    scrView: {
+        height: 760
+    }   // 마지막 리스트가 잘려서 임의로 높이 지정(기기의 세로 길이)
 })

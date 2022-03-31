@@ -11,7 +11,6 @@ export default function TestPage({ navigation }:any, props:any) {
 
     useEffect(() => {
         const getLoginData = async () => {
-            console.log('aaaaaaaaaaaa');
             let loginData = await AsyncStorage.getItem("loginData");
             
             try {
@@ -43,7 +42,7 @@ export default function TestPage({ navigation }:any, props:any) {
                 }}
                 onPress={() => {
                     console.log(userId);
-                    navigation.navigate('purchaseList', {"loginId": userId});
+                    navigation.navigate('userPurchaseList', {"loginId": userId});
                 }}
             >
                 <Text style={{color: '#fff', fontWeight: '700'}}>구매이력 조회</Text>

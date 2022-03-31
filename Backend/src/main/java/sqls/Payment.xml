@@ -16,7 +16,7 @@
 							PAYMENTDETAILADDR, PAYMENTZIPCODE, PAYMENTCATEGORY,
 							PAYMENTCOUNT)
 		VALUES (NEXTVAL('PAYMENTSEQ'), #{memberId}, #{paymentPay},
-		        SYSDATE(), 0, #{paymentMainAddr},
+		        NOW(), 0, #{paymentMainAddr},
 		        #{paymentDetailAddr}, #{paymentZipcode}, '굿즈',
 		        1)
 	</insert>
@@ -47,7 +47,7 @@
 							PAYMENTDETAILADDR, PAYMENTZIPCODE, PAYMENTCATEGORY,
 							PAYMENTCOUNT)
 		VALUES (NEXTVAL('PAYMENTSEQ'), #{memberId}, #{paymentPay},
-				SYSDATE(), 0, #{paymentMainAddr},
+				NOW(), 0, #{paymentMainAddr},
 				#{paymentDetailAddr}, #{paymentZipcode}, '코인',
 				1)
 	</insert>

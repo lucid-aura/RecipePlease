@@ -6,6 +6,8 @@ import com.recipe.a.dto.CoinTransactionDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class CoinTransactionService {
@@ -19,6 +21,11 @@ public class CoinTransactionService {
     // test mode
     public CoinTransactionDto coinTransactionTester() {
         return coinTransactionDao.coinTransactionTester();
+    }
+
+    // 사용한 모든 코인 데이터 가져오기
+    public List<CoinTransactionDto> getCoinData(String memberId) {
+        return coinTransactionDao.getCoinData(memberId);
     }
 
     // 코인 충전

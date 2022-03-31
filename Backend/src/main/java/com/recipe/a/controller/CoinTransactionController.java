@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/coin")
 public class CoinTransactionController {
@@ -25,6 +27,12 @@ public class CoinTransactionController {
     public CoinTransactionDto coinTransactionTester() {
         logger.info("CoinTransactionController coinTransactionTester()");
         return coinTransactionService.coinTransactionTester();
+    }
+
+    // 사용한 모든 코인 데이터
+    @PostMapping("/getUserCoinData")
+    public List<CoinTransactionDto> getUserCoinData(String memberId) {
+        return coinTransactionService.getCoinData(memberId);
     }
 
     // 코인 충전

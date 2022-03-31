@@ -6,12 +6,17 @@ import org.springframework.stereotype.Repository;
 
 import com.recipe.a.dto.CoinTransactionDto;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface CoinTransactionDao {
 
     // 테스트
     CoinTransactionDto coinTransactionTester();
+
+    // 사용한 모든 코인 데이터
+    List<CoinTransactionDto> getCoinData(String memberId);
 
     // 코인을 구매한 경우
     boolean chargeCoin(CoinTransactionDto coinTransactionDto);
