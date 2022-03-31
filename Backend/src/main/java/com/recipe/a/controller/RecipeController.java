@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.recipe.a.dto.PhotoDto;
 import com.recipe.a.dto.RatingDto;
 import com.recipe.a.dto.RecipeDto;
+import com.recipe.a.dto.RecipeLikeDto;
 import com.recipe.a.service.RecipeLikeService;
 import com.recipe.a.service.RecipeService;
 
@@ -139,20 +140,20 @@ public class RecipeController {
 		//return recipeService.getPhoto(photoDto);
 	}
 	
-	/*
-	@RequestMapping(value = "/getRecommendRecipe", method = {RequestMethod.GET})
-	public Map<String, Object> getRecommendRecipe() {
-		System.out.println("RecipeController getRecommendRecipe()");
-		
-		Map<String, Object> res = new HashMap<String, Object>();
-		
-		res.put("livestock", recipeService.getRecommendRecipe("livestock"));
-		res.put("seafood", recipeService.getRecommendRecipe("seafood"));
-		res.put("readcount", recipeService.getRecommendReadcountRecipe());
-		return res;
-		//return recipeService.getPhoto(photoDto);
-	}*/
 	
+	@RequestMapping(value = "/likeRecipe", method = {RequestMethod.GET})
+	public int likeRecipe(RecipeLikeDto recipeLikeDto) {
+		recipeLikeDto.setLikeseq(0);
+		System.out.println("RecipeController likeRecipe()");
+		return recipeLikeService.likeRecipe(recipeLikeDto);
+	}
+	
+	@RequestMapping(value = "/unlikeRecipe", method = {RequestMethod.GET})
+	public int unlikeRecipe(RecipeLikeDto recipeLikeDto) {
+		System.out.println("RecipeController unlikeRecipe()");
+		return recipeLikeService.unLikeRecipe(recipeLikeDto);
+
+	}
 	
 	@RequestMapping(value = "/test", method = {RequestMethod.GET})
 	public List<Integer> test(int docs_seq, String photo_category) {
