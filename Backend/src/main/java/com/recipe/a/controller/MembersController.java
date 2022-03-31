@@ -28,9 +28,6 @@ public class MembersController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	public MembersController(MembersService memberService) {
-		this.memberService = memberService;
-	}
 
 	@RequestMapping(value = "/countMembers", method = {RequestMethod.GET, RequestMethod.POST})
 	public String countMembers() {
@@ -47,7 +44,7 @@ public class MembersController {
 		Random rnd = new Random();
 		String str[] = new String[4];
 		String salt = "";
-		for(int i=0; i<str.length; i++) {
+		for (int i = 0; i < str.length; i++) {
 			str[i] = String.valueOf((char) ((int) (rnd.nextInt(26)) + 97));
 			salt += str[i];
 		}

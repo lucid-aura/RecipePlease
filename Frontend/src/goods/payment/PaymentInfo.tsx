@@ -5,13 +5,17 @@ import { Alert, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpa
 import RNPickerSelect from 'react-native-picker-select';
 import { SafeAreaView } from "react-native-safe-area-context";
 
+// 다른 디바이스로 실행
+// devices list : xcrun simctl list devices
+// run : npx react-native run-ios --simulator="devices list로 조회한 기기명"
+
 // 결제 준비화면
 /* 로그아웃 했을 때 모든 AsyncStorage를 비워야 할 것 같음.. */
 
 // 주문번호를 iamport 관리자 콘솔에 전달하기 위해 사용
-const date = new Date()
-let random = Math.floor(Math.random() * 10 + 1)
-let uid = `${date.getFullYear()}${date.getMonth()+1}${date.getDate()}-${date.getHours()}${date.getMinutes()}${date.getSeconds()}-${random}`
+const date = new Date();
+let random = Math.floor(Math.random() * 10 + 1);
+let uid = `${date.getFullYear()}${date.getMonth()+1}${date.getDate()}-${date.getHours()}${date.getMinutes()}${date.getSeconds()}-${random}`;
 
 // 하이픈을 자동으로 추가해주는 함수
 const addHyphenToPhoneNumber = (phoneNum:String) => {

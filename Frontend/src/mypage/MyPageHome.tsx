@@ -110,13 +110,13 @@ export default function MyPageHome(){
      */
 }  // 네비 함수 생성후 버튼 클릭시 이동처리
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    }
-}) //css
+// const styles = StyleSheet.create({
+//     container: {
+//         flex: 1
+//     }
+// }) //css
 
-/** 테스트용 **/
+// /** 테스트용 **/
 // export default function MyPageHomeScreen(){
 
 //     const navigation = useNavigation()
@@ -198,14 +198,3 @@ const styles = StyleSheet.create({
 //         </View>
 //      */
 // }  // 네비 함수 생성후 버튼 클릭시 이동처리
-
-/*
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
-}) //css
-
-*/

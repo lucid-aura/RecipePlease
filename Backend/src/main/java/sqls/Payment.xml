@@ -12,26 +12,14 @@
 	<!-- [굿즈] 결제 성공 시 결제 정보 추가 -->
 	<insert id="addGoodsShoppingList" parameterType="com.recipe.a.dto.PaymentDto">
 		INSERT INTO PAYMENT(PAYMENTSEQ, MEMBERID, PAYMENTPAY,
-		                    PAYMENTDATE, PAYMENTDEL, PAYMENTMAIN_ADDR,
-							PAYMENTDETAILADDR, PAYMENTZIPCODE, PAYMENTCATEGORY,
-							PAYMENTCOUNT)
-		VALUES (NEXTVAL('PAYMENTSEQ'), #{memberId}, #{paymentPay},
-		        SYSDATE(), 0, #{paymentMainAddr},
-		        #{paymentDetailAddr}, #{paymentZipcode}, '굿즈',
-		        1)
-	</insert>
-	
-	<!-- [코인] 코인 구매 시 결제 정보 추가 -->
-	<insert id="chargeCoin" parameterType="com.recipe.a.dto.PaymentDto">
-		INSERT INTO PAYMENT(PAYMENTSEQ, MEMBERID, PAYMENTPAY,
 		                    PAYMENTDATE, PAYMENTDEL, PAYMENTMAINADDR,
 							PAYMENTDETAILADDR, PAYMENTZIPCODE, PAYMENTCATEGORY,
 							PAYMENTCOUNT)
 		VALUES (NEXTVAL('PAYMENTSEQ'), #{memberId}, #{paymentPay},
-		        SYSDATE(), 0, #{paymentMainAddr},
-		        #{paymentDetailAddr}, #{paymentZipcode}, '코인',
+		        NOW(), 0, #{paymentMainAddr},
+		        #{paymentDetailAddr}, #{paymentZipcode}, '굿즈',
 		        1)
-	</insert> 
+	</insert>
 	
 	<!-- 굿즈 환불 -->
 	<update id="refundGoods" parameterType="com.recipe.a.dto.PaymentDto">
@@ -51,5 +39,17 @@
 		WHERE MEMBERID = #{memberId}
 		ORDER BY PAYMENTDATE DESC
 	</select>
+
+	<!-- 코인 충전 시 -->
+	<insert id="chargeCoin" parameterType="com.recipe.a.dto.PaymentDto">
+		INSERT INTO PAYMENT(PAYMENTSEQ, MEMBERID, PAYMENTPAY,
+							PAYMENTDATE, PAYMENTDEL, PAYMENTMAINADDR,
+							PAYMENTDETAILADDR, PAYMENTZIPCODE, PAYMENTCATEGORY,
+							PAYMENTCOUNT)
+		VALUES (NEXTVAL('PAYMENTSEQ'), #{memberId}, #{paymentPay},
+				NOW(), 0, #{paymentMainAddr},
+				#{paymentDetailAddr}, #{paymentZipcode}, '코인',
+				1)
+	</insert>
 
 </mapper>
