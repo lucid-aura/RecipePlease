@@ -26,10 +26,15 @@ public class MembersService {
 	
 	// 회원가입 - 노승현
 	public boolean regist(MembersDto dto) {	
+		int b = dao.idCheck(dto);
 		
-		int n = dao.regist(dto);
-		
-		return n>0? true:false;
+		if(b == 1) {
+			return false;
+		} else {
+			int n = dao.regist(dto);
+			
+			return n>0? true:false;
+		}
 	}
 
 	public MembersDto login(String memberId, String memberPwd) {

@@ -26,15 +26,32 @@ public class MembersDto {
 	private int memberCoin;
 	private String memberMainAddr;
 	private String memberDetailAddr;
-	private String memberZipcode;
+	private int memberZipcode;
 	private String memberGender;
 	private String memberName;
 	private String memberGrade;
 	private String salt;
 	
+	public MembersDto() {
+		super();
+		this.memberId = "";
+		this.memberPwd = "";
+		this.memberNickname = "";
+		this.memberEmail = "";
+		this.memberPhone = "";
+		this.memberCoin = 0;
+		this.memberMainAddr = "";
+		this.memberDetailAddr = "";
+		this.memberZipcode = 0;
+		this.memberGender = "";
+		this.memberName = "";
+		this.memberGrade = "";
+		this.salt = "";
+	}
+	
 	public MembersDto(String memberId, String memberPwd, String memberNickname, String memberEmail, String memberPhone,
-			int memberCoin, String memberMainAddr, String memberDetailAddr, String memberZipcode, String memberGender,
-			String memberName, String salt) {
+			int memberCoin, String memberMainAddr, String memberDetailAddr, int memberZipcode, String memberGender,
+			String memberName, String memberGrade, String salt) {
 		super();
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
@@ -47,8 +64,30 @@ public class MembersDto {
 		this.memberZipcode = memberZipcode;
 		this.memberGender = memberGender;
 		this.memberName = memberName;
+		this.memberGrade = memberGrade;
 		this.salt = salt;
 	}
+	
+	
+	public MembersDto(String memberId, String memberNickname) {
+		super();
+		this.memberId = memberId;
+		this.memberPwd = "";
+		this.memberNickname = memberNickname;
+		this.memberEmail = "";
+		this.memberPhone = "";
+		this.memberCoin = 0;
+		this.memberMainAddr = "";
+		this.memberDetailAddr = "";
+		this.memberZipcode = 0;
+		this.memberGender = "";
+		this.memberName = "";
+		this.memberGrade = "";
+		this.salt = "";
+		
+	}
+
+
 
 	public String getMemberId() {
 		return memberId;
@@ -114,11 +153,11 @@ public class MembersDto {
 		this.memberDetailAddr = memberDetailAddr;
 	}
 
-	public String getMemberZipcode() {
+	public int getMemberZipcode() {
 		return memberZipcode;
 	}
 
-	public void setMemberZipcode(String memberZipcode) {
+	public void setMemberZipcode(int memberZipcode) {
 		this.memberZipcode = memberZipcode;
 	}
 
@@ -149,14 +188,16 @@ public class MembersDto {
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
+
 	@Override
 	public String toString() {
 		return "MembersDto [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberNickname=" + memberNickname
 				+ ", memberEmail=" + memberEmail + ", memberPhone=" + memberPhone + ", memberCoin=" + memberCoin
 				+ ", memberMainAddr=" + memberMainAddr + ", memberDetailAddr=" + memberDetailAddr + ", memberZipcode="
-				+ memberZipcode + ", memberGender=" + memberGender + ", memberName=" + memberName + ", salt=" + salt
-				+ "]";
+				+ memberZipcode + ", memberGender=" + memberGender + ", memberName=" + memberName + ", memberGrade="
+				+ memberGrade + ", salt=" + salt + "]";
 	}
+	
 	
 	
 }
