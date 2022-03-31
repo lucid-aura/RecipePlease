@@ -28,9 +28,6 @@ public class MembersController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	public MembersController(MembersService memberService) {
-		this.memberService = memberService;
-	}
 
 	@RequestMapping(value = "/countMembers", method = {RequestMethod.GET, RequestMethod.POST})
 	public String countMembers() {

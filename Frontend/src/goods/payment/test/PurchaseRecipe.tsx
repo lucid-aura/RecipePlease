@@ -10,7 +10,7 @@ export default function PurchaseRecipe({navigation}:any) {
 
     // 보유코인 및 레시피 가격 세팅
     const [userCoin, setUserCoin] = useState(0);
-    // const [recipePrice, setRecipePrice] = useState(1100);
+    const [recipePrice, setRecipePrice] = useState(3000);
     
     useEffect(() => {
         const getLoginData = async () => {
@@ -33,7 +33,7 @@ export default function PurchaseRecipe({navigation}:any) {
         await axios.post("http://192.168.0.13:3000/coin/useCoin", null, {params: {
             memberId: loginData.memberId,
             docsSeq: 1,
-            coinCount: 1100
+            coinCount: recipePrice
         }})
         .then((res) => {
             console.log(res.data);
@@ -122,7 +122,7 @@ export default function PurchaseRecipe({navigation}:any) {
                             <View>
                                 <Text style={modalInnerStyle.recipeTitle}>레시피 제목</Text>
                                 <Text style={[modalInnerStyle.coin, {color: '#00f'}]}>보유코인 {userCoin}원</Text>
-                                <Text style={[modalInnerStyle.coin, { color: '#f00'}]}>구매가격 {(10000).toLocaleString('ko-KR')}원</Text>
+                                <Text style={[modalInnerStyle.coin, { color: '#f00'}]}>구매가격 {recipePrice}원</Text>
 
                                 <TouchableOpacity 
                                     style={modalInnerStyle.modalBtn}
