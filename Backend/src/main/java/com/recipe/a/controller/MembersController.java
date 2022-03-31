@@ -88,7 +88,7 @@ public class MembersController {
 		
 		boolean b = memberService.idCheck(dto);
 		if(b) {
-			return "yes";	//중복
+			return "yes";	// 중복
 		}	
 		return "no";		// 중복X
 	}
