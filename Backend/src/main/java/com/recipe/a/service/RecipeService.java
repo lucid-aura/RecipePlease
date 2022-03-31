@@ -26,19 +26,18 @@ public class RecipeService {
 
 	@Autowired
 	RecipeDao recipeDao;
-	
+
 	@Autowired
 	RecipeLikeDao recipeLikeDao;
-	
+
 	@Autowired
 	RatingDao ratingDao;
-	
+
 	@Autowired
 	PhotoDao photoDao;
+
+	@Autowired CoinTransactionDao coinTransactionDao;
 	
-	/*
-	 * @Autowired CoinTransactionDao coinTransactionDao;
-	 */
 	public int countRecipe() {
 		System.out.println("RecipeService");
 		return recipeDao.countRecipe();
@@ -51,17 +50,17 @@ public class RecipeService {
 
 	public List<PhotoDto> getPhoto(PhotoDto photoDto) {
 		List<PhotoDto> dtos = photoDao.getPhoto(photoDto);
-		
+
 		System.out.println("PhotoDto photoDto - " + dtos.size());
 		return dtos;
 		// return photoDao.getPhoto(photoDto);
-		
+
 	}
 
 	public int countPhoto() {
 		return photoDao.countPhoto();
 	}
-	
+
 	public List<Integer> test() {
 		return photoDao.test();
 	}
@@ -83,27 +82,26 @@ public class RecipeService {
 		return recipeDao.updateRecipeRating(ratingDto.getDocsSeq());
 	}
 
-	/*
-	 * public int purchaseRecipeCheck(String memberId, int recipeSeq) {
-	 * CoinTransactionDto coinDto = new CoinTransactionDto(memberId, recipeSeq);
-	 * return coinTransactionDao.purchaseRecipeCheck(coinDto); }
-	 */
+	public int purchaseRecipeCheck(String memberId, int recipeSeq) {
+		CoinTransactionDto coinDto = new CoinTransactionDto(memberId, recipeSeq);
+		return coinTransactionDao.purchaseRecipeCheck(coinDto);
+	}
+
 	public Map<String, Object> getRecommendRecipe(String category) {
 		List<RecipeDto> recipes;
 		if (category.equals("readcount")) {
 			recipes = recipeDao.getRecommendReadcountRecipe();
-		}
-		else {
+		} else {
 			recipes = recipeDao.getRecommendRecipe(category);
 		}
 		List<Integer> recipeSeqList = new ArrayList<Integer>();
 		List<String> titleList = new ArrayList<String>();
 		List<String> videoList = new ArrayList<String>();
-		List<Integer> recipePrice = new ArrayList<Integer>();		
+		List<Integer> recipePrice = new ArrayList<Integer>();
 		List<Float> recipeRatingList = new ArrayList<Float>();
 		List<String> thumbnailPhotoList = new ArrayList<String>();
 		List<Integer> readcountList = new ArrayList<Integer>();
-		
+
 		for (RecipeDto recipe : recipes) {
 			recipeSeqList.add(recipe.getRecipeSeq());
 			titleList.add(recipe.getRecipeTitle());
@@ -113,7 +111,6 @@ public class RecipeService {
 			readcountList.add(recipe.getRecipeReadcount());
 		}
 		List<PhotoDto> thumbnails = photoDao.getRecommendThumnailPhoto(recipeSeqList);
-	
 
 		for (int seq : recipeSeqList) {
 			for (PhotoDto thumbnail : thumbnails) {
@@ -123,8 +120,7 @@ public class RecipeService {
 				}
 			}
 		}
-		
-		
+
 		Map<String, Object> res = new HashMap<String, Object>();
 		res.put("recipeSeq", recipeSeqList);
 		res.put("title", titleList);
@@ -133,14 +129,13 @@ public class RecipeService {
 		res.put("recipePrice", recipePrice);
 		res.put("thumbnailPhoto", thumbnailPhotoList);
 		res.put("readcount", readcountList);
-		
-		
+
 		return res;
 	}
 
 	public int oneUpReadcount(int recipeSeq) {
 		return recipeDao.oneUpReadcount(recipeSeq);
-		
+
 	}
-	
+
 }
