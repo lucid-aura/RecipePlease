@@ -6,7 +6,7 @@ import { View, Text,StyleSheet, Button, TextInput, TouchableOpacity, Image } fro
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { NavigationHeader } from "../theme";
 import { getProfile, signOutWithKakao } from '../mypage/utils';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as L from '../store/login'
 import { AppState } from "../store";
 import { KakaoOAuthToken, login } from "@react-native-seoul/kakao-login";
@@ -20,128 +20,47 @@ npm i axios
 */
 
 export default function MyPageHome(){
-
+    
     const navigation = useNavigation()
     const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
-    // 로그인 훅
-    const [id, setId] = useState<string>('')
-    const [pwd, setPwd] = useState<string>('')
+
+    const log = useSelector<AppState, L.State>((state) => state.login)
+    const {loggedIn, loggedUser} = log
+    console.log(loggedIn)
+    const dispatch = useDispatch()
     let userInfo:string[]
-    //카카오 아이디 가져오기
-    const signInWithKakao = async (): Promise<void> => {
-        const token: KakaoOAuthToken = await login();
-    
-        console.log(JSON.stringify(token))
-    
-        userInfo= (await getProfile()).split(" ")
-        console.log("userInfo: " + userInfo[0])
-        
-        axios.post("http://192.168.219.102:3000/regist", null, 
-        {
-            params: {
-                memberId: userInfo[0],
-                memberNickname: userInfo[1],
-            }
-        }).then(function(response) {
-            if(response.data == "yes") {
-                console.log("로그인 및 회원가입 되었습니다.")
-            } else {
-                console.log("로그인 되었습니다.")
-            }
-        })
-        setId(userInfo[0])
-    };
 
-    getProfile().then(value => {
-        userInfo = value.split(" ")
-        setId(userInfo[0])
-        console.log(`userInfo[0]: ${userInfo[0]} userInfo[1]: ${userInfo[1]}`)
-    })
-
-    if(id == '') {
-        return(
-            <View style={styles.container}>
-                <NavigationHeader title="홈" 
-                Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
-                Right= {() => <Icon name="cart-heart" size={30} />}
-                />
-                {/* 아이디 입력 */}
-                <View>
-                    <TextInput
-                        placeholder="id를 입력해 주세요"
-                        placeholderTextColor='#003f5c'
-                        onChangeText = {(id) => setId(id)} />
-                </View>
-
-                {/* 패스워드 입력 */}
-                <View>
-                    <TextInput
-                        placeholder="패스워드를 입력해 주세요"
-                        placeholderTextColor='#003f5c'
-                        secureTextEntry={true}
-                        onChangeText = {(pwd) => setPwd(pwd)} />
-                </View>
-
-                {/* 로그인 버튼 */}
-                <View>
-                    <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                        <Text>로그인</Text>
-                    </TouchableOpacity>
-                </View>
-                <View>
-                    <TouchableOpacity onPress={() => signInWithKakao()}>
-                        <Image source={require("./utils/kakao_login_medium_narrow.png")} />
-                    </TouchableOpacity>
-                </View>
-                <View>
-                    <TouchableOpacity onPress={() =>signOutWithKakao()}>
-                       <Text>로그아웃</Text>
-                    </TouchableOpacity>
-                </View>
-                <View>
-                    <TouchableOpacity onPress={() => getProfile()}>
-                        <Text>프로필 조회</Text>
-                    </TouchableOpacity>
-                    <Text></Text>
-                </View>
-                {/* 회원가입 버튼 */}
-                <View>
-                    <TouchableOpacity onPress={() => navigation.navigate('MyAccount')}>
-                        <Text>회원가입</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        )
-    } else {
-        return(
+    return(
+        <View>
+            <NavigationHeader title="홈" 
+            Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
+            Right= {() => <Icon name="cart-heart" size={30} />} />
+            <Text>로그인 되어 있음</Text>
             <View>
-                <NavigationHeader title="홈" 
-                Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
-                Right= {() => <Icon name="cart-heart" size={30} />} />
-                <Text>로그인 되어 있음</Text>
-                <View>
-                    <TouchableOpacity onPress={() => {
-                        signOutWithKakao()
-                        setId('')
-                    }}>
-                       <Text>로그아웃</Text>
-                    </TouchableOpacity>
-                </View>
-                <TouchableOpacity onPress={() => navigation.navigate('MyFavoriteRecipe')}>
-                        <Text>즐겨찾기</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('MyInfo')}>
-                        <Text>내 정보</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('MyUploadedRecipe')}>
-                        <Text>내가 쓴 레시피</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('RecipeUpload')}>
-                        <Text>레시피 업로드</Text>
+                <TouchableOpacity onPress={() => {
+                    signOutWithKakao()
+                    dispatch(L.logoutAction())
+                    console.log(loggedIn)
+                    navigation.navigate("Login")
+                }}>
+                    <Text>로그아웃</Text>
                 </TouchableOpacity>
             </View>
-        )
-    }
+            <TouchableOpacity onPress={() => navigation.navigate('MyFavoriteRecipe')}>
+                    <Text>즐겨찾기</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('MyInfo')}>
+                    <Text>내 정보</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('MyUploadedRecipe')}>
+                    <Text>내가 쓴 레시피</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('RecipeUpload')}>
+                    <Text>레시피 업로드</Text>
+            </TouchableOpacity>
+        </View>
+    )
+    
    /* 
         <View>
             <Text>로그인 되었을 때</Text>

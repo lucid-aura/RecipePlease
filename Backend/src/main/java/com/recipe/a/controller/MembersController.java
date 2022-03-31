@@ -77,6 +77,7 @@ public class MembersController {
 
 	@PostMapping("/login")
 	public MembersDto login(String memberId, String memberPwd) {
+		System.out.println("login");
 		return memberService.login(memberId, memberPwd);
 	}
 	

@@ -1,10 +1,11 @@
 import Postcode from "@actbase/react-daum-postcode";
 import { NavigationRouteContext, useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Alert, Button, Modal, StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, View } from "react-native";
 import { Colors, RadioButton } from "react-native-paper";
-
+import { useDispatch } from "react-redux";
+import * as L from '../../store/login'
 
 /* 
 
@@ -17,28 +18,33 @@ npm i react-native-webview
 
 export default function MyAccount() {
 
-    const [id, setId] = useState<string>('')
-    const [pwd, setPwd] = useState<string>('')
-    const [nickname, setNickname] = useState<string>('')
+    const [memberId, setMemberId] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
+    const [confirmPassword, setConfirmPassword] = useState<string>(password)
+    const [memberNickname, setMemberNickname] = useState<string>('')
     
     const [msg, setMsg] = useState<string>('msg')
 
-    const [isModal, setModal] = useState(false)
     const navigation = useNavigation()
-    
+    const dispatch = useDispatch()
+    const goMyPage = useCallback(() => {
+          //dispatch(L.signUpAction({memberId, memberNickname, password}))
+          navigation.navigate('MyPage')
+      }, [memberId, memberNickname, password, confirmPassword])
+
     //아이디 중복확인
     const idCheck = () => {
         
-        if(id.trim() === '') {
+        if(memberId.trim() === '') {
             Alert.alert("아이디", "아이디를 입력해주세요")
-            return id 
+            return memberId 
         } else {
-            axios.post("http://192.168.219.102:3000/idCheck", null, {params: {memberId:id}})
+            axios.post("http://192.168.219.102:3000/idCheck", null, {params: {memberId:memberId}})
                 .then(function(response) {
                     console.log(response.data)
                     if(response.data == "yes") {
                        setMsg("사용할 수 없습니다.") 
-                       setId("")
+                       setMemberId("")
                        Alert.alert("아이디 중복",msg)
                     } else {
                         return setMsg("사용할 수 있습니다.")
@@ -51,19 +57,19 @@ export default function MyAccount() {
     }
     
     const regist = () => {
-        if(id.trim() === '') {
+        if(memberId.trim() === '') {
             Alert.alert('아이디를 입력해주세요')
-        } else if(pwd.trim() === '') {
+        } else if(password.trim() === '') {
             Alert.alert('패스워드를 입력해주세요')
-        } else if(nickname.trim() === '') {
+        } else if(memberNickname.trim() === '') {
             Alert.alert('닉네임을 입력해주세요')
         } else {
             axios.post("http://192.168.219.102:3000/regist", null, 
             {
                 params: {
-                    memberId: id,
-                    memberPwd: pwd,
-                    memberNickname: nickname
+                    memberId: memberId,
+                    memberPwd: password,
+                    memberNickname: memberNickname
                 }
             }).then(function(response) {
                 console.log(response.data)
@@ -71,7 +77,7 @@ export default function MyAccount() {
                     Alert.alert("회원가입","가입되었습니다.", 
                                 [{
                                     text:"확인",
-                                    onPress: () => navigation.navigate("MyPage")
+                                    onPress: () => goMyPage()
                                 }]
                     )
                 } else {
@@ -89,9 +95,9 @@ export default function MyAccount() {
             <View>
                 <TextInput 
                     placeholder="아이디"
-                    value={id}
+                    value={memberId}
                     underlineColorAndroid='transparent'
-                    onChangeText={(id) => setId(id)}
+                    onChangeText={(memberId) => setMemberId(memberId)}
                 />
             </View>
             <View>
@@ -104,21 +110,35 @@ export default function MyAccount() {
             <View>
                 <TextInput 
                     placeholder="패스워드"
-                    value={pwd}
+                    value={password}
                     underlineColorAndroid='transparent'
                     secureTextEntry
-                    onChangeText={(pwd) => setPwd(pwd)}
+                    onChangeText={(password) => setPassword(password)}
+                />
+            </View>
+            <View>
+                <TextInput 
+                    placeholder="패스워드 확인"
+                    value={confirmPassword}
+                    underlineColorAndroid='transparent'
+                    secureTextEntry
+                    onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
                 />
             </View>
             <View>
                 <TextInput 
                     placeholder="닉네임"
-                    value={nickname}
+                    value={memberNickname}
                     underlineColorAndroid='transparent'
-                    onChangeText={(nickname) => setNickname(nickname)}
+                    onChangeText={(memberNickname) => setMemberNickname(memberNickname)}
                 />
             </View>
-            <TouchableOpacity style={styles.accountBtn} onPress={() => regist()}>
+            <TouchableOpacity style={styles.accountBtn} onPress={() => {
+                    if(password === confirmPassword){
+                        regist()
+                    } else Alert.alert('password is invalid')
+                    
+                }}>
                 <Text>회원가입</Text>
             </TouchableOpacity>
         </View>

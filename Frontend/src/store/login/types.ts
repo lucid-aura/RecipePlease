@@ -3,7 +3,10 @@ import {Action} from 'redux'
 export type User = {
     memberId: string
     memberNickname: string
+    password?:string
 }
+
+
 
 export type State = {
     loggedIn:boolean
