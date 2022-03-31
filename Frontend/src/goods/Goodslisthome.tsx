@@ -61,10 +61,6 @@ export default function Goodslisthome({foods}:any){
             <Card food={foods[3]}/>
             <Card food={foods[2]}/>
         </View>
-        <View style={{flexDirection:"row"}}>
-            <Card food={foods[3]}/>
-            <Card food={foods[2]}/>
-        </View>
         
     </View>
     
