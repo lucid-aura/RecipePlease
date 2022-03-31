@@ -1,9 +1,8 @@
 import {Action} from 'redux'
 
 export type User = {
-    name:string
-    email:string
-    password:string
+    memberId: string
+    memberNickname: string
 }
 
 export type State = {

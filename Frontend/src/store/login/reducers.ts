@@ -12,7 +12,7 @@ const loggedInReducer = (state = initialLoggedIn, action: T.Actions) => {
     return state
 }
 
-const initialLoggedUser: T.User = {email:'', name:'', password:''}
+const initialLoggedUser: T.User = {memberId:'', memberNickname:''}
 const loggedUserReducer = (state = initialLoggedUser, action: T.Actions) => {
     switch(action.type) {
         case 'login':

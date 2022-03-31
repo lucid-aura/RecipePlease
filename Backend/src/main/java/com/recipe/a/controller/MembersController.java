@@ -57,7 +57,7 @@ public class MembersController {
 		String encodedPassword ="";
 		System.out.println(dto.toString());
 		
-		if(dto.getMemberPwd() == null) {	// 카카오 로그인 한 경우
+		if(dto.getMemberPwd() == "") {	// 카카오 로그인 한 경우
 			encodedPassword = passwordEncoder.encode(salt);
 			
 		} else {	// 일반 회원가입한 경우
@@ -73,11 +73,23 @@ public class MembersController {
 			return "no";
 		}
 		
-		
 	}
 
 	@PostMapping("/login")
 	public MembersDto login(String memberId, String memberPwd) {
 		return memberService.login(memberId, memberPwd);
+	}
+	
+	// 아이디 중복 체크
+	//@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
+	@PostMapping("/idCheck")
+	public String idCheck(MembersDto dto) {
+		System.out.println("MemberController idCheck");
+		
+		boolean b = memberService.idCheck(dto);
+		if(b) {
+			return "yes";	//중복
+		}	
+		return "no";		// 중복X
 	}
 }

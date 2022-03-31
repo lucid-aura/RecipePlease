@@ -24,12 +24,19 @@ public class MembersService {
 		return dao.countMembers();
 	}
 	
+	// 아이디 중복
+	public boolean idCheck(MembersDto dto) {
+		int n = dao.idCheck(dto);
+		
+		return n>0 ? true:false;
+	}
+	
 	// 회원가입 - 노승현
 	public boolean regist(MembersDto dto) {	
 		int b = dao.idCheck(dto);
 		
 		if(b == 1) {
-			return false;
+			return true;
 		} else {
 			int n = dao.regist(dto);
 			

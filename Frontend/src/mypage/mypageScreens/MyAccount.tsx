@@ -1,8 +1,10 @@
 import Postcode from "@actbase/react-daum-postcode";
+import { NavigationRouteContext, useNavigation } from "@react-navigation/native";
+import axios from "axios";
 import React, { useState } from "react";
-import { Alert, Button, Modal, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
-import { RadioButton } from "react-native-paper";
-import { getProfile } from "../utils";
+import { Alert, Button, Modal, StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, View } from "react-native";
+import { Colors, RadioButton } from "react-native-paper";
+
 
 /* 
 
@@ -17,22 +19,70 @@ export default function MyAccount() {
 
     const [id, setId] = useState<string>('')
     const [pwd, setPwd] = useState<string>('')
-    const [nickName, setNickName] = useState<string>('')
-    const [email, setEmail] = useState<string>('')
-    const [phone, setPhone] = useState<string>('')
-    const [mainAddress, setMainAddress] = useState<string>('')
-    const [detailAddress, setDetailAddress] = useState<string>('')
-    const [zipCode, setZipCode] = useState<string>('')
-    const [gender, setGender] = useState<string>('mail')
-    const [name, setName] = useState<string>('')
-
+    const [nickname, setNickname] = useState<string>('')
+    
     const [msg, setMsg] = useState<string>('msg')
 
     const [isModal, setModal] = useState(false)
+    const navigation = useNavigation()
     
+    //아이디 중복확인
+    const idCheck = () => {
+        
+        if(id.trim() === '') {
+            Alert.alert("아이디", "아이디를 입력해주세요")
+            return id 
+        } else {
+            axios.post("http://192.168.219.102:3000/idCheck", null, {params: {memberId:id}})
+                .then(function(response) {
+                    console.log(response.data)
+                    if(response.data == "yes") {
+                       setMsg("사용할 수 없습니다.") 
+                       setId("")
+                       Alert.alert("아이디 중복",msg)
+                    } else {
+                        return setMsg("사용할 수 있습니다.")
+                    }
+                })
+                .catch(function(err) {
+                    console.log(err)
+                })
+        }
+    }
     
-    //zonecode => 우편번호 address => 주소
-
+    const regist = () => {
+        if(id.trim() === '') {
+            Alert.alert('아이디를 입력해주세요')
+        } else if(pwd.trim() === '') {
+            Alert.alert('패스워드를 입력해주세요')
+        } else if(nickname.trim() === '') {
+            Alert.alert('닉네임을 입력해주세요')
+        } else {
+            axios.post("http://192.168.219.102:3000/regist", null, 
+            {
+                params: {
+                    memberId: id,
+                    memberPwd: pwd,
+                    memberNickname: nickname
+                }
+            }).then(function(response) {
+                console.log(response.data)
+                if(response.data == "yes") {
+                    Alert.alert("회원가입","가입되었습니다.", 
+                                [{
+                                    text:"확인",
+                                    onPress: () => navigation.navigate("MyPage")
+                                }]
+                    )
+                } else {
+                    Alert.alert("회원가입", "가입이 안되었습니다.")
+                }
+            }).catch(function(err) {
+                console.log(err)
+            })
+        }
+    }
+    
     return (
         <View style={styles.container}>
             <Text>회원가입</Text>
@@ -44,10 +94,9 @@ export default function MyAccount() {
                     onChangeText={(id) => setId(id)}
                 />
             </View>
-
             <View>
                 <Text>{msg}</Text>
-                <TouchableHighlight onPress={getProfile}>
+                <TouchableHighlight onPress={() => idCheck()}>
                     <Text>id 확인</Text>
                 </TouchableHighlight>
             </View>
@@ -57,90 +106,21 @@ export default function MyAccount() {
                     placeholder="패스워드"
                     value={pwd}
                     underlineColorAndroid='transparent'
+                    secureTextEntry
                     onChangeText={(pwd) => setPwd(pwd)}
                 />
             </View>
             <View>
                 <TextInput 
-                    placeholder="이름"
-                    value={name}
-                    underlineColorAndroid='transparent'
-                    onChangeText={(name) => setName(name)}
-                />
-            </View>
-            <View>
-                <TextInput 
                     placeholder="닉네임"
-                    value={nickName}
+                    value={nickname}
                     underlineColorAndroid='transparent'
-                    onChangeText={(nickName) => setNickName(nickName)}
+                    onChangeText={(nickname) => setNickname(nickname)}
                 />
             </View>
-            <View style={{flexDirection: 'row'}}>
-            <Text>남자</Text>
-                <RadioButton
-                    value='mail'
-                    status={ gender === 'mail' ? 'checked' : 'unchecked'}
-                    onPress={()=> setGender('mail')}>
-                </RadioButton>
-                <Text>여자</Text>
-                <RadioButton
-                    value='femail'
-                    status={ gender === 'femail' ? 'checked' : 'unchecked'}
-                    onPress={()=> setGender('femail')}>
-                    
-                </RadioButton>
-            </View>
-            <View>
-                <TextInput 
-                    placeholder="이메일"
-                    value={email}
-                    underlineColorAndroid='transparent'
-                    onChangeText={(email) => setEmail(email)}
-                />
-            </View>
-            <View>
-                <TextInput 
-                    placeholder="전화번호"
-                    value={phone}
-                    underlineColorAndroid='transparent'
-                    onChangeText={(phone) => setPhone(phone)}
-                />
-            </View>
-
-            <View>
-                <Modal
-                    visible={isModal}
-                    animationType="slide">
-                    <Postcode 
-                        style={{ width: 320, height: 320 }}
-                        jsOptions={{ animation: true, hideMapBtn: true }}
-                        onSelected={data => {
-                            Alert.alert(JSON.stringify(data));
-                            console.log(JSON.stringify(data))
-                            setMainAddress(data.address) 
-                            setZipCode(data.zonecode.toString())
-                            console.log(mainAddress)
-                            console.log(zipCode)
-                            setModal(false);
-                        }} 
-                        onError={function (error: unknown): void {
-                            throw new Error("Function not implemented.");
-                        } }   />
-                    <Button title='되돌아가기' onPress={() => setModal(false)} />
-                </Modal>
-                <Button title='주소찾기' onPress={() => setModal(true)}></Button>
-                
-                <Text>{zipCode}</Text>
-                <Text>{mainAddress}</Text>
-                <TextInput 
-                    placeholder="상세주소"
-                    value={detailAddress}
-                    underlineColorAndroid='transparent'
-                    onChangeText={(detailAddress) => setDetailAddress(detailAddress)}
-                />
-            </View>
-
+            <TouchableOpacity style={styles.accountBtn} onPress={() => regist()}>
+                <Text>회원가입</Text>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -149,5 +129,12 @@ const styles = StyleSheet.create ({
     container: {
         flex: 1,
         alignItems: 'center'
+    },
+    accountBtn: {
+        width: 100,
+        height: 30,
+        backgroundColor: Colors.amber300,
+        justifyContent: "center",
+        alignItems: "center"
     }
 })

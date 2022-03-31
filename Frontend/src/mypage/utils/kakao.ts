@@ -1,23 +1,24 @@
 import { KakaoOAuthToken, KakaoProfile, login, logout, getProfile as getKakaoProfile, unlink } from "@react-native-seoul/kakao-login";
 import axios from "axios";
 import { Value } from "react-native-reanimated";
+import { useSelector } from "react-redux";
+import { AppState } from "../../store";
+import * as L from "../../store/login"
 
 // 로그인
 export const signInWithKakao = async (): Promise<void> => {
     const token: KakaoOAuthToken = await login();
 
     console.log(JSON.stringify(token))
-    
+
     let userInfo:string[]= (await getProfile()).split(" ")
     console.log("userInfo: " + userInfo[0])
-
     
     axios.post("http://192.168.219.102:3000/regist", null, 
     {
         params: {
             memberId: userInfo[0],
             memberNickname: userInfo[1],
-
         }
     }).then(function(response) {
         if(response.data == "yes") {
