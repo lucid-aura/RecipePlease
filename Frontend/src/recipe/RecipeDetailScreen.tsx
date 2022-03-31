@@ -29,13 +29,16 @@ export default function RecipeDetailScreen({ route, navigation }:any){
     const [recipe, setRecipe]= useState({}); // 레시피 데이터
     const [tag, setTag] = useState([]) // 태그 데이터
     const [avarage, setAvarage]  = useState(0.0) // 각 레시피 평균 점수
+    const [likeIconName, setLikeIconName] = useState("heart-plus-outline") // 좋아요 아이콘 
     const [url, setUrl] = useState() // 유튜브 url
+    
     const playerRef = useRef<YoutubeIframeRef>(null) // ???
+    
 
     const { seq } = route.params; // 받아온 레시피 seq
     const { category } = route.params; // 받아온 카테고리
-    const { star } = route.params; // 별점 반영 용 홈 setter 함수
-    
+    const { index } = route.params;
+    const { changeAvarage } = route.params;
 
     useEffect( () => {
         let completed = false;  // 한번 실행을 위한 변수
@@ -73,18 +76,52 @@ export default function RecipeDetailScreen({ route, navigation }:any){
 
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
 
+    const likeRecipe = () => {
+        if (likeIconName == "heart-plus-outline") {
+            setLikeIconName("heart-plus")
+            const response = axios.get("http://192.168.0.4:3000/likeRecipe", {
+            params: {
+                memberId:'test', // 이후 memberId 에따라 로그인 확인 및 변경 필요
+                recipeSeq:seq,
+            } 
+            }).then(function(res) {
+                console.log(res.data)
+            }).catch(function(err){
+                console.log(err)
+            })
+        }
+        else {
+            setLikeIconName("heart-plus-outline")
+            const response = axios.get("http://192.168.0.4:3000/unlikeRecipe", {
+            params: {
+                memberId:'test', // 이후 memberId 에따라 로그인 확인 및 변경 필요
+                recipeSeq:seq,
+            } 
+            }).then(function(res) {
+                console.log(res.data)
+            }).catch(function(err){
+                console.log(err)
+            })
+        }
+
+        
+    }
     return(
         
         <SafeAreaView style={styles.container}>
             <NavigationHeader title="홈" 
                 Left= {() => <Icon name="arrow-left-bold" size={30} onPress={goBack} />}
-                Right= {() => <Icon name="cart-heart" size={30} />} />
+                Right= {() => <Icon name="mdiHeartPlus" size={30} />} />
 
             <ScrollView overScrollMode="never" style={styles.contentContainer}>
-                {/* 타이틀과 사진이 들어가는 View */}
+                {/*조회수, 좋아요, 타이틀과 사진이 들어가는 View */}
                 <View>
                     <Text style={styles.title}>{recipe.recipeTitle}</Text>
-                    <Text>조회수 : {recipe.recipeReadcount}</Text>
+                    <View style={styles.alienRow}>
+                        <Text style={styles.readcount}>조회수 : {recipe.recipeReadcount}</Text>
+                        <Icon name={likeIconName} size={50} onPress={likeRecipe} />
+
+                    </View>
                     <Image source={{ uri:thumbnail.photoUrl, width:600, height:300 }} />
                 </View>
                 <View>
@@ -141,7 +178,7 @@ export default function RecipeDetailScreen({ route, navigation }:any){
                 <View>
                     {/* 평점 리스트 및 입력 부분 자식 컴포넌트 */}
                     <Text style={styles.subTitle}>평가</Text>
-                    <RecipeDetailRating  seq={seq} setAvarage={setAvarage} avarage={avarage}  star={star} />
+                    <RecipeDetailRating  seq={seq} setAvarage={setAvarage} avarage={avarage} index={index} changeAvarage={changeAvarage} />
                 </View>
 
             </ScrollView>
@@ -199,6 +236,16 @@ const styles = StyleSheet.create({
         color:'#f1c40f',
         fontSize:32,
         textAlign:'center'
-    }
+    },
+    alienRow: {
+        flexDirection:'row',
+        justifyContent:"flex-end",
+        marginRight:10
+    },
+    readcount: {
+        justifyContent:'center', 
+        fontSize:30, 
+        marginRight:10
+}
 
 }) //css
