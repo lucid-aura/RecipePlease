@@ -20,6 +20,7 @@ npm i react-native-webview
 export default function MyAccount() {
 
     const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
+    const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
     const [memberId, setMemberId] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [confirmPassword, setConfirmPassword] = useState<string>(password)
@@ -93,60 +94,63 @@ export default function MyAccount() {
     
     return (
         <View style={styles.container}>
-            <NavigationHeader title="회원가입" viewStyle={{}}
-                Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
-                Right= {() => <Icon name="cart-heart" size={30} />}
-                />
-            <Text>회원가입</Text>
-            <View>
-                <TextInput 
-                    placeholder="아이디"
-                    value={memberId}
-                    underlineColorAndroid='transparent'
-                    onChangeText={(memberId) => setMemberId(memberId)}
-                />
+            <View style={[styles.topBar]} >
+                <NavigationHeader title="회원가입" viewStyle={{}}
+                    Left= {() => <Icon name="arrow-left" size={30} onPress={goBack} />}
+                    Right= {() => <Icon name="cart-heart" size={30} />}
+                    />
             </View>
-            <View>
-                <Text>{msg}</Text>
-                <TouchableHighlight onPress={() => idCheck()}>
-                    <Text>id 확인</Text>
-                </TouchableHighlight>
-            </View>
+            <View style={[styles.contentView]}>
+                <View>
+                    <TextInput 
+                        placeholder="아이디 입력"
+                        value={memberId}
+                        placeholderTextColor='#003f5c'
+                        onChangeText={(memberId) => setMemberId(memberId)}
+                    />
+                </View>
+                <View>
+                    <Text>{msg}</Text>
+                    <TouchableHighlight onPress={() => idCheck()}>
+                        <Text>id 확인</Text>
+                    </TouchableHighlight>
+                </View>
 
-            <View>
-                <TextInput 
-                    placeholder="패스워드"
-                    value={password}
-                    underlineColorAndroid='transparent'
-                    secureTextEntry
-                    onChangeText={(password) => setPassword(password)}
-                />
+                <View>
+                    <TextInput 
+                        placeholder="패스워드"
+                        value={password}
+                        placeholderTextColor='#003f5c'
+                        secureTextEntry
+                        onChangeText={(password) => setPassword(password)}
+                    />
+                </View>
+                <View>
+                    <TextInput 
+                        placeholder="패스워드 확인"
+                        value={confirmPassword}
+                        placeholderTextColor='#003f5c'
+                        secureTextEntry
+                        onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
+                    />
+                </View>
+                <View>
+                    <TextInput 
+                        placeholder="닉네임"
+                        value={memberNickname}
+                        underlineColorAndroid='transparent'
+                        onChangeText={(memberNickname) => setMemberNickname(memberNickname)}
+                    />
+                </View>
+                <TouchableOpacity style={styles.accountBtn} onPress={() => {
+                        if(password === confirmPassword){
+                            regist()
+                        } else Alert.alert('password is invalid')
+                        
+                    }}>
+                    <Text>회원가입</Text>
+                </TouchableOpacity>
             </View>
-            <View>
-                <TextInput 
-                    placeholder="패스워드 확인"
-                    value={confirmPassword}
-                    underlineColorAndroid='transparent'
-                    secureTextEntry
-                    onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
-                />
-            </View>
-            <View>
-                <TextInput 
-                    placeholder="닉네임"
-                    value={memberNickname}
-                    underlineColorAndroid='transparent'
-                    onChangeText={(memberNickname) => setMemberNickname(memberNickname)}
-                />
-            </View>
-            <TouchableOpacity style={styles.accountBtn} onPress={() => {
-                    if(password === confirmPassword){
-                        regist()
-                    } else Alert.alert('password is invalid')
-                    
-                }}>
-                <Text>회원가입</Text>
-            </TouchableOpacity>
         </View>
     )
 }
@@ -154,7 +158,18 @@ export default function MyAccount() {
 const styles = StyleSheet.create ({
     container: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    topBar: {
+        flex:1,
+        borderWidth: 0.5,
+        borderRadius:1
+    },
+    contentView: {
+        flex:17,
+        justifyContent:'center',
+        alignItems:'center'
     },
     accountBtn: {
         width: 100,
