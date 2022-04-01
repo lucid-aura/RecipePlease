@@ -20,6 +20,14 @@ export default function RecipeRecommendList( { category } :any) { // 굿즈 태�
 
     const [index, setIndex] = useState(0) // 추천 레시피 인덱스
 
+
+    const changeReadcount = (index:number, newReadcount:any) => {
+        console.log(index + "번에 들어온 새로운 조회수 : " + newReadcount)
+        let  newData = recipeData;
+        newData.readcount[index] = newReadcount;
+        setRecipeData(newData)
+    }
+
     const changeAvarage = (index:number, newAvarage:any) =>{
         console.log(index + "번에 들어온 새로운 평균 : " + newAvarage)
        let  newData = recipeData;
@@ -63,7 +71,8 @@ export default function RecipeRecommendList( { category } :any) { // 굿즈 태�
                 seq: recipeData.recipeSeq[index], 
                 category: 'recipe',
                 index:index,
-                changeAvarage : changeAvarage
+                changeAvarage : changeAvarage,
+                changeReadcount : changeReadcount
             })
         }
     }

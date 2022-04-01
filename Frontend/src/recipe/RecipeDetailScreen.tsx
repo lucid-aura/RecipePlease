@@ -39,6 +39,7 @@ export default function RecipeDetailScreen({ route, navigation }:any){
     const { category } = route.params; // 받아온 카테고리
     const { index } = route.params;
     const { changeAvarage } = route.params;
+    const { changeReadcount } = route.params;
 
     useEffect( () => {
         let completed = false;  // 한번 실행을 위한 변수
@@ -50,21 +51,22 @@ export default function RecipeDetailScreen({ route, navigation }:any){
                     // 사용자 
                 }
 
-                // 레시피와 태그, 평균을 갱신
+                // 레시피와 태그, 평균, 조회수를 갱신
                 setRecipe(recipeRes.data);
                 setTag(recipeRes.data.recipeGoodsTag.split(","))
                 setAvarage(recipeRes.data.recipeRating)
-
                 if (recipeRes.data.recipeVideoUrl != ""){
                     setUrl(recipeRes.data.recipeVideoUrl.split("=")[1])
 
                 } 
+                changeReadcount(index, recipeRes.data.recipeReadcount)
                 console.log(recipeRes.data) // 확인용 (log)
                 
             }
 
             const thumbnailRes = await axios.get("http://192.168.0.4:3000/getThumbnailPhoto?docsSeq=" + seq +"&photoCategory=" + category) // 해당 레시피의 썸네일 사진을 받아옴
             if (!completed) setThumbnail(thumbnailRes.data);
+            
         }
 
         fetchRecipe()
@@ -111,7 +113,7 @@ export default function RecipeDetailScreen({ route, navigation }:any){
         <SafeAreaView style={styles.container}>
             <NavigationHeader title="홈" 
                 Left= {() => <Icon name="arrow-left-bold" size={30} onPress={goBack} />}
-                Right= {() => <Icon name="mdiHeartPlus" size={30} />} />
+                Right= {() => <Icon name="cart-heart" size={30} />} />
 
             <ScrollView overScrollMode="never" style={styles.contentContainer}>
                 {/*조회수, 좋아요, 타이틀과 사진이 들어가는 View */}
