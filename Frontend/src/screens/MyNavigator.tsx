@@ -8,6 +8,7 @@ import MyUploadedRecipe from '../mypage/mypageScreens/MyUploadedRecipe';
 import MyFavoriteRecipe from '../mypage/mypageScreens/MyFavoriteRecipe';
 import MyInfo from '../mypage/mypageScreens/MyInfo';
 import MyPageHome from '../mypage/MyPageHome';
+import Login from '../mypage/Login';
 
 /*
 npm install react-native-gesture-handler
@@ -30,6 +31,7 @@ export default function MyNavigator(){
   return(
 
     <Stack.Navigator screenOptions={{headerShown:false}}>
+      <Stack.Screen name="Login" component={Login}></Stack.Screen>
       <Stack.Screen name="MyPage" component={MyPageHome}></Stack.Screen>
 
       <Stack.Screen name="MyAccount" component={MyAccount}></Stack.Screen>
