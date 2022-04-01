@@ -21,7 +21,7 @@ export default function MyPageHome(){
     
     const navigation = useNavigation()
     const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
-
+    const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
     const log = useSelector<AppState, L.State>((state) => state.login)
     const {loggedIn, loggedUser} = log
     console.log(loggedIn)
@@ -32,7 +32,7 @@ export default function MyPageHome(){
         <View style={[styles.container]}>
             <View style={[styles.topBar]}> 
                 <NavigationHeader title="홈" 
-                Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
+                Left= {() => <Icon name="text-account" size={30} onPress={goBack} />}
                 Right= {() => <Icon name="cart-heart" size={30} />} />
             </View>
             <View style={[styles.contentView]}>
