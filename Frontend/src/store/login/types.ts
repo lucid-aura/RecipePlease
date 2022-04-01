@@ -6,8 +6,6 @@ export type User = {
     password?:string
 }
 
-
-
 export type State = {
     loggedIn:boolean
     loggedUser: User
