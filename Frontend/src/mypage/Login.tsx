@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../store";
 import * as L from '../store/login'
 import * as U from './utils'
+import { red100 } from "react-native-paper/lib/typescript/styles/colors";
+import { Colors } from "react-native-paper";
 
 export default function Login() {
     const navigation = useNavigation()
@@ -20,7 +22,6 @@ export default function Login() {
     const [memberId, setMemberId] = useState<string>('')
     const [memberNickname, setMemberNickname] = useState<string>('')
     const [password, setPassword] = useState<string>('')
-    
     
     const log = useSelector<AppState, L.State>((state) => state.login)
     const {loggedIn, loggedUser} = log
@@ -54,6 +55,7 @@ export default function Login() {
         dispatch(L.loginAction({memberId,memberNickname}))
         navigation.navigate("MyPage")
     };
+
     const kakao = useCallback(() => {
         getProfile().then(value => {
             userInfo = value.split(" ")
@@ -101,60 +103,93 @@ export default function Login() {
 
     return(
         <View style={styles.container}>
-        <NavigationHeader title="홈" 
-        Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
-        Right= {() => <Icon name="cart-heart" size={30} />}
-        />
-        {/* 아이디 입력 */}
-        <View>
-            <TextInput
-                placeholder="id를 입력해 주세요"
-                placeholderTextColor='#003f5c'
-                onChangeText = {(memberId) => setMemberId(memberId)} />
-        </View>
+            <View style={[styles.topBar]}>
+                <NavigationHeader title="홈" viewStyle={{}}
+                Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
+                Right= {() => <Icon name="cart-heart" size={30} />}
+                />
+            </View>
 
-        {/* 패스워드 입력 */}
-        <View>
-            <TextInput
-                placeholder="패스워드를 입력해 주세요"
-                placeholderTextColor='#003f5c'
-                secureTextEntry={true}
-                onChangeText = {(password) => setPassword(password)} />
-        </View>
+            <View style={[styles.contentView]}>
+                {/* 아이디 입력 */}
+                <View style={[styles.contentBox]}>
+                    <View style={[styles.content]}>
+                        <TextInput
+                            placeholder="id를 입력해 주세요"
+                            placeholderTextColor='#003f5c'
+                            onChangeText = {(memberId) => setMemberId(memberId)} />
+                    </View>
 
-        {/* 로그인 버튼 */}
-        <View>
-            <TouchableOpacity onPress={() => userLogin()}>
-                <Text>로그인</Text>
-            </TouchableOpacity>
+                    {/* 패스워드 입력 */}
+                    <View style={[styles.content]}>
+                        <TextInput
+                            placeholder="패스워드를 입력해 주세요"
+                            placeholderTextColor='#003f5c'
+                            secureTextEntry={true}
+                            onChangeText = {(password) => setPassword(password)} />
+                    </View>
+
+                    {/* 로그인 버튼 */}
+                    <View style={[styles.loginBox]}>
+                        <TouchableOpacity style={[styles.loginBtn]} onPress={() => userLogin()}>
+                            <Text>로그인</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View>
+                        <TouchableOpacity onPress={() => signInWithKakao()}>
+                            <Image source={require("./utils/kakao_login_medium_narrow.png")} />
+                        </TouchableOpacity>
+                    </View>
+                    
+                    {/* 회원가입 버튼 */}
+                    <View style={[styles.loginBox]}>
+                        <TouchableOpacity style={[styles.loginBtn]} onPress={() => navigation.navigate('MyAccount')}>
+                            <Text>회원가입</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </View>
         </View>
-        <View>
-            <TouchableOpacity onPress={() => signInWithKakao()}>
-                <Image source={require("./utils/kakao_login_medium_narrow.png")} />
-            </TouchableOpacity>
-        </View>
-        <View>
-            <TouchableOpacity onPress={() =>signOutWithKakao()}>
-               <Text>로그아웃</Text>
-            </TouchableOpacity>
-        </View>
-        <View>
-            <TouchableOpacity onPress={() => getProfile()}>
-                <Text>프로필 조회</Text>
-            </TouchableOpacity>
-            <Text></Text>
-        </View>
-        {/* 회원가입 버튼 */}
-        <View>
-            <TouchableOpacity onPress={() => navigation.navigate('MyAccount')}>
-                <Text>회원가입</Text>
-            </TouchableOpacity>
-        </View>
-    </View>
     )
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    topBar: {
+        flex:1,
+        borderWidth: 0.5,
+        borderRadius:1
+    },
+    contentView: {
+        flex:17,
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    contentBox: {
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    content: {
+        borderWidth:1,
+        borderRadius:10,
+        width:200,
+        marginTop: 10
+    },
+    loginBox: {
+        borderWidth:1,
+        borderRadius:10,
+        width:100,
+        marginTop: 10,
+        marginBottom:10
+    },
+    loginBtn: {
+        alignItems:'center',
+        justifyContent:'center', 
+        marginBottom:5,
+        marginTop:5
     }
+    
 }) 

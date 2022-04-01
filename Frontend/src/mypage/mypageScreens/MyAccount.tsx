@@ -1,11 +1,12 @@
-import Postcode from "@actbase/react-daum-postcode";
-import { NavigationRouteContext, useNavigation } from "@react-navigation/native";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useCallback, useState } from "react";
-import { Alert, Button, Modal, StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, View } from "react-native";
-import { Colors, RadioButton } from "react-native-paper";
+import { Alert, StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, View } from "react-native";
+import { Colors } from "react-native-paper";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDispatch } from "react-redux";
 import * as L from '../../store/login'
+import { NavigationHeader } from "../../theme";
 
 /* 
 
@@ -18,6 +19,7 @@ npm i react-native-webview
 
 export default function MyAccount() {
 
+    const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
     const [memberId, setMemberId] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [confirmPassword, setConfirmPassword] = useState<string>(password)
@@ -83,7 +85,7 @@ export default function MyAccount() {
                 } else {
                     Alert.alert("회원가입", "가입이 안되었습니다.")
                 }
-            }).catch(function(err) {
+            }).catch((err:Error) => {
                 console.log(err)
             })
         }
@@ -91,6 +93,10 @@ export default function MyAccount() {
     
     return (
         <View style={styles.container}>
+            <NavigationHeader title="회원가입" viewStyle={{}}
+                Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
+                Right= {() => <Icon name="cart-heart" size={30} />}
+                />
             <Text>회원가입</Text>
             <View>
                 <TextInput 
