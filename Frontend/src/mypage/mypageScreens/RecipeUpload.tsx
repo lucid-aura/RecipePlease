@@ -1,7 +1,7 @@
 import axios from "axios";
 import Color from "color";
 import React, { Component, useState } from "react";
-import { StyleSheet, Text, View, TextInput, FlatList, ScrollView, Alert, Dimensions, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TextInput, FlatList, ScrollView, Alert, Dimensions, Image, TouchableOpacity, ToastAndroid } from "react-native";
 import { Button } from "react-native-paper";
 import RNPickerSelect from 'react-native-picker-select'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -9,6 +9,7 @@ import TagInput from 'react-native-tags-input';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import AsyncStorage from "@react-native-community/async-storage";
 import { white } from "react-native-paper/lib/typescript/styles/colors";
+import DetailList from "./DetailList";
 
 /* npm install @react-native-picker/picker */
 
@@ -19,25 +20,48 @@ export default function UploadScreen() {
     const [recipeSmallCategory, setPickerSelect2] = useState('')
 
     const [seq, setSeq] = useState()
-    const [recipeTitle, setTitle] = useState('')
+
+    // 사진 url
+    const [titleimgurl, setTitleimgurl] = useState("")
+
+    // 사진 분류
     const [titleimg, setTitleimg] = useState("")
     const [contentimg1, setContentimg1] = useState("")
     const [contentimg2, setContentimg2] = useState("")
     const [contentimg3, setContentimg3] = useState("")
     const [contentimg4, setContentimg4] = useState("")
 
+    // 제목, 내용, 가격
+    const [recipeTitle, setTitle] = useState('')
     const [recipeContent, setContent] = useState('')
     const [recipePrice, setPrice] = useState('')
     const [RECIPERATING, setRating] = useState('')
 
+
+    // 태그
     const [tags, setTags] = useState({
         tag: '',
         tagsArray: []
     });
-
-
     const [tagsColor, setTagsColor] = useState("")
     const [tagsText, setTagsText] = useState("")
+
+
+    // 레시피 순서 추가
+
+    const [countList, setCountList] = useState([0])
+    const [list, setList] = useState([<DetailList />])
+
+    const onAddDetailDiv = () => {
+        let countArr = [...countList]
+        let counter = countArr.slice(-1)[0]
+        counter += 1
+        countArr.push(counter)	// index 사용 X
+        // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
+        setCountList(countArr)
+        list.push(<DetailList />)
+        console.log("list : " + list[0])
+    }
 
     // const addImage = () => {
     //     launchCamera({ saveToPhotos: true }, response => {
@@ -47,34 +71,12 @@ export default function UploadScreen() {
 
     const titleimgshow = () => {
         launchImageLibrary({}, response => {
-            setTitleimg(response.assets[0].uri)
-        })
-    }
-
-    const contentimgshow1 = () => {
-        launchImageLibrary({}, response => {
-            setContentimg1(response.assets[0].uri)
-        })
-    }
-
-    const contentimgshow2 = () => {
-        launchImageLibrary({}, response => {
-            setContentimg2(response.assets[0].uri)
+            setTitleimgurl(response.assets[0].uri)
+            setTitleimg("Thumbnail")
         })
     }
 
 
-    const contentimgshow3 = () => {
-        launchImageLibrary({}, response => {
-            setContentimg3(response.assets[0].uri)
-        })
-    }
-
-    const contentimgshow4 = () => {
-        launchImageLibrary({}, response => {
-            setContentimg4(response.assets[0].uri)
-        })
-    }
 
     const RecipeUploadBtn = () => {
 
@@ -84,7 +86,7 @@ export default function UploadScreen() {
         console.log("소분류 : " + recipeSmallCategory)
         console.log("굿즈태그 : " + tags.tagsArray)
         console.log("레시피가격 : " + recipePrice)
-        console.log("이미지 경로 : " + titleimg)
+        console.log("이미지 경로 : " + titleimgurl)
 
 
         const uploadRecipe = () => {
@@ -114,11 +116,19 @@ export default function UploadScreen() {
         }
 
         const uploadRecipeImg = (temp: any) => {
+            console.log(titleimg);
+            console.log(contentimg1);
+            console.log(contentimg2);
+            console.log(contentimg3);
+            console.log(contentimg4);
+
             axios.get("http://192.168.0.14:3000/uploadRecipeImg",
                 {
                     params: {
                         photoSeq: temp,
-                        photoUrl: titleimg
+                        photoTitle: titleimg,
+                        photoContent: contentimg1 + "/" + contentimg2 + "/" + contentimg3 + "/" + contentimg4,
+                        photoUrl: titleimgurl
                     }
                 }).then(function (response) {
                     console.log(response.data)
@@ -145,6 +155,8 @@ export default function UploadScreen() {
         { label: '야식용', value: '야식용' }
     ]
 
+
+
     return (
         <View>
             <ScrollView style={styles.container}>
@@ -158,47 +170,29 @@ export default function UploadScreen() {
                 <View style={styles.picture}>
                     <TouchableOpacity onPress={titleimgshow} style={styles.camera}>
                         <Image
-                            source={{ uri: titleimg }}
+                            source={{ uri: titleimgurl }}
                             style={styles.camera}
                         ></Image>
                     </TouchableOpacity>
                 </View>
 
-                <View style={styles.frame}>
-                    <Text style={styles.text}>레시피내용</Text>
+                <View style={styles.recipeframe}>
+                    <Text style={styles.recipytext}>레시피내용</Text>
+                    <Button style={styles.addbutton} onPress={onAddDetailDiv}> 추가</Button>
                 </View>
                 <View style={styles.contentframe}>
                     <TextInput style={styles.textinput} value={recipeContent} onChangeText={(recipeContent) => setContent(recipeContent)} placeholder="1) 소고기는 기름기를 떼어내고 적당한 크기로 잘라주세요.&#10;2) 준비된 양념으로 먼저 고기를 조물조물 재워 둡니다.&#10;3) 그 사이 양파와 버섯, 대파도 썰어서 준비하세요.&#10;4) 고기가 반쯤 익어갈 때 양파를 함께 볶아요." multiline={true}></TextInput>
                 </View>
-                <View style={styles.contentpictureframe}>
-                    <TouchableOpacity onPress={contentimgshow1} style={styles.contentcameraframe} >
-                        <Image
-                            source={{ uri: contentimg1 }}
-                            style={styles.contentcamera}
-                        ></Image>
-                    </TouchableOpacity>
+                <View>
+                    {list.map((item: any, i: any) => (
+                        item
 
-                    <TouchableOpacity onPress={contentimgshow2} style={styles.contentcameraframe} >
-                        <Image
-                            source={{ uri: contentimg2 }}
-                            style={styles.contentcamera}
-                        ></Image>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={contentimgshow3} style={styles.contentcameraframe}>
-                        <Image
-                            source={{ uri: contentimg3 }}
-                            style={styles.contentcamera}
-                        ></Image>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={contentimgshow4} style={styles.contentcameraframe}>
-                        <Image
-                            source={{ uri: contentimg4 }}
-                            style={styles.contentcamera}
-                        ></Image>
-                    </TouchableOpacity>
+                    ))}
                 </View>
+
+
+                {/* <DetailList countList={countList} /> */}
+
                 <View style={styles.frame}>
                     <Text style={styles.text}>카테고리</Text>
                 </View>
@@ -258,9 +252,6 @@ export default function UploadScreen() {
                     <TextInput style={styles.textinput} value={(recipePrice)} onChangeText={(recipePrice) => setPrice(recipePrice)} ></TextInput>
                 </View>
 
-                <View style={styles.goodsframe}>
-                    <TextInput style={styles.textinput} value={RECIPERATING} onChangeText={(RECIPERATING) => setRating(RECIPERATING)}></TextInput>
-                </View>
 
 
                 <Button style={styles.btn} onPress={RecipeUploadBtn}>레시피작성</Button>
@@ -275,6 +266,15 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: 752,
+    },
+    recipeframe: {
+        width: '100%',
+        height: 55,
+        backgroundColor: "#ced4da",
+        justifyContent: 'center',
+        flex: 1,
+        flexDirection: 'row',
+
     },
     frame: {
         width: '100%',
@@ -329,6 +329,16 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: "black",
     },
+    recipytext: {
+        fontWeight: "bold",
+        marginLeft: 10,
+        fontSize: 18,
+        color: "black",
+        flex: 1,
+        marginTop: 15
+    },
+
+
     textinput: {
         marginLeft: 10,
         fontSize: 15,
@@ -382,5 +392,9 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: "black",
         textAlign: 'center'
+    },
+
+    addbutton: {
+        flex: 1
     }
 })
