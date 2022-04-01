@@ -44,7 +44,7 @@ export default function RecipeDetailScreen({ route, navigation }:any){
         let completed = false;  // 한번 실행을 위한 변수
         
         const fetchRecipe = async() =>{ // 디테일로 들어온 하나의 레시피 정보를 받아옴
-            const recipeRes =await axios.get("http://192.168.0.4:3000/getOneRecipe?recipeSeq=" + seq )
+            const recipeRes =await axios.get("http://192.168.219.102:3000/getOneRecipe?recipeSeq=" + seq )
             if (!completed) {
                 if (recipeRes.data.recipePrice > 0){
                     // 사용자 
@@ -63,7 +63,7 @@ export default function RecipeDetailScreen({ route, navigation }:any){
                 
             }
 
-            const thumbnailRes = await axios.get("http://192.168.0.4:3000/getThumbnailPhoto?docsSeq=" + seq +"&photoCategory=" + category) // 해당 레시피의 썸네일 사진을 받아옴
+            const thumbnailRes = await axios.get("http://192.168.219.102:3000/getThumbnailPhoto?docsSeq=" + seq +"&photoCategory=" + category) // 해당 레시피의 썸네일 사진을 받아옴
             if (!completed) setThumbnail(thumbnailRes.data);
         }
 
@@ -79,7 +79,7 @@ export default function RecipeDetailScreen({ route, navigation }:any){
     const likeRecipe = () => {
         if (likeIconName == "heart-plus-outline") {
             setLikeIconName("heart-plus")
-            const response = axios.get("http://192.168.0.4:3000/likeRecipe", {
+            const response = axios.get("http://192.168.219.102:3000/likeRecipe", {
             params: {
                 memberId:'test', // 이후 memberId 에따라 로그인 확인 및 변경 필요
                 recipeSeq:seq,
@@ -92,7 +92,7 @@ export default function RecipeDetailScreen({ route, navigation }:any){
         }
         else {
             setLikeIconName("heart-plus-outline")
-            const response = axios.get("http://192.168.0.4:3000/unlikeRecipe", {
+            const response = axios.get("http://192.168.219.102:3000/unlikeRecipe", {
             params: {
                 memberId:'test', // 이후 memberId 에따라 로그인 확인 및 변경 필요
                 recipeSeq:seq,

@@ -16,7 +16,7 @@ export default function RecipeDetailOrder( { seq, setAvarage, setAvg, index, cha
     
     function writeCommentReq(){ // 평가글 및 점수 입력 등록 했을 시
         console.log("writeCommentReq 함수 실행")
-        const response = axios.post("http://192.168.0.4:3000/writeComment", null , {
+        const response = axios.post("http://192.168.219.102:3000/writeComment", null , {
             params: {
                 memberId:'test', // 이후 memberId 에따라 로그인 확인 및 변경 필요
                 docsSeq:seq,
@@ -59,7 +59,7 @@ export default function RecipeDetailOrder( { seq, setAvarage, setAvg, index, cha
         let completed = false;
         const fetchRating = async() =>{
             console.log("Rating 컴포넌트 " + seq)
-            const ratingRes =await axios.get("http://192.168.0.4:3000/getAllRatingsBySeq?docsSeq=" + seq )
+            const ratingRes =await axios.get("http://192.168.219.102:3000/getAllRatingsBySeq?docsSeq=" + seq )
             setRating(ratingRes.data)
         }
 
