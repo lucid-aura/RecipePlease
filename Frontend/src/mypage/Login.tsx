@@ -10,8 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../store";
 import * as L from '../store/login'
 import * as U from './utils'
-import { red100 } from "react-native-paper/lib/typescript/styles/colors";
-import { Colors } from "react-native-paper";
+import { loginAction } from "../store/login";
 
 export default function Login() {
     const navigation = useNavigation()
@@ -26,14 +25,13 @@ export default function Login() {
     const log = useSelector<AppState, L.State>((state) => state.login)
     const {loggedIn, loggedUser} = log
     const dispatch = useDispatch()
-
+    console.log("loggedIn: "+ loggedIn + " loggedUser: " + loggedUser)
+    
     let userInfo:string[]
     //카카오 아이디 가져오기
     const signInWithKakao = async (): Promise<void> => {
         const token: KakaoOAuthToken = await login();
-    
-        console.log(JSON.stringify(token))
-        
+
         userInfo= (await getProfile()).split(" ")
         console.log("userInfo: " + userInfo[0])
         
@@ -55,18 +53,23 @@ export default function Login() {
         dispatch(L.loginAction({memberId,memberNickname}))
         navigation.navigate("MyPage")
     };
-
+  
     const kakao = useCallback(() => {
         getProfile().then(value => {
             userInfo = value.split(" ")
-            setMemberId(userInfo[0])
+            if(userInfo.length > 0){
+                
+                dispatch(loginAction({memberId, memberNickname}))
+                navigation.navigate("MyPage")
+            }
         })
+    }, [memberId, memberNickname])
+    useEffect(() => {
+        kakao()
     }, [])
-    kakao()
-    console.log("loggedIn: "+ !loggedIn)
-    if(loggedIn) {
-        navigation.navigate("MyPage")
-    } 
+    
+    
+    
 
     const userLogin = () => {
         axios.post("http://192.168.219.102:3000/login", null, 

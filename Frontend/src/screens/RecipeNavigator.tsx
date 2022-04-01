@@ -15,7 +15,7 @@ npm install watcher
 
 const Stack = createNativeStackNavigator() //스택 네비게이터 생성후 스택함수 정의
 
-export default function   (){
+export default function RecipeNavigator(){
 
     return(
       <Stack.Navigator screenOptions={{headerShown:false}}>

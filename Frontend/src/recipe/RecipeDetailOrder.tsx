@@ -12,7 +12,7 @@ export default function RecipeDetailOrder({seq, category}:any) {
 
 
         const fetchPhoto = async() =>{
-            const photoRes = await axios.get("http://192.168.0.4:3000/getPhoto?docsSeq=" + seq +"&photoCategory=" + category)
+            const photoRes = await axios.get("http://192.168.219.102:3000/getPhoto?docsSeq=" + seq +"&photoCategory=" + category)
             if (!completed) {
 
                 //console.log(photoRes.data)
