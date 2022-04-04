@@ -59,7 +59,8 @@ export default function Login() {
         getProfile().then(value => {
             userInfo = value.split(" ")
             if(userInfo.length > 0){
-                
+                setMemberId(userInfo[0])
+                setMemberNickname(userInfo[1])
                 dispatch(loginAction({memberId, memberNickname}))
                 navigation.navigate("MyPage")
             }
