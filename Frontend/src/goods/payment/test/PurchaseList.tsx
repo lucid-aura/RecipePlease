@@ -8,7 +8,6 @@ import { Alert,
     TouchableOpacity, 
     View } 
 from "react-native";
-import { resolvePath } from "react-native-reanimated/src/reanimated2/animation/styleAnimation";
 
 /* 테스트 페이지 : 구매 목록 리스트 */
 
@@ -151,6 +150,7 @@ export default function PurchaseList({user}:any, props:any) {
             })
             .then((res) => {
                 console.log(res.data);
+                console.log(res);
                 setDetailVisible(!detailVisible);
             })
             .catch((err) => console.log(err));

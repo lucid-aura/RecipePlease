@@ -12,6 +12,7 @@ import * as L from '../store/login'
 import * as U from './utils'
 import { red100 } from "react-native-paper/lib/typescript/styles/colors";
 import { Colors } from "react-native-paper";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Login() {
     const navigation = useNavigation()
@@ -69,7 +70,8 @@ export default function Login() {
     } 
 
     const userLogin = () => {
-        axios.post("http://192.168.219.102:3000/login", null, 
+        // axios.post("http://192.168.219.102:3000/login", null, 
+        axios.post("http://192.168.0.13:3000/login", null, 
         {
             params: {
                 memberId: memberId,
@@ -79,7 +81,8 @@ export default function Login() {
             console.log(response.data.memberId)
             if(response.data.memberId == memberId) {
                 console.log("로그인 되었습니다.")
-                dispatch(L.loginAction({ memberId, memberNickname, password }))
+                dispatch(L.loginAction({ memberId, memberNickname, password }));
+                AsyncStorage.setItem("loginData", JSON.stringify(response.data));
                 navigation.navigate("MyPage")
             } else {
                 console.log("아이디 및 비밀번호가 틀립니다.")

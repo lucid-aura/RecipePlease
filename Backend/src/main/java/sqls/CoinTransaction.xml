@@ -38,4 +38,10 @@
         SET MEMBERCOIN = MEMBERCOIN - #{amount}
         WHERE MEMBERID = #{memberId}
     </update>
+    
+    <!-- 레시피 구매여부 조회 -->
+    <select id="checkPurchaseRecipe" parameterType="com.recipe.a.dto.CoinTransactionDto" resultType="Integer">
+    	SELECT * FROM COINTRANSACTION
+    	WHERE MEMBERID = #{memberId} AND DOCSSEQ = #{docsSeq}
+    </select>
 </mapper>

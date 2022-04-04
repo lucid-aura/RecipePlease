@@ -41,4 +41,10 @@ public class CoinTransactionService {
         ChargeCoinDto dto = new ChargeCoinDto(coinTransactionDto.getCoinCount(), coinTransactionDto.getMemberId());
         return coinTransactionDao.useCoinUpdate(dto);
     }
+    
+    // 레시피 구매여부
+    public boolean checkPurchaseRecipe(CoinTransactionDto coinTransactionDto) {
+    	int res = coinTransactionDao.checkPurchaseRecipe(coinTransactionDto);
+    	return res > 0 ? true : false;
+    }
 }

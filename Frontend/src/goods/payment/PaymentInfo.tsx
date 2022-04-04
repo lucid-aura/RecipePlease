@@ -37,6 +37,7 @@ export default function PaymentInfo({navigation}:any, props:any) {
     const [pg, setPg] = useState('');                                 // 결제수단
     const amount = 20000                                              // 상품가격
     const [toPay, setToPay] = useState("결제 수단이 선택되지 않았습니다.");   // 결제수단 선택시 메시지
+    const [category, setCategory] = useState('goods');       // 구매품목 카테고리(레시피 or 굿즈)
 
     
 
@@ -111,54 +112,62 @@ export default function PaymentInfo({navigation}:any, props:any) {
                         </View>
 
                         <View>
-                            {/* 배송지 정보 */}
-                            <Text style={styles.subTitle}>배송지 정보</Text>
-                            <View style={styles.informContainer}>
-                                <TextInput
-                                    style={styles.textInput}
-                                    placeholder="받는 사람 이름"
-                                    value={buyerName}
-                                    onChangeText={buyerName => setBuyerName(buyerName)}
-                                />
-                                <View>
-                                    <TextInput
-                                        style={styles.textInput}
-                                        placeholder="받는 사람 주소"
-                                        value={`[${buyerPostcode}] ${buyerAddr}`}       // 우편번호와 도로명주소 함께 기입됨.
-                                        onChangeText={(addr) => setBuyerAddr(addr)}
-                                        editable={false}
-                                    />
+                            { category === 'goods'
+                                ? (
+                                    <View>
+                                        <Text style={styles.subTitle}>배송지 정보</Text>
+                                        <View style={styles.informContainer}>
+                                            <TextInput
+                                                style={styles.textInput}
+                                                placeholder="받는 사람 이름"
+                                                value={buyerName}
+                                                onChangeText={buyerName => setBuyerName(buyerName)}
+                                            />
+                                            <View>
+                                                <TextInput
+                                                    style={styles.textInput}
+                                                    placeholder="받는 사람 주소"
+                                                    value={`[${buyerPostcode}] ${buyerAddr}`}       // 우편번호와 도로명주소 함께 기입됨.
+                                                    onChangeText={(addr) => setBuyerAddr(addr)}
+                                                    editable={false}
+                                                />
 
-                                    {/* 주소 찾기 클릭시 PaymentAddr 컴포넌트로 이동 */}
-                                    <TouchableOpacity 
-                                        style={{
-                                            backgroundColor: '#fff', 
-                                            position: 'absolute', 
-                                            padding: 7, 
-                                            right: 12,
-                                            top: 7
-                                        }}
-                                        onPress={() => {
-                                            navigation.navigate('paymentAddr');
-                                        }}
-                                    >
-                                        <Text style={{color: '#47619e', textDecorationLine: 'underline'}}>주소찾기</Text>
-                                    </TouchableOpacity>
-                                </View>
-                                <TextInput
-                                    style={styles.textInput}
-                                    placeholder="상세주소"
-                                    value={buyerAddrDetail}
-                                    onChangeText={(addrDetail) => setBuyerAddrDetail(addrDetail)}
-                                />
-                                <TextInput
-                                    keyboardType="numeric"
-                                    style={styles.textInput}
-                                    placeholder="받는 사람 연락처"
-                                    value={buyerTel}
-                                    onChangeText={(buyerTel) => setBuyerTel(addHyphenToPhoneNumber(buyerTel))}
-                                />
-                            </View>
+                                                {/* 주소 찾기 클릭시 PaymentAddr 컴포넌트로 이동 */}
+                                                <TouchableOpacity 
+                                                    style={{
+                                                        backgroundColor: '#fff', 
+                                                        position: 'absolute', 
+                                                        padding: 7, 
+                                                        right: 12,
+                                                        top: 7
+                                                    }}
+                                                    onPress={() => {
+                                                        navigation.navigate('paymentAddr');
+                                                    }}
+                                                >
+                                                    <Text style={{color: '#47619e', textDecorationLine: 'underline'}}>주소찾기</Text>
+                                                </TouchableOpacity>
+                                            </View>
+                                            <TextInput
+                                                style={styles.textInput}
+                                                placeholder="상세주소"
+                                                value={buyerAddrDetail}
+                                                onChangeText={(addrDetail) => setBuyerAddrDetail(addrDetail)}
+                                            />
+                                            <TextInput
+                                                keyboardType="numeric"
+                                                style={styles.textInput}
+                                                placeholder="받는 사람 연락처"
+                                                value={buyerTel}
+                                                onChangeText={(buyerTel) => setBuyerTel(addHyphenToPhoneNumber(buyerTel))}
+                                            />
+                                        </View>
+                                    </View>
+                                )
+                                : <Text></Text>
+                            }
+                            {/* 배송지 정보 */}
+                            
                         </View>
                         
                         {/* 결제수단 선택(카카오페이, 토스페이먼츠 지원) */}
@@ -225,7 +234,8 @@ export default function PaymentInfo({navigation}:any, props:any) {
                                                 buyer_postcode: buyerPostcode,
                                                 buyer_id: userId,
                                                 app_scheme: 'example',
-                                                escrow: false
+                                                escrow: false,
+                                                category: category
                                             }));
 
                                             // Payment 컴포넌트로 이동
