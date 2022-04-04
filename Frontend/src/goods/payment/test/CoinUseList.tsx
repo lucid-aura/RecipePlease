@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import config from "../../../project.config"
 
 const Item = ({docsSeq, coinCount, coinInOut, coinDate}:any) => {
 
@@ -29,7 +30,7 @@ export default function CoinUseList({user}:any) {
 
     useEffect(() => {
         const getCoinData = () => {
-            axios.post("http://192.168.0.13:3000/coin/getUserCoinData", null, { params: {
+            axios.post(config.address +"coin/getUserCoinData", null, { params: {
                 memberId: user
             }})
             .then((res) => {

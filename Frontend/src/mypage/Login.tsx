@@ -11,7 +11,7 @@ import { AppState } from "../store";
 import * as L from '../store/login'
 import * as U from './utils'
 import { loginAction } from "../store/login";
-import address from "../project.config"
+import config from "../project.config"
 
 export default function Login() {
     const navigation = useNavigation()
@@ -36,7 +36,7 @@ export default function Login() {
         userInfo= (await getProfile()).split(" ")
         console.log("userInfo: " + userInfo[0])
         
-        axios.post(address + "regist", null, 
+        axios.post(config.address + "regist", null, 
         {
             params: {
                 memberId: userInfo[0],
@@ -74,7 +74,7 @@ export default function Login() {
     
 
     const userLogin = () => {
-        axios.post(address + "login", null, 
+        axios.post(config.address + "login", null, 
         {
             params: {
                 memberId: memberId,

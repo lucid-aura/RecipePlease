@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
-import address from "../project.config"
+import config from "../project.config"
 
 export default function RecipeDetailOrder({seq, category}:any) {
 
@@ -13,7 +13,7 @@ export default function RecipeDetailOrder({seq, category}:any) {
 
 
         const fetchPhoto = async() =>{
-            const photoRes = await axios.get(address + "getPhoto?docsSeq=" + seq +"&photoCategory=" + category)
+            const photoRes = await axios.get(config.address + "getPhoto?docsSeq=" + seq +"&photoCategory=" + category)
             if (!completed) {
 
                 //console.log(photoRes.data)
