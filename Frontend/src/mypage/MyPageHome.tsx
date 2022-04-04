@@ -24,7 +24,7 @@ export default function MyPageHome(){
     
     const log = useSelector<AppState, L.State>((state) => state.login)
     const {loggedIn, loggedUser} = log
-    console.log("MyPageHome loggedIn: " + loggedIn + "MyPageHome loggedUser: " + loggedUser)
+    console.log("MyPageHome loggedIn: " + loggedIn + "MyPageHome loggedUser: " + JSON.stringify(loggedUser))
     const dispatch = useDispatch()
 
     return(
