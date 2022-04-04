@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import React, { useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import address from  "../../project.config"
+import config from  "../../project.config"
 
 export default function PaymentResult({ navigation, route }:any) {
     
@@ -21,7 +21,7 @@ export default function PaymentResult({ navigation, route }:any) {
 
     // 결제 성공시 배송 및 주문 정보를 axios로 addGoodsShoppingList 컨트롤러에 넘겨서 처리
     useEffect(() => {
-        axios.post(address + 'payment/addGoodsShoppingList', null, { params: {
+        axios.post(config.address + 'payment/addGoodsShoppingList', null, { params: {
             memberId: paymentData.buyer_id,
             paymentPay: paymentData.amount,
             paymentMainAddr: paymentData.buyer_addr,
@@ -34,7 +34,7 @@ export default function PaymentResult({ navigation, route }:any) {
     
     // addPaymentList 컨트롤러에 넘기기
     useEffect(() => {
-        axios.post(address + 'payment/addPaymentList', null, { params: {
+        axios.post(config.address + 'payment/addPaymentList', null, { params: {
             paymentSeq: 2,
             memberId: paymentData.buyer_id,
             purchaseProductSeq: 3,
