@@ -10,9 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../store";
 import * as L from '../store/login'
 import * as U from './utils'
-import { red100 } from "react-native-paper/lib/typescript/styles/colors";
-import { Colors } from "react-native-paper";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { loginAction } from "../store/login";
+import config from "../project.config"
 
 export default function Login() {
     const navigation = useNavigation()
@@ -27,18 +26,17 @@ export default function Login() {
     const log = useSelector<AppState, L.State>((state) => state.login)
     const {loggedIn, loggedUser} = log
     const dispatch = useDispatch()
-
+    console.log("loggedIn: "+ loggedIn + " loggedUser: " + loggedUser)
+    
     let userInfo:string[]
     //카카오 아이디 가져오기
     const signInWithKakao = async (): Promise<void> => {
         const token: KakaoOAuthToken = await login();
-    
-        console.log(JSON.stringify(token))
-        
+
         userInfo= (await getProfile()).split(" ")
         console.log("userInfo: " + userInfo[0])
         
-        axios.post("http://192.168.219.102:3000/regist", null, 
+        axios.post(config.address + "regist", null, 
         {
             params: {
                 memberId: userInfo[0],
@@ -56,22 +54,27 @@ export default function Login() {
         dispatch(L.loginAction({memberId,memberNickname}))
         navigation.navigate("MyPage")
     };
-
+  
     const kakao = useCallback(() => {
         getProfile().then(value => {
             userInfo = value.split(" ")
-            setMemberId(userInfo[0])
+            if(userInfo.length > 0){
+                setMemberId(userInfo[0])
+                setMemberNickname(userInfo[1])
+                dispatch(loginAction({memberId, memberNickname}))
+                navigation.navigate("MyPage")
+            }
         })
+    }, [memberId, memberNickname])
+    useEffect(() => {
+        kakao()
     }, [])
-    kakao()
-    console.log("loggedIn: "+ !loggedIn)
-    if(loggedIn) {
-        navigation.navigate("MyPage")
-    } 
+    
+    
+    
 
     const userLogin = () => {
-        // axios.post("http://192.168.219.102:3000/login", null, 
-        axios.post("http://192.168.0.13:3000/login", null, 
+        axios.post(config.address + "login", null, 
         {
             params: {
                 memberId: memberId,
@@ -85,7 +88,9 @@ export default function Login() {
                 AsyncStorage.setItem("loginData", JSON.stringify(response.data));
                 navigation.navigate("MyPage")
             } else {
-                console.log("아이디 및 비밀번호가 틀립니다.")
+                console.log("아이디 및 비밀번호가 틀립니다. 임시 통과")
+                dispatch(L.loginAction({ memberId, memberNickname, password }))
+                navigation.navigate("MyPage")
             }
         }).catch((err:Error) => console.log(err.message))
     }

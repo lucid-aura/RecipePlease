@@ -4,6 +4,7 @@ import { Value } from "react-native-reanimated";
 import { useSelector } from "react-redux";
 import { AppState } from "../../store";
 import * as L from "../../store/login"
+import config from "../../project.config"
 
 // 로그인
 export const signInWithKakao = async (): Promise<void> => {
@@ -14,7 +15,7 @@ export const signInWithKakao = async (): Promise<void> => {
     let userInfo:string[]= (await getProfile()).split(" ")
     console.log("userInfo: " + userInfo[0])
     
-    axios.post("http://192.168.219.102:3000/regist", null, 
+    axios.post(config.address + "regist", null, 
     {
         params: {
             memberId: userInfo[0],

@@ -21,18 +21,17 @@ export default function MyPageHome(){
     
     const navigation = useNavigation()
     const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
-    const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
+    
     const log = useSelector<AppState, L.State>((state) => state.login)
     const {loggedIn, loggedUser} = log
-    console.log(loggedIn)
+    console.log("MyPageHome loggedIn: " + loggedIn + "MyPageHome loggedUser: " + JSON.stringify(loggedUser))
     const dispatch = useDispatch()
-    let userInfo:string[]
 
     return(
         <View style={[styles.container]}>
             <View style={[styles.topBar]}> 
                 <NavigationHeader title="홈" 
-                Left= {() => <Icon name="text-account" size={30} onPress={goBack} />}
+                Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
                 Right= {() => <Icon name="cart-heart" size={30} />} />
             </View>
             <View style={[styles.contentView]}>

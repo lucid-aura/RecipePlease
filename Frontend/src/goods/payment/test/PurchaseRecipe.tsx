@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Alert, Animated, Button, Dimensions, Modal, PanResponder, Pressable, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import config from  "../../../project.config"
 
 export default function PurchaseRecipe({navigation}:any) {
 
@@ -30,7 +31,7 @@ export default function PurchaseRecipe({navigation}:any) {
 
     // 레시피 구매 버튼 tap할 때 구매 요청을 보낼 함수
     const requestPurchaseRecipe = async () => {
-        await axios.post("http://192.168.0.13:3000/coin/useCoin", null, {params: {
+        await axios.post(config.address + "coin/useCoin", null, {params: {
             memberId: loginData.memberId,
             docsSeq: 1,
             coinCount: recipePrice

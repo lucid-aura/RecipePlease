@@ -7,7 +7,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDispatch } from "react-redux";
 import * as L from '../../store/login'
 import { NavigationHeader } from "../../theme";
-
+import config from "../../project.config"
 /* 
 
 npm i react-native-flexi-radio-button --save
@@ -42,7 +42,7 @@ export default function MyAccount() {
             Alert.alert("아이디", "아이디를 입력해주세요")
             return memberId 
         } else {
-            axios.post("http://192.168.219.102:3000/idCheck", null, {params: {memberId:memberId}})
+            axios.post(config.address + "idCheck", null, {params: {memberId:memberId}})
                 .then(function(response) {
                     console.log(response.data)
                     if(response.data == "yes") {
@@ -67,7 +67,7 @@ export default function MyAccount() {
         } else if(memberNickname.trim() === '') {
             Alert.alert('닉네임을 입력해주세요')
         } else {
-            axios.post("http://192.168.219.102:3000/regist", null, 
+            axios.post(config.address + "regist", null, 
             {
                 params: {
                     memberId: memberId,
