@@ -1,8 +1,11 @@
 package com.recipe.a.service;
 
 import com.recipe.a.dto.MembersDto;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.recipe.a.dao.MembersDao;
 import com.recipe.a.dto.MembersDto;
@@ -10,7 +13,9 @@ import com.recipe.a.dto.MembersDto;
 @Service
 @Transactional
 public class MembersService {
-
+	
+	static BCrypt bcr;
+	
 	private MembersDao dao;
 
 	public MembersService(MembersDao dao) {
@@ -41,8 +46,16 @@ public class MembersService {
 			return n>0? true:false;
 		}
 	}
-
+	
+	// 로그인
 	public MembersDto login(String memberId, String memberPwd) {
-		return dao.login(memberId, memberPwd);
+		
+		MembersDto salt = dao.getSalt(memberId, memberPwd);
+		System.out.println("memberService getSalt: " + salt.getSalt()+ " memberPwd: " + memberPwd);
+		
+		String encodedPassword = bcr.hashpw(memberPwd, salt.getSalt());
+		System.out.println("encodedPassword: " + encodedPassword);
+		
+		return dao.login(encodedPassword);
 	}
 }

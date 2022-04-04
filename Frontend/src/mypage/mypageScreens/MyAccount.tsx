@@ -6,6 +6,7 @@ import { Colors } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDispatch } from "react-redux";
 import * as L from '../../store/login'
+import { logoutAction } from "../../store/login";
 import { NavigationHeader } from "../../theme";
 
 /* 
@@ -31,7 +32,7 @@ export default function MyAccount() {
     const navigation = useNavigation()
     const dispatch = useDispatch()
     const goMyPage = useCallback(() => {
-          //dispatch(L.signUpAction({memberId, memberNickname, password}))
+          dispatch(L.loginAction({memberId, memberNickname}))
           navigation.navigate('MyPage')
       }, [memberId, memberNickname, password, confirmPassword])
 

@@ -69,9 +69,7 @@ export default function Login() {
         kakao()
     }, [])
     
-    
-    
-
+    // 로그인
     const userLogin = () => {
         axios.post("http://192.168.219.102:3000/login", null, 
         {
@@ -80,10 +78,10 @@ export default function Login() {
                 memberPwd: password
         }
         }).then(function(response) {
-            console.log(response.data.memberId)
+            console.log(`memberId: ${response.data.memberId} memberPwd: ${response.data.memberNickname}`)
             if(response.data.memberId == memberId) {
                 console.log("로그인 되었습니다.")
-                dispatch(L.loginAction({ memberId, memberNickname, password }))
+                dispatch(L.loginAction({ memberId, memberNickname }))
                 navigation.navigate("MyPage")
             } else {
                 console.log("아이디 및 비밀번호가 틀립니다.")

@@ -9,9 +9,14 @@
 		SELECT COUNT(*) FROM MEMBERS
 	</select>
 
+	<select id="getSalt" parameterType="String" resultType="com.recipe.a.dto.MembersDto">
+		SELECT SALT FROM MEMBERS
+		WHERE MEMBERID = #{memberId}
+	</select>
+	
 	<select id="login" parameterType="String" resultType="com.recipe.a.dto.MembersDto">
-		SELECT * FROM MEMBERS
-		WHERE MEMBERID = #{memberId} AND MEMBERPWD = #{memberPwd}
+		SELECT MEMBERID,MEMBERPWD FROM MEMBERS
+		WHERE MEMBERPWD = #{memberPwd}
 	</select>
 	
 	<!-- 아이디 중복체크 -->
