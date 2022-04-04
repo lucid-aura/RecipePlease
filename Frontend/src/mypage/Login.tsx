@@ -12,6 +12,7 @@ import * as L from '../store/login'
 import * as U from './utils'
 import { loginAction } from "../store/login";
 import config from "../project.config"
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Login() {
     const navigation = useNavigation()
