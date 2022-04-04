@@ -9,6 +9,7 @@ import { Alert,
     View } 
 from "react-native";
 import { resolvePath } from "react-native-reanimated/src/reanimated2/animation/styleAnimation";
+import config from  "../../../project.config"
 
 /* 테스트 페이지 : 구매 목록 리스트 */
 
@@ -144,7 +145,7 @@ export default function PurchaseList({user}:any, props:any) {
         // 각 아이템 클릭시
         function itemClick(paymentSeq:number) {
             // console.log('itemClicked');
-            axios.get("http://192.168.0.13:3000/payment/getPurchaseDetail", {
+            axios.get(config.address + "payment/getPurchaseDetail", {
                 params: {
                     paymentSeq: paymentSeq
                 }
@@ -160,7 +161,7 @@ export default function PurchaseList({user}:any, props:any) {
         const onClickOrderCancel = (confirm:boolean) => {
             
             if (confirm) {
-                axios.post("http://192.168.0.13:3000/payment/returnGoods", null, {
+                axios.post(config.address + "payment/returnGoods", null, {
                     params: {
                         memberId: userId,
                         paymentSeq: paymentSeq
@@ -241,7 +242,7 @@ export default function PurchaseList({user}:any, props:any) {
         //Alert.alert("useEffect start", "useEffect 실행")
         const fetchData = async () => {
             await axios.get(
-                "http://192.168.0.13:3000/payment/goodsPurchaseList", 
+                config.address + "payment/goodsPurchaseList", 
                 { params: { memberId: userId }
             })
             .then((res) => {

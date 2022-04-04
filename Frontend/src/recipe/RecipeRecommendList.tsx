@@ -4,6 +4,7 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Alert,  StyleSheet, Text, View } from "react-native";
 import { Rating } from "react-native-ratings";
 import { SliderBox } from "react-native-image-slider-box";
+import config from "../project.config"
 
 export default function RecipeRecommendList( { category } :any) { // 굿즈 태그 연결 부분
     
@@ -20,6 +21,14 @@ export default function RecipeRecommendList( { category } :any) { // 굿즈 태�
 
     const [index, setIndex] = useState(0) // 추천 레시피 인덱스
 
+
+    const changeReadcount = (index:number, newReadcount:any) => {
+        console.log(index + "번에 들어온 새로운 조회수 : " + newReadcount)
+        let  newData = recipeData;
+        newData.readcount[index] = newReadcount;
+        setRecipeData(newData)
+    }
+
     const changeAvarage = (index:number, newAvarage:any) =>{
         console.log(index + "번에 들어온 새로운 평균 : " + newAvarage)
        let  newData = recipeData;
@@ -29,7 +38,7 @@ export default function RecipeRecommendList( { category } :any) { // 굿즈 태�
 
     useEffect( () => {
         const fetchRecipe = async() =>{
-            const recipeRes =await axios.get("http://192.168.219.102:3000/getRecommendRecipe?category=" + category)
+            const recipeRes =await axios.get(config.address + "getRecommendRecipe?category=" + category)
             setRecipeData(recipeRes.data)          
         }
         fetchRecipe()
@@ -37,7 +46,7 @@ export default function RecipeRecommendList( { category } :any) { // 굿즈 태�
 
     function checkRecipe(index:number){ // 특정 레시피 선택 시
         if (recipeData.recipePrice[index] > 0){ // 유료 레시피일 경우
-            const purchaseCheckRes = axios.get("http://192.168.219.102:3000/purchaseRecipeCheck?memberId=" + "test"/* 이후 사용자 id로 변경 필요 */ + "&seq=" + recipeData.recipeSeq[index] )
+            const purchaseCheckRes = axios.get(config.address + "purchaseRecipeCheck?memberId=" + "test"/* 이후 사용자 id로 변경 필요 */ + "&seq=" + recipeData.recipeSeq[index] )
             .then(function(res){
                 if (res.data > 0){ // 데이터 전송 후 OK사인(구매확인)을 받으면 페이지 변경
                     /*
@@ -63,7 +72,8 @@ export default function RecipeRecommendList( { category } :any) { // 굿즈 태�
                 seq: recipeData.recipeSeq[index], 
                 category: 'recipe',
                 index:index,
-                changeAvarage : changeAvarage
+                changeAvarage : changeAvarage,
+                changeReadcount : changeReadcount
             })
         }
     }

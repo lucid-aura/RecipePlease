@@ -4,11 +4,12 @@ import { Alert, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } 
 import Icon from 'react-native-vector-icons/Ionicons'
 import { Rating } from "react-native-ratings";
 import { Button, DataTable, TextInput } from 'react-native-paper';
+import config from "../project.config"
 
 /*
 npm install react-native-table-component
 */
-export default function RecipeDetailOrder( { seq, setAvarage, setAvg, index, changeAvarage } :any) { // 평가 및 별점 부여 컴포넌트
+export default function RecipeDetailOrder( { seq, setAvarage, index, changeAvarage } :any) { // 평가 및 별점 부여 컴포넌트
 
     const [point, setPoint] = useState(3) // 댓글 입력시 기본 3점 default 값
     const [rating, setRating] = useState([]) // 해당 레시피의 평가글들을 모아놓은 배열
@@ -16,7 +17,7 @@ export default function RecipeDetailOrder( { seq, setAvarage, setAvg, index, cha
     
     function writeCommentReq(){ // 평가글 및 점수 입력 등록 했을 시
         console.log("writeCommentReq 함수 실행")
-        const response = axios.post("http://192.168.219.102:3000/writeComment", null , {
+        const response = axios.post(config.address + "writeComment", null , {
             params: {
                 memberId:'test', // 이후 memberId 에따라 로그인 확인 및 변경 필요
                 docsSeq:seq,
@@ -59,7 +60,7 @@ export default function RecipeDetailOrder( { seq, setAvarage, setAvg, index, cha
         let completed = false;
         const fetchRating = async() =>{
             console.log("Rating 컴포넌트 " + seq)
-            const ratingRes =await axios.get("http://192.168.219.102:3000/getAllRatingsBySeq?docsSeq=" + seq )
+            const ratingRes =await axios.get(config.address + "getAllRatingsBySeq?docsSeq=" + seq )
             setRating(ratingRes.data)
         }
 

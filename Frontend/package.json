@@ -10,7 +10,6 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@actbase/react-daum-postcode": "^1.0.4",
     "@react-native-async-storage/async-storage": "^1.16.3",
     "@react-native-picker/picker": "^2.4.0",
     "@react-native-seoul/kakao-login": "^4.0.0",

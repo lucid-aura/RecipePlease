@@ -17,8 +17,10 @@ import { Rating } from "react-native-ratings";
 //import RecipeDetailYoutube from "./RecipeDetailYoutube";
 import YoutubePlayer, {YoutubeIframeRef} from "react-native-youtube-iframe";
 import { NavigationHeader } from "../theme";
-
-
+import config from "../project.config"
+import { useSelector } from "react-redux";
+import { AppState } from "../store";
+import * as L from '../store/login'
 
 const Stack = createNativeStackNavigator()
 const context = createContext({})
@@ -33,38 +35,43 @@ export default function RecipeDetailScreen({ route, navigation }:any){
     const [url, setUrl] = useState() // 유튜브 url
     
     const playerRef = useRef<YoutubeIframeRef>(null) // ???
-    
 
     const { seq } = route.params; // 받아온 레시피 seq
     const { category } = route.params; // 받아온 카테고리
     const { index } = route.params;
     const { changeAvarage } = route.params;
+    const { changeReadcount } = route.params;
+
+    const log = useSelector<AppState, L.State>((state) => state.login)
+    const {loggedIn, loggedUser} = log
 
     useEffect( () => {
         let completed = false;  // 한번 실행을 위한 변수
-        
         const fetchRecipe = async() =>{ // 디테일로 들어온 하나의 레시피 정보를 받아옴
-            const recipeRes =await axios.get("http://192.168.219.102:3000/getOneRecipe?recipeSeq=" + seq )
+            console.log("getonerecipe " + config.address)
+            const recipeRes =await axios.get(config.address + "getOneRecipe?recipeSeq=" + seq )
             if (!completed) {
+                console.log(log)
                 if (recipeRes.data.recipePrice > 0){
-                    // 사용자 
+                    
+                    
                 }
 
-                // 레시피와 태그, 평균을 갱신
+                // 레시피와 태그, 평균, 조회수를 갱신
                 setRecipe(recipeRes.data);
                 setTag(recipeRes.data.recipeGoodsTag.split(","))
                 setAvarage(recipeRes.data.recipeRating)
-
                 if (recipeRes.data.recipeVideoUrl != ""){
                     setUrl(recipeRes.data.recipeVideoUrl.split("=")[1])
-
                 } 
-                console.log(recipeRes.data) // 확인용 (log)
+                console.log(index + " " + recipeRes.data)
+                changeReadcount(index, recipeRes.data.recipeReadcount)
                 
             }
 
-            const thumbnailRes = await axios.get("http://192.168.219.102:3000/getThumbnailPhoto?docsSeq=" + seq +"&photoCategory=" + category) // 해당 레시피의 썸네일 사진을 받아옴
+            const thumbnailRes = await axios.get( config.address + "getThumbnailPhoto?docsSeq=" + seq +"&photoCategory=" + category) // 해당 레시피의 썸네일 사진을 받아옴
             if (!completed) setThumbnail(thumbnailRes.data);
+            
         }
 
         fetchRecipe()
@@ -79,7 +86,7 @@ export default function RecipeDetailScreen({ route, navigation }:any){
     const likeRecipe = () => {
         if (likeIconName == "heart-plus-outline") {
             setLikeIconName("heart-plus")
-            const response = axios.get("http://192.168.219.102:3000/likeRecipe", {
+            const response = axios.get(config.address + "likeRecipe", {
             params: {
                 memberId:'test', // 이후 memberId 에따라 로그인 확인 및 변경 필요
                 recipeSeq:seq,
@@ -92,7 +99,7 @@ export default function RecipeDetailScreen({ route, navigation }:any){
         }
         else {
             setLikeIconName("heart-plus-outline")
-            const response = axios.get("http://192.168.219.102:3000/unlikeRecipe", {
+            const response = axios.get(config.address + "unlikeRecipe", {
             params: {
                 memberId:'test', // 이후 memberId 에따라 로그인 확인 및 변경 필요
                 recipeSeq:seq,
@@ -111,7 +118,7 @@ export default function RecipeDetailScreen({ route, navigation }:any){
         <SafeAreaView style={styles.container}>
             <NavigationHeader title="홈" 
                 Left= {() => <Icon name="arrow-left-bold" size={30} onPress={goBack} />}
-                Right= {() => <Icon name="mdiHeartPlus" size={30} />} />
+                Right= {() => <Icon name="cart-heart" size={30} />} />
 
             <ScrollView overScrollMode="never" style={styles.contentContainer}>
                 {/*조회수, 좋아요, 타이틀과 사진이 들어가는 View */}
