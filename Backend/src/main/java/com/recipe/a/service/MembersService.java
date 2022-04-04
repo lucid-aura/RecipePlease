@@ -1,6 +1,12 @@
 package com.recipe.a.service;
 
 import com.recipe.a.dto.MembersDto;
+import com.recipe.a.dto.PhotoDto;
+import com.recipe.a.dto.RecipeDto;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,5 +63,28 @@ public class MembersService {
 		System.out.println("encodedPassword: " + encodedPassword);
 		
 		return dao.login(encodedPassword);
+	}
+	
+	//내가 좋아하는 레시피
+	public Map<String,Object> myFavoriteRecipe(String memberId) {
+		
+		List<RecipeDto> recipeSeqList = dao.getRecipeSeq(memberId);
+		List<RecipeDto> recipeInfo = dao.getRecipeInfo(recipeSeqList);
+		
+		List<String> recipeTitleList = new ArrayList<String>();
+		List<Integer> recipeReadCount = new ArrayList<Integer>();
+		List<Float> recipeRating = new ArrayList<Float>();
+		
+		for(RecipeDto recipe : recipeInfo) {
+			recipeTitleList.add(recipe.getRecipeTitle());
+			recipeReadCount.add(recipe.getRecipeReadcount());
+			recipeRating.add(recipe.getRecipeRating());
+		}
+		
+		List<PhotoDto> thumbnails = dao.getThumbnail(recipeSeqList);
+		
+		
+		
+		
 	}
 }

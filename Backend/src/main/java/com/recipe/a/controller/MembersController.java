@@ -1,12 +1,15 @@
 package com.recipe.a.controller;
 
 import java.lang.reflect.Member;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.recipe.a.dto.MembersDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -79,5 +82,18 @@ public class MembersController {
 			return "yes";	// 중복
 		}	
 		return "no";		// 중복X
+	}
+	
+	//내가 좋아하는 레시피
+	@GetMapping("/MyFavoriteRecipe")
+	public Map<String,Object> MyFavoriteRecipe(String memberId) {
+		System.out.println("MemberController MyFavoriteRecipe");
+		
+		Map<String,Object> result = memberService.MyFavoriteRecipe(memberId);
+		System.out.println(result.toString());
+		
+		return result;
+		
+		
 	}
 }

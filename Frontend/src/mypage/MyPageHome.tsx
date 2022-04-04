@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import React, { useCallback } from "react";
-import { View, Text,StyleSheet,  TouchableOpacity } from "react-native";
+import { View, Text,StyleSheet,  TouchableOpacity, SafeAreaView } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { NavigationHeader } from "../theme";
 import { signOutWithKakao } from '../mypage/utils';
@@ -28,7 +28,7 @@ export default function MyPageHome(){
     const dispatch = useDispatch()
 
     return(
-        <View style={[styles.container]}>
+        <SafeAreaView style={[styles.container]}>
             <View style={[styles.topBar]}> 
                 <NavigationHeader title="홈" 
                 Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
@@ -69,7 +69,7 @@ export default function MyPageHome(){
                     </View>
                 </View>
             </View>
-        </View>
+        </SafeAreaView>
     )
     
    /* 

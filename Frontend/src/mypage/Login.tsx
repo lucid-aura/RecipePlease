@@ -1,6 +1,6 @@
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import React, { useCallback, useEffect, useState } from "react";
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { NavigationHeader } from "../theme";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { getProfile, signOutWithKakao } from "./utils";
@@ -107,7 +107,7 @@ export default function Login() {
 
 
     return(
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <View style={[styles.topBar]}>
                 <NavigationHeader title="홈" viewStyle={{}}
                 Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
@@ -154,7 +154,7 @@ export default function Login() {
                     </View>
                 </View>
             </View>
-        </View>
+        </SafeAreaView>
     )
 }
 const styles = StyleSheet.create({
