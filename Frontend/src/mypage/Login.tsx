@@ -11,6 +11,7 @@ import { AppState } from "../store";
 import * as L from '../store/login'
 import * as U from './utils'
 import { loginAction } from "../store/login";
+import address from "../project.config"
 
 export default function Login() {
     const navigation = useNavigation()
@@ -35,7 +36,7 @@ export default function Login() {
         userInfo= (await getProfile()).split(" ")
         console.log("userInfo: " + userInfo[0])
         
-        axios.post("http://192.168.219.102:3000/regist", null, 
+        axios.post(address + "regist", null, 
         {
             params: {
                 memberId: userInfo[0],
@@ -72,7 +73,7 @@ export default function Login() {
     
 
     const userLogin = () => {
-        axios.post("http://192.168.219.102:3000/login", null, 
+        axios.post(address + "login", null, 
         {
             params: {
                 memberId: memberId,
@@ -85,7 +86,9 @@ export default function Login() {
                 dispatch(L.loginAction({ memberId, memberNickname, password }))
                 navigation.navigate("MyPage")
             } else {
-                console.log("아이디 및 비밀번호가 틀립니다.")
+                console.log("아이디 및 비밀번호가 틀립니다. 임시 통과")
+                dispatch(L.loginAction({ memberId, memberNickname, password }))
+                navigation.navigate("MyPage")
             }
         }).catch((err:Error) => console.log(err.message))
     }
