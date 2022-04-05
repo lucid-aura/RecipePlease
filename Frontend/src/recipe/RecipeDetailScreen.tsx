@@ -14,26 +14,46 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import RecipeTags from './RecipeTags'
 import RecipeDetailRating from './RecipeDetailRating'
 import { Rating } from "react-native-ratings";
-//import RecipeDetailYoutube from "./RecipeDetailYoutube";
 import YoutubePlayer, {YoutubeIframeRef} from "react-native-youtube-iframe";
 import { NavigationHeader } from "../theme";
 import config from "../project.config"
 import { useSelector } from "react-redux";
 import { AppState } from "../store";
 import * as L from '../store/login'
-
-const Stack = createNativeStackNavigator()
-const context = createContext({})
+import { BlurView } from "@react-native-community/blur";
 
 export default function RecipeDetailScreen({ route, navigation }:any){
 
-    const [thumbnail, setThumbnail] = useState({}) // 썸네일 이미지 링크
-    const [recipe, setRecipe]= useState({}); // 레시피 데이터
+    const [thumbnail, setThumbnail] = useState({
+        docsSeq:-1,
+        photoCategory:"",
+        photoContent:"",
+        photoSeq:-1,
+        photoTitle:"",
+        photoUrl:"-"
+    }) // 썸네일 이미지 링크
+
+    const [recipe, setRecipe]= useState({
+        memberId:"",
+        recipeBigCategory:"",
+        recipeContent:"",
+        recipeGoodsTag:"",
+        recipePrice:0,
+        recipeRating:0.0,
+        recipeReadcount:0,
+        recipeSeq:-1,
+        recipeSmallCategory:"",
+        recipeTitle:"",
+        recipeVideoUrl:"-"
+    }); // 레시피 데이터
+
     const [tag, setTag] = useState([]) // 태그 데이터
     const [avarage, setAvarage]  = useState(0.0) // 각 레시피 평균 점수
     const [likeIconName, setLikeIconName] = useState("heart-plus-outline") // 좋아요 아이콘 
     const [url, setUrl] = useState() // 유튜브 url
-    
+    const [blur, setBlur] = useState(<></>) 
+    const [load, setLoad] = useState(false)
+
     const playerRef = useRef<YoutubeIframeRef>(null) // ???
 
     const { seq } = route.params; // 받아온 레시피 seq
@@ -41,44 +61,67 @@ export default function RecipeDetailScreen({ route, navigation }:any){
     const { index } = route.params;
     const { changeAvarage } = route.params;
     const { changeReadcount } = route.params;
-
     const log = useSelector<AppState, L.State>((state) => state.login)
     const {loggedIn, loggedUser} = log
-
+    
+    
     useEffect( () => {
         let completed = false;  // 한번 실행을 위한 변수
         const fetchRecipe = async() =>{ // 디테일로 들어온 하나의 레시피 정보를 받아옴
             console.log("getonerecipe " + config.address)
             const recipeRes =await axios.get(config.address + "getOneRecipe?recipeSeq=" + seq )
-            if (!completed) {
-                console.log(log)
-                if (recipeRes.data.recipePrice > 0){
-                    
-                    
-                }
 
-                // 레시피와 태그, 평균, 조회수를 갱신
-                setRecipe(recipeRes.data);
-                setTag(recipeRes.data.recipeGoodsTag.split(","))
-                setAvarage(recipeRes.data.recipeRating)
-                if (recipeRes.data.recipeVideoUrl != ""){
-                    setUrl(recipeRes.data.recipeVideoUrl.split("=")[1])
-                } 
-                console.log(index + " " + recipeRes.data)
-                changeReadcount(index, recipeRes.data.recipeReadcount)
-                
+            console.log(log)
+            let check = true;
+            if (recipeRes.data.recipePrice > 0){ // 유료 레시피인 경우
+                if (!loggedIn) { // 로그인 여부 확인
+                    Alert.alert("로그인이 필요합니다")
+                    check = false;
+                }
+                else {
+                    // memberId를 통해 레시피 구매여부 확인
+                    const purchaseRes = await axios.get( config.address + "coin/checkPurchaseRecipe?memberId=" + loggedUser.memberId + "&docsSeq=" + seq)
+                    if (purchaseRes.data > 0){ // 구매 확인
+                        // 레시피와 태그, 평균, 조회수를 갱신
+                    }
+                    else {
+                        // 구매 페이지로 단순 alert? 이동?
+                        check = false;
+                        Alert.alert("", "구매가 필요합니다.")
+                        
+                    }
+                }   
             }
 
+            /* 로그인, 구매 조건 만족 못했을 경우 블러 처리 */
+            if (!check){
+                setBlur(                
+                    <BlurView
+                        style={styles.absolute}
+                        blurType="light"
+                        blurAmount={10}
+                        reducedTransparencyFallbackColor="white"
+                    />
+                )
+            }
+
+            /* 데이터 로딩 */
+            setRecipe(recipeRes.data);
+            console.log(recipeRes.data);
+            setTag(recipeRes.data.recipeGoodsTag.split(","))
+            setAvarage(recipeRes.data.recipeRating)
+            if (recipeRes.data.recipeVideoUrl != ""){
+                setUrl(recipeRes.data.recipeVideoUrl.split("=")[1])
+            } 
+            changeReadcount(index, recipeRes.data.recipeReadcount)
             const thumbnailRes = await axios.get( config.address + "getThumbnailPhoto?docsSeq=" + seq +"&photoCategory=" + category) // 해당 레시피의 썸네일 사진을 받아옴
-            if (!completed) setThumbnail(thumbnailRes.data);
-            
+            setThumbnail(thumbnailRes.data);
+
+            // Loading 완료
+            setLoad(true)
         }
 
         fetchRecipe()
-        return () => {
-            completed = true;
-
-          };
     }, [])
 
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
@@ -109,31 +152,36 @@ export default function RecipeDetailScreen({ route, navigation }:any){
             }).catch(function(err){
                 console.log(err)
             })
-        }
-
-        
+        }   
     }
     return(
         
         <SafeAreaView style={styles.container}>
+
+            <View>
             <NavigationHeader title="홈" 
                 Left= {() => <Icon name="arrow-left-bold" size={30} onPress={goBack} />}
                 Right= {() => <Icon name="cart-heart" size={30} />} />
 
             <ScrollView overScrollMode="never" style={styles.contentContainer}>
                 {/*조회수, 좋아요, 타이틀과 사진이 들어가는 View */}
-                <View>
+                { load &&
+                <View style={{paddingBottom:20}}>
                     <Text style={styles.title}>{recipe.recipeTitle}</Text>
                     <View style={styles.alienRow}>
                         <Text style={styles.readcount}>조회수 : {recipe.recipeReadcount}</Text>
-                        <Icon name={likeIconName} size={50} onPress={likeRecipe} />
+                        <Icon name={likeIconName} size={40} onPress={likeRecipe} />
 
                     </View>
-                    <Image source={{ uri:thumbnail.photoUrl, width:600, height:300 }} />
+                    <View style={{alignItems:"center"}}>
+                        <Image style={{borderRadius:15}} source={{ uri:thumbnail.photoUrl, width:520, height:340 }} />
+                    </View>
                 </View>
-                <View>
+                }
 
                 {/* 별점에 관련된 View */}
+                { load &&
+                <View>
                 <Text style={styles.ratingText}>{avarage}/5</Text>
                 <Rating
                     type='star'
@@ -147,56 +195,70 @@ export default function RecipeDetailScreen({ route, navigation }:any){
                     style={{marginRight:10}}
                 />
                 </View>
+                }
 
                 {/* 조리법에 관련된 View (조리법 순서 component 로 연결) */}
+                { load &&
                 <View>
                     <Text style={styles.subTitle}>조리법</Text>
                     
                     <RecipeDetailOrder seq={seq} category={category} />
                 </View>
+                }
 
                 {/* 요리 설명에 관련된 View */}
+                { load &&
                 <View>
                     <Text style={styles.subTitle}>요리설명</Text>
                     <Text style={styles.content}>{recipe.recipeContent}</Text>
                 </View>
+                }
 
                 {/* 유튜브 링크 View */}
-                <View>
+                { load &&
+                <View style={{marginTop:20}}>
+                    <Text style={styles.subTitle}>영상설명</Text>
                     <YoutubePlayer
                         webViewStyle={{opacity: 0.99}}
                         useLocalHTML={true}
                         ref={playerRef}
-                        height={600}
+                        height={400}
                         width={600}
                         videoId={url}
                         onError={(err) => console.log(err)}
                         onChangeState={(a) => console.log(a)}
                     />
                 </View>
+                }
 
                 {/* 태그 RecipeTags 컴포넌트 View */}
+                { load &&
                 <View>
                     <Text style={styles.subTitle}>태그</Text>
                     <RecipeTags tag={tag} />
                 </View>
-
+                }
                 {/* 평가 ReipeDetailRating View */}
+
+                { load &&
                 <View>
                     {/* 평점 리스트 및 입력 부분 자식 컴포넌트 */}
                     <Text style={styles.subTitle}>평가</Text>
                     <RecipeDetailRating  seq={seq} setAvarage={setAvarage} avarage={avarage} index={index} changeAvarage={changeAvarage} />
                 </View>
-
+                }
+                {blur}
+                
             </ScrollView>
-            
+            </View>
         </SafeAreaView>
     )
 } 
 
 const styles = StyleSheet.create({
     contentContainer: {
-        paddingVertical: 0
+        paddingVertical: 0,
+        marginTop:20,
       },
     container: {
         width:'100%',
@@ -209,19 +271,19 @@ const styles = StyleSheet.create({
         height:"300"
     },
     title:{
-        fontSize:48,
-        textAlign:'center',
-        alignItems:'center',
-        justifyContent:'center'
-    },
-    subTitle:{
         fontSize:36,
         textAlign:'center',
         alignItems:'center',
         justifyContent:'center'
     },
+    subTitle:{
+        fontSize:30,
+        textAlign:'center',
+        alignItems:'center',
+        justifyContent:'center'
+    },
     content: {
-        width:600,
+        width:560,
         fontSize:18,
         color:'grey'
     },
@@ -253,6 +315,13 @@ const styles = StyleSheet.create({
         justifyContent:'center', 
         fontSize:30, 
         marginRight:10
-}
+    },
+    absolute: {
+        position: "absolute",
+        top: 10,
+        left: 0,
+        bottom: 0,
+        right: 0
+    }
 
 }) //css

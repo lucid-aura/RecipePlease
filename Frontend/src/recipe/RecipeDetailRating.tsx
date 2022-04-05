@@ -5,6 +5,9 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { Rating } from "react-native-ratings";
 import { Button, DataTable, TextInput } from 'react-native-paper';
 import config from "../project.config"
+import { useSelector } from "react-redux";
+import { AppState } from "../store";
+import * as L from '../store/login'
 
 /*
 npm install react-native-table-component
@@ -14,19 +17,21 @@ export default function RecipeDetailOrder( { seq, setAvarage, index, changeAvara
     const [point, setPoint] = useState(3) // 댓글 입력시 기본 3점 default 값
     const [rating, setRating] = useState([]) // 해당 레시피의 평가글들을 모아놓은 배열
     const [text, setText] = useState("") // 입력한 평가 글
-    
+
+    const log = useSelector<AppState, L.State>((state) => state.login)
+    const {loggedIn, loggedUser} = log
+
     function writeCommentReq(){ // 평가글 및 점수 입력 등록 했을 시
         console.log("writeCommentReq 함수 실행")
         const response = axios.post(config.address + "writeComment", null , {
             params: {
-                memberId:'test', // 이후 memberId 에따라 로그인 확인 및 변경 필요
+                memberId:loggedUser.memberId,
                 docsSeq:seq,
                 ratingCategory:'recipe',
                 ratingScore:point,
                 ratingComment:text,
             } 
         }).then(function(res) {
-
             setRating(res.data)
 
             // 평점 구하는 부분
@@ -37,13 +42,9 @@ export default function RecipeDetailOrder( { seq, setAvarage, index, changeAvara
             let avg = (sum/res.data.length).toFixed(2)
             setAvarage(parseFloat(avg)) // 여기있는 이  setter함수는 부모 컴포넌트(RecipeDetailScreen)에서 받아온 함수
             changeAvarage(index, parseFloat(avg))
-            //updateRecipeDataAfterComment() // 부모의 자매 컴포넌트에서 받아온 레시피 평균 값 변경 시 추천 레시피 리로드 함수
         }).catch(function(err){
             console.log(err)
         })
-
-        
-        
     }
 
     if (text.length > 500) { // 댓글 제한 500자
@@ -51,10 +52,8 @@ export default function RecipeDetailOrder( { seq, setAvarage, index, changeAvara
         setText(text.substring(0, 500));
     }
 
-    useEffect( () => { // 새로운 글이 작성되었을 시 다시 랜더링
-        console.log("테이블 업데이트")
-    }, [rating, point])
-
+    useEffect( () => { }, [rating, point])// 새로운 글이 작성되었을 시 다시 랜더링
+    
     useEffect( () => { // 첫 진입 시 랜더링
         console.log("rating effect rerendering")
         let completed = false;
@@ -78,8 +77,8 @@ export default function RecipeDetailOrder( { seq, setAvarage, index, changeAvara
         <DataTable>
             <DataTable.Header>
                 <DataTable.Title>id</DataTable.Title>
-                <DataTable.Title>content</DataTable.Title>
-                <DataTable.Title numeric>score</DataTable.Title>
+                <DataTable.Title>내용</DataTable.Title>
+                <DataTable.Title numeric>평가점수</DataTable.Title>
             </DataTable.Header>
             {rating.map((item:any, index:number)=> (
                 <DataTable.Row key={index}>
@@ -93,7 +92,7 @@ export default function RecipeDetailOrder( { seq, setAvarage, index, changeAvara
 
         {/* 평가 작성하는 부분 */}
         <View style={styles.inputRating}>
-            <TextInput style={{width:400, marginRight:10}}
+            <TextInput style={{width:360, marginRight:10}}
                 label="평가작성하기"
                 value={text}
                 onChangeText={(text) => setText(text)}
@@ -127,13 +126,17 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent:'center',
-        width:600,
+        marginLeft:20,
+        width:560,
     },
     inputRating: {
         flexDirection:'row',
         justifyContent:'center',
         alignItems:'center',
         marginTop:10
+    },
+    aligns: {
+        alignItems:'center'
     }
 
 }) //css

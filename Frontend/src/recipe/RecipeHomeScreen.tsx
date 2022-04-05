@@ -21,23 +21,10 @@ const testImage =
     ]
 
 export default function RecipeHomeScreen(){
-    /*
-    const updateRecipeDataAfterComment = function() { // 댓글 평가 작성 시 추천 레시피 재조회
-        console.log("this is test function")
-        axios.get("http://192.168.0.4:3000/getRecommendRecipe")
-            .then(function(res){
-                console.log(res.data)
-            })
-            .catch(function(err) {
-                console.log(err)
-            })
-    }
-    */
-   const navigation = useNavigation()
+    const navigation = useNavigation()
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
 
     return(
-        
         <SafeAreaView style={styles.container}>
             <NavigationHeader title="홈" 
                 Left= {() => <Icon name="arrow-left-bold" size={30} onPress={goBack} />}
@@ -65,14 +52,17 @@ export default function RecipeHomeScreen(){
 
 const styles = StyleSheet.create({
     contentContainer: {
-        paddingVertical: 0
+        paddingVertical: 0,
+        marginTop:30,
+        width:'100%',
       },
     container: {
         alignItems: 'center',
     },
 
     recipeTitle:{
-        fontSize:48
+        fontSize:32,
+        paddingLeft:30
     },
     recipeSlide:{
         width:600,
