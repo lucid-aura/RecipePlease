@@ -28,8 +28,8 @@ public interface MembersDao {
 	
 	//레시피 시퀀스 받아오기
 	public List<RecipeDto> getRecipeSeq(String memberId);
-	public List<RecipeDto> getRecipeInfo(List<RecipeDto> recipeSeqList);
-	public List<PhotoDto> getThumbnail(List<RecipeDto> recipeSeqList);
-	public List<Integer> getRatingCount(List<RecipeDto> recipeSeqList);
+	public RecipeDto getRecipeInfo(int recipeSeq);
+	public List<String> getThumbnail(int recipeSeq);
+	public List<Integer> getRatingCount(int recipeSeq);
 	
 }
