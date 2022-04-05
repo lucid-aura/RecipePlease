@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Alert,  StyleSheet, Text, View } from "react-native";
 import { Rating } from "react-native-ratings";
-import { SliderBox } from "react-native-image-slider-box";
+import { SliderBox }  from "react-native-image-slider-box";
 import config from "../project.config"
 
 export default function RecipeRecommendList( { category } :any) { // 굿즈 태그 연결 부분

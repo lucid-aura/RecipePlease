@@ -9,9 +9,14 @@
 		SELECT COUNT(*) FROM MEMBERS
 	</select>
 
+	<select id="getSalt" parameterType="String" resultType="com.recipe.a.dto.MembersDto">
+		SELECT SALT FROM MEMBERS
+		WHERE MEMBERID = #{memberId}
+	</select>
+	
 	<select id="login" parameterType="String" resultType="com.recipe.a.dto.MembersDto">
-		SELECT * FROM MEMBERS
-		WHERE MEMBERID = #{memberId} AND MEMBERPWD = #{memberPwd}
+		SELECT MEMBERID,MEMBERPWD,MEMBERNICKNAME FROM MEMBERS
+		WHERE MEMBERPWD = #{memberPwd}
 	</select>
 	
 	<!-- 아이디 중복체크 -->
@@ -32,8 +37,34 @@
 			   #{memberZipcode}, #{memberGender}, #{memberName}, #{memberGrade}, #{salt})
 	</insert>
 	
+	<!-- 내가 좋아하는 레시피 -->
+	<!-- 좋아요 누른 레시피시퀀스 가져오기 -->
+	<select id="getRecipeSeq" parameterType="String" resultType="com.recipe.a.dto.RecipeDto">
+		SELECT RECIPESEQ 
+		FROM RECIPELIKE
+		WHERE MEMBERID = #{memberId}
+	</select>
 	
+	<!-- 레시피 시퀀스에 해당하는 레시피 정보들 가져오기 -->
+	<select id="getRecipeInfo" parameterType="java.util.List" resultType="com.recipe.a.dto.RecipeDto">
+		SELECT RECIPETITLE, RECIPEREADCOUNT, RECIPERATING
+		FROM RECIPE
+		WHERE RECIPESEQ = #{recipeSeqList}
+	</select>
 	
+	<!-- 해당 레시피 시퀀스로 썸네일 url가져오기 -->
+	<select id="getThumbnail" parameterType="java.util.List" resultType="com.recipe.a.dto.PhotoDto" >
+		SELECT PHOTOURL
+		FROM PHOTO
+		WHERE DOCSSEQ = #{recipeSeqList} AND PHOTOCATEGORY = 'recipe' AND PHOTOTITLE = 'thumbnail'
+	</select>
+	
+	<!-- 평가 갯수 가져오기 -->
+	<select id="getRatingCount" parameterType="java.util.List" resultType="Integer">
+		SELECT COUNT(*)
+		FROM RATING
+		WHERE DOCSSEQ = #{recipeSeqList} AND RATINGCATEGORY = 'recipe'
+	</select>
 	
 
 
