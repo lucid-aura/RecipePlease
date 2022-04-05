@@ -5,6 +5,7 @@ import com.recipe.a.dto.PhotoDto;
 import com.recipe.a.dto.RecipeDto;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -67,23 +68,34 @@ public class MembersService {
 	
 	//내가 좋아하는 레시피
 	public Map<String,Object> myFavoriteRecipe(String memberId) {
+		System.out.println("myFavoriteRecipe service");
 		
 		List<RecipeDto> recipeSeqList = dao.getRecipeSeq(memberId);
+		System.out.println("recipeSeqList: " + recipeSeqList.toString());
 		List<RecipeDto> recipeInfo = dao.getRecipeInfo(recipeSeqList);
 		
 		List<String> recipeTitleList = new ArrayList<String>();
-		List<Integer> recipeReadCount = new ArrayList<Integer>();
-		List<Float> recipeRating = new ArrayList<Float>();
+		List<Integer> recipeReadcountList = new ArrayList<Integer>();
+		List<Float> recipeRatingList = new ArrayList<Float>();
 		
 		for(RecipeDto recipe : recipeInfo) {
 			recipeTitleList.add(recipe.getRecipeTitle());
-			recipeReadCount.add(recipe.getRecipeReadcount());
-			recipeRating.add(recipe.getRecipeRating());
+			recipeReadcountList.add(recipe.getRecipeReadcount());
+			recipeRatingList.add(recipe.getRecipeRating());
 		}
 		
-		List<PhotoDto> thumbnails = dao.getThumbnail(recipeSeqList);
+		List<PhotoDto> thumbnailList = dao.getThumbnail(recipeSeqList);
+		List<Integer> recipeRatingCountList = dao.getRatingCount(recipeSeqList);
 		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("recipeSeq", recipeSeqList);
+		result.put("recipeTitle", recipeTitleList);
+		result.put("recipeReadCount", recipeReadcountList);
+		result.put("recipeRating", recipeRatingList);
+		result.put("recipeThumbnails", thumbnailList);
+		result.put("recipeRatingCount", recipeRatingCountList);
 		
+		return result;
 		
 		
 	}

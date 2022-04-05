@@ -16,6 +16,7 @@ import config from "../project.config"
 export default function Login() {
     const navigation = useNavigation()
     const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
+    console.log("Login")
 
     // 로그인 훅
     // 카카오 아이디
@@ -27,7 +28,9 @@ export default function Login() {
     const {loggedIn, loggedUser} = log
     const dispatch = useDispatch()
     console.log("loggedIn: "+ loggedIn + " loggedUser: " + loggedUser)
-    
+    if(loggedIn) {
+        navigation.navigate("MyPage")
+    }
     let userInfo:string[]
     //카카오 아이디 가져오기
     const signInWithKakao = async (): Promise<void> => {
@@ -49,26 +52,24 @@ export default function Login() {
                 console.log("로그인 되었습니다.")
             }
         }).catch((err:Error) => console.log(err.message))
-        setMemberId(userInfo[0])
-        setMemberNickname(userInfo[1])
-        dispatch(L.loginAction({memberId,memberNickname}))
+        dispatch(L.loginAction({memberId: userInfo[0], memberNickname: userInfo[1]}))
         navigation.navigate("MyPage")
     };
   
     const kakao = useCallback(() => {
-        getProfile().then(value => {
-            userInfo = value.split(" ")
-            if(userInfo.length > 0){
-                setMemberId(userInfo[0])
-                setMemberNickname(userInfo[1])
-                dispatch(loginAction({memberId, memberNickname}))
-                navigation.navigate("MyPage")
-            }
-        })
+            getProfile().then(value => {
+                userInfo = value.split(" ")
+                if(userInfo.length > 0){
+                    dispatch(loginAction({memberId: userInfo[0], memberNickname: userInfo[1]}))
+                    navigation.navigate("MyPage")
+                }
+            })
     }, [memberId, memberNickname])
+
     useEffect(() => {
         kakao()
     }, [])
+    
     
     // 로그인
     const userLogin = () => {
@@ -79,16 +80,14 @@ export default function Login() {
                 memberPwd: password
         }
         }).then(function(response) {
-            console.log(`memberId: ${response.data.memberId} memberPwd: ${response.data.memberNickname}`)
+            console.log(`memberId: ${response.data.memberId} memberNickname: ${response.data.memberNickname}`)
             if(response.data.memberId == memberId) {
                 console.log("로그인 되었습니다.")
-                dispatch(L.loginAction({ memberId, memberNickname }))
-                navigation.navigate("MyPage")
-            } else {
-                console.log("아이디 및 비밀번호가 틀립니다. 임시 통과")
-                dispatch(L.loginAction({ memberId, memberNickname, password }))
-                navigation.navigate("MyPage")
-            }
+                dispatch(L.loginAction({ memberId: response.data.memberId, memberNickname: response.data.memberNickname }))
+                console.log("디스패치아래")
+                //navigation.navigate("MyPage")
+                console.log('로그인 아래')
+            } 
         }).catch((err:Error) => console.log(err.message))
     }
 
@@ -105,7 +104,7 @@ export default function Login() {
     //         .catch((e) => {})
     // }, [loggedIn])
 
-
+    if(!loggedIn){
     return(
         <SafeAreaView style={styles.container}>
             <View style={[styles.topBar]}>
@@ -156,6 +155,12 @@ export default function Login() {
             </View>
         </SafeAreaView>
     )
+    } else {
+    return(
+        <View><Text onPress={ () => {signOutWithKakao()
+            dispatch(L.logoutAction())}}>테스트</Text></View>
+    )
+    }
 }
 const styles = StyleSheet.create({
     container: {

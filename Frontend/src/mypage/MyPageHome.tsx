@@ -18,7 +18,7 @@ npm i axios
 */
 
 export default function MyPageHome(){
-    
+    console.log("MyPageHome")
     const navigation = useNavigation()
     const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
     

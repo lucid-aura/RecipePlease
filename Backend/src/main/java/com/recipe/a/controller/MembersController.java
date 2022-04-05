@@ -61,6 +61,8 @@ public class MembersController {
 		
 	}
 	
+	
+	//로그인
 	@PostMapping("/login")
 	public MembersDto login(String memberId, String memberPwd) {
 		System.out.println("login");
@@ -85,15 +87,13 @@ public class MembersController {
 	}
 	
 	//내가 좋아하는 레시피
-	@GetMapping("/MyFavoriteRecipe")
-	public Map<String,Object> MyFavoriteRecipe(String memberId) {
-		System.out.println("MemberController MyFavoriteRecipe");
-		
-		Map<String,Object> result = memberService.MyFavoriteRecipe(memberId);
+	@GetMapping("/myFavoriteRecipe")
+	public Map<String,Object> myFavoriteRecipe(String memberId) {
+		System.out.println("MemberController myFavoriteRecipe");
+		System.out.println("memberId: " + memberId);
+		Map<String,Object> result = memberService.myFavoriteRecipe(memberId);
 		System.out.println(result.toString());
 		
 		return result;
-		
-		
 	}
 }

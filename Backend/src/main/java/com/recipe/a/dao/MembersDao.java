@@ -30,5 +30,6 @@ public interface MembersDao {
 	public List<RecipeDto> getRecipeSeq(String memberId);
 	public List<RecipeDto> getRecipeInfo(List<RecipeDto> recipeSeqList);
 	public List<PhotoDto> getThumbnail(List<RecipeDto> recipeSeqList);
+	public List<Integer> getRatingCount(List<RecipeDto> recipeSeqList);
 	
 }
