@@ -32,9 +32,6 @@ public class MembersController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	
-
-
 	@RequestMapping(value = "/countMembers", method = {RequestMethod.GET, RequestMethod.POST})
 	public String countMembers() {
 		System.out.println("MembersController countMembers()");

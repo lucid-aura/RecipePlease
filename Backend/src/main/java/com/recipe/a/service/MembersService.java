@@ -72,7 +72,16 @@ public class MembersService {
 		
 		List<RecipeDto> recipeSeqList = dao.getRecipeSeq(memberId);
 		System.out.println("recipeSeqList: " + recipeSeqList.toString());
-		List<RecipeDto> recipeInfo = dao.getRecipeInfo(recipeSeqList);
+		
+		List<RecipeDto> recipeInfo = new ArrayList<RecipeDto>();
+		List<String> thumbnailList = new ArrayList<String>();
+		List<Integer> recipeRatingCountList = new ArrayList<Integer>();
+		for(int i=0; i<recipeSeqList.size(); i++) {
+			recipeInfo.add(dao.getRecipeInfo(recipeSeqList.get(i).getRecipeSeq()));
+			thumbnailList = dao.getThumbnail(recipeSeqList.get(i).getRecipeSeq());
+			recipeRatingCountList = dao.getRatingCount(recipeSeqList.get(i).getRecipeSeq());
+		}
+			
 		
 		List<String> recipeTitleList = new ArrayList<String>();
 		List<Integer> recipeReadcountList = new ArrayList<Integer>();
@@ -84,8 +93,10 @@ public class MembersService {
 			recipeRatingList.add(recipe.getRecipeRating());
 		}
 		
-		List<PhotoDto> thumbnailList = dao.getThumbnail(recipeSeqList);
-		List<Integer> recipeRatingCountList = dao.getRatingCount(recipeSeqList);
+		
+		System.out.println("recipeInfo: " + recipeInfo.toString());
+		System.out.println("thumbnailList: " + thumbnailList.toString());
+		System.out.println("recipeRatingCountList: " + recipeRatingCountList.toString());
 		
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("recipeSeq", recipeSeqList);
