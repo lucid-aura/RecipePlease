@@ -1,16 +1,20 @@
 package com.recipe.a.controller;
 
 import java.lang.reflect.Member;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.recipe.a.dto.MembersDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.recipe.a.dto.MembersDto;
 import com.recipe.a.service.MembersService;
@@ -27,6 +31,8 @@ public class MembersController {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	
 
 
 	@RequestMapping(value = "/countMembers", method = {RequestMethod.GET, RequestMethod.POST})
@@ -41,26 +47,9 @@ public class MembersController {
 	@RequestMapping(value = "/regist", method = {RequestMethod.GET, RequestMethod.POST})
 	public String regist(MembersDto dto) {
 		System.out.println("MembersController regist()");
-		Random rnd = new Random();
-		String str[] = new String[4];
-		String salt = "";
-		for (int i = 0; i < str.length; i++) {
-			str[i] = String.valueOf((char) ((int) (rnd.nextInt(26)) + 97));
-			salt += str[i];
-		}
+		String salt = BCrypt.gensalt(10);
 		dto.setSalt(salt);
-		String secretNum = dto.getMemberPwd() + salt;
-		System.out.println("secretNum: "+ secretNum);
-		String encodedPassword ="";
-		System.out.println(dto.toString());
-		
-		if(dto.getMemberPwd() == "") {	// 카카오 로그인 한 경우
-			encodedPassword = passwordEncoder.encode(salt);
-			
-		} else {	// 일반 회원가입한 경우
-			encodedPassword = passwordEncoder.encode(secretNum);
-		}
-		dto.setMemberPwd(encodedPassword);
+		dto.setMemberPwd(BCrypt.hashpw(dto.getMemberPwd(), salt));
 		System.out.println("dto.getMember_pwd: " + dto.getMemberPwd() );
 		
 		boolean b = memberService.regist(dto);
@@ -71,11 +60,17 @@ public class MembersController {
 		}
 		
 	}
-
+	
+	
+	//로그인
 	@PostMapping("/login")
 	public MembersDto login(String memberId, String memberPwd) {
 		System.out.println("login");
-		return memberService.login(memberId, memberPwd);
+		System.out.println("memberId: " + memberId + " " + "memberPwd: " + memberPwd);
+		MembersDto result = memberService.login(memberId, memberPwd);
+		System.out.println("result: " + result.toString());
+		
+		return result;
 	}
 	
 	// 아이디 중복 체크
@@ -89,5 +84,16 @@ public class MembersController {
 			return "yes";	// 중복
 		}	
 		return "no";		// 중복X
+	}
+	
+	//내가 좋아하는 레시피
+	@GetMapping("/myFavoriteRecipe")
+	public Map<String,Object> myFavoriteRecipe(String memberId) {
+		System.out.println("MemberController myFavoriteRecipe");
+		System.out.println("memberId: " + memberId);
+		Map<String,Object> result = memberService.myFavoriteRecipe(memberId);
+		System.out.println(result.toString());
+		
+		return result;
 	}
 }

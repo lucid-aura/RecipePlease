@@ -13,6 +13,8 @@ public class RecipeDto {
 	private float recipeRating;
 	private int recipeReadcount;
 	
+	public RecipeDto() {}
+	
 	public RecipeDto(String memberId, String recipeTitle, String recipeContent, String recipeBigCategory,
 			String recipeSmallCategory, String recipeVideoUrl, String recipeGoodsTag, int recipePrice) {
 		super();

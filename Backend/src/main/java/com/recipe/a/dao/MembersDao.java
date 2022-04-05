@@ -3,6 +3,9 @@ package com.recipe.a.dao;
 import java.util.List;
 
 import com.recipe.a.dto.MembersDto;
+import com.recipe.a.dto.PhotoDto;
+import com.recipe.a.dto.RecipeDto;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -16,9 +19,17 @@ public interface MembersDao {
 	
 	// 아이디 체크
 	public int idCheck(MembersDto dto);
-	// 회원가입 - 노승현
-	public int regist(MembersDto dto);	// 회원가입 - 노승현
+	// 회원가입 
+	public int regist(MembersDto dto);	// 회원가입 
 	
-
-	MembersDto login(String memberId, String memberPwd);
+	// 로그인
+	public MembersDto getSalt(String memberId, String memberPwd);
+	public MembersDto login(String memberPwd);
+	
+	//레시피 시퀀스 받아오기
+	public List<RecipeDto> getRecipeSeq(String memberId);
+	public List<RecipeDto> getRecipeInfo(List<RecipeDto> recipeSeqList);
+	public List<PhotoDto> getThumbnail(List<RecipeDto> recipeSeqList);
+	public List<Integer> getRatingCount(List<RecipeDto> recipeSeqList);
+	
 }
