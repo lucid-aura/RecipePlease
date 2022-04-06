@@ -20,7 +20,7 @@ const OnBoardScreen = ({navigation}:any) => {
       <View style={style.textContainer}>
         <View>
           <Text style={{fontSize: 32, fontWeight: 'bold', textAlign: 'center'}}>
-            Delicious Food
+            레시피를 부탁해
           </Text>
           <Text
             style={{
@@ -29,7 +29,7 @@ const OnBoardScreen = ({navigation}:any) => {
               textAlign: 'center',
               color: COLORS.grey,
             }}>
-            We help you to find best and delicious food
+            음식에 관한 모든것을 공유합니다.
           </Text>
         </View>
         <View style={style.indicatorContainer}>
@@ -39,7 +39,7 @@ const OnBoardScreen = ({navigation}:any) => {
         </View>
         <PrimaryButton
           onPress={() => navigation.navigate('HomeScreen')}
-          title="Get Started"
+          title="시작하기"
         />
       </View>
     </SafeAreaView>

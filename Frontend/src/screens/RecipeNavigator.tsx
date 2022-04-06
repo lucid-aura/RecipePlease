@@ -3,6 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import RecipeHomeScreen from '../recipe/RecipeHomeScreen';
 import RecipeDetailScreen from '../recipe/RecipeDetailScreen';
+import RecipeSearchResult from '../recipe/RecipeSearchResult';
 
 /*
 npm install react-native-gesture-handler
@@ -22,6 +23,7 @@ export default function RecipeNavigator(){
         <Stack.Screen name="RecipeHome" component={RecipeHomeScreen}></Stack.Screen>
 
         <Stack.Screen name="RecipeDetail" component={RecipeDetailScreen}></Stack.Screen>
+        <Stack.Screen name="RecipeSearchResult" component={RecipeSearchResult}></Stack.Screen>
       </Stack.Navigator>
     )
   }

@@ -41,4 +41,9 @@ public class CoinTransactionService {
         ChargeCoinDto dto = new ChargeCoinDto(coinTransactionDto.getCoinCount(), coinTransactionDto.getMemberId());
         return coinTransactionDao.useCoinUpdate(dto);
     }
+
+	public int checkPurchaseRecipe(CoinTransactionDto coinTransactionDto) {
+		return coinTransactionDao.checkPurchaseRecipe(coinTransactionDto);
+		
+	}
 }

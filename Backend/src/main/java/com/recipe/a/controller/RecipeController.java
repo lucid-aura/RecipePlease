@@ -1,5 +1,6 @@
 package com.recipe.a.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ import com.recipe.a.dto.RecipeDto;
 import com.recipe.a.dto.RecipeLikeDto;
 import com.recipe.a.service.RecipeLikeService;
 import com.recipe.a.service.RecipeService;
+
 
 @RestController // @Controller + @ResponseBody -> Restful
 public class RecipeController {
@@ -155,6 +157,16 @@ public class RecipeController {
 
 	}
 	
+	
+	@RequestMapping(value = "/searchRecipe", method = {RequestMethod.POST})
+	public Map<String, Object> searchRecipe(String search, String bigOptions, String smallOptions) {
+		System.out.println("RecipeController searchRecipe()");
+		ArrayList<String> big = new ArrayList<String>(Arrays.asList(bigOptions.split(",")));
+		ArrayList<String> small = new ArrayList<String>(Arrays.asList(smallOptions.split(","))); 
+		return recipeService.searchRecipe(search, big, small);
+	}
+	
+	
 	@RequestMapping(value = "/test", method = {RequestMethod.GET})
 	public List<Integer> test(int docs_seq, String photo_category) {
 		System.out.println(docs_seq + " " + photo_category);
@@ -169,3 +181,4 @@ public class RecipeController {
 		//return recipeService.getPhoto(photoDto);
 	}
 }
+

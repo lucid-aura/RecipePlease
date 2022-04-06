@@ -1,13 +1,17 @@
-import axios from "axios";
-import React, { useCallback } from "react";
-import { View, Text,StyleSheet, SafeAreaView, ScrollView } from "react-native";
+/* 작업중 */
+import React, { useCallback, useState } from "react";
+import { View, Text,StyleSheet, SafeAreaView, ScrollView, Alert, Image } from "react-native";
 import { NavigationHeader } from "../theme";
 import RecipeRecommendList from "./RecipeRecommendList";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useNavigation } from "@react-navigation/native";
+import RecipeSearch from "./RecipeSearch";
+import RNFS from "react-native-fs"
+
 /*
 npm i react-native-image-slider-box -HSH 추가
 npm install --save react-native-ratings - HSH 추가
+npm install react-native-fs
 */
  
 // 더미
@@ -21,27 +25,33 @@ const testImage =
     ]
 
 export default function RecipeHomeScreen(){
-    /*
-    const updateRecipeDataAfterComment = function() { // 댓글 평가 작성 시 추천 레시피 재조회
-        console.log("this is test function")
-        axios.get("http://192.168.0.4:3000/getRecommendRecipe")
-            .then(function(res){
-                console.log(res.data)
-            })
-            .catch(function(err) {
-                console.log(err)
-            })
-    }
-    */
-   const navigation = useNavigation()
+    const navigation = useNavigation()
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
 
     return(
-        
         <SafeAreaView style={styles.container}>
             <NavigationHeader title="홈" 
                 Left= {() => <Icon name="arrow-left-bold" size={30} onPress={goBack} />}
                 Right= {() => <Icon name="cart-heart" size={30} />} />
+
+            <RecipeSearch />
+
+            {/* <Text>bnb</Text>
+            <Image source={
+               {uri: 'file://' + RNFS.ExternalStorageDirectoryPath + '/A.jpg'} }
+                style={{ width:500, height: 300 }}
+            />
+
+            <Text>{'file://' + RNFS.ExternalStorageDirectoryPath + '/DCIM/A.jpg'}</Text>
+            <Text>{RNFS.DocumentDirectoryPath}</Text>
+            <Text>{RNFS.CachesDirectoryPath}</Text>
+            <Text>{RNFS.DownloadDirectoryPath}</Text>
+            <Text>{RNFS.ExternalCachesDirectoryPath}</Text>
+            <Text>{RNFS.ExternalDirectoryPath}</Text>
+            <Text>{RNFS.ExternalStorageDirectoryPath}</Text>
+            <Text>{RNFS.PicturesDirectoryPath}</Text> */}
+
+
             <ScrollView style={styles.contentContainer} showsHorizontalScrollIndicator={false}>
                 <Text style={styles.recipeTitle}>축산물 추천 레시피</Text>
                 <View>
@@ -65,23 +75,22 @@ export default function RecipeHomeScreen(){
 
 const styles = StyleSheet.create({
     contentContainer: {
-        paddingVertical: 0
+        paddingVertical: 0,
+        marginTop:30,
+        marginBottom:200,
+        width:'100%',
       },
     container: {
         alignItems: 'center',
     },
 
     recipeTitle:{
-        fontSize:48
-    },
-    recipeSlide:{
-        width:600,
-        height:300,
-        alignItems:'center', 
+        fontSize:32,
+        paddingLeft:30
     },
     ratingText: {
         color:'#f1c40f',
         fontSize:32,
         textAlign:'center'
-    }
+    },
 })// css

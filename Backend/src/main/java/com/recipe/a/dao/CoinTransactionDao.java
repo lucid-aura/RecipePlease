@@ -25,4 +25,7 @@ public interface CoinTransactionDao {
     // 코인을 사용한 경우
     boolean useCoin(CoinTransactionDto coinTransactionDto);
     boolean useCoinUpdate(ChargeCoinDto chargeCoinDto);
+
+    // 유료레시피에 접근할 경우 코인 구매내역을 확인
+	int checkPurchaseRecipe(CoinTransactionDto coinTransactionDto);
 }
