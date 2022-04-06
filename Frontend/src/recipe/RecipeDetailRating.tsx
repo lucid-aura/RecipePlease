@@ -22,7 +22,6 @@ export default function RecipeDetailOrder( { seq, setAvarage, index, changeAvara
     const {loggedIn, loggedUser} = log
 
     function writeCommentReq(){ // 평가글 및 점수 입력 등록 했을 시
-        console.log("writeCommentReq 함수 실행")
         const response = axios.post(config.address + "writeComment", null , {
             params: {
                 memberId:loggedUser.memberId,

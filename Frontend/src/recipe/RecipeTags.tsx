@@ -1,5 +1,3 @@
-/* 공사중 */
-
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Alert, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";

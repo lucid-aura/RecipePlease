@@ -138,4 +138,22 @@ public class RecipeService {
 
 	}
 
+	public Map<String, Object> searchRecipe(String search, ArrayList<String> big, ArrayList<String> small) {
+		Map<String, Object> res = new HashMap<String, Object>();
+		ArrayList<RecipeDto> recipes = (ArrayList<RecipeDto>) recipeDao.searchRecipe(search, big, small);
+		
+		List<Integer> recipeSeqList = new ArrayList<Integer>();
+		
+		for (RecipeDto recipe : recipes) {
+			recipeSeqList.add(recipe.getRecipeSeq());
+		}
+		
+		List<PhotoDto> thumbnails = photoDao.getRecommendThumnailPhoto(recipeSeqList);
+		
+		res.put("recipes", recipeDao.searchRecipe(search, big, small));
+		res.put("thumbnails", thumbnails);
+		return res;
+		
+	}
+
 }

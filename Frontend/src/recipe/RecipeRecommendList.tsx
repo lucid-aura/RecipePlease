@@ -54,7 +54,6 @@ export default function RecipeRecommendList( { category } :any) { // 굿즈 태�
     }, [])
 
     function checkRecipe(index:number){ // 특정 레시피 선택 시
-
         console.log(recipeData.recipePrice[index])
         navigation.navigate('RecipeDetail' as never,{
             seq: recipeData.recipeSeq[index], 
@@ -63,47 +62,6 @@ export default function RecipeRecommendList( { category } :any) { // 굿즈 태�
             changeAvarage : changeAvarage,
             changeReadcount : changeReadcount
         } as never)
-
-        /* // 만약 레시피에 들어가서 로그인, 무료 유료 판단한다면 지워야할 내용
-        if (recipeData.recipePrice[index] > 0){ // 유료 레시피일 경우
-            if (!loggedIn){ // 로그인 확인
-                // 로그인 페이지로 이동?
-                Alert.alert("", "로그인 필요합니다.")
-            }
-            else { // 레시피 구매 확인
-                console.log(loggedUser)
-                const purchaseCheckRes = axios.get(config.address + "coin/checkPurchaseRecipe?memberId=" + loggedUser.memberId + "&docsSeq=" + recipeData.recipeSeq[index] )
-                .then(function(res){
-                    if (res.data > 0){ // 데이터 전송 후 구매내역이 있으면 페이지 변경
-                        navigation.navigate('RecipeDetail' as never,{
-                            seq: recipeData.recipeSeq[index], 
-                            category: 'recipe',
-                            index:index,
-                            changeAvarage : changeAvarage,
-                            changeReadcount : changeReadcount
-                        } as never)
-                    }
-                    else{
-                        // 구매 페이지로 단순 alert? 이동?
-                        Alert.alert("", "구매가 필요합니다.")
-                    }
-                })
-                .catch(function(err) {
-                    console.log(err)
-                })     
-            }
-        }
-        else{ // 무료 레시피일 경우 화면 전환
-            navigation.navigate('RecipeDetail' as never,{
-                seq: recipeData.recipeSeq[index], 
-                category: 'recipe',
-                index:index,
-                changeAvarage : changeAvarage,
-                changeReadcount : changeReadcount
-            } as never)
-        }
-        */
-
     }
 
   return (

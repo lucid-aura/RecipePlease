@@ -22,7 +22,9 @@ import { AppState } from "../store";
 import * as L from '../store/login'
 import { BlurView } from "@react-native-community/blur";
 
-export default function RecipeDetailScreen({ route, navigation }:any){
+export default function RecipeDetailScreen({ route }:any){
+
+    const navigation = useNavigation()
 
     const [thumbnail, setThumbnail] = useState({
         docsSeq:-1,
@@ -51,7 +53,7 @@ export default function RecipeDetailScreen({ route, navigation }:any){
     const [avarage, setAvarage]  = useState(0.0) // 각 레시피 평균 점수
     const [likeIconName, setLikeIconName] = useState("heart-plus-outline") // 좋아요 아이콘 
     const [url, setUrl] = useState() // 유튜브 url
-    const [blur, setBlur] = useState(<></>) 
+    const [blur, setBlur] = useState(<Text> </Text>) 
     const [load, setLoad] = useState(false)
 
     const playerRef = useRef<YoutubeIframeRef>(null) // ???
@@ -66,16 +68,29 @@ export default function RecipeDetailScreen({ route, navigation }:any){
     
     
     useEffect( () => {
-        let completed = false;  // 한번 실행을 위한 변수
         const fetchRecipe = async() =>{ // 디테일로 들어온 하나의 레시피 정보를 받아옴
-            console.log("getonerecipe " + config.address)
             const recipeRes =await axios.get(config.address + "getOneRecipe?recipeSeq=" + seq )
-
-            console.log(log)
             let check = true;
             if (recipeRes.data.recipePrice > 0){ // 유료 레시피인 경우
                 if (!loggedIn) { // 로그인 여부 확인
-                    Alert.alert("로그인이 필요합니다")
+                    Alert.alert("유료 레시피입니다.", "로그인이 필요합니다." ,
+                        [
+                          {
+                            text: "로그인",
+                            onPress: () => {
+                                setBlur(<></>)
+                                navigation.navigate('RecipeHome' as never)
+                                navigation.navigate('MyNavigator' as never)
+                            }},
+                          {
+                            text: "뒤로가기",
+                            onPress: () => {
+                                setBlur(<></>)
+                                navigation.navigate('RecipeHome' as never)
+                            }},
+                        ],
+                        { cancelable: false}
+                      );
                     check = false;
                 }
                 else {
@@ -131,7 +146,7 @@ export default function RecipeDetailScreen({ route, navigation }:any){
             setLikeIconName("heart-plus")
             const response = axios.get(config.address + "likeRecipe", {
             params: {
-                memberId:'test', // 이후 memberId 에따라 로그인 확인 및 변경 필요
+                memberId:loggedUser.memberId,
                 recipeSeq:seq,
             } 
             }).then(function(res) {
@@ -144,7 +159,7 @@ export default function RecipeDetailScreen({ route, navigation }:any){
             setLikeIconName("heart-plus-outline")
             const response = axios.get(config.address + "unlikeRecipe", {
             params: {
-                memberId:'test', // 이후 memberId 에따라 로그인 확인 및 변경 필요
+                memberId:loggedUser.memberId,
                 recipeSeq:seq,
             } 
             }).then(function(res) {
@@ -248,7 +263,7 @@ export default function RecipeDetailScreen({ route, navigation }:any){
                 </View>
                 }
                 {blur}
-                
+
             </ScrollView>
             </View>
         </SafeAreaView>

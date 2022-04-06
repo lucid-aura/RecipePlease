@@ -57,8 +57,6 @@ export default function GoodsHomeScreen(){
              <Goodslisthome
                  foods={foods}
               />
-             
-             <Text>Goods Home Screen</Text>
              <Button title="Pay로 이동" onPress={()=>navigation.navigate('paymentInfo')}></Button>
             
         </ScrollView>
