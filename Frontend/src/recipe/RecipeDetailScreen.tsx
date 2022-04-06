@@ -2,6 +2,8 @@
 실행 전 Axios url 반드시 확인해주세요! 현재 각자의 로컬 주소로 되어있습니다.
 
 npm install react-native-tags-input
+npm install @react-native-community/blur
+
 */
 
 import { useNavigation } from "@react-navigation/native";
