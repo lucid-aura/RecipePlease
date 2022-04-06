@@ -1,13 +1,15 @@
 /* 작업중 */
-import React, { useCallback, useState } from "react";
-import { View, Text,StyleSheet, SafeAreaView, ScrollView, Alert, Image } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import { View, Text,StyleSheet, SafeAreaView, ScrollView, Alert, Image, Platform } from "react-native";
 import { NavigationHeader } from "../theme";
 import RecipeRecommendList from "./RecipeRecommendList";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useNavigation } from "@react-navigation/native";
 import RecipeSearch from "./RecipeSearch";
 import RNFS from "react-native-fs"
-
+import {
+    PermissionsAndroid
+} from 'react-native';
 /*
 npm i react-native-image-slider-box -HSH 추가
 npm install --save react-native-ratings - HSH 추가
@@ -28,6 +30,29 @@ export default function RecipeHomeScreen(){
     const navigation = useNavigation()
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
 
+    const permission = async() => {
+        if (Platform.OS === "android") {
+            await PermissionsAndroid.requestMultiple([
+                PermissionsAndroid.PERMISSIONS.CAMERA,
+                PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+                PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+            ]).then((result)=>{
+                if (result['android.permission.CAMERA']
+                && result['android.permission.WRITE_EXTERNAL_STORAGE']
+                && result['android.permission.READ_EXTERNAL_STORAGE']
+                === 'granted') {
+                    console.log("모든 권한 획득");
+                } else{
+                    console.log("권한거절");
+                }
+            })
+        }else{
+        }
+    }
+
+    useEffect( () => {
+        permission()
+    }, [])
     return(
         <SafeAreaView style={styles.container}>
             <NavigationHeader title="홈" 
@@ -36,21 +61,10 @@ export default function RecipeHomeScreen(){
 
             <RecipeSearch />
 
-            {/* <Text>bnb</Text>
-            <Image source={
+            {/* <Image source={
                {uri: 'file://' + RNFS.ExternalStorageDirectoryPath + '/A.jpg'} }
-                style={{ width:500, height: 300 }}
-            />
-
-            <Text>{'file://' + RNFS.ExternalStorageDirectoryPath + '/DCIM/A.jpg'}</Text>
-            <Text>{RNFS.DocumentDirectoryPath}</Text>
-            <Text>{RNFS.CachesDirectoryPath}</Text>
-            <Text>{RNFS.DownloadDirectoryPath}</Text>
-            <Text>{RNFS.ExternalCachesDirectoryPath}</Text>
-            <Text>{RNFS.ExternalDirectoryPath}</Text>
-            <Text>{RNFS.ExternalStorageDirectoryPath}</Text>
-            <Text>{RNFS.PicturesDirectoryPath}</Text> */}
-
+               'file:///storage/emulated/0/DCIM/image-s2.jpg'
+            /> */}
 
             <ScrollView style={styles.contentContainer} showsHorizontalScrollIndicator={false}>
                 <Text style={styles.recipeTitle}>축산물 추천 레시피</Text>
