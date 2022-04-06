@@ -8,6 +8,9 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.recipe.a.dto.MembersDto;
+import com.recipe.a.dto.MyFavoriteDto;
+import com.recipe.a.dto.RecipeDto;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -85,12 +88,20 @@ public class MembersController {
 	
 	//내가 좋아하는 레시피
 	@GetMapping("/myFavoriteRecipe")
-	public Map<String,Object> myFavoriteRecipe(String memberId) {
+	public List<MyFavoriteDto> myFavoriteRecipe(String memberId) {
 		System.out.println("MemberController myFavoriteRecipe");
 		System.out.println("memberId: " + memberId);
-		Map<String,Object> result = memberService.myFavoriteRecipe(memberId);
+		List<MyFavoriteDto> result = memberService.myFavoriteRecipe(memberId);
 		System.out.println(result.toString());
 		
 		return result;
+	}
+	
+	//테스트용
+	@RequestMapping(value = "/test1", method = {RequestMethod.GET})
+	public List<RecipeDto> test1() {
+		System.out.println("test");
+		
+		return memberService.test1();
 	}
 }

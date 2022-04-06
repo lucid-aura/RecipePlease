@@ -9,6 +9,13 @@ public class PhotoDto {
 	private String photoUrl;
 	
 	public PhotoDto() {
+		super();
+		this.photoSeq = 0;
+		this.docsSeq = 0;
+		this.photoTitle = "";
+		this.photoContent = "";
+		this.photoCategory = "";
+		this.photoUrl = "";
 	}
 
 	public PhotoDto(int photoSeq, int docsSeq, String photoTitle, String photoContent, String photoCategory,

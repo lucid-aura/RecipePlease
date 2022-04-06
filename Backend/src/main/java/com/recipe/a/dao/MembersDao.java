@@ -3,6 +3,7 @@ package com.recipe.a.dao;
 import java.util.List;
 
 import com.recipe.a.dto.MembersDto;
+import com.recipe.a.dto.MyFavoriteDto;
 import com.recipe.a.dto.PhotoDto;
 import com.recipe.a.dto.RecipeDto;
 
@@ -29,7 +30,8 @@ public interface MembersDao {
 	//레시피 시퀀스 받아오기
 	public List<RecipeDto> getRecipeSeq(String memberId);
 	public RecipeDto getRecipeInfo(int recipeSeq);
-	public List<String> getThumbnail(int recipeSeq);
-	public List<Integer> getRatingCount(int recipeSeq);
+	public PhotoDto getThumbnail(int recipeSeq);
+	public int getRatingCount(int recipeSeq);
 	
+	public List<RecipeDto> test1();
 }
