@@ -11,14 +11,9 @@ export type MyFavoriteRecipeDatas = {
     datas:MyFavoriteRecipeProps
 }
 
-const MyFavoriteFlatlist:FC<MyFavoriteRecipeDatas> = ({datas}) => {
-    const [myRecipe, setMyRecipe] = useState<MyFavoriteRecipeProps>()
+const MyFavoriteFlatlist:FC<MyFavoriteRecipeDatas> = ({datas: initialDatas}) => {
+    const [myRecipe, setMyRecipe] = useState<MyFavoriteRecipeProps>(initialDatas)
     
-    const getData = async() => {
-        getMyFavoriteRecipeDatas("fff")
-        .then(result => setMyRecipe(result))
-    }
-    useEffect(() => { getData() },[])
  
     return (
         <View style={[styles.container]}>
@@ -30,16 +25,16 @@ const MyFavoriteFlatlist:FC<MyFavoriteRecipeDatas> = ({datas}) => {
                     style={[styles.title]}
                     numberOfLines={2}
                     ellipsizeMode="tail"    
-                >제목이다ㄴㄷㄹㄴㄷㅁㄹㄷㄴㅁㄹㄴㄷㅁㄹㄴㅁㄷㄻㄴㅁㄴㄷㄻㄴㄷㄻㄴㄷㄻㄴㄷ</Text>
+                >{myRecipe.recipeTitle}</Text>
                 <View style={{marginTop:5}}>
-                    <Text style={[styles.id]}>by 아이디</Text>
+                    <Text style={[styles.id]}>{myRecipe.memberId}</Text>
                 </View>
                 <View style={{flexDirection:'row'}}>
                     <Rating
                         type='star'
                         ratingCount={5}
                         imageSize={20}
-                        startingValue={3}
+                        startingValue={myRecipe.recipeRatingList}
                         minValue={1}
                         fractions={20}
                         readonly={true}
@@ -47,10 +42,10 @@ const MyFavoriteFlatlist:FC<MyFavoriteRecipeDatas> = ({datas}) => {
                         
                     />
                     <View style={[styles.ratingCount]}>
-                        <Text style={{fontSize:18, color:Colors.grey500}}>(2)</Text>
+                        <Text style={{fontSize:18, color:Colors.grey500}}>({myRecipe.recipeRatingCountList})</Text>
                     </View>
                     <View style={[styles.readCount]}>
-                        <Text style={{fontSize:18, color:Colors.grey500}}>조회수 15만</Text>
+                        <Text style={{fontSize:18, color:Colors.grey500}}>조회수 {myRecipe.recipeRatingList}회</Text>
                     </View>
                     
                 </View>
@@ -65,18 +60,15 @@ export default MyFavoriteFlatlist
 const styles = StyleSheet.create ({
     container: {
         flexDirection: 'row',
-        backgroundColor: Colors.lime100, 
         padding:5
     },
     leftView: {
         padding:5,
-        backgroundColor: Colors.amber100
     },
     rightView: {
         flex:1,
         padding:10,
         marginRight:10,
-        backgroundColor: Colors.red200
     },
     title: {
         fontSize:25,

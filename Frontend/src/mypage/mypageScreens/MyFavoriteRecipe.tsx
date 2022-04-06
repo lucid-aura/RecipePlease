@@ -1,6 +1,6 @@
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { Button, FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useSelector } from "react-redux";
@@ -16,20 +16,22 @@ export const MyFavoriteRecipe = () => {
 
     const navigation = useNavigation()
     const log = useSelector<AppState, L.State>((state) => state.login)
-    const [myData, setMyData] =useState<MyFavoriteRecipeProps[]>([]) 
+    const [myData, setMyData] = useState<MyFavoriteRecipeProps[]>() 
     
     const {loggedIn, loggedUser} = log
     const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
     const datas = async() => {
-        /* await getMyFavoriteRecipeDatas(loggedUser.memberId)
+        await getMyFavoriteRecipeDatas(loggedUser.memberId)
                 .then(value => {
-                    setMyData(value)
-                    console.log(JSON.stringify(myData))
-                }) */
+                    setMyData([value])
+                    console.log("내가 좋아하는 레시피: " + JSON.stringify(value))
+                    console.log(myData)
+                })
     }
-   /*  useEffect(() => {
+   useEffect(() => {
         datas()
-    }, [])  */
+        console.log("useEffect")
+    }, []) 
     const test = () => {
         /* getMyFavoriteRecipeDatas(loggedUser.memberId)
                 .then(value => {
@@ -40,7 +42,6 @@ export const MyFavoriteRecipe = () => {
                     console.log(val.data)
                 })
     }
-
     return (
         <SafeAreaView style={[styles.container]}>
             <NavigationHeader title="내가 즐겨보는 레시피" viewStyle={{}}
@@ -51,22 +52,15 @@ export const MyFavoriteRecipe = () => {
                 title="test"
                 onPress={() => test()}
             />
-            <View><MyFavoriteFlatlist datas={{
-                recipeSeq: 0,
-                recipeTitle: "",
-                recipeReadcountList: 0,
-                recipeRatingList: 0,
-                thumbnailList: "",
-                recipeRatingCountList: [],
-                memberId: ""
-            }} /></View>
-            {/* <FlatList
-                data={myData}
-                rederItem={() => <MyFavoriteFlatlist datas={{item}} />}
-                keyExtractor={(item) => item.recipeSeq}
-            >
-
-            </FlatList> */}
+            <View>
+                <FlatList
+                    data={myData}
+                    renderItem={({item}) => (
+                        <MyFavoriteFlatlist datas={item} />
+                    )}
+                    keyExtractor={(item) => item.memberId}
+                />
+            </View>
         </SafeAreaView>
     )
 }

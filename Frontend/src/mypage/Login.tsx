@@ -93,6 +93,11 @@ export default function Login() {
         }).catch((err:Error) => console.log(err.message))
     }
 
+    const goMyfavoritePage = () => {
+        navigation.navigate('MyFavoriteRecipe')
+    }
+    
+
     // useEffect(() => {
     //     U.readFromStorage(L.loggedUserkey)
     //         .then((value) => {

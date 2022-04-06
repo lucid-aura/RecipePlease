@@ -4,6 +4,6 @@ export type MyFavoriteRecipeProps = {
     recipeReadcountList: 0
     recipeRatingList: 0.0
     thumbnailList: string
-    recipeRatingCountList: []
+    recipeRatingCountList: number
     memberId: string
 }
