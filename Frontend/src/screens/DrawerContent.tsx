@@ -9,14 +9,15 @@ import { NavigationHeader } from "../theme";
 const DrawerContent: FC<DrawerContentComponentProps> = (props) => {
     const {navigation} = props
     const Drawerclose = useCallback(() => navigation.dispatch(DrawerActions.closeDrawer()), [])
-
     return (
+
         <DrawerContentScrollView {...props} contentContainerStyle={[styles.view]}>
             <NavigationHeader viewStyle={{backgroundColor:'white'}} 
                     Left= {() => (<Icon name="arrow-left" size={50} onPress={Drawerclose}/>)}
                     Right={() => (<Icon name="close" size={24} onPress={Drawerclose} />)} />
             <Text>DrawerContent</Text>
         </DrawerContentScrollView>
+
     )
 }
 

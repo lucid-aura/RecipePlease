@@ -111,8 +111,8 @@ export default function Login() {
             <SafeAreaView style={styles.container}>
                 <View style={[styles.topBar]}>
                     <NavigationHeader title="홈" viewStyle={{}}
-                    Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
-                    Right= {() => <Icon name="cart-heart" size={30} />}
+                    Left= {() => <Icon name="text-account" size={40} onPress={drawerOpen} />}
+                    Right= {() => <Icon name="cart-heart" size={40} />}
                     />
                 </View>
 
@@ -162,8 +162,8 @@ export default function Login() {
             <SafeAreaView style={[styles.container]}>
                 <View style={[styles.topBar]}> 
                     <NavigationHeader title="홈" 
-                    Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
-                    Right= {() => <Icon name="cart-heart" size={30} />} />
+                    Left= {() => <Icon name="text-account" size={40} onPress={drawerOpen} />}
+                    Right= {() => <Icon name="cart-heart" size={40} />} />
                 </View>
                 <View style={[styles.contentView]}>
                     <Text>마이페이지</Text>
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
         borderRadius:1
     },
     contentView: {
-        flex:17,
+        flex:13,
         justifyContent:'center',
         alignItems:'center'
     },

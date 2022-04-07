@@ -1,7 +1,11 @@
+/*
+npm i react-native-swiper
+*/
+
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useCallback, useEffect, useLayoutEffect, useState } from "react";
-import { Alert,  StyleSheet, Text, View } from "react-native";
+import { Alert,  Image,  StyleSheet, Text, View } from "react-native";
 import { Rating } from "react-native-ratings";
 import { SliderBox }  from "react-native-image-slider-box";
 import config from "../project.config"
@@ -10,6 +14,8 @@ import { AppState } from "../store";
 import * as L from '../store/login'
 
 import { LogBox } from 'react-native'; // Non-serializable warning 숨기기
+import Swiper from "react-native-swiper";
+import { TouchableOpacity } from "react-native-gesture-handler";
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
 ]);
@@ -28,7 +34,8 @@ export default function RecipeRecommendList( { category } :any) { // 굿즈 태�
         "thumbnailPhoto":[],
         "title":[],
         "videoUrl":[],
-        "readcount":[]
+        "readcount":[],
+        "capacity":[]
     })
 
     const [index, setIndex] = useState(0) // 추천 레시피 인덱스
@@ -49,6 +56,7 @@ export default function RecipeRecommendList( { category } :any) { // 굿즈 태�
         const fetchRecipe = async() =>{
             const recipeRes =await axios.get(config.address + "getRecommendRecipe?category=" + category)
             setRecipeData(recipeRes.data)          
+            console.log(recipeRes.data)
         }
         fetchRecipe()
     }, [])
@@ -66,7 +74,46 @@ export default function RecipeRecommendList( { category } :any) { // 굿즈 태�
 
   return (
     <View style={styles.container}>
-        <SliderBox
+      <Swiper 
+        autoplay 
+        showsPagination={true} 
+        width={500}
+        height={400} 
+        autoplayTimeout={3.0}
+        loop={true}
+        
+      >
+        {recipeData.thumbnailPhoto.map((item, index) => {
+          return (
+              <View style={{alignItems:'center'}} key={index}>
+                  <TouchableOpacity onPress={ () => checkRecipe(index)}>
+                    <Image source={
+                        {uri: item} }
+                        style={{ alignSelf:'center', width:240, height:160}}
+                    />
+                    <Text style={styles.recipeTitle}>{recipeData.title[index]}</Text>
+                    <View style={{flexDirection:'row'}}>
+                        <Text style={styles.recipeReadcount}>조회수 : {recipeData.readcount[index]}</Text>
+                        <Text style={styles.recipeCapacity}>기준 : {recipeData.capacity[index]}인분</Text>
+                    </View>
+                    
+                    <Text style={styles.ratingText}>{recipeData.recipeRating[index]}</Text>
+                    <Rating
+                        type='star'
+                        ratingCount={5}
+                        imageSize={30}
+                        tintColor="#EEEEEE"
+                        readonly={true}
+                        fractions={20}
+                        startingValue={recipeData.recipeRating[index]}
+                    />
+                </TouchableOpacity>
+             </View>
+          )}
+        )}
+      </Swiper>
+
+        {/* <SliderBox
             images={recipeData.thumbnailPhoto}
             sliderBoxHeight={160}
             parentWidth={600}
@@ -106,7 +153,8 @@ export default function RecipeRecommendList( { category } :any) { // 굿즈 태�
                 fractions={20}
                 startingValue={recipeData.recipeRating[index]}
             />
-        </View>
+        </View> */}
+
         </View>
   );
 }
@@ -117,13 +165,22 @@ const styles = StyleSheet.create({
       },
       
     container: {
-        marginBottom:50
+        marginBottom:50,
+        alignItems:'center'
     },
     recipeTitle:{
-        fontSize:24
+        fontSize:24,
+        width:500,
     },
     recipeReadcount:{
-        fontSize:16
+        fontSize:16,
+        width:250,
+        textAlign:"left"
+    },
+    recipeCapacity:{
+        fontSize:16,
+        width:250,
+        textAlign:"right"
     },
     recipeSlide:{
         width:320,

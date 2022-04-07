@@ -12,11 +12,15 @@ public class RecipeDto {
 	private int recipePrice;
 	private float recipeRating;
 	private int recipeReadcount;
+	private int recipeCapacity;
+	private String recipeThumbnail;
+	
+	
 	
 	public RecipeDto() {}
 	
 	public RecipeDto(String memberId, String recipeTitle, String recipeContent, String recipeBigCategory,
-			String recipeSmallCategory, String recipeVideoUrl, String recipeGoodsTag, int recipePrice) {
+			String recipeSmallCategory, String recipeVideoUrl, String recipeGoodsTag, int recipePrice, int recipeCapacity, String recipeThumbnail) {
 		super();
 		this.memberId = memberId;
 		this.recipeTitle = recipeTitle;
@@ -28,10 +32,12 @@ public class RecipeDto {
 		this.recipePrice = recipePrice;
 		this.recipeRating = 0.0F;
 		this.recipeReadcount = 0;
+		this.recipeCapacity = recipeCapacity;
+		this.recipeThumbnail =recipeThumbnail;
 	}
 
 	public RecipeDto(int recipeSeq, String memberId, String recipeTitle, String recipeContent, String recipeBigCategory,
-			String recipeSmallCategory, String recipeVideoUrl, String recipeGoodsTag, int recipePrice, float recipeRating, int recipeReadcount) {
+			String recipeSmallCategory, String recipeVideoUrl, String recipeGoodsTag, int recipePrice, float recipeRating, int recipeReadcount, int recipeCapacity, String recipeThumbnail) {
 		super();
 		this.recipeSeq = recipeSeq;
 		this.memberId = memberId;
@@ -44,10 +50,12 @@ public class RecipeDto {
 		this.recipePrice = recipePrice;
 		this.recipeRating = recipeRating;
 		this.recipeReadcount = recipeReadcount;
+		this.recipeCapacity = recipeCapacity;
+		this.recipeThumbnail =recipeThumbnail;
 	}
 	
 	public RecipeDto(int recipeSeq, String memberId, String recipeTitle, String recipeContent, String recipeBigCategory,
-			String recipeSmallCategory, String recipeVideoUrl, String recipeGoodsTag, int recipePrice, float recipeRating) {
+			String recipeSmallCategory, String recipeVideoUrl, String recipeGoodsTag, int recipePrice, float recipeRating, int recipeCapacity, String recipeThumbnail) {
 		super();
 		this.recipeSeq = recipeSeq;
 		this.memberId = memberId;
@@ -60,6 +68,8 @@ public class RecipeDto {
 		this.recipePrice = recipePrice;
 		this.recipeRating = recipeRating;
 		this.recipeReadcount = 0;
+		this.recipeCapacity = recipeCapacity;
+		this.recipeThumbnail =recipeThumbnail;
 	}
 
 	public int getRecipeSeq() {
@@ -149,6 +159,22 @@ public class RecipeDto {
 	public void setRecipeReadcount(int recipeReadcount) {
 		this.recipeReadcount = recipeReadcount;
 	}
+	
+	public int getRecipeCapacity() {
+		return recipeCapacity;
+	}
+
+	public void setRecipeCapacity(int recipeCapacity) {
+		this.recipeCapacity = recipeCapacity;
+	}
+
+	public String getRecipeThumbnail() {
+		return recipeThumbnail;
+	}
+
+	public void setRecipeThumbnail(String recipeThumbnail) {
+		this.recipeThumbnail = recipeThumbnail;
+	}
 
 	@Override
 	public String toString() {
@@ -156,10 +182,8 @@ public class RecipeDto {
 				+ ", recipeContent=" + recipeContent + ", recipeBigCategory=" + recipeBigCategory
 				+ ", recipeSmallCategory=" + recipeSmallCategory + ", recipeVideoUrl=" + recipeVideoUrl
 				+ ", recipeGoodsTag=" + recipeGoodsTag + ", recipePrice=" + recipePrice + ", recipeRating="
-				+ recipeRating + ", recipeReadcount=" + recipeReadcount + "]";
+				+ recipeRating + ", recipeReadcount=" + recipeReadcount + ", recipeCapacity=" + recipeCapacity
+				+ ", recipeThumbnail=" + recipeThumbnail + "]";
 	}
-
-	
-	
 	
 }

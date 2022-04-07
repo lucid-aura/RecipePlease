@@ -57,7 +57,7 @@ public class RecipeController {
 	@RequestMapping(value ="/insertRecipe", method = {RequestMethod.GET, RequestMethod.POST})
 	public String insertRecipe() {
 		System.out.println("RecipeController insertRecipe()");
-		RecipeDto temp = new RecipeDto("test", "title", "content", "big", "small", "url", "tag", 0);
+		RecipeDto temp = new RecipeDto("test", "title", "content", "big", "small", "url", "tag", 0, 0, "");
 
 		int res = recipeService.insertRecipe(temp);
 		System.out.println(res);
@@ -141,6 +141,15 @@ public class RecipeController {
 		return recipeService.getRecommendRecipe(category);
 		//return recipeService.getPhoto(photoDto);
 	}
+
+	@RequestMapping(value = "/getRecommendRecipeTest", method = {RequestMethod.GET})
+	public List<RecipeDto> getRecommendRecipeTest(String category) {
+		
+		System.out.println("RecipeController getRecommendRecipeTest() " + category);
+
+		return recipeService.getRecommendRecipeTest(category);
+		//return recipeService.getPhoto(photoDto);
+	}	
 	
 	
 	@RequestMapping(value = "/likeRecipe", method = {RequestMethod.GET})

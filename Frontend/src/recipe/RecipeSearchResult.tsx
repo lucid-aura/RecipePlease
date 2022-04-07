@@ -72,8 +72,8 @@ export default function RecipeSearchResult({ route }:any) { // 레시피 검색 
   return (
     <SafeAreaView style={styles.container}>
          <NavigationHeader title="홈" 
-                Left= {() => <Icon name="arrow-left-bold" size={30} onPress={goBack} />}
-                Right= {() => <Icon name="cart-heart" size={30} />} />
+                Left= {() => <Icon name="arrow-left-bold" size={40} onPress={goBack} />}
+                Right= {() => <Icon name="cart-heart" size={40} />} />
 
         <Text>{search}</Text>
         <Text style={{fontSize:36}}>"{search}" 검색 결과</Text>

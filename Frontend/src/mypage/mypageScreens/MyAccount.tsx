@@ -97,8 +97,8 @@ export default function MyAccount() {
         <SafeAreaView style={styles.container}>
             <View style={[styles.topBar]} >
                 <NavigationHeader title="회원가입" viewStyle={{}}
-                    Left= {() => <Icon name="arrow-left" size={30} onPress={goBack} />}
-                    Right= {() => <Icon name="cart-heart" size={30} />}
+                    Left= {() => <Icon name="arrow-left" size={40} onPress={goBack} />}
+                    Right= {() => <Icon name="cart-heart" size={40} />}
                     />
             </View>
             <View style={[styles.contentView]}>

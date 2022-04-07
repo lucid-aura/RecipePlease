@@ -101,6 +101,7 @@ public class RecipeService {
 		List<Float> recipeRatingList = new ArrayList<Float>();
 		List<String> thumbnailPhotoList = new ArrayList<String>();
 		List<Integer> readcountList = new ArrayList<Integer>();
+		List<Integer> capacityList = new ArrayList<Integer>();
 
 		for (RecipeDto recipe : recipes) {
 			recipeSeqList.add(recipe.getRecipeSeq());
@@ -109,6 +110,7 @@ public class RecipeService {
 			recipePrice.add(recipe.getRecipePrice());
 			recipeRatingList.add(recipe.getRecipeRating());
 			readcountList.add(recipe.getRecipeReadcount());
+			capacityList.add(recipe.getRecipeCapacity());
 		}
 		List<PhotoDto> thumbnails = photoDao.getRecommendThumnailPhoto(recipeSeqList);
 
@@ -129,9 +131,21 @@ public class RecipeService {
 		res.put("recipePrice", recipePrice);
 		res.put("thumbnailPhoto", thumbnailPhotoList);
 		res.put("readcount", readcountList);
-
+		res.put("capacity", capacityList);
+		
 		return res;
 	}
+	
+	public List<RecipeDto> getRecommendRecipeTest(String category) {
+		List<RecipeDto> recipes;
+		if (category.equals("readcount")) {
+			recipes = recipeDao.getRecommendReadcountRecipe();
+		} else {
+			recipes = recipeDao.getRecommendRecipe(category);
+		}
+		return recipes;
+	}
+
 
 	public int oneUpReadcount(int recipeSeq) {
 		return recipeDao.oneUpReadcount(recipeSeq);
@@ -155,5 +169,6 @@ public class RecipeService {
 		return res;
 		
 	}
+
 
 }

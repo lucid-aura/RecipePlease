@@ -55,11 +55,10 @@ export default function RecipeHomeScreen(){
     }, [])
     return(
         <SafeAreaView style={styles.container}>
-            <NavigationHeader title="홈" 
-                Left= {() => <Icon name="arrow-left-bold" size={30} onPress={goBack} />}
-                Right= {() => <Icon name="cart-heart" size={30} />} />
+            <NavigationHeader
+                Left= {() => <Icon name="arrow-left-bold" size={40} onPress={goBack} />}
+                Right= {() => <Icon name="cart-heart" size={40} />} />
 
-            <RecipeSearch />
 
             {/* <Image source={
                {uri: 'file://' + RNFS.ExternalStorageDirectoryPath + '/A.jpg'} }
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
     contentContainer: {
         paddingVertical: 0,
         marginTop:30,
-        marginBottom:200,
+        marginBottom:50,
         width:'100%',
       },
     container: {

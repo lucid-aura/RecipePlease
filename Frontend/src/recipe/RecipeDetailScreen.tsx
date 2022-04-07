@@ -177,8 +177,8 @@ export default function RecipeDetailScreen({ route }:any){
 
             <View>
             <NavigationHeader title="홈" 
-                Left= {() => <Icon name="arrow-left-bold" size={30} onPress={goBack} />}
-                Right= {() => <Icon name="cart-heart" size={30} />} />
+                Left= {() => <Icon name="arrow-left-bold" size={40} onPress={goBack} />}
+                Right= {() => <Icon name="cart-heart" size={40} />} />
 
             <ScrollView overScrollMode="never" style={styles.contentContainer}>
                 {/*조회수, 좋아요, 타이틀과 사진이 들어가는 View */}
