@@ -3,12 +3,19 @@ package com.recipe.a.dto;
 public class PhotoDto {
 	private int photoSeq;
 	private int docsSeq;
-	private String photoTitle;
-	private String photoContent;
-	private String photoCategory;
+	private String photoTitle;		// 사진 종류들 알려주는것(썸네일은 썸네일)
+	private String photoContent;	// 사진에 대한 설명
+	private String photoCategory;	// 굿즈냐 레시피냐
 	private String photoUrl;
 	
 	public PhotoDto() {
+		super();
+		this.photoSeq = 0;
+		this.docsSeq = 0;
+		this.photoTitle = "";
+		this.photoContent = "";
+		this.photoCategory = "";
+		this.photoUrl = "";
 	}
 
 	public PhotoDto(int photoSeq, int docsSeq, String photoTitle, String photoContent, String photoCategory,

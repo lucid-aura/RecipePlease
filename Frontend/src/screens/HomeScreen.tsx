@@ -70,14 +70,14 @@ const HomeScreen = () => {
       <TouchableHighlight//사진 및 디테일 설정
         underlayColor={COLORS.white}
         activeOpacity={0.9}
-        onPress={() => navigation.navigate('RecipeNavigator', { 
+        onPress={() => navigation.navigate('RecipeNavigator'  as never, { 
           screen: 'RecipeDetail',
           params:{
             seq:0, 
             updateRecipeDataAfterComment: console.log("여기에 평가 작성 시 데이터 리로드 하는 함수가 들어가야 합니다."),
             category: 'recipe'
           }
-        })}>
+        }  as never)}>
         <View style={style.card}>
           <View style={{alignItems: 'center', top: -40}}>
             <Image source={food.image} style={{height: 120, width: 120}} />
@@ -88,7 +88,7 @@ const HomeScreen = () => {
               {food.ingredients}
             </Text>
           </View>
-          <View //+ 기호 삭제
+          <View //+ 기호 삭제 + $삭제
             style={{
               marginTop: 10,
               marginHorizontal: 20,
@@ -96,7 +96,7 @@ const HomeScreen = () => {
               justifyContent: 'space-between',
             }}>
             <Text style={{fontSize: 18, fontWeight: 'bold'}}>
-              ${food.price}
+              {food.prompt}
             </Text>
           </View>
         </View>
@@ -135,13 +135,10 @@ const HomeScreen = () => {
         }}>
         <View style={style.inputContainer}>
           <Icon name="search" size={28} />
-          <TextInput //검색바
+          <TextInput //검색바 + 우측 검색 구간 아이콘 삭제(현재 슬라이더로 메뉴 구성단 완성으로 삭제)
             style={{flex: 1, fontSize: 18}}
             placeholder="요리법을 선택하세요"
           />
-        </View>
-        <View style={style.sortBtn}> 
-          <Icon name="tune" size={28} color={COLORS.white} />
         </View>
       </View>
       <View>

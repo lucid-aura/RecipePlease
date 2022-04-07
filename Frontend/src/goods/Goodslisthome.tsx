@@ -44,7 +44,7 @@ export default function Goodslisthome({foods}:any){
                   justifyContent: 'space-between',
                 }}>
                 <Text style={{fontSize: 18, fontWeight: 'bold'}}>
-                  ${food.price}
+                {food.prompt}
                 </Text>
               </View>
             </View>

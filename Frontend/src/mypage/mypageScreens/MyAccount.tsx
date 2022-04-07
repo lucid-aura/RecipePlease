@@ -1,11 +1,12 @@
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useCallback, useState } from "react";
-import { Alert, StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, View } from "react-native";
+import { Alert, SafeAreaView, StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, View } from "react-native";
 import { Colors } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDispatch } from "react-redux";
 import * as L from '../../store/login'
+import { logoutAction } from "../../store/login";
 import { NavigationHeader } from "../../theme";
 import config from "../../project.config"
 /* 
@@ -31,7 +32,7 @@ export default function MyAccount() {
     const navigation = useNavigation()
     const dispatch = useDispatch()
     const goMyPage = useCallback(() => {
-          //dispatch(L.signUpAction({memberId, memberNickname, password}))
+          dispatch(L.loginAction({memberId, memberNickname}))
           navigation.navigate('MyPage')
       }, [memberId, memberNickname, password, confirmPassword])
 
@@ -93,7 +94,7 @@ export default function MyAccount() {
     }
     
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <View style={[styles.topBar]} >
                 <NavigationHeader title="회원가입" viewStyle={{}}
                     Left= {() => <Icon name="arrow-left" size={30} onPress={goBack} />}
@@ -151,7 +152,7 @@ export default function MyAccount() {
                     <Text>회원가입</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </SafeAreaView>
     )
 }
 

@@ -39,9 +39,9 @@
         WHERE MEMBERID = #{memberId}
     </update>
     
-    <!-- 레시피 구매여부 조회 -->
+    <!-- 코인 사용 확인 시 -->
     <select id="checkPurchaseRecipe" parameterType="com.recipe.a.dto.CoinTransactionDto" resultType="Integer">
-    	SELECT * FROM COINTRANSACTION
-    	WHERE MEMBERID = #{memberId} AND DOCSSEQ = #{docsSeq}
+    	SELECT COUNT(*) FROM COINTRANSACTION
+    	WHERE MEMBERID=#{memberId} AND DOCSSEQ=#{docsSeq} AND COININOUT='사용'
     </select>
 </mapper>

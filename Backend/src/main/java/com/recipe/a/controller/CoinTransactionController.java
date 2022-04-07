@@ -58,4 +58,12 @@ public class CoinTransactionController {
     	return res ? "구매" : "비구매";
     }
 
+    // 레시피 구매 확인
+    @GetMapping("/checkPurchaseRecipe")
+    public int checkPurchaseRecipe(CoinTransactionDto coinTransactionDto) {
+        logger.info("CoinTransactionController checkPurchaseRecipe()");
+        System.out.println(coinTransactionDto.toString());
+        coinTransactionDto.setCoinTransactionSeq(-1);
+        return coinTransactionService.checkPurchaseRecipe(coinTransactionDto);   
+    }
 }
