@@ -112,6 +112,7 @@ export default function PaymentInfo({navigation}:any, props:any) {
                         </View>
 
                         <View>
+                            {/* 상품 구분(굿즈/코인)에 따라 주소 입력 컴포넌트를 보여주거나 가림 */}
                             { category === 'goods'
                                 ? (
                                     <View>
@@ -166,7 +167,6 @@ export default function PaymentInfo({navigation}:any, props:any) {
                                 )
                                 : <Text></Text>
                             }
-                            {/* 배송지 정보 */}
                             
                         </View>
                         
@@ -223,8 +223,8 @@ export default function PaymentInfo({navigation}:any, props:any) {
                                             AsyncStorage.setItem('payment', JSON.stringify({
                                                 pg: pg,
                                                 pay_method: 'card',
-                                                merchant_uid: `ORD-${uid}-${userId}`,   // 사용자 아이디를 추가
-                                                name: '카카오 도마 칼 세트',
+                                                merchant_uid: `ORD-${uid}-${userId}`,
+                                                name: '카카오 도마 칼 세트',                // 굿즈명 또는 코인 금액
                                                 amount: amount,
                                                 buyer_email: buyerEmail,
                                                 buyer_name: buyerName,
