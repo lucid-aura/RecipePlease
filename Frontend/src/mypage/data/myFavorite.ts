@@ -1,8 +1,9 @@
 export type MyFavoriteRecipeProps = {
-    recipeSeq: number
-    recipeRating: number
-    thumbnailPhoto: string
-    title: string
-    readcount: number
-    memberNickname:string
+    recipeSeq : number
+    recipeTitle: string
+    recipeReadcountList: 0
+    recipeRatingList: 0.0
+    thumbnailList: string
+    recipeRatingCountList: number
+    memberId: string
 }

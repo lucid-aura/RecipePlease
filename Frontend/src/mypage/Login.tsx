@@ -93,6 +93,11 @@ export default function Login() {
         }).catch((err:Error) => console.log(err.message))
     }
 
+    const goMyfavoritePage = () => {
+        navigation.navigate('MyFavoriteRecipe')
+    }
+    
+
     // useEffect(() => {
     //     U.readFromStorage(L.loggedUserkey)
     //         .then((value) => {
@@ -106,7 +111,7 @@ export default function Login() {
     //         .catch((e) => {})
     // }, [loggedIn])
 
-    if(!loggedIn){
+    if(!loggedIn){  // 로그아웃 상태일 때
         return(
             <SafeAreaView style={styles.container}>
                 <View style={[styles.topBar]}>
@@ -157,7 +162,7 @@ export default function Login() {
                 </View>
             </SafeAreaView>
         )
-    } else {
+    } else {    // 로그인 상태일 때
         return(
             <SafeAreaView style={[styles.container]}>
                 <View style={[styles.topBar]}> 

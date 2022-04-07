@@ -17,8 +17,22 @@ public class RecipeDto {
 	
 	
 	
-	public RecipeDto() {}
 	
+	
+	public RecipeDto() {
+		super();
+		this.memberId = "";
+		this.recipeTitle = "";
+		this.recipeContent = "";
+		this.recipeBigCategory = "";
+		this.recipeSmallCategory = "";
+		this.recipeVideoUrl = "";
+		this.recipeGoodsTag = "";
+		this.recipePrice = 0;
+		this.recipeRating = 0.0F;
+		this.recipeReadcount = 0;
+	}
+
 	public RecipeDto(String memberId, String recipeTitle, String recipeContent, String recipeBigCategory,
 			String recipeSmallCategory, String recipeVideoUrl, String recipeGoodsTag, int recipePrice, int recipeCapacity, String recipeThumbnail) {
 		super();
