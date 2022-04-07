@@ -13,9 +13,10 @@ export type MyFavoriteRecipeDatas = {
 
 const MyFavoriteFlatlist:FC<MyFavoriteRecipeDatas> = ({datas: initialDatas}) => {
     const [myRecipe, setMyRecipe] = useState<MyFavoriteRecipeProps>(initialDatas)
+
     
- 
     return (
+        
         <View style={[styles.container]}>
             <View style={[styles.leftView]}>
                 <Image style={{width:190, height:160}} source={require("./foodPicture.jpg")} />

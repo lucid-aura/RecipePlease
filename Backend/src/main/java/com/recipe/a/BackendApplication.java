@@ -8,8 +8,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @SpringBootApplication
 public class BackendApplication {
 	
-	
-	
 	public static void main(String[] args) {
 		
 		String version = org.springframework.core.SpringVersion.getVersion();
