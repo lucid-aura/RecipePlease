@@ -1,13 +1,19 @@
-import axios from "axios";
-import React, { useCallback } from "react";
-import { View, Text,StyleSheet, SafeAreaView, ScrollView } from "react-native";
+/* 작업중 */
+import React, { useCallback, useEffect, useState } from "react";
+import { View, Text,StyleSheet, SafeAreaView, ScrollView, Alert, Image, Platform } from "react-native";
 import { NavigationHeader } from "../theme";
 import RecipeRecommendList from "./RecipeRecommendList";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useNavigation } from "@react-navigation/native";
+import RecipeSearch from "./RecipeSearch";
+import RNFS from "react-native-fs"
+import {
+    PermissionsAndroid
+} from 'react-native';
 /*
 npm i react-native-image-slider-box -HSH 추가
 npm install --save react-native-ratings - HSH 추가
+npm install react-native-fs
 */
  
 // 더미
@@ -21,27 +27,45 @@ const testImage =
     ]
 
 export default function RecipeHomeScreen(){
-    /*
-    const updateRecipeDataAfterComment = function() { // 댓글 평가 작성 시 추천 레시피 재조회
-        console.log("this is test function")
-        axios.get("http://192.168.0.4:3000/getRecommendRecipe")
-            .then(function(res){
-                console.log(res.data)
-            })
-            .catch(function(err) {
-                console.log(err)
-            })
-    }
-    */
-   const navigation = useNavigation()
+    const navigation = useNavigation()
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
 
+    const permission = async() => {
+        if (Platform.OS === "android") {
+            await PermissionsAndroid.requestMultiple([
+                PermissionsAndroid.PERMISSIONS.CAMERA,
+                PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+                PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+            ]).then((result)=>{
+                if (result['android.permission.CAMERA']
+                && result['android.permission.WRITE_EXTERNAL_STORAGE']
+                && result['android.permission.READ_EXTERNAL_STORAGE']
+                === 'granted') {
+                    console.log("모든 권한 획득");
+                } else{
+                    console.log("권한거절");
+                }
+            })
+        }else{
+        }
+    }
+
+    useEffect( () => {
+        permission()
+    }, [])
     return(
-        
         <SafeAreaView style={styles.container}>
             <NavigationHeader title="홈" 
                 Left= {() => <Icon name="arrow-left-bold" size={30} onPress={goBack} />}
                 Right= {() => <Icon name="cart-heart" size={30} />} />
+
+            <RecipeSearch />
+
+            {/* <Image source={
+               {uri: 'file://' + RNFS.ExternalStorageDirectoryPath + '/A.jpg'} }
+               'file:///storage/emulated/0/DCIM/image-s2.jpg'
+            /> */}
+
             <ScrollView style={styles.contentContainer} showsHorizontalScrollIndicator={false}>
                 <Text style={styles.recipeTitle}>축산물 추천 레시피</Text>
                 <View>
@@ -65,23 +89,22 @@ export default function RecipeHomeScreen(){
 
 const styles = StyleSheet.create({
     contentContainer: {
-        paddingVertical: 0
+        paddingVertical: 0,
+        marginTop:30,
+        marginBottom:200,
+        width:'100%',
       },
     container: {
         alignItems: 'center',
     },
 
     recipeTitle:{
-        fontSize:48
-    },
-    recipeSlide:{
-        width:600,
-        height:300,
-        alignItems:'center', 
+        fontSize:32,
+        paddingLeft:30
     },
     ratingText: {
         color:'#f1c40f',
         fontSize:32,
         textAlign:'center'
-    }
+    },
 })// css
