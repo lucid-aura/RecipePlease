@@ -1,6 +1,10 @@
 package com.recipe.a.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.recipe.a.dto.PhotoDto;
+import com.recipe.a.dto.RatingDto;
 import com.recipe.a.dto.RecipeDto;
+import com.recipe.a.dto.RecipeLikeDto;
 import com.recipe.a.service.RecipeLikeService;
 import com.recipe.a.service.RecipeService;
+
 
 @RestController // @Controller + @ResponseBody -> Restful
 public class RecipeController {
@@ -47,6 +54,7 @@ public class RecipeController {
 	}
 	
 	
+<<<<<<< HEAD
 	@RequestMapping(value = "/uploadRecipe", method = {RequestMethod.GET, RequestMethod.POST})
 	public int countRecipe(RecipeDto dto) {
 		System.out.println("RecipeController uploadRecipe()");
@@ -55,21 +63,38 @@ public class RecipeController {
 		recipeService.uploadRecipe(dto);
 		
 		return dto.getRecipeSeq();
+=======
+	@RequestMapping(value ="/insertRecipe", method = {RequestMethod.GET, RequestMethod.POST})
+	public String insertRecipe() {
+		System.out.println("RecipeController insertRecipe()");
+		RecipeDto temp = new RecipeDto("test", "title", "content", "big", "small", "url", "tag", 0);
+
+		int res = recipeService.insertRecipe(temp);
+		System.out.println(res);
+		return "개수는: " + res;
+>>>>>>> main
 	}
 	
 	@RequestMapping(value = "/getOneRecipe", method = {RequestMethod.GET})
 	public RecipeDto getOneRecipe(int recipeSeq) {
 		System.out.println("RecipeController getOneRecipe()");
-			
+		recipeService.oneUpReadcount(recipeSeq);
 		return recipeService.getOneRecipe(recipeSeq);
 		//return recipeService.getPhoto(photoDto);
 	}
 	
 	
+<<<<<<< HEAD
 	@RequestMapping(value = "/uploadRecipeImg", method = {RequestMethod.GET, RequestMethod.POST})
 	public String uploadRecipeImg(PhotoDto dto) {
 		System.out.println("RecipeController uploadRecipeImg()");
 		System.out.println(dto.toString());
+=======
+	@RequestMapping(value = "/getPhoto", method = {RequestMethod.GET})
+	public List<PhotoDto> getPhoto(int docsSeq, String photoCategory) {
+		System.out.println("RecipeController getPhoto()");
+		PhotoDto photoDto = new PhotoDto();
+>>>>>>> main
 		
 		boolean b = recipeService.uploadRecipeImg(dto);
 		if(b) {
@@ -79,6 +104,7 @@ public class RecipeController {
 	}
 	
 	
+<<<<<<< HEAD
 //	@RequestMapping(value = "/getPhoto", method = {RequestMethod.GET})
 //	public List<PhotoDto> getPhoto(int docsSeq, String photoCategory) {
 //		PhotoDto photoDto = new PhotoDto();
@@ -90,6 +116,88 @@ public class RecipeController {
 //		return recipeService.getPhoto(photoDto);
 //	}
 //	
+=======
+	@RequestMapping(value = "/getThumbnailPhoto", method = {RequestMethod.GET})
+	public PhotoDto getThumbnailPhoto(int docsSeq, String photoCategory) {
+		System.out.println("RecipeController getThumbnailPhoto()");
+		PhotoDto photoDto = new PhotoDto();
+		
+		photoDto.setPhotoSeq(0);
+		photoDto.setDocsSeq(docsSeq);
+		photoDto.setPhotoCategory(photoCategory);
+
+		return recipeService.getThumbnailPhoto(photoDto);
+	}
+	
+	@RequestMapping(value = "/getRecipeTag", method = {RequestMethod.GET})
+	public List<String> getRecipeTag(int recipeSeq) {
+		System.out.println("RecipeController getRecipeTag()");
+		
+		return Arrays.asList(recipeService.getOneRecipe(recipeSeq).getRecipeGoodsTag().split(","));
+	}
+	
+	@RequestMapping(value = "/getAllRatingsBySeq", method = {RequestMethod.GET})
+	public List<RatingDto> getRatings(int docsSeq) {
+		System.out.println("RecipeController getAllRatingsBySeq()");
+		return recipeService.getAllRatingsBySeq(docsSeq);
+		//return Arrays.asList(recipeService.getOneRecipe(recipeSeq).getRecipeGoodsTag().split(","));
+	}
+	
+	@RequestMapping(value = "/writeComment", method = {RequestMethod.POST})
+	public List<RatingDto> writeComment(RatingDto ratingDto) {
+		System.out.println("RecipeController writeComment()");
+		System.out.println(ratingDto.toString());
+		
+		recipeService.writeComment(ratingDto);
+		return recipeService.getAllRatingsBySeq(ratingDto.getDocsSeq());
+		
+		// return recipeService.getAllRatingsBySeq(docsSeq);
+		//return Arrays.asList(recipeService.getOneRecipe(recipeSeq).getRecipeGoodsTag().split(","));
+	}	
+	
+//	@RequestMapping(value = "/purchaseRecipeCheck", method = {RequestMethod.GET})
+//	public int purchaseRecipeCheck(String memberId, int recipeSeq) {
+//		System.out.println(memberId + " " + recipeSeq);
+//		System.out.println("RecipeController purchaseRecipeCheck()");
+//
+//		return recipeService.purchaseRecipeCheck(memberId, recipeSeq);
+//		//return recipeService.getPhoto(photoDto);
+//	}
+
+	@RequestMapping(value = "/getRecommendRecipe", method = {RequestMethod.GET})
+	public Map<String, Object> getRecommendRecipe(String category) {
+		
+		System.out.println("RecipeController getRecommendRecipe() " + category);
+
+		return recipeService.getRecommendRecipe(category);
+		//return recipeService.getPhoto(photoDto);
+	}
+	
+	
+	@RequestMapping(value = "/likeRecipe", method = {RequestMethod.GET})
+	public int likeRecipe(RecipeLikeDto recipeLikeDto) {
+		recipeLikeDto.setLikeseq(0);
+		System.out.println("RecipeController likeRecipe()");
+		return recipeLikeService.likeRecipe(recipeLikeDto);
+	}
+	
+	@RequestMapping(value = "/unlikeRecipe", method = {RequestMethod.GET})
+	public int unlikeRecipe(RecipeLikeDto recipeLikeDto) {
+		System.out.println("RecipeController unlikeRecipe()");
+		return recipeLikeService.unLikeRecipe(recipeLikeDto);
+
+	}
+	
+	
+	@RequestMapping(value = "/searchRecipe", method = {RequestMethod.POST})
+	public Map<String, Object> searchRecipe(String search, String bigOptions, String smallOptions) {
+		System.out.println("RecipeController searchRecipe()");
+		ArrayList<String> big = new ArrayList<String>(Arrays.asList(bigOptions.split(",")));
+		ArrayList<String> small = new ArrayList<String>(Arrays.asList(smallOptions.split(","))); 
+		return recipeService.searchRecipe(search, big, small);
+	}
+	
+>>>>>>> main
 	
 	@RequestMapping(value = "/test", method = {RequestMethod.GET})
 	public List<Integer> test(int docs_seq, String photo_category) {
@@ -100,7 +208,13 @@ public class RecipeController {
 		List<Integer> dtos = recipeService.test();
 		System.out.println(dtos.get(0));
 		
+		
 		return dtos;
 		//return recipeService.getPhoto(photoDto);
 	}
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> main

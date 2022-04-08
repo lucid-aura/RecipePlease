@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.recipe.a.dao.CoinTransactionDao">
+
+    <!-- tester -->
+    <select id="coinTransactionTester" resultType="com.recipe.a.dto.CoinTransactionDto">
+        SELECT * FROM COINTRANSACTION
+    </select>
+
+    <!-- 아이디에 해당하는 모든 코인 사용 데이터를 가져옴 -->
+    <select id="getCoinData" parameterType="String" resultType="com.recipe.a.dto.CoinTransactionDto">
+        SELECT * FROM COINTRANSACTION
+        WHERE MEMBERID = #{memberId}
+        ORDER BY COINDATE DESC
+    </select>
+
+    <!-- 코인 충전시 -->
+    <insert id="chargeCoin" parameterType="com.recipe.a.dto.CoinTransactionDto">
+        INSERT INTO COINTRANSACTION(COINTRANSACTIONSEQ, MEMBERID, DOCSSEQ, COINCOUNT, COININOUT, COINDATE)
+        VALUES (NEXTVAL('COINTRANSACTIONSEQ'), #{memberId}, #{docsSeq}, #{coinCount}, '충전', NOW())
+    </insert>
+    <update id="chargeCoinUpdate" parameterType="com.recipe.a.dto.ChargeCoinDto">
+        UPDATE MEMBERS
+        SET MEMBERCOIN = MEMBERCOIN + #{amount}
+        WHERE MEMBERID = #{memberId}
+    </update>
+
+    <!-- 코인 사용시 -->
+    <insert id="useCoin" parameterType="com.recipe.a.dto.CoinTransactionDto">
+        INSERT INTO COINTRANSACTION(COINTRANSACTIONSEQ, MEMBERID, DOCSSEQ, COINCOUNT, COININOUT, COINDATE)
+        VALUES (NEXTVAL('COINTRANSACTIONSEQ'), #{memberId}, #{docsSeq}, #{coinCount}, '사용', NOW())
+    </insert>
+    <update id="useCoinUpdate" parameterType="com.recipe.a.dto.ChargeCoinDto">
+        UPDATE MEMBERS
+        SET MEMBERCOIN = MEMBERCOIN - #{amount}
+        WHERE MEMBERID = #{memberId}
+    </update>
+    
+    <!-- 코인 사용 확인 시 -->
+    <select id="checkPurchaseRecipe" parameterType="com.recipe.a.dto.CoinTransactionDto" resultType="Integer">
+    	SELECT COUNT(*) FROM COINTRANSACTION
+    	WHERE MEMBERID=#{memberId} AND DOCSSEQ=#{docsSeq} AND COININOUT='사용'
+    </select>
+</mapper>

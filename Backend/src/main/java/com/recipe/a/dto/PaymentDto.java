@@ -1,11 +1,20 @@
 package com.recipe.a.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.ToString;
+/*
+	CREATE TABLE PAYMENT (
+		PAYMENTSEQ			INTEGER			NOT NULL,
+		MEMBERID			VARCHAR(20)		NOT NULL,
+		PAYMENTPAY			INTEGER			NOT NULL,
+		PAYMENTDATE			DATE			NOT NULL,
+		PAYMENTDEL			INTEGER			NULL,
+		PAYMENTMAINADDR		VARCHAR(100)	NULL,
+		PAYMENTDETAILADDR	VARCHAR(100)	NULL,
+		PAYMENTZIPCODE		INTEGER			NULL,
+		PAYMENTCATEGORY		VARCHAR(20)		NOT NULL,
+		PAYMENTCOUNT		INTEGER			NOT NULL
+	);
+*/
 
-@Getter
-@ToString
 public class PaymentDto {
 	
 	private int paymentSeq;
@@ -20,6 +29,21 @@ public class PaymentDto {
 	private int paymentCount;
 
 	public PaymentDto() {
+	}
+
+	public PaymentDto(int paymentSeq, String memberId, int paymentPay, String paymentDate, int paymentDel,
+			String paymentMainAddr, String paymentDetailAddr, int paymentZipcode, String paymentCategory,
+			int paymentCount) {
+		this.paymentSeq = paymentSeq;
+		this.memberId = memberId;
+		this.paymentPay = paymentPay;
+		this.paymentDate = paymentDate;
+		this.paymentDel = paymentDel;
+		this.paymentMainAddr = paymentMainAddr;
+		this.paymentDetailAddr = paymentDetailAddr;
+		this.paymentZipcode = paymentZipcode;
+		this.paymentCategory = paymentCategory;
+		this.paymentCount = paymentCount;
 	}
 
 	public int getPaymentSeq() {
@@ -109,6 +133,8 @@ public class PaymentDto {
 				+ ", paymentDetailAddr=" + paymentDetailAddr + ", paymentZipcode=" + paymentZipcode
 				+ ", paymentCategory=" + paymentCategory + ", paymentCount=" + paymentCount + "]";
 	}
+
+	
 
 
 }

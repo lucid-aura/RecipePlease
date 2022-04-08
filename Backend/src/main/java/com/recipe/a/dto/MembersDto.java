@@ -1,5 +1,22 @@
 package com.recipe.a.dto;
 
+/*
+CREATE TABLE `MEMBERS` (
+	`MEMBERID`	VARCHAR(20)	PRIMARY KEY,
+	`MEMBERPWD`	VARCHAR(100)	NOT NULL,
+	`MEMBERNICKNAME`	VARCHAR(50)	NOT NULL,
+	`MEMBEREMAIL`	VARCHAR(30)	NULL,
+	`MEMBERPHONE`	VARCHAR(20)	NULL,
+	`MEMBERCOIN`	INTEGER	NOT NULL,
+	`MEMBERMAIN_ADDR`	VARCHAR(100)	NULL,
+	`MEMBERDETAIL_ADDR`	VARCHAR(100)	NULL,
+	`MEMBERZIPCODE`	INTEGER	NULL,
+	`MEMBERGENDER`	VARCHAR(10)	NULL,
+	`MEMBERNAME`	VARCHAR(20)	NULL,
+	`MEMBERGRADE`	VARCHAR(50)	NOT NULL,
+	`SALT`	VARCHAR(100)	NOT NULL
+);
+ */
 public class MembersDto {
 	private String memberId;
 	private String memberPwd;
@@ -9,14 +26,32 @@ public class MembersDto {
 	private int memberCoin;
 	private String memberMainAddr;
 	private String memberDetailAddr;
-	private String memberZipcode;
+	private int memberZipcode;
 	private String memberGender;
 	private String memberName;
+	private String memberGrade;
 	private String salt;
 	
+	public MembersDto() {
+		super();
+		this.memberId = "";
+		this.memberPwd = "";
+		this.memberNickname = "";
+		this.memberEmail = "";
+		this.memberPhone = "";
+		this.memberCoin = 0;
+		this.memberMainAddr = "";
+		this.memberDetailAddr = "";
+		this.memberZipcode = 0;
+		this.memberGender = "";
+		this.memberName = "";
+		this.memberGrade = "";
+		this.salt = "";
+	}
+	
 	public MembersDto(String memberId, String memberPwd, String memberNickname, String memberEmail, String memberPhone,
-			int memberCoin, String memberMainAddr, String memberDetailAddr, String memberZipcode, String memberGender,
-			String memberName, String salt) {
+			int memberCoin, String memberMainAddr, String memberDetailAddr, int memberZipcode, String memberGender,
+			String memberName, String memberGrade, String salt) {
 		super();
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
@@ -29,8 +64,30 @@ public class MembersDto {
 		this.memberZipcode = memberZipcode;
 		this.memberGender = memberGender;
 		this.memberName = memberName;
+		this.memberGrade = memberGrade;
 		this.salt = salt;
 	}
+	
+	
+	public MembersDto(String memberId, String memberNickname) {
+		super();
+		this.memberId = memberId;
+		this.memberPwd = "";
+		this.memberNickname = memberNickname;
+		this.memberEmail = "";
+		this.memberPhone = "";
+		this.memberCoin = 0;
+		this.memberMainAddr = "";
+		this.memberDetailAddr = "";
+		this.memberZipcode = 0;
+		this.memberGender = "";
+		this.memberName = "";
+		this.memberGrade = "";
+		this.salt = "";
+		
+	}
+
+
 
 	public String getMemberId() {
 		return memberId;
@@ -96,11 +153,11 @@ public class MembersDto {
 		this.memberDetailAddr = memberDetailAddr;
 	}
 
-	public String getMemberZipcode() {
+	public int getMemberZipcode() {
 		return memberZipcode;
 	}
 
-	public void setMemberZipcode(String memberZipcode) {
+	public void setMemberZipcode(int memberZipcode) {
 		this.memberZipcode = memberZipcode;
 	}
 
@@ -119,11 +176,15 @@ public class MembersDto {
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
-
+	public String getMemberGrade() {
+		return memberGrade;
+	}
+	public void setMember_grade(String memberGrade) {
+		this.memberGrade = memberGrade;
+	}
 	public String getSalt() {
 		return salt;
 	}
-
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
@@ -133,9 +194,10 @@ public class MembersDto {
 		return "MembersDto [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberNickname=" + memberNickname
 				+ ", memberEmail=" + memberEmail + ", memberPhone=" + memberPhone + ", memberCoin=" + memberCoin
 				+ ", memberMainAddr=" + memberMainAddr + ", memberDetailAddr=" + memberDetailAddr + ", memberZipcode="
-				+ memberZipcode + ", memberGender=" + memberGender + ", memberName=" + memberName + ", salt=" + salt
-				+ "]";
+				+ memberZipcode + ", memberGender=" + memberGender + ", memberName=" + memberName + ", memberGrade="
+				+ memberGrade + ", salt=" + salt + "]";
 	}
+	
 	
 	
 }

@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import MyPageHomeScreen from '../mypage/MyPageHomeScreen';
+import MyPageHomeScreen from '../mypage/MyPageHome';
 import RecipeUpload from '../mypage/mypageScreens/RecipeUpload';
 import MyAccount from '../mypage/mypageScreens/MyAccount';
 import MyUploadedRecipe from '../mypage/mypageScreens/MyUploadedRecipe';
 import MyFavoriteRecipe from '../mypage/mypageScreens/MyFavoriteRecipe';
 import MyInfo from '../mypage/mypageScreens/MyInfo';
+import MyPageHome from '../mypage/MyPageHome';
+import Login from '../mypage/Login';
+import MyInfoUpdate from '../mypage/mypageScreens/MyInfoUpdate';
 
 /*
 npm install react-native-gesture-handler
@@ -23,13 +26,14 @@ npm i axios
 const Stack = createNativeStackNavigator() //스택 네비게이터 생성후 스택함수 정의
 
 
-export default function MyScreen(){
+export default function MyNavigator(){
 
 
   return(
 
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={MyPageHomeScreen}></Stack.Screen>
+    <Stack.Navigator screenOptions={{headerShown:false}}>
+      <Stack.Screen name="Login" component={Login}></Stack.Screen>
+      <Stack.Screen name="MyPage" component={MyPageHome}></Stack.Screen>
 
       <Stack.Screen name="MyAccount" component={MyAccount}></Stack.Screen>
 
@@ -40,6 +44,8 @@ export default function MyScreen(){
       <Stack.Screen name="MyFavoriteRecipe" component={MyFavoriteRecipe}></Stack.Screen>
 
       <Stack.Screen name="MyInfo" component={MyInfo}></Stack.Screen>
+
+      <Stack.Screen name="MyInfoUpdate" component={MyInfoUpdate}></Stack.Screen>
 
     </Stack.Navigator>
     

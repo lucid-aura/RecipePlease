@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import axios from "axios";
 import Color from "color";
 import React, { Component, useState } from "react";
@@ -156,8 +157,13 @@ export default function UploadScreen() {
     ]
 
 
+=======
+import React from "react";
+import { SafeAreaView, Text, View } from "react-native";
+>>>>>>> main
 
     return (
+<<<<<<< HEAD
         <View>
             <ScrollView style={styles.container}>
                 <View style={styles.frame}>
@@ -258,6 +264,11 @@ export default function UploadScreen() {
             </ScrollView>
 
         </View>
+=======
+        <SafeAreaView>
+            <Text>레시피 업로드하기</Text>
+        </SafeAreaView>
+>>>>>>> main
     )
 }
 

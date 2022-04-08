@@ -9,6 +9,7 @@
 	SELECT COUNT(*) FROM RECIPE
 </select>
 
+<<<<<<< HEAD
 <insert id="uploadRecipe" parameterType="com.recipe.a.dto.RecipeDto">
 	<selectKey keyProperty="recipeSeq" resultType="int" order="BEFORE">
 		SELECT NEXTVAL('recipeSeq') SEQ FROM dual
@@ -18,6 +19,11 @@
 	VALUES(#{recipeSeq}, #{recipeTitle}, #{recipeContent}, #{recipeBigCategory}, #{recipeSmallCategory}, #{recipeGoodsTag}, #{recipePrice}, 0)
 	
 	
+=======
+<insert id="insertRecipe" parameterType="com.recipe.a.dto.RecipeDto">
+	INSERT INTO RECIPE(RECIPESEQ, MEMBERID, RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEVIDEOURL, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING, RECIPEREADCOUNT)
+	VALUES(NEXTVAL('RECIPESEQ'), #{memberId}, #{recipeTitle}, #{recipe_content}, #{recipeBigCategory}, #{recipeSmallCategory}, #{recipeVideoUrl}, #{recipeGoodsTag}, #{recipePrice}, 0.0, 0) 
+>>>>>>> main
 </insert>
 
 
@@ -28,6 +34,48 @@
 
 
 <select id="getOneRecipe" parameterType="Integer" resultType="com.recipe.a.dto.RecipeDto">
-	SELECT * FROM RECIPE WHERE RECIPE_SEQ=#{recipe_seq}
+	SELECT RECIPESEQ, MEMBERID, RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEVIDEOURL, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING, RECIPEREADCOUNT
+	FROM RECIPE WHERE RECIPESEQ=#{recipeSeq}
+</select>
+<<<<<<< HEAD
+</mapper>
+=======
+
+<update id="oneUpReadcount" parameterType="Integer">
+	UPDATE RECIPE
+	SET RECIPEREADCOUNT=RECIPEREADCOUNT+1
+	WHERE RECIPESEQ=#{recipeSeq}
+</update>
+
+<update id="updateRecipeRating" parameterType="Integer">
+	UPDATE RECIPE
+	SET RECIPERATING=(
+	    SELECT ROUND(AVG(RATINGSCORE), 2)
+	    FROM RATING
+	    GROUP BY DOCSSEQ
+	    HAVING DOCSSEQ=#{docsSeq}
+	    )
+	WHERE RECIPESEQ=#{docsSeq}
+</update>
+
+<select id="getRecommendRecipe" parameterType="String" resultType="com.recipe.a.dto.RecipeDto">
+	SELECT * FROM RECIPE WHERE RECIPEBIGCATEGORY=#{category} ORDER BY RECIPERATING DESC LIMIT 3
+</select>
+
+<select id="getRecommendReadcountRecipe" resultType="com.recipe.a.dto.RecipeDto">
+	SELECT * FROM RECIPE ORDER BY RECIPEREADCOUNT DESC LIMIT 3;
+</select>
+
+<select id="searchRecipe" resultType="com.recipe.a.dto.RecipeDto">
+	SELECT * FROM RECIPE WHERE RECIPETITLE LIKE CONCAT('%', #{search}, '%') 
+	AND RECIPEBIGCATEGORY IN
+	<foreach collection="big" item="item" open="(" close=")" separator=",">
+		#{item}
+	</foreach>
+	AND	RECIPESMALLCATEGORY IN
+	<foreach collection="small" item="item" open="(" close=")" separator=",">
+		#{item}
+	</foreach>
 </select>
 </mapper>
+>>>>>>> main

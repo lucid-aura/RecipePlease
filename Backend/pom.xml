@@ -81,12 +81,11 @@
 		    <version>8.0.27</version>
 		</dependency>
 		
-		<!-- Lombok Project -->
+		<!-- bcrypt 암호화 -->
 		<dependency>
-    		<groupId>org.projectlombok</groupId>
-    		<artifactId>lombok</artifactId>
-   			<version>1.18.20</version>
-    		<scope>provided</scope>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<version>2.6.3</version>
 		</dependency>
 		 
 		<!-- iamport module -->
@@ -95,17 +94,12 @@
 		    <artifactId>iamport-rest-client-java</artifactId>
 		    <version>0.2.17</version>
 		</dependency>
-		
-		<!-- slf4j 로거 사용 설정 --> 
-		<dependency> 
-			<groupId>org.slf4j</groupId> 
-			<artifactId>slf4j-api</artifactId> 
-			<version>1.7.36</version> 
-		</dependency> 
-		<dependency> 
-			<groupId>ch.qos.logback</groupId> 
-			<artifactId>logback-classic</artifactId> 
-			<version>1.2.10</version> 
+
+		<!-- log4j 사용 -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
 		</dependency>
 
 	</dependencies>

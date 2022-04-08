@@ -10,7 +10,21 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PaymentDao {
 
-	public int countPayment();
+	// 테스터
+	int countPayment();
 
-	int addGoodsShoppingList(PaymentDto dto);
+	// 굿즈 결제 완료 시 db에 추가
+	boolean addGoodsShoppingList(PaymentDto dto);
+
+	// 환불요청 시 paymentDel 업데이트
+	boolean refundGoods(String memberId, int paymentSeq);
+
+	// 구매 목록 리스트 반환
+	List<PaymentDto> goodsPurchaseList(String memberId);
+
+	// 구매 상세내역 반환
+	PaymentDto getGoodsPurchaseDetail(int paymentSeq);
+
+	// 코인 충전(구매)
+	boolean chargeCoin(PaymentDto dto);
 }
