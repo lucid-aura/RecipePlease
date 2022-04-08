@@ -5,7 +5,7 @@ import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "r
 import { Colors } from "react-native-paper"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 
-const DrawerSetting: FC<DrawerContentComponentProps> = (props) => {
+const DrawerSettingLogout: FC<DrawerContentComponentProps> = (props) => {
     
     const {navigation} = props
     const Drawerclose = useCallback(() => navigation.dispatch(DrawerActions.closeDrawer()), [])
@@ -93,7 +93,7 @@ const DrawerSetting: FC<DrawerContentComponentProps> = (props) => {
     )
 }
 
-export default DrawerSetting
+export default DrawerSettingLogout
 
 const styles = StyleSheet.create({
     container: {
