@@ -128,7 +128,7 @@ export default function PurchaseRecipe({navigation}:any) {
                             {/* 모달에 들어갈 내용을 아래에 작성 */}
                             <View>
                                 <Text style={modalInnerStyle.recipeTitle}>레시피 제목</Text>
-                                <Text style={[modalInnerStyle.coin, {color: '#00f'}]}> {`보유코인 ${divideNum(userCoin)}원`}</Text>
+                                <Text style={[modalInnerStyle.coin, {color: '#00f'}]}>{`보유코인 ${divideNum(userCoin)}원`}</Text>
                                 <Text style={[modalInnerStyle.coin, { color: '#f00'}]}>{`구매가격 ${divideNum(recipePrice)}원`}</Text>
 
                                 <TouchableOpacity 

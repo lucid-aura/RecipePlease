@@ -37,7 +37,7 @@ export default function PaymentInfo({navigation}:any, props:any) {
     const [pg, setPg] = useState('');                                 // 결제수단
     const amount = 20000                                              // 상품가격
     const [toPay, setToPay] = useState("결제 수단이 선택되지 않았습니다.");   // 결제수단 선택시 메시지
-    const [category, setCategory] = useState('goods');       // 구매품목 카테고리(레시피 or 굿즈)
+    const [category, setCategory] = useState('goods');       // 구매품목 카테고리(코인 or 굿즈)
 
     
 
