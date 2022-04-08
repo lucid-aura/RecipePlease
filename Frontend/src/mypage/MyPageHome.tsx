@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     topBar: {
-        flex:1,
         borderWidth: 0.5,
         borderRadius:1
     },

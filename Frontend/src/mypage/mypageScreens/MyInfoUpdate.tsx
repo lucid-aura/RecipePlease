@@ -6,43 +6,25 @@ import { Colors } from "react-native-paper";
 import { color } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDispatch, useSelector } from "react-redux";
-import { AppState } from "../../store";
 import { NavigationHeader } from "../../theme";
-import * as L from "../../store/login"
 import * as D from "../../store/drawer"
+import { AppState } from "../../store";
 
-export default function MyInfo() {
+export default function MyInfoUpdate() {
 
     const navigation = useNavigation()
-    const log = useSelector<AppState, L.State>((state) => state.login)
-
-    const goShoppingCart = () => {
-        dispatch(D.drawerChangeFalseAction())
-        navigation.dispatch(DrawerActions.openDrawer())
-    }
-    const goSetting = () => {
-        dispatch(D.drawerChangeTrueAction())
-        navigation.dispatch(DrawerActions.openDrawer())
-    }
-    const goMyInfoUpdate = useCallback(() => {
-        navigation.navigate("MyInfoUpdate")
-    },[])
     const dispatch = useDispatch()
-    
-    const goCheck = () => {
-        dispatch(D.drawerChangeTrueAction())
-    }
-       
-    
-    const {loggedIn, loggedUser} = log
-
-
+    const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
+   
+    const goCheck = useCallback(() => {
+        dispatch(D.drawerChangeTrueAction)
+    }, [])
     return (
         <SafeAreaView style={{flex:1}}>
              <View style={[styles.topBar]}> 
                 <NavigationHeader title="내 정보" 
-                Left= {() => <Icon name="text-account" size={30} onPress={() => goSetting()} />}
-                Right= {() => <Icon name="cart-heart" size={30} onPress={() => goShoppingCart()} />} />
+                Left= {() => <Icon name="arrow-left" size={30} onPress={goBack} />}
+                Right= {() => <Icon name="cart-heart" size={30} />} />
             </View>
             <View style={[styles.contentView]}>
                 <Text style={{fontSize:23}}>아이디: </Text>
@@ -75,11 +57,10 @@ export default function MyInfo() {
                 <Text style={{fontSize:23}}>주소: </Text>
             </View>
             <View style={{flex:1,alignItems:'center', justifyContent:"center"}}>
-                <TouchableOpacity style={{backgroundColor:Colors.amber600}} onPress={() => goMyInfoUpdate()}>
+                <TouchableOpacity style={{backgroundColor:Colors.amber600}} onPress={() => goCheck()} >
                     <Text style={{color:'white'}}>수정하기</Text>
                 </TouchableOpacity>
             </View>
-            
         </SafeAreaView>
     )
 }

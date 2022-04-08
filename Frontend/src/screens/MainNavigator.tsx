@@ -12,6 +12,7 @@ export default function MainNavigator() {
         <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props}/>} initialRouteName={'HomeScreen'} screenOptions={{headerShown:false}}>
             <Drawer.Screen name="TabNavigator" component={TabNavigator}/>
             
+            
         </Drawer.Navigator>
     )
 }
