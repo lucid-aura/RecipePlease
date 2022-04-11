@@ -48,8 +48,13 @@ public class RecipeService {
 		return recipeDao.insertRecipe(newRecipe);
 	}
 	
+<<<<<<< Updated upstream
 	public boolean uploadRecipeImg(PhotoDto photoDto) {
 		int p = photoDao.uploadRecipeImg(photoDto);
+=======
+	public boolean uploadRecipeImg(PhotoDto dto) {
+		int p = photoDao.uploadRecipeImg(dto);
+>>>>>>> Stashed changes
 		return p>0?true:false;
 	}
 

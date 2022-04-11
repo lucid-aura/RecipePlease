@@ -20,6 +20,7 @@
 
 
 <select id="getOneRecipe" parameterType="Integer" resultType="com.recipe.a.dto.RecipeDto">
+<<<<<<< Updated upstream
 	SELECT RECIPESEQ, MEMBERID, RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEVIDEOURL, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING, RECIPEREADCOUNT
 	FROM RECIPE WHERE RECIPESEQ=#{recipeSeq}
 </select>
@@ -59,5 +60,8 @@
 	<foreach collection="small" item="item" open="(" close=")" separator=",">
 		#{item}
 	</foreach>
+=======
+	SELECT * FROM RECIPE WHERE RECIPE_SEQ=#{recipe_seq}
+>>>>>>> Stashed changes
 </select>
 </mapper>
