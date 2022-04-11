@@ -10,6 +10,7 @@ export type User = {
     memberDetailAddr?: string
     memberZipcode?: string
     memberName?: string
+    memberGender?: string
     memberGrade?: string    
 }
 

@@ -98,7 +98,7 @@ export default function MyAccount() {
             <View style={[styles.topBar]} >
                 <NavigationHeader title="회원가입" viewStyle={{}}
                     Left= {() => <Icon name="arrow-left" size={30} onPress={goBack} />}
-                    Right= {() => <Icon name="cart-heart" size={30} />}
+                    
                     />
             </View>
             <View style={[styles.contentView]}>

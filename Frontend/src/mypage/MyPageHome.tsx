@@ -8,6 +8,7 @@ import { signOutWithKakao } from '../mypage/utils';
 import { useDispatch, useSelector } from "react-redux";
 import * as L from '../store/login'
 import { AppState } from "../store";
+import * as D from "../store/drawer"
 
 /* 
 npm i react-native-paper
@@ -20,22 +21,32 @@ npm i axios
 export default function MyPageHome(){
     console.log("MyPageHome")
     const navigation = useNavigation()
-    const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
+    const dispatch = useDispatch()
     
     const log = useSelector<AppState, L.State>((state) => state.login)
+
     const {loggedIn, loggedUser} = log
     console.log("MyPageHome loggedIn: " + loggedIn + "MyPageHome loggedUser: " + JSON.stringify(loggedUser))
-    const dispatch = useDispatch()
+    
+    const goShoppingCart = () => {
+        dispatch(D.drawerChangeFalseAction())
+        navigation.dispatch(DrawerActions.openDrawer())
+    }
+    const goSetting = () => {
+        dispatch(D.drawerChangeTrueAction())
+        navigation.dispatch(DrawerActions.openDrawer())
+    }
 
     return(
         <SafeAreaView style={[styles.container]}>
             <View style={[styles.topBar]}> 
                 <NavigationHeader title="홈" 
-                Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
-                Right= {() => <Icon name="cart-heart" size={30} />} />
+                    Left= {() => <Icon name="text-account" size={30} onPress={goSetting} />}
+                    Right= {() => <Icon name="cart-heart" size={30} onPress={goShoppingCart} />} 
+                />
             </View>
             <View style={[styles.contentView]}>
-                <Text>마이페이지</Text>
+                <Text>마이페</Text>
                 <View style={[styles.contentBox]}>
                     <View >
                         <TouchableOpacity style={[styles.content]} onPress={() => {
