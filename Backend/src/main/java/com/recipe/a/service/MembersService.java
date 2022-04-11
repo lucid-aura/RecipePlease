@@ -137,17 +137,43 @@ public class MembersService {
 					memberId
 					));
 		}
-//		result.put("recipeSeq", recipeSeqList);
-//		result.put("recipeTitle", recipeTitleList);
-//		result.put("recipeReadCount", recipeReadcountList);
-//		result.put("recipeRating", recipeRatingList);
-//		result.put("recipeThumbnails", thumbnailList);
-//		result.put("recipeRatingCount", recipeRatingCountList);
 		
 		return result;
-		
-		
 	}
+	
+	// 이메일 수정
+	public boolean updateEmail(String memberId, String memberEmail) {
+		
+		int n = dao.updateEmail(memberId, memberEmail);
+		
+		return n>0? false : true; // false면 업데이트 성공, true면 업데이트 실패
+	}
+	
+	// 닉네임 수정
+	public boolean updateNickname(String memberId, String memberNickname) {
+		
+		int n = dao.updateNickname(memberId, memberNickname);
+		
+		return n>0? false : true; // false면 업데이트 성공, true면 업데이트 실패
+	}
+	
+	// 전화번호 수정
+	public boolean updatePhone(String memberId, String memberPhone) {
+		
+		int n = dao.updateNickname(memberId, memberPhone);
+		
+		return n>0? false : true; // false면 업데이트 성공, true면 업데이트 실패
+	}
+	
+	// 주소 수정
+	public boolean updateAddr(MembersDto dto) {
+		
+		int n = dao.updateAddr(dto);
+		System.out.println("updateAddr result int: " +n);
+		
+		return n>0? false : true; // false면 업데이트 성공, true면 업데이트 실패
+	}
+	
 	
 	public List<RecipeDto> test1() {
 		return dao.test1();

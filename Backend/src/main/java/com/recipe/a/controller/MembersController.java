@@ -96,6 +96,63 @@ public class MembersController {
 		return result;
 	}
 	
+	//이메일 업데이트
+	@RequestMapping(value = "/updateEmail", method = {RequestMethod.POST})
+	public String updateEmail(String memberId, String memberEmail) {
+		System.out.println("MemberController updateEmail");
+		System.out.println("memberId: " + memberId + " memberEmail" + memberEmail);
+		
+		boolean b = memberService.updateEmail(memberId, memberEmail);
+		
+		if(b) {
+			return "fail";
+		}		
+		
+		return "success";
+	}
+	
+	//닉네임 업데이트
+	@RequestMapping(value = "/updateNickname", method = {RequestMethod.POST})
+	public String updateNickname(String memberId, String memberNickname) {
+		System.out.println("MemberController updateEmail");
+		System.out.println("memberId: " + memberId + " memberEmail" + memberNickname);
+		
+		boolean b = memberService.updateNickname(memberId, memberNickname);
+		
+		if(b) {
+			return "fail";
+		}		
+		return "success";
+	}
+	
+	// 전화번호 업데이트
+	@RequestMapping(value = "/updatePhone", method = {RequestMethod.POST})
+	public String updatePhone(String memberId, String memberPhone) {
+		System.out.println("MemberController updateEmail");
+		System.out.println("memberId: " + memberId + " memberEmail: " + memberPhone);
+		
+		boolean b = memberService.updateNickname(memberId, memberPhone);
+		
+		if(b) {
+			return "fail";
+		}		
+		return "success";
+	}
+	
+	// 주소 업데이트
+	@RequestMapping(value = "/updateAddr", method = {RequestMethod.POST})
+	public String updateAddr(MembersDto dto) {
+		System.out.println("MemberController updateAddr");
+		//System.out.println("MembersDto: " + dto.toString());
+		
+		boolean b = memberService.updateAddr(dto);
+		System.out.println("updateAddr result: " +b);
+		if(b) {
+			return "fail";
+		}		
+		return "success";
+	}
+	
 	//테스트용
 	@RequestMapping(value = "/test1", method = {RequestMethod.GET})
 	public List<RecipeDto> test1() {
