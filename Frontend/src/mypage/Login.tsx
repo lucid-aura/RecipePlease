@@ -11,6 +11,7 @@ import { AppState } from "../store";
 import * as L from '../store/login'
 import config from "../project.config"
 import * as D from "../store/drawer"
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Login() {
     const navigation = useNavigation()
