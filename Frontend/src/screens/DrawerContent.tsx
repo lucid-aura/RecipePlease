@@ -15,7 +15,6 @@ import DrawerSettingLogin from "../mypage/component/DrawerSettingLogIn";
 
 const DrawerContent: FC<DrawerContentComponentProps> = (props) => {
     
-    const {navigation} = props
     const log = useSelector<AppState, L.State>((state) => state.login)
     const change = useSelector<AppState, D.State>((state) => state.drawer)
     const {loggedIn, loggedUser} = log
