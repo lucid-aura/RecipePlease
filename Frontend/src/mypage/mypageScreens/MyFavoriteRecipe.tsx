@@ -26,7 +26,7 @@ export const MyFavoriteRecipe = () => {
                 .then(value => {
                     setMyData(value)
                     console.log("내가 좋아하는 레시피: " + JSON.stringify(value))
-                    console.log("마이페이지 레시피: "+JSON.stringify(myData))
+                    console.log("hook 레시피: "+JSON.stringify(myData))
                 })
     }
    useEffect(() => {

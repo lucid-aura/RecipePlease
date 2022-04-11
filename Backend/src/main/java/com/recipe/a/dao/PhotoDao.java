@@ -20,4 +20,7 @@ public interface PhotoDao {
 	public PhotoDto getThumbnailPhoto(PhotoDto photoDto);
 
 	public List<PhotoDto> getRecommendThumnailPhoto(List<Integer> seqList);
+	
+	//내가 좋아하는 레시피 썸네일
+	public PhotoDto getThumbnail(int recipeSeq);
 }

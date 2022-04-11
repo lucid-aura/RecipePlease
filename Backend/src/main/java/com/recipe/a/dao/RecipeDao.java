@@ -28,4 +28,9 @@ public interface RecipeDao {
 	public int oneUpReadcount(int recipeSeq);
 
 	public List<RecipeDto> searchRecipe(@Param("search")String search, @Param("big")ArrayList<String> big, @Param("small")ArrayList<String> small);
+	
+	// 내가 좋아하는 레시피 시퀀스
+	
+	public RecipeDto getRecipeInfo(int recipeSeq);
+	
 }

@@ -36,4 +36,11 @@
 		#{item}
 	</foreach>
 </select>
+
+<!-- 해당 레시피 시퀀스로 썸네일 url가져오기 -->
+<select id="getThumbnail" parameterType="Integer" resultType="com.recipe.a.dto.PhotoDto" >
+	SELECT PHOTOURL
+	FROM PHOTO
+	WHERE DOCSSEQ = #{recipeSeq} AND PHOTOCATEGORY = 'recipe' AND PHOTOTITLE = 'thumbnail'
+</select>
 </mapper>

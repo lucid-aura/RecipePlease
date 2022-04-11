@@ -18,4 +18,11 @@
     VALUES(NEXTVAL('RATINGSEQ'), #{memberId}, #{docsSeq}, #{ratingCategory}, #{ratingScore}, #{ratingComment})
 </insert>
 
+<!-- 평가 갯수 가져오기 -->
+<select id="getRatingCount" parameterType="Integer" resultType="Integer">
+	SELECT COUNT(*)
+	FROM RATING
+	WHERE DOCSSEQ = #{recipeSeq} AND RATINGCATEGORY = 'recipe'
+</select>
+
 </mapper>

@@ -17,4 +17,11 @@
 <delete id="unLikeRecipe">
 	DELETE FROM RECIPELIKE WHERE RECIPESEQ=#{recipeSeq} AND MEMBERID=#{memberId}
 </delete>
+
+<!-- 좋아요 누른 레시피시퀀스 가져오기 -->
+<select id="getRecipeSeq" parameterType="String" resultType="com.recipe.a.dto.RecipeDto">
+		SELECT RECIPESEQ 
+		FROM RECIPELIKE
+		WHERE MEMBERID = #{memberId}
+</select>
 </mapper>
