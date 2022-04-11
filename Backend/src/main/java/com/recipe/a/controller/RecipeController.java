@@ -54,14 +54,28 @@ public class RecipeController {
 	}
 	
 	
+	// 레시피 업로드
 	@RequestMapping(value ="/insertRecipe", method = {RequestMethod.GET, RequestMethod.POST})
-	public String insertRecipe() {
+	public int insertRecipe(RecipeDto newRecipe) {
 		System.out.println("RecipeController insertRecipe()");
-		RecipeDto temp = new RecipeDto("test", "title", "content", "big", "small", "url", "tag", 0);
-
-		int res = recipeService.insertRecipe(temp);
-		System.out.println(res);
-		return "개수는: " + res;
+		System.out.println(newRecipe.toString());
+		System.out.println(newRecipe.getRecipeSeq());
+		recipeService.insertRecipe(newRecipe);
+		
+		return newRecipe.getRecipeSeq();
+	}
+	
+	// 레시피 이미지 업로드
+	@RequestMapping(value = "/uploadRecipeImg", method = {RequestMethod.GET, RequestMethod.POST})
+	public String uploadRecipeImg(PhotoDto photoDto) {
+		System.out.println("RecipeController uploadRecipeImg()");
+		System.out.println(photoDto.toString());
+		
+		boolean b = recipeService.uploadRecipeImg(photoDto);
+		if(b) {
+			return "YES";
+		}
+		return "NO";
 	}
 	
 	@RequestMapping(value = "/getOneRecipe", method = {RequestMethod.GET})

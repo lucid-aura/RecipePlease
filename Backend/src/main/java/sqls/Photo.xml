@@ -5,6 +5,12 @@
 
 <mapper namespace="com.recipe.a.dao.PhotoDao">
 
+<insert id="uploadRecipeImg" parameterType="com.recipe.a.dto.PhotoDto">
+	INSERT INTO PHOTO(PHOTOSEQ, DOCSSEQ, PHOTOTITLE, PHOTOCONTENT, PHOTOCATEGORY, PHOTOURL)
+	VALUES(NEXTVAL('photoSeq'), #{docsSeq},  #{photoTitle},  #{photoContent},  #{photoCategory}, #{photoUrl})
+</insert>
+
+
 <select id="countPhoto" resultType="Integer">
 	SELECT COUNT(*) FROM PHOTO
 </select>
@@ -25,6 +31,12 @@
 	WHERE DOCSSEQ=#{docsSeq} AND PHOTOCATEGORY=#{photoCategory} AND PHOTOTITLE='thumbnail'
 	
 </select>
+
+<insert id="uploadRecipeImg" parameterType="com.recipe.a.dto.PhotoDto">
+	INSERT INTO PHOTO(PHOTOSEQ, DOCSSEQ, PHOTOTITLE, PHOTOCONTENT, PHOTOCATEGORY, PHOTOURL)
+	VALUES(NEXTVAL('photoseq'), #{docsSeq},  #{photoTitle},  #{photoContent},  #{photoCategory}, #{photoUrl})
+</insert>
+
 
 <select id="test" resultType="Integer">
 	SELECT PHOTOSEQ FROM PHOTO

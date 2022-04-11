@@ -13,8 +13,6 @@ public class RecipeDto {
 	private float recipeRating;
 	private int recipeReadcount;
 	
-	
-	
 	public RecipeDto() {
 		super();
 		this.memberId = "";
