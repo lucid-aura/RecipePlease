@@ -6,7 +6,7 @@
 <mapper namespace="com.recipe.a.dao.RecipeDao">
 
 <select id="countRecipe" resultType="Integer">
-	SELECT COUNT(*) FROM RECIPE
+	SELECT COUNT(*) FROM RECIPE WHERE RECIPEBIGCATEGORY=#{bigCategory} AND RECIPESMALLCATEGORY=#{smallCategory}
 </select>
 
 <insert id="insertRecipe" parameterType="com.recipe.a.dto.RecipeDto">
@@ -40,8 +40,12 @@
 	SELECT * FROM RECIPE WHERE RECIPEBIGCATEGORY=#{category} ORDER BY RECIPERATING DESC LIMIT 3
 </select>
 
+<select id="getSmallRecommendRecipe" parameterType="String" resultType="com.recipe.a.dto.RecipeDto">
+	SELECT * FROM RECIPE WHERE RECIPESMALLCATEGORY=#{category}
+</select>
+
 <select id="getRecommendReadcountRecipe" resultType="com.recipe.a.dto.RecipeDto">
-	SELECT * FROM RECIPE ORDER BY RECIPEREADCOUNT DESC LIMIT 3;
+	SELECT * FROM RECIPE ORDER BY RECIPEREADCOUNT DESC LIMIT 4;
 </select>
 
 <select id="searchRecipe" resultType="com.recipe.a.dto.RecipeDto">
@@ -54,5 +58,11 @@
 	<foreach collection="small" item="item" open="(" close=")" separator=",">
 		#{item}
 	</foreach>
+	<if test='sortOrder=="readcount"'>
+		ORDER BY RECIPEREADCOUNT DESC
+	</if>
+	<if test='sortOrder=="rating"'>
+		ORDER BY RECIPERATING DESC
+	</if>
 </select>
 </mapper>

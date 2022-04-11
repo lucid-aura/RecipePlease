@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Icons from 'react-native-vector-icons/MaterialIcons';
-import { Checkbox, Searchbar } from "react-native-paper";
+import { Checkbox, RadioButton, Searchbar } from "react-native-paper";
 import { TextInput } from "react-native-gesture-handler";
 import COLORS from '../consts/colors';
 
@@ -27,6 +27,7 @@ export default function RecipeSearch() { // 레시피 검색 컴포넌트
     const [entertain, setEntertain] = useState(true)
     const [nightMeal, setNightMeal] = useState(true)
 
+    const [sortOrder, setSortOrder] = useState('readcount');
 
     useEffect( () => {
 
@@ -61,7 +62,7 @@ export default function RecipeSearch() { // 레시피 검색 컴포넌트
                         if (element) smallOptions.push(smallCategoryArray[index])
                     });
 
-                    navigation.navigate("RecipeSearchResult" as never ,{ search:search, bigOptions:bigOptions, smallOptions:smallOptions } as never)
+                    navigation.navigate("RecipeSearchResult" as never ,{ search:search, bigOptions:bigOptions, smallOptions:smallOptions, sortOrder:sortOrder } as never)
                 }}
             />
             <Icons 
@@ -122,8 +123,23 @@ export default function RecipeSearch() { // 레시피 검색 컴포넌트
                     }}
                 />
                 <Text style={styles.categoryText}>야식용</Text>
-
             </View>
+
+            <Text style={{fontSize:24}}>정렬 방식</Text>
+                <View style={styles.categoryCheck}>
+                    <RadioButton
+                        value="readcount"
+                        status={ sortOrder === 'readcount' ? 'checked' : 'unchecked' }
+                        onPress={() => setSortOrder('readcount')}
+                    />
+                    <Text style={styles.categoryText}>조회 순</Text>
+                    <RadioButton
+                        value="rating"
+                        status={ sortOrder === 'rating' ? 'checked' : 'unchecked' }
+                        onPress={() => setSortOrder('rating')}
+                    />
+                    <Text style={styles.categoryText}>평점 순</Text>
+                </View>
             </View>
         </View>
         }

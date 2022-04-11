@@ -13,7 +13,7 @@ import com.recipe.a.dto.RecipeDto;
 @Repository
 public interface RecipeDao {
 
-	public int countRecipe();
+	public int countRecipe(String bigCategory, String smallCategory);
 
 	public void insertRecipe(RecipeDto newRecipe);
 
@@ -23,9 +23,11 @@ public interface RecipeDao {
 
 	public List<RecipeDto> getRecommendRecipe(String category);
 	
+	public List<RecipeDto> getSmallRecommendRecipe(String category);
+	
 	public List<RecipeDto> getRecommendReadcountRecipe();
 
 	public int oneUpReadcount(int recipeSeq);
 
-	public List<RecipeDto> searchRecipe(@Param("search")String search, @Param("big")ArrayList<String> big, @Param("small")ArrayList<String> small);
+	public List<RecipeDto> searchRecipe(@Param("search")String search, @Param("big")ArrayList<String> big, @Param("small")ArrayList<String> small, @Param("sortOrder")String sortOrder);
 }

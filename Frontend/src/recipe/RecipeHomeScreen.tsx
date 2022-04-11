@@ -4,12 +4,15 @@ import { View, Text,StyleSheet, SafeAreaView, ScrollView, Alert, Image, Platform
 import { NavigationHeader } from "../theme";
 import RecipeRecommendList from "./RecipeRecommendList";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { useNavigation } from "@react-navigation/native";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
 import RecipeSearch from "./RecipeSearch";
 import RNFS from "react-native-fs"
 import {
     PermissionsAndroid
 } from 'react-native';
+import * as D from "../store/drawer"
+
 /*
 npm i react-native-image-slider-box -HSH 추가
 npm install --save react-native-ratings - HSH 추가
@@ -30,6 +33,12 @@ export default function RecipeHomeScreen(){
     const navigation = useNavigation()
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
 
+    const dispatch = useDispatch()
+    const goShoppingCart = () => {
+        dispatch(D.drawerChangeFalseAction())
+        navigation.dispatch(DrawerActions.openDrawer())
+    }
+    
     const permission = async() => {
         if (Platform.OS === "android") {
             await PermissionsAndroid.requestMultiple([
@@ -57,7 +66,7 @@ export default function RecipeHomeScreen(){
         <SafeAreaView style={styles.container}>
             <NavigationHeader
                 Left= {() => <Icon name="arrow-left-bold" size={40} onPress={goBack} />}
-                Right= {() => <Icon name="cart-heart" size={40} />} />
+                Right= {() => <Icon name="cart-heart" size={40} onPress={goShoppingCart} />} />
 
 
             {/* <Image source={

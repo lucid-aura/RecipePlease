@@ -6,8 +6,7 @@ npm install @react-native-community/blur
 
 */
 
-import { useNavigation } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Button, StyleSheet, Text, View, Image, SafeAreaView, ScrollView, Dimensions, Alert } from "react-native";
 import axios from 'axios';
@@ -19,14 +18,20 @@ import { Rating } from "react-native-ratings";
 import YoutubePlayer, {YoutubeIframeRef} from "react-native-youtube-iframe";
 import { NavigationHeader } from "../theme";
 import config from "../project.config"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../store";
 import * as L from '../store/login'
 import { BlurView } from "@react-native-community/blur";
+import * as D from "../store/drawer"
 
 export default function RecipeDetailScreen({ route }:any){
 
     const navigation = useNavigation()
+    const dispatch = useDispatch()
+    const goShoppingCart = () => {
+        dispatch(D.drawerChangeFalseAction())
+        navigation.dispatch(DrawerActions.openDrawer())
+    }
 
     const [thumbnail, setThumbnail] = useState({
         docsSeq:-1,
@@ -178,7 +183,7 @@ export default function RecipeDetailScreen({ route }:any){
             <View>
             <NavigationHeader title="홈" 
                 Left= {() => <Icon name="arrow-left-bold" size={40} onPress={goBack} />}
-                Right= {() => <Icon name="cart-heart" size={40} />} />
+                Right= {() => <Icon name="cart-heart" size={40} onPress={goShoppingCart} />} />
 
             <ScrollView overScrollMode="never" style={styles.contentContainer}>
                 {/*조회수, 좋아요, 타이틀과 사진이 들어가는 View */}

@@ -98,7 +98,6 @@ export default function PaymentInfo({navigation}:any, props:any) {
                 >
                     {/* 결제 메인 화면 */}
                     <View style={{flex: 1}}>
-
                         {/* 주문정보(주문 상품 확인), 임의로 기입되었으므로 향후 보완 필요 */}
                         <View>
                             <Text style={styles.subTitle}>주문 정보</Text>

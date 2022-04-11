@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Chef</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/7a52739f2b.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav id="navBar" class="navbar-white">
+        <a href="index.html"><img src="images/logo2.png" class="logo"></a> <!--이거 나중에 jsp 작업할때 수정 하세요-->
+        <ul class="nav-links">
+            <li><a href="#" class="simple">간편식</a></li>
+            <li><a href="#">야식</a></li>
+            <li><a href="listing.html">손님접대용</a></li> <!--임의 설정입니다. 난주 jsp 작업할때 수정 하세요-->
+        </ul>
+        <a href="#" class="register-btn">회원 가입하기</a>
+        <i class="fas fa-bars" onclick="togglebtn()"></i>
+    </nav>
+
+    <div class="container">
+
+        <div class="list-container">
+            <div class="left-col">
+                <p>세부 세항 부분</p>
+                <h1>굿즈 구매 페이지</h1>
+                
+                <div class="small-container cart-page">
+
+                    <table>
+                        <tr>
+                            <th>구성</th>
+                            <th>품목</th>
+                            <th>총계</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="cart-info">
+                                    <img src="images/kichen-1.jpg">
+                                    <div>
+                                        <p>주방기구 관련</p>
+                                        <small>가격 : 50,000원</small>
+                                        <br>
+                                        <a href="">remove</a>
+                                    </div>
+                                </div>
+
+                            </td>
+                            <td><input type="number" value="1"></td>
+                            <td>50,000원</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="cart-info">
+                                    <img src="images/kichen-2.jpg">
+                                    <div>
+                                        <p>주방기구 관련</p>
+                                        <small>가격 : 45,000원</small>
+                                        <br>
+                                        <a href="">remove</a>
+                                    </div>
+                                </div>
+
+                            </td>
+                            <td><input type="number" value="1"></td>
+                            <td>45,000원</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="cart-info">
+                                    <img src="images/kichen-3.jpg">
+                                    <div>
+                                        <p>주방기구 관련</p>
+                                        <small>가격 : 60,000원</small>
+                                        <br>
+                                        <a href="">remove</a>
+                                    </div>
+                                </div>
+
+                            </td>
+                            <td><input type="number" value="1"></td>
+                            <td>60,000원</td>
+                        </tr>
+                    </table>
+
+                    <div class="total-price">
+
+                        <table>
+                            <tr>
+                                <td>구매 금액</td>
+                                <td>115,000원</td>
+                            </tr>
+                            <tr>
+                                <td>제세 공과금</td>
+                                <td>11,500원</td>
+                            </tr>
+                            <tr>
+                                <td>총 금액</td>
+                                <td>126,500원</td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+                
+            <div class="right-col">
+                <div class="sidebar">
+                    <h2>세부사항 선택</h2>
+                    <h3>구성 타입</h3>
+                    <div class="filter">
+                        <input type="checkbox"> <p>식기 관련</p> <span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox"> <p>주방 도구</p> <span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox"> <p>기타</p> <span>(0)</span>
+                    </div>
+                    <h3>조회 순</h3>
+                    <div class="filter">
+                        <input type="checkbox"> <p>많이 선택한 물품</p> <span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox"> <p>조회 많은순</p> <span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox"> <p>문의 많은순</p> <span>(0)</span>
+                    </div>
+
+                    <div class="sidebar-link">
+                        <a href="food.html">더 보기</a><!--임의로 걸었습니다. 난주 JSP작업할때 유의 하세요-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div class="footer">
+            <a href ="https://facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href ="https://youtube.com/"><i class="fa-brands fa-youtube"></i></a>
+            <a href ="https://google.com/"><i class="fa-brands fa-google"></i></a>
+            <a href ="https://linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href ="https://instagram.com/"><i class="fa-brands fa-instagram"></i></a>
+            <hr>
+            <p> Copyright By 2022, 레시피를 부탁해</p>
+        </div>
+
+    </div>
+
+    
+
+    <script>
+        let navBar = document.getElementById("navBar")
+
+        function togglebtn(){
+            navBar.classList.toggle("hidemenu");
+        }
+    </script>
+</body>
+</html>

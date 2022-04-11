@@ -33,7 +33,6 @@ export default function RecipeRecommendList( { category } :any) { // 굿즈 태�
         "recipeRating":[],
         "thumbnailPhoto":[],
         "title":[],
-        "videoUrl":[],
         "readcount":[],
         "capacity":[]
     })

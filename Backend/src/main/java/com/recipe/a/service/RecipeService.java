@@ -38,9 +38,8 @@ public class RecipeService {
 
 	@Autowired CoinTransactionDao coinTransactionDao;
 	
-	public int countRecipe() {
-		System.out.println("RecipeService");
-		return recipeDao.countRecipe();
+	public int countRecipe(String bigCategory, String smallCategory) {
+		return recipeDao.countRecipe(bigCategory, smallCategory);
 	}
 
 	public int insertRecipe(RecipeDto newRecipe) {
@@ -96,7 +95,7 @@ public class RecipeService {
 		}
 		List<Integer> recipeSeqList = new ArrayList<Integer>();
 		List<String> titleList = new ArrayList<String>();
-		List<String> videoList = new ArrayList<String>();
+		//List<String> videoList = new ArrayList<String>();
 		List<Integer> recipePrice = new ArrayList<Integer>();
 		List<Float> recipeRatingList = new ArrayList<Float>();
 		List<String> thumbnailPhotoList = new ArrayList<String>();
@@ -106,7 +105,7 @@ public class RecipeService {
 		for (RecipeDto recipe : recipes) {
 			recipeSeqList.add(recipe.getRecipeSeq());
 			titleList.add(recipe.getRecipeTitle());
-			videoList.add(recipe.getRecipeVideoUrl());
+			//videoList.add(recipe.getRecipeVideoUrl());
 			recipePrice.add(recipe.getRecipePrice());
 			recipeRatingList.add(recipe.getRecipeRating());
 			readcountList.add(recipe.getRecipeReadcount());
@@ -126,7 +125,7 @@ public class RecipeService {
 		Map<String, Object> res = new HashMap<String, Object>();
 		res.put("recipeSeq", recipeSeqList);
 		res.put("title", titleList);
-		res.put("videoUrl", videoList);
+		//res.put("videoUrl", videoList);
 		res.put("recipeRating", recipeRatingList);
 		res.put("recipePrice", recipePrice);
 		res.put("thumbnailPhoto", thumbnailPhotoList);
@@ -146,27 +145,34 @@ public class RecipeService {
 		return recipes;
 	}
 
+	public List<RecipeDto> getSmallRecommendRecipe(String category) {
+		List<RecipeDto> recipes;
+		recipes = recipeDao.getSmallRecommendRecipe(category);
+		return recipes;
+	}
+	
 
 	public int oneUpReadcount(int recipeSeq) {
 		return recipeDao.oneUpReadcount(recipeSeq);
 
 	}
 
-	public Map<String, Object> searchRecipe(String search, ArrayList<String> big, ArrayList<String> small) {
-		Map<String, Object> res = new HashMap<String, Object>();
-		ArrayList<RecipeDto> recipes = (ArrayList<RecipeDto>) recipeDao.searchRecipe(search, big, small);
-		
-		List<Integer> recipeSeqList = new ArrayList<Integer>();
-		
-		for (RecipeDto recipe : recipes) {
-			recipeSeqList.add(recipe.getRecipeSeq());
-		}
-		
-		List<PhotoDto> thumbnails = photoDao.getRecommendThumnailPhoto(recipeSeqList);
-		
-		res.put("recipes", recipeDao.searchRecipe(search, big, small));
-		res.put("thumbnails", thumbnails);
-		return res;
+	public List<RecipeDto> searchRecipe(String search, ArrayList<String> big, ArrayList<String> small, String sortOrder) {
+		return recipeDao.searchRecipe(search, big, small, sortOrder);
+//		Map<String, Object> res = new HashMap<String, Object>();
+//		ArrayList<RecipeDto> recipes = (ArrayList<RecipeDto>) recipeDao.searchRecipe(search, big, small);
+//		
+//		List<Integer> recipeSeqList = new ArrayList<Integer>();
+//		
+//		for (RecipeDto recipe : recipes) {
+//			recipeSeqList.add(recipe.getRecipeSeq());
+//		}
+//		
+//		List<PhotoDto> thumbnails = photoDao.getRecommendThumnailPhoto(recipeSeqList);
+//		
+//		res.put("recipes", recipeDao.searchRecipe(search, big, small));
+//		res.put("thumbnails", thumbnails);
+//		return res;
 		
 	}
 

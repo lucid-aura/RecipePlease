@@ -37,11 +37,10 @@ public class RecipeController {
 	
 	
 	@RequestMapping(value = "/countRecipe", method = {RequestMethod.GET, RequestMethod.POST})
-	public String countRecipe() {
+	public int countRecipe(String bigCategory, String smallCategory) {
 		System.out.println("RecipeController countRecipe()");
-		int res = recipeService.countRecipe();
-		System.out.println(res);
-		return "개수는: " + res;
+		return recipeService.countRecipe(bigCategory, smallCategory);
+		
 	}
 	
 	
@@ -66,7 +65,9 @@ public class RecipeController {
 	
 	@RequestMapping(value = "/getOneRecipe", method = {RequestMethod.GET})
 	public RecipeDto getOneRecipe(int recipeSeq) {
+		
 		System.out.println("RecipeController getOneRecipe()");
+		System.out.println(recipeSeq);
 		recipeService.oneUpReadcount(recipeSeq);
 		return recipeService.getOneRecipe(recipeSeq);
 		//return recipeService.getPhoto(photoDto);
@@ -142,13 +143,20 @@ public class RecipeController {
 		//return recipeService.getPhoto(photoDto);
 	}
 
+	@RequestMapping(value = "/getSmallRecommendRecipe", method = {RequestMethod.GET})
+	public List<RecipeDto> getSmallRecommendRecipe(String category) {
+		
+		System.out.println("RecipeController getSmallRecommendRecipe()");
+
+		return recipeService.getSmallRecommendRecipe(category);
+	}	
+	
 	@RequestMapping(value = "/getRecommendRecipeTest", method = {RequestMethod.GET})
 	public List<RecipeDto> getRecommendRecipeTest(String category) {
 		
 		System.out.println("RecipeController getRecommendRecipeTest() " + category);
 
 		return recipeService.getRecommendRecipeTest(category);
-		//return recipeService.getPhoto(photoDto);
 	}	
 	
 	
@@ -163,29 +171,25 @@ public class RecipeController {
 	public int unlikeRecipe(RecipeLikeDto recipeLikeDto) {
 		System.out.println("RecipeController unlikeRecipe()");
 		return recipeLikeService.unLikeRecipe(recipeLikeDto);
-
 	}
 	
 	
-	@RequestMapping(value = "/searchRecipe", method = {RequestMethod.POST})
-	public Map<String, Object> searchRecipe(String search, String bigOptions, String smallOptions) {
+	@RequestMapping(value = "/searchRecipe", method = {RequestMethod.GET, RequestMethod.POST})
+	public List<RecipeDto> searchRecipe(String search, String bigOptions, String smallOptions, String sortOrder) {
 		System.out.println("RecipeController searchRecipe()");
+		System.out.println(bigOptions);
 		ArrayList<String> big = new ArrayList<String>(Arrays.asList(bigOptions.split(",")));
 		ArrayList<String> small = new ArrayList<String>(Arrays.asList(smallOptions.split(","))); 
-		return recipeService.searchRecipe(search, big, small);
+		return recipeService.searchRecipe(search, big, small, sortOrder);
 	}
-	
 	
 	@RequestMapping(value = "/test", method = {RequestMethod.GET})
 	public List<Integer> test(int docs_seq, String photo_category) {
 		System.out.println(docs_seq + " " + photo_category);
-		
 		System.out.println("RecipeController test()");
 		
 		List<Integer> dtos = recipeService.test();
-		System.out.println(dtos.get(0));
-		
-		
+
 		return dtos;
 		//return recipeService.getPhoto(photoDto);
 	}

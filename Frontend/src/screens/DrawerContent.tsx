@@ -11,6 +11,7 @@ import {  signOutWithKakao } from "../mypage/utils";
 import * as D from "../store/drawer"
 import DrawerSettingLogout from "../mypage/component/DrawerSettingLogout";
 import DrawerSettingLogin from "../mypage/component/DrawerSettingLogIn";
+import DrawerCart from "../mypage/component/DrawerCart";
 
 
 const DrawerContent: FC<DrawerContentComponentProps> = (props) => {
@@ -24,11 +25,8 @@ const DrawerContent: FC<DrawerContentComponentProps> = (props) => {
     
     if(!drawerChange) {
         return(
-            <SafeAreaView>
-                <View>
-                    <Text>장바구니</Text>
-                </View>
-                
+            <SafeAreaView style={{ flex:1, alignItems: 'center',  justifyContent:'center'}}>
+                <DrawerCart />
             </SafeAreaView>
         )
     } else {
