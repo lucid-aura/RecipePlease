@@ -47,20 +47,19 @@ public class MembersController {
 	@RequestMapping(value = "/regist", method = {RequestMethod.GET, RequestMethod.POST})
 	public String regist(MembersDto dto) {
 		System.out.println("MembersController regist()");
-		String salt = BCrypt.gensalt(10);
-		dto.setSalt(salt);
-		dto.setMemberPwd(BCrypt.hashpw(dto.getMemberPwd(), salt));
+		String salt = BCrypt.gensalt(10);	// 임의의 솔트값 생성
+		dto.setSalt(salt);	// 솔트값 Dto 에 담기
+		dto.setMemberPwd(BCrypt.hashpw(dto.getMemberPwd(), salt));	//솔트값과 비밀번호 합쳐서 암호화후 Dto에 담기
 		System.out.println("dto.getMember_pwd: " + dto.getMemberPwd() );
 		
 		boolean b = memberService.regist(dto);
 		if (b) {
-			return "yes";
+			return "yes";	// 회원가입 실패
 		} else {
-			return "no";
+			return "no";	// 회원가입 성공
 		}
 		
 	}
-	
 	
 	//로그인
 	@PostMapping("/login")

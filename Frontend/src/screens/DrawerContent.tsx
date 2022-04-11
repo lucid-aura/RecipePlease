@@ -16,7 +16,6 @@ import DrawerCart from "../mypage/component/DrawerCart";
 
 const DrawerContent: FC<DrawerContentComponentProps> = (props) => {
     
-    const {navigation} = props
     const log = useSelector<AppState, L.State>((state) => state.login)
     const change = useSelector<AppState, D.State>((state) => state.drawer)
     const {loggedIn, loggedUser} = log

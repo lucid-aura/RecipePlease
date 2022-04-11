@@ -65,4 +65,11 @@
 		ORDER BY RECIPERATING DESC
 	</if>
 </select>
+
+<!-- 레시피 시퀀스에 해당하는 레시피 정보들 가져오기 -->
+<select id="getRecipeInfo" parameterType="Integer" resultType="com.recipe.a.dto.RecipeDto">
+	SELECT RECIPETITLE, RECIPEREADCOUNT, RECIPERATING
+	FROM RECIPE
+	WHERE RECIPESEQ = #{recipeSeq}
+</select>
 </mapper>
