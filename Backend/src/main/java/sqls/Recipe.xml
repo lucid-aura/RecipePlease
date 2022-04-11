@@ -9,27 +9,13 @@
 	SELECT COUNT(*) FROM RECIPE
 </select>
 
-<<<<<<< HEAD
-<insert id="uploadRecipe" parameterType="com.recipe.a.dto.RecipeDto">
+
+<insert id="insertRecipe" parameterType="com.recipe.a.dto.RecipeDto">
 	<selectKey keyProperty="recipeSeq" resultType="int" order="BEFORE">
 		SELECT NEXTVAL('recipeSeq') SEQ FROM dual
 	</selectKey>
-	INSERT INTO Test(RECIPESEQ,RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, 
-				RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING)
-	VALUES(#{recipeSeq}, #{recipeTitle}, #{recipeContent}, #{recipeBigCategory}, #{recipeSmallCategory}, #{recipeGoodsTag}, #{recipePrice}, 0)
-	
-	
-=======
-<insert id="insertRecipe" parameterType="com.recipe.a.dto.RecipeDto">
 	INSERT INTO RECIPE(RECIPESEQ, MEMBERID, RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEVIDEOURL, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING, RECIPEREADCOUNT)
-	VALUES(NEXTVAL('RECIPESEQ'), #{memberId}, #{recipeTitle}, #{recipe_content}, #{recipeBigCategory}, #{recipeSmallCategory}, #{recipeVideoUrl}, #{recipeGoodsTag}, #{recipePrice}, 0.0, 0) 
->>>>>>> main
-</insert>
-
-
-<insert id="uploadRecipeImg" parameterType="com.recipe.a.dto.PhotoDto">
-	INSERT INTO Test2(DOCSSEQ, PHOTOURL)
-	VALUES(#{photoSeq}, #{photoUrl})
+	VALUES(#{recipeSeq}, #{memberId}, #{recipeTitle}, #{recipeContent}, #{recipeBigCategory}, #{recipeSmallCategory}, #{recipeVideoUrl}, #{recipeGoodsTag}, #{recipePrice}, 0.0, 0) 
 </insert>
 
 
@@ -37,9 +23,6 @@
 	SELECT RECIPESEQ, MEMBERID, RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEVIDEOURL, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING, RECIPEREADCOUNT
 	FROM RECIPE WHERE RECIPESEQ=#{recipeSeq}
 </select>
-<<<<<<< HEAD
-</mapper>
-=======
 
 <update id="oneUpReadcount" parameterType="Integer">
 	UPDATE RECIPE
@@ -78,4 +61,3 @@
 	</foreach>
 </select>
 </mapper>
->>>>>>> main

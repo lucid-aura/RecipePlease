@@ -2,9 +2,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import GoodsHomeScreen from '../goods/GoodsHomeScreen';
-<<<<<<< HEAD:Frontend/src/screens/GoodsScreen.tsx
-import GoodsPayScreen from '../goods/GoodsPayScreen';
-=======
 import Payment from '../goods/payment/Payment';
 import PaymentAddr from '../goods/payment/PaymentAddr';
 import PaymentFailed from '../goods/payment/PaymentFailed';
@@ -15,7 +12,6 @@ import PurchaseList from '../goods/payment/test/PurchaseList';
 import PurchaseRecipe from '../goods/payment/test/PurchaseRecipe';
 import TestPage from '../goods/payment/test/TestPage';
 import UserPurchaseList from '../goods/payment/test/UserPurchaseList';
->>>>>>> main:Frontend/src/screens/GoodsNavigator.tsx
 
 /*
 npm install react-native-gesture-handler
@@ -34,9 +30,6 @@ export default function GoodsNavigator(){
       <Stack.Navigator screenOptions={{headerShown:false}}>
         <Stack.Screen name="Home" component={GoodsHomeScreen}></Stack.Screen>
 
-<<<<<<< HEAD:Frontend/src/screens/GoodsScreen.tsx
-        <Stack.Screen name="Pay" component={GoodsPayScreen}></Stack.Screen>
-=======
         <Stack.Screen name="paymentInfo" component={PaymentInfo} options={{title: "결제정보"}} />
         <Stack.Screen name="payment" component={Payment} options={{title: "결제"}} />
         <Stack.Screen name="paymentResult" component={PaymentResult} options={{title: "결제완료"}} />
@@ -49,7 +42,6 @@ export default function GoodsNavigator(){
         <Stack.Screen name="purchaseList" component={PurchaseList} options={{title: "상품 구매 이력"}} />
         <Stack.Screen name="coinUseList" component={CoinUseList} options={{title: "코인 충전/사용 이력"}} />
         <Stack.Screen name="purchaseRecipe" component={PurchaseRecipe} options={{title: "레시피 구매"}} />
->>>>>>> main:Frontend/src/screens/GoodsNavigator.tsx
 
       </Stack.Navigator>
     )

@@ -1,20 +1,57 @@
-import React, { useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { StyleSheet, View, Image, TouchableOpacity } from "react-native"
-import { Text, TextInput } from "react-native-paper"
+import { Button, Text, TextInput } from "react-native-paper"
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { white } from "react-native-paper/lib/typescript/styles/colors";
 
 
 
 const DetailList = (props: any) => {
-    const [contentImglist, setContentimglist] = useState()
+    const [contentImglist, setContentimglist] = useState("")
+    const [contentText, setContentText] = useState("")
+    const [imgdata, setImgdata] = useState(props.setData3)
 
     const contentimgshow1 = () => {
         launchImageLibrary({}, response => {
-            console.log(response)
             setContentimglist(response.assets[0].uri)
+            let a = props.setData3;
+            let b = props.setData4;
+            console.log("a : " + JSON.stringify(a))
+            console.log("b : " + b)
+
+            // a.push({ imglist: response.assets[0].uri })
+            a[b].imglist = response.assets[0].uri
+            a[b].imgText = contentText
+            console.log("imglist:" + a[b].imglist)
+            console.log("imgText:" + a[b].imgText)
+            props.setData2(a)
+
+            console.log("bbbb: " + b)
+            //props.setData(contentImglist, setContentimglist)
+            console.log("DetailList : " + contentImglist)
         })
     }
+
+    const content = () => {
+        let a = props.setData3;
+        let b = props.setData4;
+        console.log("a : " + JSON.stringify(a))
+        console.log("b : " + b)
+
+        a[b].imgText = contentText
+
+        console.log("imgText:" + a[b].imgText)
+        props.setData2(a)
+    }
+
+    useEffect(() => {
+        const test = () => {
+            JSON.stringify(imgdata)
+        }
+        test()
+    }, [])
+
+
     return (
         <View style={styles.contentpictureframe}>
             <TouchableOpacity onPress={contentimgshow1} style={styles.contentcameraframe}>
@@ -24,8 +61,14 @@ const DetailList = (props: any) => {
                 >
                 </Image>
             </TouchableOpacity>
-            <TextInput style={styles.photoContentText}></TextInput>
+            <TextInput style={styles.photoContentText}
+                value={contentText}
+                onChangeText={(contentText) => setContentText(contentText)}
+                onKeyPress={content}
+            >
+            </TextInput>
         </View>
+
     )
 }
 

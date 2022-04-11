@@ -8,13 +8,8 @@ npm install @react-native-community/blur
 
 import { useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-<<<<<<< HEAD
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
-=======
 import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Button, StyleSheet, Text, View, Image, SafeAreaView, ScrollView, Dimensions, Alert } from "react-native";
->>>>>>> main
 import axios from 'axios';
 import RecipeDetailOrder from "./RecipeDetailOrder";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -31,34 +26,6 @@ import { BlurView } from "@react-native-community/blur";
 
 export default function RecipeDetailScreen({ route }:any){
 
-<<<<<<< HEAD
-export default function RecipeDetailScreen() {
-
-    const [data, setData] = useState();
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = axios.get("http://192.168.0.14:3000/countRecipe").then(function (res) {
-                setData(res.data)
-
-            })
-                .catch(function (err) {
-                    console.log(err)
-                })
-        }
-        fetchData()
-    }, [])
-
-    const navigation = useNavigation()
-    const url = useContext(context)
-
-    return (
-        <View style={styles.container}>
-            <Text>Recipe Detail Screen</Text>
-            <Text>{data}</Text>
-
-        </View>
-=======
     const navigation = useNavigation()
 
     const [thumbnail, setThumbnail] = useState({
@@ -302,7 +269,6 @@ export default function RecipeDetailScreen() {
             </ScrollView>
             </View>
         </SafeAreaView>
->>>>>>> main
     )
 } 
 
@@ -315,9 +281,6 @@ const styles = StyleSheet.create({
         width:'100%',
         flex: 1,
         alignItems: 'center',
-<<<<<<< HEAD
-        justifyContent: 'center'
-=======
         marginBottom:10
     },
     titleImage:{
@@ -376,7 +339,6 @@ const styles = StyleSheet.create({
         left: 0,
         bottom: 0,
         right: 0
->>>>>>> main
     }
 
 }) //css

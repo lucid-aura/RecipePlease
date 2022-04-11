@@ -1,8 +1,8 @@
 package com.recipe.a.dto;
 
-//dto
 public class RecipeDto {
 	private int recipeSeq;
+	private String memberId;
 	private String recipeTitle;
 	private String recipeContent;
 	private String recipeBigCategory;
@@ -12,15 +12,6 @@ public class RecipeDto {
 	private int recipePrice;
 	private float recipeRating;
 	private int recipeReadcount;
-	
-<<<<<<< HEAD
-	public RecipeDto() {
-	}
-
-	public RecipeDto(int recipeSeq, String recipeTitle, String recipeContent, String recipeBigCategory,
-			String recipeSmallCategory, String recipeGoodsTag, int recipePrice, float recipeRating) {
-=======
-	
 	
 	public RecipeDto() {
 		super();
@@ -53,9 +44,9 @@ public class RecipeDto {
 
 	public RecipeDto(int recipeSeq, String memberId, String recipeTitle, String recipeContent, String recipeBigCategory,
 			String recipeSmallCategory, String recipeVideoUrl, String recipeGoodsTag, int recipePrice, float recipeRating, int recipeReadcount) {
->>>>>>> main
 		super();
 		this.recipeSeq = recipeSeq;
+		this.memberId = memberId;
 		this.recipeTitle = recipeTitle;
 		this.recipeContent = recipeContent;
 		this.recipeBigCategory = recipeBigCategory;
@@ -89,6 +80,14 @@ public class RecipeDto {
 
 	public void setRecipeSeq(int recipeSeq) {
 		this.recipeSeq = recipeSeq;
+	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 	public String getRecipeTitle() {
@@ -165,22 +164,14 @@ public class RecipeDto {
 
 	@Override
 	public String toString() {
-<<<<<<< HEAD
-		return "RecipeDto [recipeSeq=" + recipeSeq + ", recipeTitle=" + recipeTitle + ", recipeContent=" + recipeContent
-				+ ", recipeBigCategory=" + recipeBigCategory + ", recipeSmallCategory=" + recipeSmallCategory
-				+ ", recipeGoodsTag=" + recipeGoodsTag + ", recipePrice=" + recipePrice + ", recipeRating="
-				+ recipeRating + "]";
-=======
 		return "RecipeDto [recipeSeq=" + recipeSeq + ", memberId=" + memberId + ", recipeTitle=" + recipeTitle
 				+ ", recipeContent=" + recipeContent + ", recipeBigCategory=" + recipeBigCategory
 				+ ", recipeSmallCategory=" + recipeSmallCategory + ", recipeVideoUrl=" + recipeVideoUrl
 				+ ", recipeGoodsTag=" + recipeGoodsTag + ", recipePrice=" + recipePrice + ", recipeRating="
 				+ recipeRating + ", recipeReadcount=" + recipeReadcount + "]";
->>>>>>> main
 	}
 
 	
 	
 	
 }
-

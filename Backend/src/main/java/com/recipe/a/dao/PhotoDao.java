@@ -11,10 +11,10 @@ import com.recipe.a.dto.PhotoDto;
 @Repository
 public interface PhotoDao {
 
+	public int uploadRecipeImg(PhotoDto photoDto);
+	
 	public int countPhoto();
-	
 
-	
 	public List<PhotoDto> getPhoto(PhotoDto photoDto);
 	
 	public List<Integer> test(); 

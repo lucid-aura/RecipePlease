@@ -16,12 +16,6 @@ export default function GoodsHomeScreen(){
     const navigation = useNavigation()
     
     return(
-<<<<<<< HEAD
-        <View style={styles.container}>
-            <Text>Goods Home Screen</Text>
-            <Button title="Pay로 이동" onPress={()=>navigation.navigate('Pay')}></Button>
-
-=======
         <ScrollView>
              <View style={styles.inputContainer}>
              <Icon name="search" size={28} />
@@ -66,7 +60,6 @@ export default function GoodsHomeScreen(){
              <Button title="Pay로 이동" onPress={()=>navigation.navigate('paymentInfo')}></Button>
             
         </ScrollView>
->>>>>>> main
 
     )
 }// 네비 함수 생성후 버튼 클릭시 이동처리

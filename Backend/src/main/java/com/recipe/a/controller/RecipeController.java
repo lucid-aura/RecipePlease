@@ -54,25 +54,28 @@ public class RecipeController {
 	}
 	
 	
-<<<<<<< HEAD
-	@RequestMapping(value = "/uploadRecipe", method = {RequestMethod.GET, RequestMethod.POST})
-	public int countRecipe(RecipeDto dto) {
-		System.out.println("RecipeController uploadRecipe()");
-		System.out.println(dto.toString());
-		System.out.println(dto.getRecipeSeq());
-		recipeService.uploadRecipe(dto);
-		
-		return dto.getRecipeSeq();
-=======
+	// 레시피 업로드
 	@RequestMapping(value ="/insertRecipe", method = {RequestMethod.GET, RequestMethod.POST})
-	public String insertRecipe() {
+	public int insertRecipe(RecipeDto newRecipe) {
 		System.out.println("RecipeController insertRecipe()");
-		RecipeDto temp = new RecipeDto("test", "title", "content", "big", "small", "url", "tag", 0);
-
-		int res = recipeService.insertRecipe(temp);
-		System.out.println(res);
-		return "개수는: " + res;
->>>>>>> main
+		System.out.println(newRecipe.toString());
+		System.out.println(newRecipe.getRecipeSeq());
+		recipeService.insertRecipe(newRecipe);
+		
+		return newRecipe.getRecipeSeq();
+	}
+	
+	// 레시피 이미지 업로드
+	@RequestMapping(value = "/uploadRecipeImg", method = {RequestMethod.GET, RequestMethod.POST})
+	public String uploadRecipeImg(PhotoDto photoDto) {
+		System.out.println("RecipeController uploadRecipeImg()");
+		System.out.println(photoDto.toString());
+		
+		boolean b = recipeService.uploadRecipeImg(photoDto);
+		if(b) {
+			return "YES";
+		}
+		return "NO";
 	}
 	
 	@RequestMapping(value = "/getOneRecipe", method = {RequestMethod.GET})
@@ -84,39 +87,19 @@ public class RecipeController {
 	}
 	
 	
-<<<<<<< HEAD
-	@RequestMapping(value = "/uploadRecipeImg", method = {RequestMethod.GET, RequestMethod.POST})
-	public String uploadRecipeImg(PhotoDto dto) {
-		System.out.println("RecipeController uploadRecipeImg()");
-		System.out.println(dto.toString());
-=======
 	@RequestMapping(value = "/getPhoto", method = {RequestMethod.GET})
 	public List<PhotoDto> getPhoto(int docsSeq, String photoCategory) {
 		System.out.println("RecipeController getPhoto()");
 		PhotoDto photoDto = new PhotoDto();
->>>>>>> main
 		
-		boolean b = recipeService.uploadRecipeImg(dto);
-		if(b) {
-			return "YES";
-		}
-		return "NO";
+		photoDto.setPhotoSeq(0);
+		photoDto.setDocsSeq(docsSeq);
+		photoDto.setPhotoCategory(photoCategory);
+
+		return recipeService.getPhoto(photoDto);
 	}
 	
 	
-<<<<<<< HEAD
-//	@RequestMapping(value = "/getPhoto", method = {RequestMethod.GET})
-//	public List<PhotoDto> getPhoto(int docsSeq, String photoCategory) {
-//		PhotoDto photoDto = new PhotoDto();
-//		
-//		photoDto.setPhotoSeq(0);
-//		photoDto.setDocsSeq(docsSeq);
-//		photoDto.setPhotoCategory(photoCategory);
-//
-//		return recipeService.getPhoto(photoDto);
-//	}
-//	
-=======
 	@RequestMapping(value = "/getThumbnailPhoto", method = {RequestMethod.GET})
 	public PhotoDto getThumbnailPhoto(int docsSeq, String photoCategory) {
 		System.out.println("RecipeController getThumbnailPhoto()");
@@ -197,7 +180,6 @@ public class RecipeController {
 		return recipeService.searchRecipe(search, big, small);
 	}
 	
->>>>>>> main
 	
 	@RequestMapping(value = "/test", method = {RequestMethod.GET})
 	public List<Integer> test(int docs_seq, String photo_category) {
@@ -212,9 +194,5 @@ public class RecipeController {
 		return dtos;
 		//return recipeService.getPhoto(photoDto);
 	}
-<<<<<<< HEAD
-}
-=======
 }
 
->>>>>>> main

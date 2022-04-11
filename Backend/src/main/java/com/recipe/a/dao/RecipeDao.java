@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import com.recipe.a.dto.PhotoDto;
 import com.recipe.a.dto.RecipeDto;
 
 @Mapper
@@ -16,15 +15,9 @@ public interface RecipeDao {
 
 	public int countRecipe();
 
-	public int uploadRecipe(RecipeDto dto);
-	public int uploadRecipeImg(PhotoDto dto);
-	
-	
+	public int insertRecipe(RecipeDto newRecipe);
+
 	public RecipeDto getOneRecipe(int recipeSeq);
-<<<<<<< HEAD
-	
-	
-=======
 
 	public int updateRecipeRating(int docsSeq);
 
@@ -35,5 +28,4 @@ public interface RecipeDao {
 	public int oneUpReadcount(int recipeSeq);
 
 	public List<RecipeDto> searchRecipe(@Param("search")String search, @Param("big")ArrayList<String> big, @Param("small")ArrayList<String> small);
->>>>>>> main
 }

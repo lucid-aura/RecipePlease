@@ -54,28 +54,6 @@ export default function RecipeHomeScreen(){
         permission()
     }, [])
     return(
-<<<<<<< HEAD
-        <View style={styles.container}>
-
-            <Text>Home Screen</Text>
-            <Button title="레시피로 이동" onPress={()=>navigation.navigate('RecipeDetail')}></Button>
-            <SliderBox
-                images={testImage}
-                sliderBoxHeight={200}
-                parentWidth={200}
-                onCurrentImagePressed={index => 
-                    navigation.navigate('RecipeDetail',{
-                        url: testImage[index]
-                    })}
-                dotColor="#FFEE58"
-                inactiveDotColor="#90A4AE"
-                paginationBoxVerticalPadding={20}
-                autoplay
-                circleLoop
-            />
-
-        </View>
-=======
         <SafeAreaView style={styles.container}>
             <NavigationHeader title="홈" 
                 Left= {() => <Icon name="arrow-left-bold" size={30} onPress={goBack} />}
@@ -106,7 +84,6 @@ export default function RecipeHomeScreen(){
             </ScrollView>
         </SafeAreaView>
         
->>>>>>> main
     )
 }
 

@@ -43,15 +43,15 @@ public class RecipeService {
 		return recipeDao.countRecipe();
 	}
 
-	public int uploadRecipe(RecipeDto dto) {
-		return recipeDao.uploadRecipe(dto);
+	public int insertRecipe(RecipeDto newRecipe) {
+		
+		return recipeDao.insertRecipe(newRecipe);
 	}
-<<<<<<< HEAD
 	
-	public boolean uploadRecipeImg(PhotoDto dto) {
-		int p = recipeDao.uploadRecipeImg(dto);
+	public boolean uploadRecipeImg(PhotoDto photoDto) {
+		int p = photoDao.uploadRecipeImg(photoDto);
 		return p>0?true:false;
-=======
+	}
 
 	public List<PhotoDto> getPhoto(PhotoDto photoDto) {
 		List<PhotoDto> dtos = photoDao.getPhoto(photoDto);
@@ -60,20 +60,8 @@ public class RecipeService {
 		return dtos;
 		// return photoDao.getPhoto(photoDto);
 
->>>>>>> main
 	}
 
-	
-//	public List<PhotoDto> getPhoto(PhotoDto photoDto) {
-//		List<PhotoDto> dtos = photoDao.getPhoto(photoDto);
-//		
-//		System.out.println("PhotoDto photoDto - " + dtos.size());
-//		return dtos;
-//		// return photoDao.getPhoto(photoDto);
-//		
-//	}
-	
-	
 	public int countPhoto() {
 		return photoDao.countPhoto();
 	}

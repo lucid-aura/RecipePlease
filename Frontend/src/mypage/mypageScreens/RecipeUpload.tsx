@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import axios from "axios";
 import Color from "color";
 import React, { Component, useState } from "react";
@@ -8,13 +7,19 @@ import RNPickerSelect from 'react-native-picker-select'
 import Icon from 'react-native-vector-icons/Ionicons'
 import TagInput from 'react-native-tags-input';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import AsyncStorage from "@react-native-community/async-storage";
+import * as L from 'c:/reactSamples/Frontend4/src/store/login/index'
+import { AppState } from "c:/reactSamples/Frontend4/src/store/index";
 import { white } from "react-native-paper/lib/typescript/styles/colors";
 import DetailList from "./DetailList";
+import { useSelector } from "react-redux";
 
 /* npm install @react-native-picker/picker */
 
 export default function UploadScreen() {
+
+    // 멤버아이디
+    const log = useSelector<AppState, L.State>((state) => state.login)
+    const { loggedIn, loggedUser } = log
 
     // 카테고리
     const [recipeBigCategory, setPickerSelect] = useState('')
@@ -25,19 +30,11 @@ export default function UploadScreen() {
     // 사진 url
     const [titleimgurl, setTitleimgurl] = useState("")
 
-    // 사진 분류
-    const [titleimg, setTitleimg] = useState("")
-    const [contentimg1, setContentimg1] = useState("")
-    const [contentimg2, setContentimg2] = useState("")
-    const [contentimg3, setContentimg3] = useState("")
-    const [contentimg4, setContentimg4] = useState("")
 
     // 제목, 내용, 가격
     const [recipeTitle, setTitle] = useState('')
     const [recipeContent, setContent] = useState('')
     const [recipePrice, setPrice] = useState('')
-    const [RECIPERATING, setRating] = useState('')
-
 
     // 태그
     const [tags, setTags] = useState({
@@ -48,10 +45,21 @@ export default function UploadScreen() {
     const [tagsText, setTagsText] = useState("")
 
 
-    // 레시피 순서 추가
+    // 레시피 내용 순서 추가
+    const [tests, setTests] = useState([
+        {
+            imglist: "",
+            imgText: ""
+        }
+    ])
 
     const [countList, setCountList] = useState([0])
-    const [list, setList] = useState([<DetailList />])
+    const [imglist, setImglist] = useState("")
+    const [imgText, setImgText] = useState("")
+
+    const [list, setList] = useState([<DetailList setData={setImglist} setData2={setTests} setData3={tests} setData4={0} setData5={setImgText} />])
+
+    console.log("RecipeUpload : " + imglist)
 
     const onAddDetailDiv = () => {
         let countArr = [...countList]
@@ -60,9 +68,25 @@ export default function UploadScreen() {
         countArr.push(counter)	// index 사용 X
         // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
         setCountList(countArr)
-        list.push(<DetailList />)
-        console.log("list : " + list[0])
+        let num = list
+        console.log("tests: " + JSON.stringify(tests[counter - 1]))
+        tests.push({ imglist: "", imgText: "" })
+        num.push(<DetailList setData={setImglist} setData2={setTests} setData3={tests} setData4={counter} setData5={setImgText} />)
+        setList(num)
+        //onCreate()
     }
+
+    // const onCreate = () => {
+    //     console.log("onCreate 테스트 : " + imglist)
+    //     console.log("onCreate 테스트 : " + imgText)
+    //     const test = {
+    //         imglist,
+    //         imgText
+    //     }
+    //     setTests([...tests, test])
+    // }
+
+
 
     // const addImage = () => {
     //     launchCamera({ saveToPhotos: true }, response => {
@@ -70,35 +94,37 @@ export default function UploadScreen() {
     //     })
     // }
 
+
+    // 썸네일 이미지 등록
     const titleimgshow = () => {
         launchImageLibrary({}, response => {
             setTitleimgurl(response.assets[0].uri)
-            setTitleimg("Thumbnail")
         })
     }
 
 
-
+    // 업로드 버튼
     const RecipeUploadBtn = () => {
+        // console.log("memberId : " + loggedUser.memberId)
+        // console.log("제목 : " + recipeTitle)
+        // console.log("내용 : " + recipeContent)
+        // console.log("대분류 : " + recipeBigCategory)
+        // console.log("소분류 : " + recipeSmallCategory)
+        // console.log("굿즈태그 : " + tags.tagsArray)
+        // console.log("레시피가격 : " + recipePrice)
+        // console.log("이미지 경로 : " + titleimgurl)
 
-        console.log("제목 : " + recipeTitle)
-        console.log("내용 : " + recipeContent)
-        console.log("대분류 : " + recipeBigCategory)
-        console.log("소분류 : " + recipeSmallCategory)
-        console.log("굿즈태그 : " + tags.tagsArray)
-        console.log("레시피가격 : " + recipePrice)
-        console.log("이미지 경로 : " + titleimgurl)
-
-
+        // 레시피 업로드
         const uploadRecipe = () => {
-
-            axios.get("http://192.168.0.14:3000/uploadRecipe",
+            axios.get("http://192.168.0.14:3000/insertRecipe",
                 {
                     params: {
+                        memberId: loggedUser.memberId,
                         recipeTitle: recipeTitle,
                         recipeContent: recipeContent,
                         recipeBigCategory: recipeBigCategory,
                         recipeSmallCategory: recipeSmallCategory,
+                        recipeVideoUrl: "test",
                         recipeGoodsTag: String(tags.tagsArray),
                         recipePrice: recipePrice
                     }
@@ -108,7 +134,9 @@ export default function UploadScreen() {
                     if (response.data != null && response.data != "") {
                         Alert.alert("레시피 추가되었습니다..")
                         setSeq(response.data)
-                        uploadRecipeImg(response.data)
+                        uploadRecipeThumbnailImg(response.data)
+                        uploadRecipeContentImg(response.data)
+
                     }
 
                 }).catch(function () {
@@ -116,34 +144,56 @@ export default function UploadScreen() {
                 })
         }
 
-        const uploadRecipeImg = (temp: any) => {
-            console.log(titleimg);
-            console.log(contentimg1);
-            console.log(contentimg2);
-            console.log(contentimg3);
-            console.log(contentimg4);
-
+        // 썸네일 이미지 업로드
+        const uploadRecipeThumbnailImg = (temp: any) => {
             axios.get("http://192.168.0.14:3000/uploadRecipeImg",
                 {
                     params: {
-                        photoSeq: temp,
-                        photoTitle: titleimg,
-                        photoContent: contentimg1 + "/" + contentimg2 + "/" + contentimg3 + "/" + contentimg4,
+                        docsSeq: temp,
+                        photoTitle: "thumbnail",
+                        photoContent: recipeTitle,
+                        photoCategory: "recipe",
                         photoUrl: titleimgurl
+
                     }
                 }).then(function (response) {
                     console.log(response.data)
 
                     if (response.data == "YES") {
-                        Alert.alert("이미지 추가되었습니다..")
+                        //Alert.alert("이미지 추가되었습니다..")
                     }
                 }).catch(function () {
-                    Alert.alert("이미지 추가되지 않았습니다.")
+                    //Alert.alert("이미지 추가되지 않았습니다.")
                 })
         }
 
-        uploadRecipe()
+        // 레시피 순서 이미지 업로드
+        const uploadRecipeContentImg = (temp: any) => {
+            for (let i = 0; i < tests.length; i++) {
+                axios.get("http://192.168.0.14:3000/uploadRecipeImg",
+                    {
+                        params: {
 
+                            docsSeq: temp,
+                            photoTitle: "cookOrder",
+                            photoContent: tests[i].imgText,
+                            photoCategory: "recipe",
+                            photoUrl: tests[i].imglist,
+
+                        }
+
+                    }).then(function (response) {
+                        console.log(response.data)
+
+                        if (response.data == "YES") {
+                            //Alert.alert("이미지 추가되었습니다..")
+                        }
+                    }).catch(function () {
+                        //Alert.alert("이미지 추가되지 않았습니다.")
+                    })
+            }
+        }
+        uploadRecipe()
     }
 
     const values = [
@@ -156,14 +206,7 @@ export default function UploadScreen() {
         { label: '야식용', value: '야식용' }
     ]
 
-
-=======
-import React from "react";
-import { SafeAreaView, Text, View } from "react-native";
->>>>>>> main
-
     return (
-<<<<<<< HEAD
         <View>
             <ScrollView style={styles.container}>
                 <View style={styles.frame}>
@@ -185,6 +228,7 @@ import { SafeAreaView, Text, View } from "react-native";
                 <View style={styles.recipeframe}>
                     <Text style={styles.recipytext}>레시피내용</Text>
                     <Button style={styles.addbutton} onPress={onAddDetailDiv}> 추가</Button>
+
                 </View>
                 <View style={styles.contentframe}>
                     <TextInput style={styles.textinput} value={recipeContent} onChangeText={(recipeContent) => setContent(recipeContent)} placeholder="1) 소고기는 기름기를 떼어내고 적당한 크기로 잘라주세요.&#10;2) 준비된 양념으로 먼저 고기를 조물조물 재워 둡니다.&#10;3) 그 사이 양파와 버섯, 대파도 썰어서 준비하세요.&#10;4) 고기가 반쯤 익어갈 때 양파를 함께 볶아요." multiline={true}></TextInput>
@@ -192,10 +236,8 @@ import { SafeAreaView, Text, View } from "react-native";
                 <View>
                     {list.map((item: any, i: any) => (
                         item
-
                     ))}
                 </View>
-
 
                 {/* <DetailList countList={countList} /> */}
 
@@ -264,11 +306,6 @@ import { SafeAreaView, Text, View } from "react-native";
             </ScrollView>
 
         </View>
-=======
-        <SafeAreaView>
-            <Text>레시피 업로드하기</Text>
-        </SafeAreaView>
->>>>>>> main
     )
 }
 
@@ -276,7 +313,7 @@ import { SafeAreaView, Text, View } from "react-native";
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: 752,
+        height: 700,
     },
     recipeframe: {
         width: '100%',
@@ -361,7 +398,8 @@ const styles = StyleSheet.create({
     },
     btn: {
         marginTop: 20,
-        marginVertical: 8
+        marginVertical: 8,
+        height: 400
     },
     textInput: {
         height: 30,

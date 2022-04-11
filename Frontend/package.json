@@ -10,48 +10,33 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@react-native-community/async-storage": "^1.12.1",
-    "@react-native-community/cameraroll": "^4.1.2",
-=======
     "@react-native-async-storage/async-storage": "^1.16.3",
     "@react-native-community/blur": "^3.6.0",
->>>>>>> main
     "@react-native-picker/picker": "^2.4.0",
     "@react-native-seoul/kakao-login": "^4.0.0",
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/drawer": "^6.3.3",
-    "@react-navigation/native": "^6.0.8",
+    "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.5.0",
+    "@react-navigation/stack": "^6.1.1",
     "@types/color": "^3.0.3",
     "axios": "^0.26.1",
     "color": "^4.2.1",
-    "fbjs": "^3.0.4",
+    "iamport-react-native": "^2.0.0-rc.2",
     "react": "17.0.2",
     "react-native": "0.67.3",
-<<<<<<< HEAD
-    "react-native-camera": "^4.2.1",
-    "react-native-gesture-handler": "^2.3.2",
-    "react-native-image-picker": "^4.7.3",
-    "react-native-image-slider-box": "^1.1.20",
-=======
     "react-native-daum-postcode": "^1.0.11",
     "react-native-flexi-radio-button": "^0.2.2",
     "react-native-fs": "^2.19.0",
     "react-native-gesture-handler": "^2.1.1",
+    "react-native-image-picker": "^4.7.3",
     "react-native-modal": "^13.0.1",
->>>>>>> main
     "react-native-paper": "^4.11.2",
     "react-native-picker-select": "^8.0.4",
     "react-native-ratings": "^8.1.0",
     "react-native-reanimated": "^2.5.0",
     "react-native-safe-area-context": "^4.2.1",
     "react-native-screens": "^3.13.1",
-<<<<<<< HEAD
-    "react-native-tags-input": "^1.0.10",
-    "react-native-vector-icons": "^9.1.0",
-    "watcher": "^1.2.0"
-=======
     "react-native-table-component": "^1.2.2",
     "react-native-tags-input": "^1.0.10",
     "react-native-vector-icons": "^9.1.0",
@@ -61,7 +46,6 @@
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
     "watcher": "^1.1.0"
->>>>>>> main
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
