@@ -31,6 +31,8 @@ VALUES('PAYMENTLISTSEQ', 0);
 INSERT INTO sequences 
 VALUES('RATINGSEQ', 0);
 
+INSERT INTO sequences
+VALUES('COINTRANSACTIONSEQ', 0);
 
 select NEXTVAL('LIKESEQ') as LIKESEQ 
 from dual;
@@ -53,9 +55,12 @@ from dual;
 select NEXTVAL('RATINGSEQ') as RATINGSEQ 
 from dual;
 
+select NEXTVAL('COINTRANSACTIONSEQ') as COINTRANSACTIONSEQ 
+from dual;
+
 select * from SEQUENCES;
 
-delete from SEQUENCES where name='LIKESEQ';
+delete from SEQUENCES where name='COINTRANSACTIONSEQ';
 DELETE FROM SEQUENCES;
 
 commit;

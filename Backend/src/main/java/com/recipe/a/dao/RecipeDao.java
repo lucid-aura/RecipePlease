@@ -15,8 +15,15 @@ public interface RecipeDao {
 
 	public int countRecipe();
 
-	public void insertRecipe(RecipeDto newRecipe);
+<<<<<<< Updated upstream
+	public int insertRecipe(RecipeDto newRecipe);
 
+=======
+	public int uploadRecipe(RecipeDto dto);
+	
+	
+	
+>>>>>>> Stashed changes
 	public RecipeDto getOneRecipe(int recipeSeq);
 
 	public int updateRecipeRating(int docsSeq);

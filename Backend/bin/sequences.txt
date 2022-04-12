@@ -11,50 +11,51 @@ select * from recipe;
 --END
 
 INSERT INTO sequences 
-VALUES('LIKE_SEQ', 0);
+VALUES('LIKESEQ', 0);
 
 INSERT INTO sequences 
-VALUES('RECIPE_SEQ', 0);
+VALUES('RECIPESEQ', 0);
 
 INSERT INTO sequences 
-VALUES('PHOTO_SEQ', 0);
+VALUES('PHOTOSEQ', 0);
 
 INSERT INTO sequences 
-VALUES('PAYMENT_SEQ', 0);
+VALUES('PAYMENTSEQ', 0);
 
 INSERT INTO sequences 
-VALUES('GOODS_SEQ', 0);
+VALUES('GOODSSEQ', 0);
 
 INSERT INTO sequences 
-VALUES('PAYMENT_LIST_SEQ', 0);
+VALUES('PAYMENTLISTSEQ', 0);
 
 INSERT INTO sequences 
-VALUES('RATING_SEQ', 0);
+VALUES('RATINGSEQ', 0);
 
 
-select NEXTVAL('LIKE_SEQ') as LIKE_SEQ 
+select NEXTVAL('LIKESEQ') as LIKESEQ 
 from dual;
 
-select NEXTVAL('RECIPE_SEQ') as RECIPE_SEQ 
+select NEXTVAL('RECIPESEQ') as RECIPESEQ 
 from dual;
 
-select NEXTVAL('PHOTO_SEQ') as PHOTO_SEQ 
+select NEXTVAL('PHOTOSEQ') as PHOTOSEQ 
 from dual;
 
-select NEXTVAL('PAYMENT_SEQ') as PAYMENT_SEQ 
+select NEXTVAL('PAYMENTSEQ') as PAYMENTSEQ 
 from dual;
 
-select NEXTVAL('GOODS_SEQ') as GOODS_SEQ 
+select NEXTVAL('GOODSSEQ') as GOODSSEQ 
 from dual;
 
-select NEXTVAL('PAYMENT_LIST_SEQ') as PAYMENT_LIST_SEQ 
+select NEXTVAL('PAYMENTLISTSEQ') as PAYMENTLISTSEQ 
 from dual;
 
-select NEXTVAL('RATING_SEQ') as RATING_SEQ 
+select NEXTVAL('RATINGSEQ') as RATINGSEQ 
 from dual;
 
 select * from SEQUENCES;
 
-delete from SEQUENCES where name='LIKE_SEQ';
+delete from SEQUENCES where name='LIKESEQ';
+DELETE FROM SEQUENCES;
 
 commit;
