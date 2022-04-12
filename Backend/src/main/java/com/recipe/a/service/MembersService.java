@@ -72,10 +72,8 @@ public class MembersService {
 	public MembersDto login(String memberId, String memberPwd) {
 		
 		MembersDto salt = dao.getSalt(memberId, memberPwd);
-		System.out.println("memberService getSalt: " + salt.getSalt()+ " memberPwd: " + memberPwd);
 		
 		String encodedPassword = bcr.hashpw(memberPwd, salt.getSalt());
-		System.out.println("encodedPassword: " + encodedPassword);
 		
 		return dao.login(encodedPassword);
 	}
@@ -141,6 +139,7 @@ public class MembersService {
 		return result;
 	}
 	
+	// 내가 업로드한 레시피 불러오기
 	public List<RecipeDto> myUploadedRecipe(String memberId) {
 		System.out.println("myUploadedRecipe service");
 		

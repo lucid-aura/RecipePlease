@@ -1,7 +1,7 @@
 import { DrawerContentComponentProps, DrawerContentScrollView } from "@react-navigation/drawer"
 import { DrawerActions } from "@react-navigation/native"
 import React, { FC, useCallback } from "react"
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { Colors } from "react-native-paper"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import { useDispatch, useSelector } from "react-redux"
@@ -16,32 +16,32 @@ const DrawerSettingLogin: FC<DrawerContentComponentProps> = (props) => {
     const log = useSelector<AppState, L.State>((state) => state.login)
     const {loggedIn, loggedUser} = log
     const dispatch = useDispatch()
-    const goMyFavoriteRecipe = () => {
+    const goMyFavoriteRecipe = useCallback(() => {
         props.navigation.navigate("MyFavoriteRecipe")
-    }
+    },[])
     
-    const goMyInfo = () => {
+    const goMyInfo = useCallback(() => {
         props.navigation.navigate("MyInfo")
-    }
-    const goMyUploadedRecipe =() => {
+    },[])
+    const goMyUploadedRecipe = useCallback(() => {
         props.navigation.navigate("MyUploadedRecipe")
-    }
-    const goHome = () => {
+    },[])
+    const goHome = useCallback(() => {
         props.navigation.navigate("HomeScreen")
-    }
-    const goRecipe = () => {
+    },[])
+    const goRecipe = useCallback(() => {
         props.navigation.navigate("RecipeHome")
-    }
-    const goGoods = () => {
+    },[])
+    const goGoods = useCallback(() => {
         props.navigation.navigate("Home")
-    }
-    const goMyPage= () => {
+    },[])
+    const goMyPage= useCallback(() => {
         props.navigation.navigate("MyPage")
-    }
-    const goLogin = () => {
+    },[])
+    const goLogin = useCallback(() => {
         props.navigation.navigate("Login")
         Drawerclose()
-    }
+    },[])
 
     return (
         <DrawerContentScrollView {...props} contentContainerStyle={[styles.container]}>

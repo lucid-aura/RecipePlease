@@ -13,5 +13,4 @@ export const getMyFavoriteRecipeDatas = (memberId:string):Promise<MyFavoriteReci
                 console.log(err)
             })
             .catch(reject)
-
 })

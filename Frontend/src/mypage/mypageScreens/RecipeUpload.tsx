@@ -7,8 +7,8 @@ import RNPickerSelect from 'react-native-picker-select'
 import Icon from 'react-native-vector-icons/Ionicons'
 import TagInput from 'react-native-tags-input';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import * as L from 'c:/reactSamples/Frontend4/src/store/login/index'
-import { AppState } from "c:/reactSamples/Frontend4/src/store/index";
+import * as L from '../../store/login'
+import { AppState } from "../../store";
 import { white } from "react-native-paper/lib/typescript/styles/colors";
 import DetailList from "./DetailList";
 import { useSelector } from "react-redux";

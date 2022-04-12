@@ -29,6 +29,8 @@ public class RecipeDto {
 		this.recipePrice = 0;
 		this.recipeRating = 0.0F;
 		this.recipeReadcount = 0;
+		this.recipeCapacity = 0;
+		this.recipeThumbnail = "";
 	}
 
 	public RecipeDto(String memberId, String recipeTitle, String recipeContent, String recipeBigCategory,

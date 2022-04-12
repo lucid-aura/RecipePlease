@@ -1,10 +1,9 @@
 import axios from "axios"
 import { address } from "../../project.config"
-import { myUploadedRecipeProps } from "./myUploadedRecipeProps"
+import { MyUploadedRecipeProps } from "./MyUploadedRecipeProps"
 
-
-export const getMyUploadedRecipeDatas = (memberId:string):Promise<myUploadedRecipeProps[]> => new Promise((resolve, reject) => {
-    console.log('getMyFavoriteRecipeDatas')
+export const getMyUploadedRecipeDatas = (memberId:string):Promise<MyUploadedRecipeProps[]> => new Promise((resolve, reject) => {
+    console.log('getMyUploadedRecipeDatas')
     axios.get(address+"myUploadedRecipe", { params: { memberId: memberId } })
             .then((response) => {
                 resolve(response.data)
@@ -14,5 +13,4 @@ export const getMyUploadedRecipeDatas = (memberId:string):Promise<myUploadedReci
                 console.log(err)
             })
             .catch(reject)
-
 })

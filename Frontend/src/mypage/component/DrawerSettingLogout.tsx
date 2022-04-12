@@ -10,32 +10,32 @@ const DrawerSettingLogout: FC<DrawerContentComponentProps> = (props) => {
     const {navigation} = props
     const Drawerclose = useCallback(() => navigation.dispatch(DrawerActions.closeDrawer()), [])
 
-    const goMyFavoriteRecipe = () => {
+    const goMyFavoriteRecipe = useCallback(() => {
         props.navigation.navigate("MyFavoriteRecipe")
-    }
+    },[])
     
-    const goMyInfo = () => {
+    const goMyInfo = useCallback(() => {
         props.navigation.navigate("MyInfo")
-    }
-    const goMyUploadedRecipe =() => {
+    },[])
+    const goMyUploadedRecipe = useCallback(() => {
         props.navigation.navigate("MyUploadedRecipe")
-    }
-    const goHome = () => {
+    },[])
+    const goHome = useCallback(() => {
         props.navigation.navigate("HomeScreen")
-    }
-    const goRecipe = () => {
+    },[])
+    const goRecipe = useCallback(() => {
         props.navigation.navigate("RecipeHome")
-    }
-    const goGoods = () => {
+    },[])
+    const goGoods = useCallback(() => {
         props.navigation.navigate("Home")
-    }
-    const goMyPage= () => {
+    },[])
+    const goMyPage= useCallback(() => {
         props.navigation.navigate("MyPage")
-    }
-    const goLogin = () => {
+    },[])
+    const goLogin = useCallback(() => {
         props.navigation.navigate("Login")
         Drawerclose()
-    }
+    },[])
 
     return (
         <DrawerContentScrollView {...props} contentContainerStyle={[styles.container]}>

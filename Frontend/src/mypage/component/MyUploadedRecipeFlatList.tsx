@@ -1,20 +1,37 @@
-import React, { useState } from "react";
-import type { FC } from 'react' 
-import { MyFavoriteRecipeProps } from "../data";
-import { Image, StyleSheet, Text, View } from "react-native";
+import React, { ReactNode, useMemo, useState } from "react";
+import type { FC } from 'react'
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Colors } from "react-native-paper";
 import { Rating } from "react-native-ratings";
+import { MyUploadedRecipeProps } from "../data/MyUploadedRecipeProps";
+import { useNavigation } from "@react-navigation/native";
 
-export type MyFavoriteRecipeDatas = {
-    datas:MyFavoriteRecipeProps
+export type MyUploadedRecipeDatas = {
+    datas:MyUploadedRecipeProps
 }
 
-const MyFavoriteFlatlist:FC<MyFavoriteRecipeDatas> = ({datas: initialDatas}) => {
-    const [myRecipe, setMyRecipe] = useState<MyFavoriteRecipeProps>(initialDatas)
+const MyUploadedRecipeFlatList:FC<MyUploadedRecipeDatas> = ({datas: initialDatas}:any) => {
+    const [myRecipe, setMyRecipe] = useState<MyUploadedRecipeProps>(initialDatas)
     
+    const ratingCount = useMemo(() => {
+        Object.keys(myRecipe.recipeRating).length
+    },
+    [Object.keys(myRecipe.recipeRating).length] 
+    )
+
+    const navigation = useNavigation()
+    const goRecipeDetail = () => {
+        navigation.navigate('RecipeNavigator', {
+            screen: 'RecipeDetail', 
+            params:{
+                seq: myRecipe.recipeSeq,
+                category: 'recipe'
+            }})
+    }
+
     return (
         
-        <View style={[styles.container]}>
+        <Pressable style={[styles.container]} onPress={goRecipeDetail} >
             <View style={[styles.leftView]}>
                 <Image style={{width:190, height:160}} source={require("./foodPicture.jpg")} />
             </View>
@@ -32,28 +49,27 @@ const MyFavoriteFlatlist:FC<MyFavoriteRecipeDatas> = ({datas: initialDatas}) => 
                         type='star'
                         ratingCount={5}
                         imageSize={20}
-                        startingValue={myRecipe.recipeRatingList}
+                        startingValue={myRecipe.recipeRating}
                         minValue={1}
                         fractions={20}
                         readonly={true}
                         style={{alignItems:"baseline", marginTop:10}}
-                        
                     />
                     <View style={[styles.ratingCount]}>
-                        <Text style={{fontSize:18, color:Colors.grey500}}>({myRecipe.recipeRatingCountList})</Text>
+                        <Text style={{fontSize:18, color:Colors.grey500}}>({ratingCount})</Text>
                     </View>
                     <View style={[styles.readCount]}>
-                        <Text style={{fontSize:18, color:Colors.grey500}}>조회수 {myRecipe.recipeRatingList}회</Text>
+                        <Text style={{fontSize:18, color:Colors.grey500}}>조회수 {myRecipe.recipeReadcount}회</Text>
                     </View>
                     
                 </View>
             </View>
             
-        </View>
+        </Pressable>
     ) 
 }
 
-export default MyFavoriteFlatlist
+export default MyUploadedRecipeFlatList
 
 const styles = StyleSheet.create ({
     container: {
