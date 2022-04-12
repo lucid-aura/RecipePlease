@@ -36,5 +36,7 @@ public interface RecipeDao {
 	public int insertRecipe(RecipeDto newRecipe);
 	
 	public RecipeDto getRecipeInfo(int recipeSeq);
+	// 내가 업로드한 레시피
+	public RecipeDto myUploadedRecipe(int reicpeSeq);
 	
 }
