@@ -40,9 +40,9 @@ export const MyFavoriteRecipe = () => {
 
     return (
         <SafeAreaView style={[styles.container]}>
-            <NavigationHeader title="내가 즐겨보는 레시피" viewStyle={{borderBottomWidth:1}}
-                Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
-                Right= {() => <Icon name="cart-heart" size={30} />}
+            <NavigationHeader title="내가 즐겨보는 레시피" viewStyle={{}}
+                Left= {() => <Icon name="text-account" size={40} onPress={drawerOpen} />}
+                Right= {() => <Icon name="cart-heart" size={40} />}
                 />
             <View>
                 <FlatList

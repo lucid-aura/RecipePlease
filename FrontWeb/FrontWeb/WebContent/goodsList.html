@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Chef</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/7a52739f2b.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav id="navBar" class="navbar-white">
+        <a href="index.html"><img src="images/logo2.png" class="logo"></a> <!--이거 나중에 jsp 작업할때 수정 하세요-->
+        <ul class="nav-links">
+            <li><a href="#" class="simple">간편식</a></li>
+            <li><a href="#">야식</a></li>
+            <li><a href="listing.html">손님접대용</a></li> <!--임의 설정입니다. 난주 jsp 작업할때 수정 하세요-->
+        </ul>
+        <a href="#" class="register-btn">회원 가입하기</a>
+        <i class="fas fa-bars" onclick="togglebtn()"></i>
+    </nav>
+
+    <div class="container">
+
+        <div class="small-container single-product">
+            <div class="row">
+                <div class="col-2">
+                    <img src="images/kichen1.jpg" width="100%" id="productImg">
+
+                    <div class="small-img-row">
+                        <div class="small-img-col">
+                            <img src="images/kichen1.jpg" width="100%" class="smallImg">
+                        </div>
+                        <div class="small-img-col">
+                            <img src="images/kichen2.jpg" width="100%" class="smallImg">
+                        </div>
+                        <div class="small-img-col">
+                            <img src="images/kichen3.jpg" width="100%" class="smallImg">
+                        </div>
+                        <div class="small-img-col">
+                            <img src="images/kichen4.jpg" width="100%" class="smallImg">
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-2">
+                    <p>주방 도구 / 도마</p>
+                    <h1>나무가 아주 좋습니다.</h1>
+                    <h4>35,000원</h4>
+                    <select>
+                        <option>크기를 고르세요</option>
+                        <option>대</option>
+                        <option>중</option>
+                        <option>소</option>
+                    </select>
+                    <input type="number" value="1">
+                    <a href="" class="btn">카트에 추가하기</a>
+                    <br>
+                    <h3>Product Details <i class="fa-solid fa-indent"></i></h3>
+                    <p>이 도마는 친환경적 제작으로 호르몬발생이 적으며 더군다나 멸균처리로 된 나무로 가공되어 참 좋습니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="small-container">
+            <div class="row row-2">
+                <h2>품목 등급</h2>
+                <p>더 필요한거 있으신가요?</p>
+            </div>
+        </div>
+        
+
+        
+
+        <div class="footer">
+            <a href ="https://facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href ="https://youtube.com/"><i class="fa-brands fa-youtube"></i></a>
+            <a href ="https://google.com/"><i class="fa-brands fa-google"></i></a>
+            <a href ="https://linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href ="https://instagram.com/"><i class="fa-brands fa-instagram"></i></a>
+            <hr>
+            <p> Copyright By 2022, 레시피를 부탁해</p>
+        </div>
+
+    </div>
+
+    
+
+    <script>
+        let navBar = document.getElementById("navBar")
+
+        function togglebtn(){
+            navBar.classList.toggle("hidemenu");
+        }
+    </script>
+
+    <!-- js for Product gallery-->
+
+    <script>
+        let productImg = document.getElementById("productImg")
+        let smallImg = document.getElementsByClassName("smallImg")
+
+        smallImg[0].onclick = function()
+        {
+            productImg.src = smallImg[0].src;
+        }
+
+        smallImg[1].onclick = function()
+        {
+            productImg.src = smallImg[1].src;
+        }
+
+        smallImg[2].onclick = function()
+        {
+            productImg.src = smallImg[2].src;
+        }
+
+        smallImg[3].onclick = function()
+        {
+            productImg.src = smallImg[3].src;
+        }
+
+    </script>
+</body>
+</html>

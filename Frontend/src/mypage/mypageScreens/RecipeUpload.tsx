@@ -12,11 +12,13 @@ import { AppState } from "c:/reactSamples/Frontend4/src/store/index";
 import { white } from "react-native-paper/lib/typescript/styles/colors";
 import DetailList from "./DetailList";
 import { useSelector } from "react-redux";
-
+import config from "../../project.config"
+import { useNavigation } from "@react-navigation/native";
+import RecipeRecommendList from "../../recipe/RecipeRecommendList";
 /* npm install @react-native-picker/picker */
 
 export default function UploadScreen() {
-
+    const navigation = useNavigation()
     // 멤버아이디
     const log = useSelector<AppState, L.State>((state) => state.login)
     const { loggedIn, loggedUser } = log
@@ -116,7 +118,7 @@ export default function UploadScreen() {
 
         // 레시피 업로드
         const uploadRecipe = () => {
-            axios.get("http://192.168.0.14:3000/insertRecipe",
+            axios.get(config.address + "insertRecipe",
                 {
                     params: {
                         memberId: loggedUser.memberId,
@@ -136,7 +138,13 @@ export default function UploadScreen() {
                         setSeq(response.data)
                         uploadRecipeThumbnailImg(response.data)
                         uploadRecipeContentImg(response.data)
-
+                        navigation.navigate('RecipeNavigator' as never,{
+                            screen: 'RecipeDetail',
+                            params: {
+                                seq:  response.data, 
+                                category: 'recipe'
+                            }
+                        } as never)
                     }
 
                 }).catch(function () {
@@ -146,7 +154,7 @@ export default function UploadScreen() {
 
         // 썸네일 이미지 업로드
         const uploadRecipeThumbnailImg = (temp: any) => {
-            axios.get("http://192.168.0.14:3000/uploadRecipeImg",
+            axios.get(config.address + "uploadRecipeImg",
                 {
                     params: {
                         docsSeq: temp,
@@ -170,7 +178,7 @@ export default function UploadScreen() {
         // 레시피 순서 이미지 업로드
         const uploadRecipeContentImg = (temp: any) => {
             for (let i = 0; i < tests.length; i++) {
-                axios.get("http://192.168.0.14:3000/uploadRecipeImg",
+                axios.get(config.address + "uploadRecipeImg",
                     {
                         params: {
 
@@ -197,13 +205,13 @@ export default function UploadScreen() {
     }
 
     const values = [
-        { label: '축산물', value: '축산물' },
-        { label: '해산물', value: '해산물' },
+        { label: '축산물', value: 'livestock' },
+        { label: '해산물', value: 'seafood' },
     ]
     const values2 = [
-        { label: '1인용', value: '1인용' },
-        { label: '접대용', value: '접대용' },
-        { label: '야식용', value: '야식용' }
+        { label: '1인용', value: 'personal' },
+        { label: '접대용', value: 'entertain' },
+        { label: '야식용', value: 'nightmeal' }
     ]
 
     return (
