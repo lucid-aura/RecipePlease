@@ -27,6 +27,7 @@ export const MyFavoriteRecipe = () => {
                     console.log("hook 레시피: "+JSON.stringify(myData))
                 })
     }
+
    useEffect(() => {
         datas()
     }, [myData.length]) 

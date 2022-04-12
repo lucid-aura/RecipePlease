@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Alert, Pressable, StyleSheet, TextInput, View } from "react-native";
 import Postcode from "react-native-daum-postcode";
 import { Text } from "react-native-paper";
@@ -41,7 +41,7 @@ const MyInfoAddr = () => {
                 Alert.alert("수정이 되지 않았습니다. 다시 입력해주세요.")
             }
         }).catch((err:Error) => console.log(err))
-    }
+    } 
     return (
         
         <View 

@@ -1,5 +1,5 @@
 import { DrawerActions, useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Alert, Modal, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
 import { Colors } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -21,17 +21,17 @@ const MyInfoItem = ({loggedUser}:any) => {
 
     const navigation = useNavigation()
     const dispatch = useDispatch()
-    const goShoppingCart = () => {
+    const goShoppingCart = useCallback(() => {
         dispatch(D.drawerChangeFalseAction())
         navigation.dispatch(DrawerActions.openDrawer())
-    }
-    const goSetting = () => {
+    },[])
+    const goSetting = useCallback(() => {
         dispatch(D.drawerChangeTrueAction())
         navigation.dispatch(DrawerActions.openDrawer())
-    }
-    const goMyInfoUpdate = () => {
+    },[])
+    const goMyInfoUpdate = useCallback(() => {
         navigation.navigate("MyInfoUpdate")
-    }
+    }, [] )
 
     const update = () => {
         console.log(updateValue)
@@ -128,6 +128,17 @@ const MyInfoItem = ({loggedUser}:any) => {
                     onPress={() => {
                         navigation.navigate("MyInfoAddr")
                     }}>
+                    <Text>수정하기</Text>
+                </Pressable>
+            </View>
+            <View style={[styles.contentView]}>
+                <Text style={{fontSize:23}}>테스트</Text>
+                <Pressable 
+                    style={[styles.pressAble]} 
+                    onPress={() => {
+                        navigation.navigate("Certification")
+                    }}
+                    >
                     <Text>수정하기</Text>
                 </Pressable>
             </View>

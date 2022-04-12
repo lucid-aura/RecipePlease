@@ -32,7 +32,7 @@ export default function MyAccount() {
     const dispatch = useDispatch()
     const goMyPage = useCallback(() => {
           dispatch(L.loginAction({memberId, memberNickname}))
-          navigation.navigate('MyPage')
+          navigation.navigate('Login')
       }, [memberId, memberNickname, password, confirmPassword])
 
     //아이디 중복확인
@@ -57,7 +57,7 @@ export default function MyAccount() {
                     console.log(err)
                 })
         }
-    }
+    } 
     
     const regist = () => {
         if(memberId.trim() === '') {
@@ -76,7 +76,7 @@ export default function MyAccount() {
                 }
             }).then(function(response) {
                 console.log(response.data)
-                if(response.data == "yes") {
+                if(response.data == "no") {
                     Alert.alert("회원가입","가입되었습니다.", 
                                 [{
                                     text:"확인",
