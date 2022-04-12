@@ -1,7 +1,6 @@
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { Alert, Modal, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { Colors } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDispatch } from "react-redux";
@@ -128,21 +127,10 @@ const MyInfoItem = ({loggedUser}:any) => {
                     style={[styles.pressAble]} 
                     onPress={() => {
                         navigation.navigate("MyInfoAddr")
-                        /* setTitle("전화번호")
-                        setUpdateUrl("updatePhone")
-                        setUpdateInfo("memberPhone")
-                        setUpdateValue(loggedUser.memberPhone)
-                        setModalVisible(!modalVisible) */
                     }}>
                     <Text>수정하기</Text>
                 </Pressable>
             </View>
-            <View style={{flex:1,alignItems:'center', justifyContent:"center"}}>
-                <TouchableOpacity style={{backgroundColor:Colors.amber600}} onPress={() => goMyInfoUpdate()}>
-                    <Text style={{color:'white'}}>수정하기</Text>
-                </TouchableOpacity>
-            </View>
-         
             <Modal
                 style={{justifyContent:'center', alignItems:'center'}}
                 animationType="slide"
@@ -178,6 +166,7 @@ const MyInfoItem = ({loggedUser}:any) => {
                 </View>
 
             </Modal>
+            
         </SafeAreaView>
     )
 }

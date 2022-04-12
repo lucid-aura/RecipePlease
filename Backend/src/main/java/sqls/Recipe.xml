@@ -71,4 +71,12 @@
 	FROM RECIPE
 	WHERE RECIPESEQ = #{recipeSeq}
 </select>
+
+<!-- 내가 업로드한 레시피 정보 가져오기 -->
+<select id="myUploadedRecipe" parameterType="Integer" resultType="com.recipe.a.dto.RecipeDto">
+	SELECT RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, 
+		   RECIPERATING, RECIPEREADCOUNT, RECIPETHUMBNAIL
+	FROM RECIPE
+	WHERE RECIPESEQ = #{recipeSeq} 
+</select>
 </mapper>
