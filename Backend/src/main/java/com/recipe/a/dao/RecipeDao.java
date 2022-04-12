@@ -30,7 +30,8 @@ public interface RecipeDao {
 	public List<RecipeDto> searchRecipe(@Param("search")String search, @Param("big")ArrayList<String> big, @Param("small")ArrayList<String> small);
 	
 	// 내가 좋아하는 레시피 시퀀스
-	
 	public RecipeDto getRecipeInfo(int recipeSeq);
+	// 내가 업로드한 레시피
+	public RecipeDto myUploadedRecipe(int reicpeSeq);
 	
 }

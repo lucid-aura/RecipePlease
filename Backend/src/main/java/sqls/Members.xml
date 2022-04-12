@@ -64,14 +64,9 @@
 	</update>
 	<!-- 주소 업데이트 -->
 	<update id="updateAddr" parameterType="com.recipe.a.dto.MembersDto">
-		
 		UPDATE MEMBERS
-		<foreach collection="big" item="item" index="index" open="(" close=")" separator=";">
-			SET MEMBERMAINADDR = #{item.memberMainAddr}, 
-				MEMBERDETAILADDR = #{item.memberDetailAddr}, 
-				MEMBERZIPCODE = #{item.memberZipcode}
-		</foreach>
-		WHERE MEMBERID = #{item.memberId}
+		SET MEMBERMAINADDR = #{memberMainAddr}, MEMBERDETAILADDR = #{memberDetailAddr}, MEMBERZIPCODE = #{memberZipcode}
+		WHERE MEMBERID = #{memberId}
 		
 	</update>
 </mapper>

@@ -1,4 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useState } from "react";
@@ -23,6 +22,7 @@ const MyInfoAddr = () => {
     const addrChange = () => {
         axios.post(address+"updateAddr", null, {
             params: {
+                memberId: loggedUser.memberId,
                 memberZipcode: zipcode,
                 memberMainAddr: mainAddr,
                 memberDetailAddr: detailAddr

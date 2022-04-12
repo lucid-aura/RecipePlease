@@ -96,6 +96,19 @@ public class MembersController {
 		return result;
 	}
 	
+	// 내가 쓴 레시피 가져오기
+	@RequestMapping(value = "/myUploadedRecipe", method = {RequestMethod.GET})
+	public List<RecipeDto> myUploadedRecipe(String memberId) {
+		System.out.println("MemberController myUploadedRecipe");
+		System.out.println("memberId: " + memberId);
+		
+		List<RecipeDto> result = memberService.myUploadedRecipe(memberId);
+		System.out.println(result.toString());
+		
+		return result;
+	}
+		
+	
 	//이메일 업데이트
 	@RequestMapping(value = "/updateEmail", method = {RequestMethod.POST})
 	public String updateEmail(String memberId, String memberEmail) {
@@ -143,7 +156,7 @@ public class MembersController {
 	@RequestMapping(value = "/updateAddr", method = {RequestMethod.POST})
 	public String updateAddr(MembersDto dto) {
 		System.out.println("MemberController updateAddr");
-		//System.out.println("MembersDto: " + dto.toString());
+		System.out.println("MembersDto: " + dto.toString());
 		
 		boolean b = memberService.updateAddr(dto);
 		System.out.println("updateAddr result: " +b);
@@ -152,6 +165,8 @@ public class MembersController {
 		}		
 		return "success";
 	}
+	
+	
 	
 	//테스트용
 	@RequestMapping(value = "/test1", method = {RequestMethod.GET})
