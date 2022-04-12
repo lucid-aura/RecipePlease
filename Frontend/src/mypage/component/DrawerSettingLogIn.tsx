@@ -1,7 +1,7 @@
 import { DrawerContentComponentProps, DrawerContentScrollView } from "@react-navigation/drawer"
 import { DrawerActions } from "@react-navigation/native"
 import React, { FC, useCallback } from "react"
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { Colors } from "react-native-paper"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import { useDispatch, useSelector } from "react-redux"

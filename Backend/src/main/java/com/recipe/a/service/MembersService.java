@@ -141,6 +141,7 @@ public class MembersService {
 		return result;
 	}
 	
+	// 내가 업로드한 레시피 불러오기
 	public List<RecipeDto> myUploadedRecipe(String memberId) {
 		System.out.println("myUploadedRecipe service");
 		

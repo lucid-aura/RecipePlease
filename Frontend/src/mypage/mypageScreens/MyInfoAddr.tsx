@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useState } from "react";
-import { Alert, Pressable, TextInput, View } from "react-native";
+import { Alert, Pressable, StyleSheet, TextInput, View } from "react-native";
 import Postcode from "react-native-daum-postcode";
 import { Text } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
@@ -96,21 +96,29 @@ const MyInfoAddr = () => {
                     throw new Error("Function not implemented.");
                 }}
             />
-            <View>
-                <TextInput 
-                    value={"지번: "+zipcode.toString()}
-                    editable={false}                    
-                />
-                <TextInput 
-                    value={mainAddr}
-                />
-                <TextInput 
-                    value={detailAddr}
-                    onChangeText={(text) => setDetailAddr(text)}
-                />
-                <Pressable onPress={addrChange}>
-                    <Text>주소변경</Text>
-                </Pressable>
+            <View style={[styles.resultBox]}>
+                <View style={[styles.resultTextInput]}>
+                    <TextInput 
+                        value={"지번: "+ zipcode.toString()}
+                        editable={false}                    
+                    />
+                    </View>
+                <View style={[styles.resultTextInput]}>
+                    <TextInput 
+                        value={mainAddr}
+                    />
+                </View>
+                <View style={[styles.resultTextInput]}>
+                    <TextInput 
+                        value={detailAddr}
+                        onChangeText={(text) => setDetailAddr(text)}
+                    />
+                </View>
+                <View style={[styles.resultButton]}>
+                    <Pressable style={{padding:3}} onPress={addrChange}>
+                        <Text>주소변경</Text>
+                    </Pressable>
+                </View>
             </View>
             {/* 확인용 */}
             {/* <Text>우편번호: {postcode}</Text>
@@ -122,3 +130,23 @@ const MyInfoAddr = () => {
 }
 
 export default MyInfoAddr
+
+const styles = StyleSheet.create({
+    resultBox: {
+        borderWidth: 0.3,
+        padding: 10,
+        margin:10,
+        borderRadius: 5,
+        width:'70%'
+    },
+    resultTextInput: {
+        borderWidth:0.3
+    },
+    resultButton: {
+        marginTop:10,
+        alignSelf:'center',
+        borderWidth:0.3,
+        maxWidth:100,
+        borderRadius: 5,
+    }
+})

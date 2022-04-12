@@ -1,4 +1,4 @@
-export type myUploadedRecipeProps = {
+export type MyUploadedRecipeProps = {
     recipeSeq: number,
     recipeTitle: string,
     recipeContent: string,
@@ -6,5 +6,6 @@ export type myUploadedRecipeProps = {
     recipeSmallCategory: string,
     recipeRating: number,
     recipeReadcount: number,
-    recipeThumbnail: string
+    recipeThumbnail: string,
+    memberId:string
 }

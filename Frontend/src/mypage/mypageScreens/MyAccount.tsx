@@ -1,12 +1,11 @@
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useCallback, useState } from "react";
-import { Alert, SafeAreaView, StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, View } from "react-native";
+import { Alert, Pressable, SafeAreaView, StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, View } from "react-native";
 import { Colors } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDispatch } from "react-redux";
 import * as L from '../../store/login'
-import { logoutAction } from "../../store/login";
 import { NavigationHeader } from "../../theme";
 import config from "../../project.config"
 /* 
@@ -27,7 +26,7 @@ export default function MyAccount() {
     const [confirmPassword, setConfirmPassword] = useState<string>(password)
     const [memberNickname, setMemberNickname] = useState<string>('')
     
-    const [msg, setMsg] = useState<string>('msg')
+    const [msg, setMsg] = useState<string>('')
 
     const navigation = useNavigation()
     const dispatch = useDispatch()
@@ -94,63 +93,70 @@ export default function MyAccount() {
     }
     
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={[styles.topBar]} >
-                <NavigationHeader title="회원가입" viewStyle={{}}
-                    Left= {() => <Icon name="arrow-left" size={40} onPress={goBack} />}
-                    Right= {() => <Icon name="cart-heart" size={40} />}
-                    />
-            </View>
-            <View style={[styles.contentView]}>
-                <View>
-                    <TextInput 
-                        placeholder="아이디 입력"
-                        value={memberId}
-                        placeholderTextColor='#003f5c'
-                        onChangeText={(memberId) => setMemberId(memberId)}
-                    />
+        <SafeAreaView style={{flex:1}}>
+            <View style={styles.container}>
+                <View style={[styles.topBar]} >
+                    <NavigationHeader title="회원가입" viewStyle={{}}
+                        Left= {() => <Icon name="arrow-left" size={40} onPress={goBack} />}
+                        Right= {() => <Icon name="cart-heart" size={40} />}
+                        />
                 </View>
-                <View>
-                    <Text>{msg}</Text>
-                    <TouchableHighlight onPress={() => idCheck()}>
-                        <Text>id 확인</Text>
-                    </TouchableHighlight>
-                </View>
+                <View style={[styles.contentView]}>
+                    <View style={[styles.contentBox]}>
+                        <View style={[styles.textInput]}>
+                            <TextInput 
+                                placeholder="아이디 입력"
+                                value={memberId}
+                                placeholderTextColor='#003f5c'
+                                onChangeText={(memberId) => setMemberId(memberId)}
+                            />
+                        </View>
+                        <View style={[styles.check]}>
+                            <View>
+                                <Text style={{fontSize:17}}>{msg}</Text>
+                            </View>
+                            <Pressable style={{borderWidth:0.3, padding:5}} onPress={() => idCheck()}>
+                                <Text>Id 중복 확인</Text>
+                            </Pressable>
+                        </View>
 
-                <View>
-                    <TextInput 
-                        placeholder="패스워드"
-                        value={password}
-                        placeholderTextColor='#003f5c'
-                        secureTextEntry
-                        onChangeText={(password) => setPassword(password)}
-                    />
+                        <View style={[styles.textInput]}>
+                            <TextInput 
+                                placeholder="패스워드"
+                                value={password}
+                                placeholderTextColor='#003f5c'
+                                secureTextEntry
+                                onChangeText={(password) => setPassword(password)}
+                            />
+                        </View>
+                        <View style={[styles.textInput]}>
+                            <TextInput 
+                                placeholder="패스워드 확인"
+                                value={confirmPassword}
+                                placeholderTextColor='#003f5c'
+                                secureTextEntry
+                                onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
+                            />
+                        </View>
+                        <View style={[styles.textInput]}>
+                            <TextInput 
+                                placeholder="닉네임"
+                                value={memberNickname}
+                                placeholderTextColor='#003f5c'
+                                underlineColorAndroid='transparent'
+                                onChangeText={(memberNickname) => setMemberNickname(memberNickname)}
+                            />
+                        </View>
+                        <TouchableOpacity style={styles.accountBtn} onPress={() => {
+                                if(password === confirmPassword){
+                                    regist()
+                                } else Alert.alert('password is invalid')
+                                
+                            }}>
+                            <Text>회원가입</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-                <View>
-                    <TextInput 
-                        placeholder="패스워드 확인"
-                        value={confirmPassword}
-                        placeholderTextColor='#003f5c'
-                        secureTextEntry
-                        onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
-                    />
-                </View>
-                <View>
-                    <TextInput 
-                        placeholder="닉네임"
-                        value={memberNickname}
-                        underlineColorAndroid='transparent'
-                        onChangeText={(memberNickname) => setMemberNickname(memberNickname)}
-                    />
-                </View>
-                <TouchableOpacity style={styles.accountBtn} onPress={() => {
-                        if(password === confirmPassword){
-                            regist()
-                        } else Alert.alert('password is invalid')
-                        
-                    }}>
-                    <Text>회원가입</Text>
-                </TouchableOpacity>
             </View>
         </SafeAreaView>
     )
@@ -158,25 +164,44 @@ export default function MyAccount() {
 
 const styles = StyleSheet.create ({
     container: {
-        flex: 1,
+        flex:1,
         alignItems: 'center',
         justifyContent: 'center'
     },
     topBar: {
-        flex:1,
         borderWidth: 0.5,
         borderRadius:1
     },
     contentView: {
-        flex:17,
+        flex:1,
         justifyContent:'center',
+        width:'70%',
+    },
+    contentBox: {
         alignItems:'center'
+
+    },
+    check: {
+        width:'70%',
+        flexDirection:'row',
+        justifyContent:'space-between',
+        marginTop:10,
+        marginBottom:10
+
     },
     accountBtn: {
         width: 100,
-        height: 30,
+        height:30,
         backgroundColor: Colors.amber300,
         justifyContent: "center",
-        alignItems: "center"
-    }
+        alignItems: "center",
+        borderWidth:0.3,
+        marginTop:10
+    },
+    textInput: {
+        borderWidth: 0.3,
+        width: '70%',
+        margin:10
+
+    },
 })

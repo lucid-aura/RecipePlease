@@ -1,10 +1,8 @@
 import { DrawerActions, useNavigation } from "@react-navigation/native";
-import axios from "axios";
 import React, { useCallback, useRef, useState } from "react";
-import { Button, FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { FlatList, SafeAreaView, StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useSelector } from "react-redux";
-import { address } from "../../project.config";
 import { AppState } from "../../store";
 import { NavigationHeader } from "../../theme";
 import * as L from '../../store/login'
@@ -40,9 +38,9 @@ export const MyFavoriteRecipe = () => {
 
     return (
         <SafeAreaView style={[styles.container]}>
-            <NavigationHeader title="내가 즐겨보는 레시피" viewStyle={{}}
-                Left= {() => <Icon name="text-account" size={40} onPress={drawerOpen} />}
-                Right= {() => <Icon name="cart-heart" size={40} />}
+            <NavigationHeader title="내가 즐겨보는 레시피" viewStyle={{borderBottomWidth:1}}
+                Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
+                Right= {() => <Icon name="cart-heart" size={30} />}
                 />
             <View>
                 <FlatList
