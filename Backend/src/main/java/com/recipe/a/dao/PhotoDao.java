@@ -11,13 +11,9 @@ import com.recipe.a.dto.PhotoDto;
 @Repository
 public interface PhotoDao {
 
-	public int uploadRecipeImg(PhotoDto photoDto);
-	
-<<<<<<< Updated upstream
-	public int countPhoto();
-=======
 	public int uploadRecipeImg(PhotoDto dto);
->>>>>>> Stashed changes
+	
+	public int countPhoto();
 
 	public List<PhotoDto> getPhoto(PhotoDto photoDto);
 	

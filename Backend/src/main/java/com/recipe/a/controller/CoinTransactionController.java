@@ -54,11 +54,12 @@ public class CoinTransactionController {
     // 레시피 구매 여부 조회(구매여부를 조회하여 바로 보여줄지, 구매하지 않았음을 알려줄지 확인하는 목적)
     @PostMapping("/checkPurchaseRecipe")
     public String checkPurchaseRecipe(CoinTransactionDto dto) {
-    	boolean res = coinTransactionService.checkPurchaseRecipe(dto);
-    	return res ? "구매" : "비구매";
+    	int res = coinTransactionService.checkPurchaseRecipe(dto);
+    	return res>0 ? "구매" : "비구매";
     }
 
     // 레시피 구매 확인
+    /*
     @GetMapping("/checkPurchaseRecipe")
     public int checkPurchaseRecipe(CoinTransactionDto coinTransactionDto) {
         logger.info("CoinTransactionController checkPurchaseRecipe()");
@@ -66,4 +67,5 @@ public class CoinTransactionController {
         coinTransactionDto.setCoinTransactionSeq(-1);
         return coinTransactionService.checkPurchaseRecipe(coinTransactionDto);   
     }
+    */
 }

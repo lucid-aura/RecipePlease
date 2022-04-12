@@ -69,7 +69,6 @@
 	<if test='sortOrder=="rating"'>
 		ORDER BY RECIPERATING DESC
 	</if>
-	SELECT * FROM RECIPE WHERE RECIPE_SEQ=#{recipe_seq}
 </select>
 
 <!-- 레시피 시퀀스에 해당하는 레시피 정보들 가져오기 -->

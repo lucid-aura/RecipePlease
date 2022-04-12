@@ -5,10 +5,7 @@
 
 <mapper namespace="com.recipe.a.dao.PhotoDao">
 
-<insert id="uploadRecipeImg" parameterType="com.recipe.a.dto.PhotoDto">
-	INSERT INTO PHOTO(PHOTOSEQ, DOCSSEQ, PHOTOTITLE, PHOTOCONTENT, PHOTOCATEGORY, PHOTOURL)
-	VALUES(NEXTVAL('photoSeq'), #{docsSeq},  #{photoTitle},  #{photoContent},  #{photoCategory}, #{photoUrl})
-</insert>
+
 
 
 <select id="countPhoto" resultType="Integer">
@@ -34,7 +31,7 @@
 
 <insert id="uploadRecipeImg" parameterType="com.recipe.a.dto.PhotoDto">
 	INSERT INTO PHOTO(PHOTOSEQ, DOCSSEQ, PHOTOTITLE, PHOTOCONTENT, PHOTOCATEGORY, PHOTOURL)
-	VALUES(NEXTVAL('photoseq'), #{docsSeq},  #{photoTitle},  #{photoContent},  #{photoCategory}, #{photoUrl})
+	VALUES(NEXTVAL('photoSeq'), #{docsSeq},  #{photoTitle},  #{photoContent},  #{photoCategory}, #{photoUrl})
 </insert>
 
 

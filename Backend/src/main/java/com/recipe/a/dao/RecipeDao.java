@@ -15,15 +15,10 @@ public interface RecipeDao {
 
 	public int countRecipe(String bigCategory, String smallCategory);
 
-<<<<<<< Updated upstream
-	public int insertRecipe(RecipeDto newRecipe);
-
-=======
 	public int uploadRecipe(RecipeDto dto);
 	
 	
 	
->>>>>>> Stashed changes
 	public RecipeDto getOneRecipe(int recipeSeq);
 
 	public int updateRecipeRating(int docsSeq);
@@ -37,4 +32,9 @@ public interface RecipeDao {
 	public int oneUpReadcount(int recipeSeq);
 
 	public List<RecipeDto> searchRecipe(@Param("search")String search, @Param("big")ArrayList<String> big, @Param("small")ArrayList<String> small, @Param("sortOrder")String sortOrder);
+
+	public int insertRecipe(RecipeDto newRecipe);
+	
+	public RecipeDto getRecipeInfo(int recipeSeq);
+	
 }

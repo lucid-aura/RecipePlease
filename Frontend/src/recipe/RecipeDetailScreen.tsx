@@ -67,9 +67,9 @@ export default function RecipeDetailScreen({ route }:any){
 
     const { seq } = route.params; // 받아온 레시피 seq
     const { category } = route.params; // 받아온 카테고리
-    const { index } = route.params;
-    const { changeAvarage } = route.params;
-    const { changeReadcount } = route.params;
+    // const { index } = route.params;
+    // const { changeAvarage } = route.params;
+    // const { changeReadcount } = route.params;
     const log = useSelector<AppState, L.State>((state) => state.login)
     const {loggedIn, loggedUser} = log
     
@@ -135,7 +135,7 @@ export default function RecipeDetailScreen({ route }:any){
             if (recipeRes.data.recipeVideoUrl != ""){
                 setUrl(recipeRes.data.recipeVideoUrl.split("=")[1])
             } 
-            changeReadcount(index, recipeRes.data.recipeReadcount)
+            //changeReadcount(index, recipeRes.data.recipeReadcount)
             const thumbnailRes = await axios.get( config.address + "getThumbnailPhoto?docsSeq=" + seq +"&photoCategory=" + category) // 해당 레시피의 썸네일 사진을 받아옴
             setThumbnail(thumbnailRes.data);
 
@@ -179,7 +179,6 @@ export default function RecipeDetailScreen({ route }:any){
     return(
         
         <SafeAreaView style={styles.container}>
-
             <View>
             <NavigationHeader title="홈" 
                 Left= {() => <Icon name="arrow-left-bold" size={40} onPress={goBack} />}
@@ -266,12 +265,13 @@ export default function RecipeDetailScreen({ route }:any){
                 <View>
                     {/* 평점 리스트 및 입력 부분 자식 컴포넌트 */}
                     <Text style={styles.subTitle}>평가</Text>
-                    <RecipeDetailRating  seq={seq} setAvarage={setAvarage} avarage={avarage} index={index} changeAvarage={changeAvarage} />
+                    <RecipeDetailRating  seq={seq} setAvarage={setAvarage} avarage={avarage} />
                 </View>
                 }
                 {blur}
 
             </ScrollView>
+            <Text></Text>
             </View>
         </SafeAreaView>
     )
