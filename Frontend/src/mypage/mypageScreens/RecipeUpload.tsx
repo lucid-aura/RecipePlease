@@ -27,6 +27,11 @@ export default function UploadScreen() {
     const [recipeBigCategory, setPickerSelect] = useState('')
     const [recipeSmallCategory, setPickerSelect2] = useState('')
 
+
+    // 요리정보(몇 인분))
+    const [recipeInformation, setPickerSelect3] = useState(0)
+
+    // seq
     const [seq, setSeq] = useState()
 
     // 사진 url
@@ -138,10 +143,10 @@ export default function UploadScreen() {
                         setSeq(response.data)
                         uploadRecipeThumbnailImg(response.data)
                         uploadRecipeContentImg(response.data)
-                        navigation.navigate('RecipeNavigator' as never,{
+                        navigation.navigate('RecipeNavigator' as never, {
                             screen: 'RecipeDetail',
                             params: {
-                                seq:  response.data, 
+                                seq: response.data,
                                 category: 'recipe'
                             }
                         } as never)
@@ -213,6 +218,17 @@ export default function UploadScreen() {
         { label: '접대용', value: 'entertain' },
         { label: '야식용', value: 'nightmeal' }
     ]
+    const values3 = [
+        { label: "1인분", value: 'one' },
+        { label: "2인분", value: 'two' },
+        { label: "3인분", value: 'three' },
+        { label: "4인분", value: 'four' },
+        { label: "5인분", value: 'five' },
+        { label: "6인분", value: 'six' },
+        { label: "7인분", value: 'seven' },
+        { label: "8인분", value: 'eight' },
+        { label: "9인분", value: 'nine' }
+    ]
 
     return (
         <View>
@@ -225,21 +241,26 @@ export default function UploadScreen() {
                 </View>
 
                 <View style={styles.picture}>
-                    <TouchableOpacity onPress={titleimgshow} style={styles.camera}>
+                    <TouchableOpacity onPress={titleimgshow} style={styles.camera1}>
+                        <Icon name='camera-outline' style={styles.camerabutton} size={100}></Icon>
+                        <TextInput style={styles.cameraText1}>요리 대표 사진을 등록해 주세요.</TextInput>
+                        <TextInput>음식사진 외 사람/동물 등의 사진은 삼가해 주세요.</TextInput>
                         <Image
                             source={{ uri: titleimgurl }}
-                            style={styles.camera}
+                            style={styles.camera2}
                         ></Image>
                     </TouchableOpacity>
+
                 </View>
 
                 <View style={styles.recipeframe}>
-                    <Text style={styles.recipytext}>레시피내용</Text>
-                    <Button style={styles.addbutton} onPress={onAddDetailDiv}> 추가</Button>
-
+                    <Text style={styles.recipytext}>레시피 소개 및 순서</Text>
+                    <TouchableOpacity onPress={onAddDetailDiv}>
+                        <Icon name='add-circle' color="black" style={styles.addbutton} size={35}></Icon>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.contentframe}>
-                    <TextInput style={styles.textinput} value={recipeContent} onChangeText={(recipeContent) => setContent(recipeContent)} placeholder="1) 소고기는 기름기를 떼어내고 적당한 크기로 잘라주세요.&#10;2) 준비된 양념으로 먼저 고기를 조물조물 재워 둡니다.&#10;3) 그 사이 양파와 버섯, 대파도 썰어서 준비하세요.&#10;4) 고기가 반쯤 익어갈 때 양파를 함께 볶아요." multiline={true}></TextInput>
+                    <TextInput style={styles.textinput} value={recipeContent} onChangeText={(recipeContent) => setContent(recipeContent)} placeholder="&#10;이 레시피를 소개하는 내용을 적어주세요.&#10;예) 남편의 생일을 맞아 소고기 미역국을 끓여봤어요.&#10;어머니로부터 배운 미역국 레시피를 남편의 입맛에 맞게 고안했습니다." multiline={true}></TextInput>
                 </View>
                 <View>
                     {list.map((item: any, i: any) => (
@@ -272,6 +293,22 @@ export default function UploadScreen() {
                         </RNPickerSelect>
                     </View>
                 </View>
+
+                <View style={styles.frame}>
+                    <Text style={styles.text}>요리정보(몇 인분)</Text>
+                </View>
+                <View style={styles.categoryframe}>
+                    <View style={styles.picker}>
+                        <RNPickerSelect onValueChange={(value) => setPickerSelect3(value)}
+                            items={values3}
+                            placeholder={{
+                                label: '선택'
+                            }}
+                        >
+                        </RNPickerSelect>
+                    </View>
+                </View>
+
                 <View style={styles.frame}>
                     <Text style={styles.text}>굿즈태그</Text>
                 </View>
@@ -302,14 +339,11 @@ export default function UploadScreen() {
                     />
                 </View>
                 <View style={styles.frame}>
-                    <Text style={styles.text}>레시피가격</Text>
+                    <Text style={styles.text}>레시피가격(₩)</Text>
                 </View>
-                <View style={styles.goodsframe}>
-                    <TextInput style={styles.textinput} value={(recipePrice)} onChangeText={(recipePrice) => setPrice(recipePrice)} ></TextInput>
+                <View style={styles.priceframe}>
+                    <TextInput style={styles.textinput} value={(recipePrice)} onChangeText={(recipePrice) => setPrice(recipePrice)} keyboardType="number-pad" ></TextInput>
                 </View>
-
-
-
                 <Button style={styles.btn} onPress={RecipeUploadBtn}>레시피작성</Button>
             </ScrollView>
 
@@ -321,13 +355,13 @@ export default function UploadScreen() {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: 700,
+        height: '100%',
     },
     recipeframe: {
         width: '100%',
         height: 55,
         backgroundColor: "#ced4da",
-        justifyContent: 'center',
+
         flex: 1,
         flexDirection: 'row',
 
@@ -336,7 +370,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 55,
         backgroundColor: "#ced4da",
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     titleframe: {
         width: '100%',
@@ -346,7 +380,7 @@ const styles = StyleSheet.create({
     },
     contentframe: {
         width: '100%',
-        height: 250,
+        height: 140,
         backgroundColor: "white"
     },
     contentpictureframe: {
@@ -370,6 +404,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: "white",
     },
+    priceframe: {
+        width: '100%',
+        backgroundColor: "white"
+    },
 
     picture: {
         width: '100%',
@@ -381,13 +419,14 @@ const styles = StyleSheet.create({
     },
     text: {
         fontWeight: "bold",
-        marginLeft: 10,
+        marginLeft: 15,
         fontSize: 18,
         color: "black",
+
     },
     recipytext: {
         fontWeight: "bold",
-        marginLeft: 10,
+        marginLeft: 15,
         fontSize: 18,
         color: "black",
         flex: 1,
@@ -397,9 +436,9 @@ const styles = StyleSheet.create({
 
     textinput: {
         marginLeft: 10,
-        fontSize: 15,
-
+        fontSize: 15
     },
+
     picker: {
         flex: 1,
         width: '50%',
@@ -407,7 +446,7 @@ const styles = StyleSheet.create({
     btn: {
         marginTop: 20,
         marginVertical: 8,
-        height: 400
+
     },
     textInput: {
         height: 30,
@@ -424,9 +463,17 @@ const styles = StyleSheet.create({
         color: '#3ca897'
     },
 
-    camera: {
+    camera1: {
         width: '100%',
-        height: '100%'
+        height: '100%',
+        position: "absolute",
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    camera2: {
+        width: '100%',
+        height: '100%',
+        position: "absolute"
     },
     contentcameraframe: {
         width: 120,
@@ -452,6 +499,18 @@ const styles = StyleSheet.create({
     },
 
     addbutton: {
-        flex: 1
+        flex: 1,
+        marginRight: 20,
+        marginTop: 8
+    },
+    camerabutton: {
+        color: '#adb5bd'
+    },
+
+    cameraText1: {
+        fontSize: 19,
+        marginTop: -15,
+        marginBottom: -15
     }
+
 })
