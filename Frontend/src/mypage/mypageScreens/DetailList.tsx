@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useState } from "react"
 import { StyleSheet, View, Image, TouchableOpacity } from "react-native"
 import { Button, Text, TextInput } from "react-native-paper"
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import { white } from "react-native-paper/lib/typescript/styles/colors";
-
+import { black, white } from "react-native-paper/lib/typescript/styles/colors";
+import Icon from 'react-native-vector-icons/Ionicons';
 
 
 const DetailList = (props: any) => {
@@ -60,44 +60,78 @@ const DetailList = (props: any) => {
                     source={{ uri: contentImglist }}
                 >
                 </Image>
-            </TouchableOpacity>
-            <TextInput style={styles.photoContentText}
-                value={contentText}
-                onChangeText={(contentText) => setContentText(contentText)}
-                onKeyPress={content}
-            >
-            </TextInput>
-        </View>
 
+            </TouchableOpacity>
+
+            <View style={styles.contentframe}>
+                <TextInput style={styles.photoContentText}
+                    value={contentText}
+                    onChangeText={(contentText) => setContentText(contentText)}
+                    onKeyPress={content}
+                    multiline={true}
+                    placeholder="레시피 순서를 차례대로 입력해주세요.&#10;+ 버튼을누르시면 순서창이 추가됩니다."
+                    underlineColor="white">
+                </TextInput>
+            </View>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     contentpictureframe: {
+        // width: '100%',
+        // height: 160,
+        // flex: 1,
+        // flexDirection: 'row'
         width: '100%',
-        height: 160,
-        flexDirection: 'row'
+        height: 150,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        borderColor: '#eee',
+        borderBottomWidth: 0.5,
+        padding: 5,
+
+
     },
     contentcameraframe: {
+        // width: 120,
+        // height: 120,
+        // backgroundColor: 'white',
+        // marginTop: 20,
+        // marginLeft: 20,
+        flexDirection: 'row',
+        marginLeft: 10,
+
+        backgroundColor: 'white'
+
+
+    },
+
+    contentcamera: {
+        // width: 120,
+        // height: 120,
+        // backgroundColor: 'white',
         width: 120,
         height: 120,
         backgroundColor: 'white',
-        marginTop: 20,
-        marginLeft: 20,
-        flex: 1
-
     },
-    contentcamera: {
-        width: 120,
+
+    contentframe: {
+        width: 500,
         height: 120,
-        backgroundColor: 'white'
+        backgroundColor: "white",
+        marginLeft: 20,
     },
 
     photoContentText: {
-        flex: 4,
-        width: 100,
-        height: 120
-    }
+        // flex: 4,
+        fontSize: 15,
+        height: '100%',
+        backgroundColor: 'white'
+    },
+
+
 })
 
 export default DetailList
