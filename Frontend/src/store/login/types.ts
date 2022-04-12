@@ -8,7 +8,7 @@ export type User = {
     memberCoin?: string
     memberMainAddr?: string
     memberDetailAddr?: string
-    memberZipcode?: string
+    memberZipcode?: number
     memberName?: string
     memberGender?: string
     memberGrade?: string    

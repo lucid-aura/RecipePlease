@@ -9,10 +9,15 @@
 	SELECT COUNT(*) FROM RECIPE WHERE RECIPEBIGCATEGORY=#{bigCategory} AND RECIPESMALLCATEGORY=#{smallCategory}
 </select>
 
+
 <insert id="insertRecipe" parameterType="com.recipe.a.dto.RecipeDto">
+	<selectKey keyProperty="recipeSeq" resultType="int" order="BEFORE">
+		SELECT NEXTVAL('recipeSeq') SEQ FROM dual
+	</selectKey>
 	INSERT INTO RECIPE(RECIPESEQ, MEMBERID, RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEVIDEOURL, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING, RECIPEREADCOUNT)
-	VALUES(NEXTVAL('RECIPESEQ'), #{memberId}, #{recipeTitle}, #{recipe_content}, #{recipeBigCategory}, #{recipeSmallCategory}, #{recipeVideoUrl}, #{recipeGoodsTag}, #{recipePrice}, 0.0, 0) 
+	VALUES(#{recipeSeq}, #{memberId}, #{recipeTitle}, #{recipeContent}, #{recipeBigCategory}, #{recipeSmallCategory}, #{recipeVideoUrl}, #{recipeGoodsTag}, #{recipePrice}, 0.0, 0) 
 </insert>
+
 
 <select id="getOneRecipe" parameterType="Integer" resultType="com.recipe.a.dto.RecipeDto">
 	SELECT RECIPESEQ, MEMBERID, RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEVIDEOURL, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING, RECIPEREADCOUNT
@@ -64,6 +69,7 @@
 	<if test='sortOrder=="rating"'>
 		ORDER BY RECIPERATING DESC
 	</if>
+	SELECT * FROM RECIPE WHERE RECIPE_SEQ=#{recipe_seq}
 </select>
 
 <!-- 레시피 시퀀스에 해당하는 레시피 정보들 가져오기 -->

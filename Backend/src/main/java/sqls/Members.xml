@@ -44,5 +44,34 @@
 		FROM RECIPE
 	</select>
 
-
+	<!-- 이메일 업데이트  -->
+	<update id="updateEmail" parameterType="String">
+		UPDATE MEMBERS
+		SET MEMBEREMAIL = #{memberEmail}
+		WHERE MEMBERID = #{memberId}
+	</update>
+	<!-- 닉네임 업데이트 -->
+	<update id="updateNickname" parameterType="String">
+		UPDATE MEMBERS
+		SET MEMBERNICKNAME = #{memberNickname}
+		WHERE MEMBERID = #{memberId}
+	</update>
+	<!-- 전화번호 업데이트 -->
+	<update id="updatePhone" parameterType="String">
+		UPDATE MEMBERS
+		SET MEMBERNICKNAME = #{memberPhone}
+		WHERE MEMBERID = #{memberId}
+	</update>
+	<!-- 주소 업데이트 -->
+	<update id="updateAddr" parameterType="com.recipe.a.dto.MembersDto">
+		
+		UPDATE MEMBERS
+		<foreach collection="big" item="item" index="index" open="(" close=")" separator=";">
+			SET MEMBERMAINADDR = #{item.memberMainAddr}, 
+				MEMBERDETAILADDR = #{item.memberDetailAddr}, 
+				MEMBERZIPCODE = #{item.memberZipcode}
+		</foreach>
+		WHERE MEMBERID = #{item.memberId}
+		
+	</update>
 </mapper>

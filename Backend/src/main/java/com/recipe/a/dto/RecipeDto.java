@@ -17,8 +17,6 @@ public class RecipeDto {
 	
 	
 	
-	
-	
 	public RecipeDto() {
 		super();
 		this.memberId = "";
