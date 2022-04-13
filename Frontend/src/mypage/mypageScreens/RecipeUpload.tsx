@@ -9,13 +9,13 @@ import TagInput from 'react-native-tags-input';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import * as L from '../../store/login'
 import { AppState } from "../../store";
-import { white } from "react-native-paper/lib/typescript/styles/colors";
+import { black, white } from "react-native-paper/lib/typescript/styles/colors";
 import DetailList from "./DetailList";
 import { useSelector } from "react-redux";
 import config from "../../project.config"
 import { useNavigation } from "@react-navigation/native";
 
-/* npm install @react-native-picker/picker */
+// yarn add react-native-image-picker
 
 export default function UploadScreen() {
     const [thumbnailAssets, setThumnailAssets] = useState(
@@ -40,12 +40,15 @@ export default function UploadScreen() {
     // 카테고리
     const [recipeBigCategory, setPickerSelect] = useState('')
     const [recipeSmallCategory, setPickerSelect2] = useState('')
+    const [recipeInformation, setPickerSelect3] = useState('')
 
     const [seq, setSeq] = useState({})
 
     // 사진 url
     const [titleimgurl, setTitleimgurl] = useState("")
 
+    // 유튜브 주소
+    const [youtubeurl, setYoutubeurl] = useState('')
 
     // 제목, 내용, 가격
     const [recipeTitle, setTitle] = useState('')
@@ -64,7 +67,7 @@ export default function UploadScreen() {
     // 레시피 내용 순서 추가
     const [tests, setTests] = useState([
         {
-            imgAssets:{},
+            imgAssets: {},
             imglist: "",
             imgText: ""
         }
@@ -87,7 +90,7 @@ export default function UploadScreen() {
         setCountList(countArr)
         let num = list
         console.log("tests: " + JSON.stringify(tests[counter - 1]))
-        tests.push({ imgAssets:"", imglist: "", imgText: "" })
+        tests.push({ imgAssets: "", imglist: "", imgText: "" })
         num.push(<DetailList setData={setImglist} setData2={setTests} setData3={tests} setData4={counter} setData5={setImgText} />)
         setList(num)
         //onCreate()
@@ -122,23 +125,23 @@ export default function UploadScreen() {
     }
 
     // 이미지 서버 저장
-    const uploadImageToServer  = (assets:any) => {
+    const uploadImageToServer = (assets: any) => {
         console.log("assets!!: " + assets)
-        const createFormData = (body:any = {}) => {
+        const createFormData = (body: any = {}) => {
             const data = new FormData();
-            
+
             // 사진 추가
-            data.append('photo', 
+            data.append('photo',
                 assets
             );
-            
+
             // 파일 이름 추가
             Object.keys(body).forEach((key) => {
                 data.append(key, body[key]);
             });
-            
+
             return data;
-            };
+        };
 
         const handleUploadPhoto = () => {
 
@@ -146,13 +149,13 @@ export default function UploadScreen() {
                 method: 'POST',
                 body: createFormData({ fileName: assets.fileName }),
             })
-            .catch((error) => {
-            console.log('error', error);
-            });
+                .catch((error) => {
+                    console.log('error', error);
+                });
         }
-        handleUploadPhoto() 
+        handleUploadPhoto()
     }
-    
+
 
     // 업로드 버튼
     const RecipeUploadBtn = () => {
@@ -175,11 +178,11 @@ export default function UploadScreen() {
                         recipeContent: recipeContent,
                         recipeBigCategory: recipeBigCategory,
                         recipeSmallCategory: recipeSmallCategory,
-                        recipeVideoUrl: "test",
+                        recipeVideoUrl: youtubeurl,
                         recipeGoodsTag: String(tags.tagsArray),
                         recipePrice: recipePrice,
-                        recipeCapacity:0,
-                        recipeThumbnail:thumbnailAssets.assets[0].fileName
+                        recipeCapacity: recipeInformation,
+                        recipeThumbnail: thumbnailAssets.assets[0].fileName
                     }
                 }).then(function (response) {
                     console.log("seq값 : " + response.data)
@@ -225,7 +228,7 @@ export default function UploadScreen() {
                 }).catch(function () {
                     //Alert.alert("이미지 추가되지 않았습니다.")
                 })
-                
+
         }
 
         // 레시피 순서 이미지 업로드
@@ -269,15 +272,15 @@ export default function UploadScreen() {
         { label: '야식용', value: 'nightmeal' }
     ]
     const values3 = [
-        { label: "1인분", value: 'one' },
-        { label: "2인분", value: 'two' },
-        { label: "3인분", value: 'three' },
-        { label: "4인분", value: 'four' },
-        { label: "5인분", value: 'five' },
-        { label: "6인분", value: 'six' },
-        { label: "7인분", value: 'seven' },
-        { label: "8인분", value: 'eight' },
-        { label: "9인분", value: 'nine' }
+        { label: "1인분", value: 1 },
+        { label: "2인분", value: 2 },
+        { label: "3인분", value: 3 },
+        { label: "4인분", value: 4 },
+        { label: "5인분", value: 5 },
+        { label: "6인분", value: 6 },
+        { label: "7인분", value: 7 },
+        { label: "8인분", value: 8 },
+        { label: "9인분", value: 9 }
     ]
 
     return (
@@ -360,7 +363,20 @@ export default function UploadScreen() {
                 </View>
 
                 <View style={styles.frame}>
+                    <Text style={styles.text}>유튜브 영상 주소</Text>
+                </View>
+                <View style={styles.youtubeFrame}>
+                    <Text style={styles.tagText2}>작성하신 레시피의 조리 영상이 있다면 유튜브 주소를 남겨주세요.</Text>
+                </View>
+                <View style={styles.priceframe}>
+                    <TextInput style={styles.textinput} value={(youtubeurl)} onChangeText={(youtubeurl) => setYoutubeurl(youtubeurl)} placeholder="https://www.youtube.com/"></TextInput>
+                </View>
+
+                <View style={styles.frame}>
                     <Text style={styles.text}>굿즈태그</Text>
+                </View>
+                <View style={styles.tagFrame}>
+                    <Text style={styles.tagText2}>재료, 목적, 효능, 대상 등을 입력 후 완료키를 눌러서 태그로 남겨주세요.{"\n"}예) 돼지고기, 다이어트, 비만, 칼슘, 감기예방, 이유식, 초간단</Text>
                 </View>
                 <View style={styles.goodsframe}>
                     <TagInput updateState={(tags: any) => { setTags(tags) }}
@@ -372,7 +388,7 @@ export default function UploadScreen() {
                         leftElementContainerStyle={{ marginLeft: 3 }}
                         containerStyle={{ width: (Dimensions.get('window').width - 40) }}
                         inputContainerStyle={[styles.textInput, { backgroundColor: '#fff' }]}
-                        inputStyle={{ color: '#fff' }}
+                        inputStyle={{ color: 'black' }}
                         onFocus={() => {
                             setTagsColor('#fff')
                             setTagsText('#3ca897')
@@ -392,7 +408,7 @@ export default function UploadScreen() {
                     <Text style={styles.text}>레시피가격(₩)</Text>
                 </View>
                 <View style={styles.priceframe}>
-                    <TextInput style={styles.textinput} value={(recipePrice)} onChangeText={(recipePrice) => setPrice(recipePrice)} keyboardType="number-pad" ></TextInput>
+                    <TextInput style={styles.textinput} value={(recipePrice)} onChangeText={(recipePrice) => setPrice(recipePrice)} keyboardType="number-pad" placeholder="예) 1000, 5000 숫자를 입력 원단위" ></TextInput>
                 </View>
                 <Button style={styles.btn} onPress={RecipeUploadBtn}>레시피작성</Button>
             </ScrollView>
@@ -456,7 +472,7 @@ const styles = StyleSheet.create({
     },
     priceframe: {
         width: '100%',
-        backgroundColor: "white"
+        backgroundColor: "white",
     },
 
     picture: {
@@ -496,6 +512,8 @@ const styles = StyleSheet.create({
     btn: {
         marginTop: 20,
         marginVertical: 8,
+        height: 60,
+
 
     },
     textInput: {
@@ -507,7 +525,8 @@ const styles = StyleSheet.create({
         padding: 3,
     },
     tag: {
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        height: 35
     },
     tagText: {
         color: '#3ca897'
@@ -561,6 +580,30 @@ const styles = StyleSheet.create({
         fontSize: 19,
         marginTop: -15,
         marginBottom: -15
-    }
+    },
+
+    tagText2: {
+        marginLeft: 10,
+        fontSize: 13,
+        color: "black"
+
+    },
+    tagFrame: {
+        width: '100%',
+        height: 60,
+        backgroundColor: "white",
+        borderBottomWidth: 1,
+        borderColor: "#adb5bd",
+        justifyContent: "center"
+    },
+
+    youtubeFrame: {
+        width: '100%',
+        height: 40,
+        backgroundColor: "white",
+        borderBottomWidth: 1,
+        borderColor: "#adb5bd",
+        justifyContent: "center"
+    },
 
 })
