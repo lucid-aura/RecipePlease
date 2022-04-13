@@ -2,12 +2,15 @@ import { DrawerActions, useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useCallback, useState } from "react";
 import { Alert, Pressable, SafeAreaView, StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, View } from "react-native";
-import { Colors } from "react-native-paper";
+import { Colors, RadioButton } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDispatch } from "react-redux";
 import * as L from '../../store/login'
 import { NavigationHeader } from "../../theme";
 import config from "../../project.config"
+import { checkIdRule, checkPasswordRule } from "../utils";
+
+
 /* 
 
 npm i react-native-flexi-radio-button --save
@@ -21,18 +24,29 @@ export default function MyAccount() {
 
     const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
-    const [memberId, setMemberId] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
-    const [confirmPassword, setConfirmPassword] = useState<string>(password)
-    const [memberNickname, setMemberNickname] = useState<string>('')
-    
-    const [msg, setMsg] = useState<string>('')
+    const [memberId, setMemberId] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState(password)
+    const [memberNickname, setMemberNickname] = useState('')
+    const [msg, setMsg] = useState('')
+    const [checked, setChecked] = useState("남자")
 
     const navigation = useNavigation()
     const dispatch = useDispatch()
-    const goMyPage = useCallback(() => {
-          dispatch(L.loginAction({memberId, memberNickname}))
-          navigation.navigate('Login')
+    const goMyPage = useCallback((response) => {
+        dispatch(L.loginAction({ 
+            memberId: response.memberId, 
+            memberNickname: response.memberNickname,
+            memberEmail: response.memberEmail,
+            memberPhone: response.memberPhone,
+            memberName: response.memberName,
+            memberCoin: response.memberCoin,
+            memberGender: response.memberGender,
+            memberGrade: response.memberGrade,
+            memberMainAddr: response.memberMainAddr,
+            memberDetailAddr: response.memberDetailAddr
+        }))
+        navigation.navigate('Login')
       }, [memberId, memberNickname, password, confirmPassword])
 
     //아이디 중복확인
@@ -67,31 +81,42 @@ export default function MyAccount() {
         } else if(memberNickname.trim() === '') {
             Alert.alert('닉네임을 입력해주세요')
         } else {
-            axios.post(config.address + "regist", null, 
-            {
+            console.log(`memberId: ` + memberId + " password: " + password)
+            const chkPassword = checkPasswordRule(password)
+            const chkId = checkIdRule(memberId)
+            if(chkPassword && chkId) {
+                axios.post(config.address + "regist", null, 
+                {
                 params: {
                     memberId: memberId,
                     memberPwd: password,
-                    memberNickname: memberNickname
+                    memberNickname: memberNickname,
+                    memberGender: checked
                 }
-            }).then(function(response) {
-                console.log(response.data)
-                if(response.data == "no") {
-                    Alert.alert("회원가입","가입되었습니다.", 
-                                [{
-                                    text:"확인",
-                                    onPress: () => goMyPage()
-                                }]
-                    )
-                } else {
-                    Alert.alert("회원가입", "가입이 안되었습니다.")
-                }
-            }).catch((err:Error) => {
-                console.log(err)
-            })
+                }).then((response) => {
+                    console.log(response.data)
+                    if(response.data.memberId == memberId) {
+                        Alert.alert("회원가입","가입되었습니다.", 
+                                    [{
+                                        text:"확인",
+                                        onPress: () => goMyPage(response.data)
+                                    }]
+                        )
+                    } else {
+                        Alert.alert("회원가입", "가입이 안되었습니다.")
+                    }
+                }).catch((err:Error) => {
+                    console.log(err)
+                })
+            } else {
+                return Alert.alert("8자리 이상, 영문(소문자/대문자), 숫자, 특수문자 모두 포함해야 합니다.")
+            }
+            
         }
     }
     
+    
+
     return (
         <SafeAreaView style={{flex:1}}>
             <View style={styles.container}>
@@ -119,7 +144,25 @@ export default function MyAccount() {
                                 <Text>Id 중복 확인</Text>
                             </Pressable>
                         </View>
-
+                        <View style={[styles.contentBox, {flexDirection:'row'}]}>
+                            <View style={{flexDirection:'row', }}>
+                                
+                                <RadioButton 
+                                    value= '남자'
+                                    status={ checked === '남자' ? 'checked' : 'unchecked'}
+                                    onPress={() => setChecked('남자')}
+                                />
+                                <Text style={{marginTop:8}}>남자</Text>
+                            </View>
+                            <View style={{flexDirection:'row',marginLeft:10 }}>
+                                <RadioButton 
+                                    value= '여자'
+                                    status={ checked === '여자' ? 'checked' : 'unchecked'}
+                                    onPress={() => setChecked('여자')}
+                                />
+                                <Text style={{marginTop:8}}>여자</Text>
+                            </View>
+                        </View>
                         <View style={[styles.textInput]}>
                             <TextInput 
                                 placeholder="패스워드"
@@ -148,9 +191,15 @@ export default function MyAccount() {
                             />
                         </View>
                         <TouchableOpacity style={styles.accountBtn} onPress={() => {
-                                if(password === confirmPassword){
-                                    regist()
-                                } else Alert.alert('password is invalid')
+                            
+                                if(msg == '') {
+                                    Alert.alert('아이디 중복확인을 해주세요.')
+                                } else {
+                                    if(password === confirmPassword){
+                                        regist()
+                                    } else Alert.alert('password is invalid')
+                                }
+                               
                                 
                             }}>
                             <Text>회원가입</Text>
