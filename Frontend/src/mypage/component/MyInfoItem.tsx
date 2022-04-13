@@ -136,7 +136,9 @@ const MyInfoItem = ({loggedUser}:any) => {
                 <Pressable 
                     style={[styles.pressAble]} 
                     onPress={() => {
-                        navigation.navigate("Certification")
+                        navigation.navigate('IamportNavigator', {
+                            screen: 'IamportHome'
+                        })
                     }}
                     >
                     <Text>수정하기</Text>

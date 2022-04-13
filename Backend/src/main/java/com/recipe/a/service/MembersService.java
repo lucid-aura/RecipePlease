@@ -56,15 +56,22 @@ public class MembersService {
 	}
 	
 	// 회원가입 - 노승현
-	public boolean regist(MembersDto dto) {	
-		int b = dao.idCheck(dto);	
+	public MembersDto regist(MembersDto dto) {	
 		
-		if(b == 1) {
-			return true;	// 아이디 중복됨(회원가입 실패)
+		int n = dao.idCheck(dto);
+		int b;
+		if(n>0) {	// 아이디 있음
+			b = 0;
 		} else {
-			int n = dao.regist(dto);
+			b = dao.regist(dto);
+		}
+		
+		if(b > 0) {
+			return dao.login(dto.getMemberPwd());
 			
-			return n>0? false:true;	// false: 회원가입 성공, true: 회원가입 실패
+		} else {
+			MembersDto onlyLogin = new MembersDto();
+			return onlyLogin;
 		}
 	}
 	
