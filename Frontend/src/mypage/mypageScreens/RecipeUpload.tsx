@@ -1,7 +1,7 @@
 import axios from "axios";
 import Color from "color";
 import React, { Component, useState } from "react";
-import { StyleSheet, Text, View, TextInput, FlatList, ScrollView, Alert, Dimensions, Image, TouchableOpacity, ToastAndroid } from "react-native";
+import { StyleSheet, Text, View, TextInput, FlatList, ScrollView, Alert, Dimensions, Image, TouchableOpacity, ToastAndroid, Platform } from "react-native";
 import { Button } from "react-native-paper";
 import RNPickerSelect from 'react-native-picker-select'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -14,10 +14,24 @@ import DetailList from "./DetailList";
 import { useSelector } from "react-redux";
 import config from "../../project.config"
 import { useNavigation } from "@react-navigation/native";
-import RecipeRecommendList from "../../recipe/RecipeRecommendList";
+
 /* npm install @react-native-picker/picker */
 
 export default function UploadScreen() {
+    const [thumbnailAssets, setThumnailAssets] = useState(
+        {
+            // "assets": 
+            // [
+            //     {"fileName": "", 
+            //     "fileSize": 0, 
+            //     "height": 0, 
+            //     "type": "", 
+            //     "uri": "", 
+            //     "width": 0}
+            // ]
+        }
+    )
+
     const navigation = useNavigation()
     // 멤버아이디
     const log = useSelector<AppState, L.State>((state) => state.login)
@@ -27,12 +41,7 @@ export default function UploadScreen() {
     const [recipeBigCategory, setPickerSelect] = useState('')
     const [recipeSmallCategory, setPickerSelect2] = useState('')
 
-
-    // 요리정보(몇 인분))
-    const [recipeInformation, setPickerSelect3] = useState(0)
-
-    // seq
-    const [seq, setSeq] = useState()
+    const [seq, setSeq] = useState({})
 
     // 사진 url
     const [titleimgurl, setTitleimgurl] = useState("")
@@ -55,6 +64,7 @@ export default function UploadScreen() {
     // 레시피 내용 순서 추가
     const [tests, setTests] = useState([
         {
+            imgAssets:{},
             imglist: "",
             imgText: ""
         }
@@ -77,7 +87,7 @@ export default function UploadScreen() {
         setCountList(countArr)
         let num = list
         console.log("tests: " + JSON.stringify(tests[counter - 1]))
-        tests.push({ imglist: "", imgText: "" })
+        tests.push({ imgAssets:"", imglist: "", imgText: "" })
         num.push(<DetailList setData={setImglist} setData2={setTests} setData3={tests} setData4={counter} setData5={setImgText} />)
         setList(num)
         //onCreate()
@@ -106,9 +116,43 @@ export default function UploadScreen() {
     const titleimgshow = () => {
         launchImageLibrary({}, response => {
             setTitleimgurl(response.assets[0].uri)
+            setThumnailAssets(response)
+            console.log(response)
         })
     }
 
+    // 이미지 서버 저장
+    const uploadImageToServer  = (assets:any) => {
+        console.log("assets!!: " + assets)
+        const createFormData = (body:any = {}) => {
+            const data = new FormData();
+            
+            // 사진 추가
+            data.append('photo', 
+                assets
+            );
+            
+            // 파일 이름 추가
+            Object.keys(body).forEach((key) => {
+                data.append(key, body[key]);
+            });
+            
+            return data;
+            };
+
+        const handleUploadPhoto = () => {
+
+            fetch(config.address + 'imageUploadToServer', {
+                method: 'POST',
+                body: createFormData({ fileName: assets.fileName }),
+            })
+            .catch((error) => {
+            console.log('error', error);
+            });
+        }
+        handleUploadPhoto() 
+    }
+    
 
     // 업로드 버튼
     const RecipeUploadBtn = () => {
@@ -133,7 +177,9 @@ export default function UploadScreen() {
                         recipeSmallCategory: recipeSmallCategory,
                         recipeVideoUrl: "test",
                         recipeGoodsTag: String(tags.tagsArray),
-                        recipePrice: recipePrice
+                        recipePrice: recipePrice,
+                        recipeCapacity:0,
+                        recipeThumbnail:thumbnailAssets.assets[0].fileName
                     }
                 }).then(function (response) {
                     console.log("seq값 : " + response.data)
@@ -159,14 +205,15 @@ export default function UploadScreen() {
 
         // 썸네일 이미지 업로드
         const uploadRecipeThumbnailImg = (temp: any) => {
-            axios.get(config.address + "uploadRecipeImg",
+            uploadImageToServer(thumbnailAssets.assets[0])
+            axios.post(config.address + "uploadRecipeImg", null,
                 {
                     params: {
                         docsSeq: temp,
                         photoTitle: "thumbnail",
                         photoContent: recipeTitle,
                         photoCategory: "recipe",
-                        photoUrl: titleimgurl
+                        photoUrl: thumbnailAssets.assets[0].fileName
 
                     }
                 }).then(function (response) {
@@ -178,11 +225,14 @@ export default function UploadScreen() {
                 }).catch(function () {
                     //Alert.alert("이미지 추가되지 않았습니다.")
                 })
+                
         }
 
         // 레시피 순서 이미지 업로드
         const uploadRecipeContentImg = (temp: any) => {
+            console.log("size?" + tests.length)
             for (let i = 0; i < tests.length; i++) {
+                uploadImageToServer(tests[i].imgAssets)
                 axios.get(config.address + "uploadRecipeImg",
                     {
                         params: {
@@ -191,7 +241,7 @@ export default function UploadScreen() {
                             photoTitle: "cookOrder",
                             photoContent: tests[i].imgText,
                             photoCategory: "recipe",
-                            photoUrl: tests[i].imglist,
+                            photoUrl: tests[i].imgAssets.fileName,
 
                         }
 

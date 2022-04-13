@@ -1,15 +1,34 @@
 package com.recipe.a.controller;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.recipe.a.dto.PhotoDto;
 import com.recipe.a.dto.RatingDto;
@@ -207,5 +226,41 @@ public class RecipeController {
 		return dtos;
 		//return recipeService.getPhoto(photoDto);
 	}
-}
+	
+	// 도움 받은 사이트 : https://velog.io/@gmtmoney2357/스프링-부트-파일-업로드-다운로드-이미지-보여주기
+	@RequestMapping(value = "/imageUploadToServer", method = { RequestMethod.POST })
+	public String testUpload(HttpServletRequest request) throws Exception {
+		System.out.println("RecipeController imageUploadToServer()");
 
+		String fileName = "";
+		InputStream imageInputStream = null;
+		Part imagePart = null;
+		
+		//헤더에서 받아온 키 값이 fileName 인 경우 사진의 파일 이름이 들어있다. -> 파일 이름 저장
+		fileName = request.getParameter("fileName");
+		System.out.println("itemName? " + fileName);
+	    
+	    //.getParts()로 모든 항목들을 collection형식으로 받을 수 있다.
+	    Collection<Part> parts = request.getParts();
+	    for (Part part : parts) {
+	        //form에서 지정한 name을 받을 수 있다.
+	 		//System.out.println("name={}   " +  part.getName());
+	    	
+	 		// 헤더에서 받아온 키 값이 photo 인 경우 실제 사진 데이터가 들어 있다. -> inputstream 및 part 연결
+	 		if (part.getName().equals("photo")) {
+	        	imageInputStream = part.getInputStream(); //데이터 읽기
+	        	imagePart = part;
+	        }
+	    }
+	    
+
+	    String fullPath = "C://recipeUpload/" + fileName;
+	    
+        System.out.println("경로및 이름 : "+  fullPath);
+ 		imagePart.write(fullPath);
+	    
+ 		// 이미지가 서버에 저장된 주소(localhost:3000)가 DB에 저장되어야 함
+ 		System.out.println("http://localhost:3000/photo/" + fileName);
+		return "http://localhost:3000/photo/" + fileName;
+	}
+}

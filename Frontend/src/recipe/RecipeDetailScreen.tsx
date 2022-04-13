@@ -195,7 +195,7 @@ export default function RecipeDetailScreen({ route }:any){
 
                     </View>
                     <View style={{alignItems:"center"}}>
-                        <Image style={{borderRadius:15}} source={{ uri:thumbnail.photoUrl, width:520, height:340 }} />
+                        <Image style={{borderRadius:15}} source={{uri:  config.photo+thumbnail.photoUrl, width:520, height:340 }} />
                     </View>
                 </View>
                 }
