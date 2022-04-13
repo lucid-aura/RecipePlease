@@ -16,15 +16,15 @@ npm install watcher
 
 const Stack = createNativeStackNavigator() //스택 네비게이터 생성후 스택함수 정의
 
-export default function RecipeNavigator(){
+export default function RecipeNavigator() {
 
-    return(
-      <Stack.Navigator screenOptions={{headerShown:false}}>
-        <Stack.Screen name="RecipeHome" component={RecipeHomeScreen}></Stack.Screen>
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="RecipeHome" component={RecipeHomeScreen}></Stack.Screen>
 
-        <Stack.Screen name="RecipeDetail" component={RecipeDetailScreen}></Stack.Screen>
-        <Stack.Screen name="RecipeSearchResult" component={RecipeSearchResult}></Stack.Screen>
-      </Stack.Navigator>
-    )
-  }
+      <Stack.Screen name="RecipeDetail" component={RecipeDetailScreen}></Stack.Screen>
+      <Stack.Screen name="RecipeSearchResult" component={RecipeSearchResult}></Stack.Screen>
+    </Stack.Navigator>
+  )
+}
 //레시피 이동 처리
