@@ -30,7 +30,7 @@ export default function RecipeDetailOrder({seq, category}:any) {
     <SafeAreaView style={styles.container}>
             {cookorder.map((order:{photoUrl:string, photoContent:string}, index) :any=> (
                 <View key={index} style={styles.orderOne}>
-                    <Image style={{ borderRadius:10}} source={{ uri:order.photoUrl, width:100, height:100 }} />
+                    <Image style={{ borderRadius:10}} source={{ uri:  config.photo+order.photoUrl, width:100, height:100 }} />
                     <Text style={styles.orderTitle}>{order.photoContent}</Text>
                 </View>
             ))}

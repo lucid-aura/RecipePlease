@@ -95,7 +95,7 @@ export default function RecipeRecommendList( { category } :any) { // 굿즈 태�
               <View style={{alignItems:'center'}} key={index}>
                   <TouchableOpacity onPress={ () => checkRecipe(index)}>
                     <Image source={
-                        {uri: item} }
+                        {uri: config.photo + item} }
                         style={{ alignSelf:'center', width:240, height:160}}
                     />
                     <Text style={styles.recipeTitle}>{recipeData.title[index]}</Text>
