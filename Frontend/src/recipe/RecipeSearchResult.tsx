@@ -93,7 +93,7 @@ export default function RecipeSearchResult({ route }:any) { // 레시피 검색 
                                 changeReadcount : changeReadcount
                             } as never)
                         }}>
-                        <Card.Cover source={{ uri: item.recipeThumbnail}} />
+                        <Card.Cover source={{ uri: config.photo +  item.recipeThumbnail}} />
                         <Card.Title title={item.recipeTitle} subtitle={"평점 : " + item.recipeRating} />
                         <Card.Content>
                             <Title>

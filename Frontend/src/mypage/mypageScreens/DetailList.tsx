@@ -20,8 +20,10 @@ const DetailList = (props: any) => {
             console.log("b : " + b)
 
             // a.push({ imglist: response.assets[0].uri })
+            a[b].imgAssets = response.assets[0]
             a[b].imglist = response.assets[0].uri
             a[b].imgText = contentText
+            console.log("imgAssets:" + a[b].imgAssets)
             console.log("imglist:" + a[b].imglist)
             console.log("imgText:" + a[b].imgText)
             props.setData2(a)
