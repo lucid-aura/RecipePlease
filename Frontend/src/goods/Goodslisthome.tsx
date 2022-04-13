@@ -15,54 +15,42 @@ export default function Goodslisthome({foods}:any){
           <TouchableHighlight//사진 및 디테일 설정
             underlayColor={COLORS.white}
             activeOpacity={0.9}
-            onPress={() => navigation.navigate('RecipeNavigator', { 
-              screen: 'RecipeDetail',
-              params:{
-                seq:0, 
-                updateRecipeDataAfterComment: console.log("여기에 평가 작성 시 데이터 리로드 하는 함수가 들어가야 합니다."),
-                category: 'recipe'
-              }
-            })}>
+            onPress={() => navigation.navigate('goodsDetail', {"seq": 8}
+
+              
+            )}>
+
+            
             <View style={styles.card}>
-            <View>
-                
-            </View>
-              <View style={{alignItems: 'center', top: -40}}>
-                <Image source={food.image} style={{height: 120, width: 120}} />
-              </View>
-              <View style={{marginHorizontal: 20}}>
-                <Text style={{fontSize: 18, fontWeight: 'bold'}}>{food.name}</Text>
-                <Text style={{fontSize: 14, color: COLORS.grey, marginTop: 2}}>
-                  {food.ingredients}
-                </Text>
-              </View>
-              <View //+ 기호 삭제
-                style={{
-                  marginTop: 10,
-                  marginHorizontal: 20,
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}>
-                <Text style={{fontSize: 18, fontWeight: 'bold'}}>
-                {food.prompt}
-                </Text>
-              </View>
-            </View>
+                    <View style={styles.img}/>
+                        <View style={styles.mainstory}>
+                           <View style={styles.story}>
+                                <Text style={{fontSize:20, fontWeight:"bold"}}>99,990원</Text>
+                            </View>
+                            <View style={styles.story1}>
+                                <Text style={{fontSize:15,}}>
+                                    놋담(식기) 백화점 선물포장 방짜유기 1인 식기세트(공기+대접+수저)
+                                </Text>
+                                    </View>
+                                <View style={styles.story2}>
+                                    <Text>별점</Text>
+                                 </View>
+                            </View>
+                </View>
+               
+
+
+
           </TouchableHighlight>
         );
       };
   return(
-    <View>
-        <View style={{flexDirection:"row"}}>
+
+        <View>
             <Card food={foods[1]}/>
-            <Card food={foods[0]}/>
         </View>
-        <View style={{flexDirection:"row"}}>
-            <Card food={foods[3]}/>
-            <Card food={foods[2]}/>
-        </View>
-        
-    </View>
+
+
     
   
   )
@@ -70,16 +58,66 @@ export default function Goodslisthome({foods}:any){
 
 
 
+
+
+
+
 const styles = StyleSheet.create({
-card: {
-    height: 220,
-    width: cardWidth,
-    marginHorizontal: 10,
-    marginBottom: 20,
-    marginTop: 50,
-    borderRadius: 15,
-    elevation: 13,
-    backgroundColor: COLORS.white,
+  card: {
+    position:"absolute",
+    backgroundColor:'white',
+    width:'50%',  
+    paddingBottom:"130%"
+},
+  card1: {
+    position:"absolute",
+    backgroundColor:'white',
+    width:'50%',  
+    paddingBottom:"130%",
+    right:0,
+  },
+  card2: {
+    position:"absolute",
+    backgroundColor:'white',
+    width:'50%',  
+    paddingBottom:"10%",
+    bottom:0,
+  },
+  card3: {
+    position:"absolute",
+    backgroundColor:'white',
+    width:'50%',  
+    paddingBottom:"10%",
+    right:0,
+    bottom:0,
+  },
+img:{
+  elevation: 16,
+  width:"92%",
+  paddingBottom:"92%",
+  backgroundColor:'dodgerblue',
+  left:"4%",
+  top:"4%",
+  borderRadius:10,
+},
+mainstory:{
+  left:"4%",
+  top:"5%"
+},
+story:{
+  left:"4%",
+  top:"5%",
+},
+story1:{
+  left:"4%",
+  top:"6%",
+},
+story2:{
+  left:"4%",
+  top:"8%",
 }
+
+
 })
 //마이 컴포넌트 이동
+
