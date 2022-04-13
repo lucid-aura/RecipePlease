@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/7a52739f2b.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="project.config.js" charset="utf-8"></script>
+    <script type="text/javascript" src="commons.js" charset="utf-8"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
     <nav id="navBar" class="navbar-white">
@@ -19,7 +22,7 @@
             <li><a href="listing.html?category=entertain">접대용</a></li>
             <li><a href="listing.html?category=nightmeal">야식용</a></li>
         </ul>
-        <a href="#" class="register-btn">회원 가입하기</a>
+        <a href="login.html" class="register-btn" id="loginBtn" onclick="logout()">로그인</a>
         <i class="fas fa-bars" onclick="togglebtn()"></i>
     </nav>
     <div class="food-details">
@@ -45,7 +48,6 @@
                 <label class="guest-field">인원수</label>
                 <input  id="capacity" type="text" placeholder="" readonly>
             </div>
-            <button type="submit">별점 부탁드립니당</button>
         </form>
         
         <ul class="detail-list host" id="detail-list">
@@ -72,28 +74,54 @@
 
         <hr class="line">
 
+                
+        <div class="container host">
+        <table id="ratingTable">
+            <tr>
+                <th>ID</th>
+                <th>내용</th>
+                <th>평가점수</th>
+            </tr>
+
+        </table>
+        </div>
+
+
+        <div class="container host">
+
+            <form class="check-form" id="comment" class="input-group"  method="post">
+                <input id="ratingText" type="text" placeholder="레시피를 평가해주세요">
+                <span id="ratingStar">
+                    <i class="fa-regular fa-star" onclick="changeStar(1)"></i>
+                    <i class="fa-regular fa-star" onclick="changeStar(2)"></i>
+                    <i class="fa-regular fa-star" onclick="changeStar(3)"></i>
+                    <i class="fa-regular fa-star" onclick="changeStar(4)"></i>
+                    <i class="fa-regular fa-star" onclick="changeStar(5)"></i>
+                </span>
+                <button type="button" onclick="submitRating()">작성</button>
+            </form>
+        </div>
+
         <div class="host" id="host">
             <img src="images/host.jpg">
             <div>
                 <h2>Hosted By Beak's</h2>
-                <p><span>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star-half-stroke"></i>
-                    <i class="fa-regular fa-star"></i>
+                <p>
+                    <span>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                        <i class="fa-regular fa-star"></i>
                 </span>&nbsp; &nbsp; 300 reviews &nbsp; &nbsp; 질문 응답률 99% &nbsp; &nbsp; 질문 응답시간: 1시간이내</p>
             </div>
         </div>
         <a href="#" class="contact-host">Contact Host</a>
     </div>
+
+
     <div class="container">
         <div class="footer">
-            <a href ="https://facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href ="https://youtube.com/"><i class="fa-brands fa-youtube"></i></a>
-            <a href ="https://google.com/"><i class="fa-brands fa-google"></i></a>
-            <a href ="https://linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href ="https://instagram.com/"><i class="fa-brands fa-instagram"></i></a>
             <hr>
             <p> Copyright By 2022, 레시피를 부탁해</p>
         </div>
@@ -101,9 +129,40 @@
 
     <script>
         let navBar = document.getElementById("navBar")
+        let ratingScore = 0;
+        let recipeSeq = -1;
+        let loggedUser = {};
 
         function togglebtn(){
             navBar.classList.toggle("hidemenu");
+        }
+
+        function changeStar(index) {
+            ratingScore = index
+            $("#ratingStar i").attr('class', "fa-regular fa-star")
+            $("#ratingStar i:nth-child(-n+"+index+")").attr('class', "fa-solid fa-star")
+        }
+
+        function submitRating() {
+            let ratingComment = $("#ratingText").val()
+            $.ajax({
+                url : webAddress + "writeComment",
+                type : 'POST', 
+                data : {
+                    memberId:loggedUser.memberId,
+                    docsSeq:recipeSeq,
+                    ratingCategory:'recipe',
+                    ratingScore:ratingScore,
+                    ratingComment:ratingComment
+                }, 
+            success : function(res) {
+                alert("평가 등록 완료")
+                location.reload()
+            },
+            error : function(xhr, status) {
+                alert(xhr + " : " + status);
+            }
+            });
         }
 
         const categories = {
@@ -115,25 +174,44 @@
         }
 
 	    $( document ).ready(function() {
-            let ratingCount = 0;
+            
+            loggedUser = JSON.parse(sessionStorage.getItem("loggedUser"))
+            console.log(loggedUser)
+            kakaoInit()
+            checkLogin(loggedUser)
 
             var url = document.URL;
         	console.log(url);
-        	let recipeSeq = url.substring(url.indexOf("recipeSeq")).split("=")[1]
+        	recipeSeq = url.substring(url.indexOf("recipeSeq")).split("=")[1]
             console.log(recipeSeq);
 
             $.ajax({ // 평가 글
-	    		url: "http://192.168.0.4:3000/getAllRatingsBySeq",
+	    		url: webAddress + "getAllRatingsBySeq",
 	    		    data: {
 	    			    docsSeq:recipeSeq
 	    		    },
 	    		    success: function( result ) {
                        ratingCount = result.length
+                        console.log(result)
+                        $.each(result, function(index, value){
+                            $("<tr>" + 
+                                "<td>" + 
+                                    value.memberId +
+                                "</td>" + 
+                                "<td>" + 
+                                    value.ratingComment +
+                                "</td>" + 
+                                "<td>" + 
+                                    value.ratingScore +
+                                "</td>" + 
+                            "</tr>")
+                        .appendTo($("#ratingTable"))
+    		            });
 	    		  }
 	    	});
 
 	    	$.ajax({ // 디테일 레시피 정보
-	    		url: "http://192.168.0.4:3000/getOneRecipe",
+	    		url: webAddress + "getOneRecipe",
 	    		    data: {
 	    			    recipeSeq:recipeSeq
 	    		    },
@@ -168,7 +246,7 @@
 	    	});
 
             $.ajax({ //  레시피 사진
-	    		url: "http://192.168.0.4:3000/getPhoto",
+	    		url: webAddress + "getPhoto",
 	    		    data: {
 	    			    docsSeq:recipeSeq,
                         photoCategory:"recipe"
@@ -176,13 +254,11 @@
 	    		    success: function( result ) {
                         result.forEach(function(element, index){
                             if (element.photoTitle == "thumbnail") {
-                                //$("#thumbnailPhoto").attr("src", "images/food-1.jpg")
-                                $("#thumbnailPhoto").attr("src", "images/test.jpg")
+                                $("#thumbnailPhoto").attr("src", webPhoto + element.photoUrl)
                             }
                             else {
                                 $("<li>" + 
-                                    //"<img src=" + 'images/food-' + (index+2) +'.jpg' + ">" + 
-                                    "<img src=" + 'images/test.jpg' + ">" + 
+                                    "<img src=" + webPhoto + element.photoUrl + ">" + 
                                     "<span>" + element.photoContent + "</span>" +
                                     "</li>").appendTo("#detail-list")
                             }
@@ -190,22 +266,6 @@
                        console.log(result)
 	    		  }
 	    	});
-
-
-
-                //     <div class="host" id="host">
-                //     <img src="images/host.jpg">
-                //     <div>
-                //         <h2>Hosted By Beak's</h2>
-                //         <p><span>
-                //             <i class="fa-solid fa-star"></i>
-                //             <i class="fa-solid fa-star"></i>
-                //             <i class="fa-solid fa-star"></i>
-                //             <i class="fa-solid fa-star-half-stroke"></i>
-                //             <i class="fa-regular fa-star"></i>
-                //         </span>&nbsp; &nbsp; 300 reviews &nbsp; &nbsp; 질문 응답률 99% &nbsp; &nbsp; 질문 응답시간: 1시간이내</p>
-                //     </div>
-                // </div>
         });
     </script>
 </body>

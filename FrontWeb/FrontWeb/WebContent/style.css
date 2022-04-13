@@ -46,7 +46,7 @@ nav{
 }/*회원 가입 부분 버튼 처리 & 지정 부분 css처리*/
 
 .container{
-    padding: 0 7%;
+    padding: 7%;
 }/*컨테이너 설정*/
 
 .header h1{
@@ -59,7 +59,7 @@ nav{
 
 .search-bar{
     background: #fff;
-    width: 70%;
+    width: 50%;
     margin: 30px auto;
     padding: 6px 10px 6px 30px;
     border-radius: 50px;

@@ -40,6 +40,7 @@ export default function UploadScreen() {
     // 카테고리
     const [recipeBigCategory, setPickerSelect] = useState('')
     const [recipeSmallCategory, setPickerSelect2] = useState('')
+    const [recipeCapacity, setPickerSelect3] = useState('')
 
     const [seq, setSeq] = useState({})
 
@@ -178,7 +179,7 @@ export default function UploadScreen() {
                         recipeVideoUrl: "test",
                         recipeGoodsTag: String(tags.tagsArray),
                         recipePrice: recipePrice,
-                        recipeCapacity:0,
+                        recipeCapacity:recipeCapacity,
                         recipeThumbnail:thumbnailAssets.assets[0].fileName
                     }
                 }).then(function (response) {
@@ -189,6 +190,7 @@ export default function UploadScreen() {
                         setSeq(response.data)
                         uploadRecipeThumbnailImg(response.data)
                         uploadRecipeContentImg(response.data)
+                        navigation.navigate('Login' as never)
                         navigation.navigate('RecipeNavigator' as never, {
                             screen: 'RecipeDetail',
                             params: {
@@ -269,15 +271,15 @@ export default function UploadScreen() {
         { label: '야식용', value: 'nightmeal' }
     ]
     const values3 = [
-        { label: "1인분", value: 'one' },
-        { label: "2인분", value: 'two' },
-        { label: "3인분", value: 'three' },
-        { label: "4인분", value: 'four' },
-        { label: "5인분", value: 'five' },
-        { label: "6인분", value: 'six' },
-        { label: "7인분", value: 'seven' },
-        { label: "8인분", value: 'eight' },
-        { label: "9인분", value: 'nine' }
+        { label: "1인분", value: 1 },
+        { label: "2인분", value: 2 },
+        { label: "3인분", value: 3 },
+        { label: "4인분", value: 4 },
+        { label: "5인분", value: 5 },
+        { label: "6인분", value: 6 },
+        { label: "7인분", value: 7 },
+        { label: "8인분", value: 8 },
+        { label: "9인분", value: 9 }
     ]
 
     return (
@@ -372,7 +374,7 @@ export default function UploadScreen() {
                         leftElementContainerStyle={{ marginLeft: 3 }}
                         containerStyle={{ width: (Dimensions.get('window').width - 40) }}
                         inputContainerStyle={[styles.textInput, { backgroundColor: '#fff' }]}
-                        inputStyle={{ color: '#fff' }}
+                        inputStyle={{ color: 'black' }}
                         onFocus={() => {
                             setTagsColor('#fff')
                             setTagsText('#3ca897')
@@ -507,7 +509,8 @@ const styles = StyleSheet.create({
         padding: 3,
     },
     tag: {
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        height:30
     },
     tagText: {
         color: '#3ca897'

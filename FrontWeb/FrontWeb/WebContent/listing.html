@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/7a52739f2b.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="project.config.js" charset="utf-8"></script>
+    <script type="text/javascript" src="commons.js" charset="utf-8"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
     <nav id="navBar" class="navbar-white">
@@ -18,7 +21,7 @@
             <li><a href="listing.html?category=entertain">접대용</a></li>
             <li><a href="listing.html?category=nightmeal">야식용</a></li> <!--임의 설정입니다. 난주 jsp 작업할때 수정 하세요-->
         </ul>
-        <a href="#" class="register-btn">회원 가입하기</a>
+        <a href="login.html" class="register-btn" id="loginBtn" onclick="logout()">로그인</a>
         <i class="fas fa-bars" onclick="togglebtn()"></i>
     </nav>
 
@@ -200,7 +203,7 @@
             $.each(data, function(index, value){
     		        	    $("<div class='best' onclick='goRecipeDetail(" + value.recipeSeq +")'>" + 
                                     "<div class='best-img'>" +
-    		        	    	        "<img src=" + 'images/image-10.jpg' + ">" +	
+    		        	    	        "<img src=" + webPhoto + value.recipeThumbnail + ">" +	
                                     "</div>" +
                                     "<div class='best-info'>" + 
                                         "<p>" + categories[value.recipeBigCategory] +"</p>" +
@@ -215,6 +218,10 @@
         }
 
         $( document ).ready(function() {
+            let loggedUser = sessionStorage.getItem("loggedUser")
+            checkLogin(loggedUser)
+            kakaoInit()
+
             $("#checkBoxLivestock").attr("checked", true);
             $("#checkBoxSeafood").attr("checked", true);
         	var url = document.URL;
@@ -222,7 +229,7 @@
         	$("#listHead").text(categories[category] +  " 조회순")
             
             $.ajax({
-	    		url: "http://192.168.0.4:3000/countRecipe",
+	    		url: webAddress + "countRecipe",
 	    		    data: {
 	    			    bigCategory:"livestock",
                         smallCategory:category
@@ -237,7 +244,7 @@
             });
 
             $.ajax({
-	    		url: "http://192.168.0.4:3000/countRecipe",
+	    		url: webAddress + "countRecipe",
 	    		    data: {
 	    			    bigCategory:"seafood",
                         smallCategory:category
@@ -252,7 +259,7 @@
             });
 
         	$.ajax({
-	    		url: "http://192.168.0.4:3000/getSmallRecommendRecipe",
+	    		url: webAddress + "getSmallRecommendRecipe",
 	    		    data: {
 	    			    category:category
 	    		    },
@@ -316,7 +323,7 @@
                     bigOptions.push("seafood")
                 }
                 $.ajax({
-	    		url: "http://192.168.0.4:3000/searchRecipe",
+	    		url: webAddress + "searchRecipe",
 	    		    data: {
                         search:"",
 	    			    bigOptions:bigOptions.toString(),
@@ -344,7 +351,7 @@
                     bigOptions.push("seafood")
                 }
                 $.ajax({
-	    		url: "http://192.168.0.4:3000/searchRecipe",
+	    		url: webAddress + "searchRecipe",
 	    		    data: {
                         search:"",
 	    			    bigOptions:bigOptions.toString(),
@@ -366,7 +373,7 @@
                 }
 
                 $.ajax({
-	    		url: "http://192.168.0.4:3000/searchRecipe",
+	    		url: webAddress + "searchRecipe",
 	    		    data: {
                         search:"",
 	    			    bigOptions:bigOptions.toString(),
