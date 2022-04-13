@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Chef</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/7a52739f2b.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    
+
+</head>
+<body>
+
+    <!-- 
+        <a href="javascript:kakaoLogin();"><img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" alt="카카오계정 로그인" style="height: 100px;"/></a>
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+        <script>
+            window.Kakao.init('694bef496dca2e0892b337ea4ddeaf9b');
+            
+            function kakaoLogin() {
+                window.Kakao.Auth.authorize({
+                    redirectUri: encodeURI('http://192.168.0.4:5500/WebContent/cart.html')
+                })
+                   
+
+                window.Kakao.Auth.login({
+                    scope: 'profile_nickname', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
+                    success: function(response) {
+                        console.log(response) // 로그인 성공하면 받아오는 데이터
+                        window.Kakao.API.request({ // 사용자 정보 가져오기 
+                            url: '/v2/user/me',
+                            success: (res) => {
+                                const kakao_account = res.kakao_account;
+                                console.log(kakao_account)
+                                window.location.href='http://192.168.0.4:5500/WebContent/cart.html' //리다이렉트 되는 코드
+                            }
+                        });
+                        
+                    },
+                    fail: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
+        </script>
+        -->
+
+
+    <div class="header">
+        <nav id="navBar">
+            <a href="index.html"><img src="images/logo.png" class="logo"></a> <!--이거 나중에 jsp 작업할때 수정 하세요-->
+            <ul class="nav-links">
+                <li><a href="#" class="simple">홈</a></li>
+                <li><a href="listing.html?category=personal">개인용</a></li>
+                <li><a href="listing.html?category=entertain">접대용</a></li>
+                <li><a href="listing.html?category=nightmeal">야식용</a></li>
+            </ul>
+            <a href="#" class="register-btn">회원 가입하기</a>
+            <i class="fa-solid fa-bars" onclick="togglebtn()"></i>
+        </nav>
+        <div class="container">
+            <h1>먹을거 고민은 이제 그만~</h1>
+            <div class="search-bar">
+                <form>
+                    <div>
+                        <label>레시피 검색</label>
+                        <input id="searchInput" type="text" placeholder="검색어를 입력해주세요">
+                    </div>
+                    <button onclick="search()" type="button"><img src="images/search.png"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+        <h2 class="sub-title">축산물 추천 레시피</h2>
+        <div class="latest" id="recommendLivestock">
+        </div>
+
+        <h2 class="sub-title">해산물 추천 레시피</h2>
+        <div class="latest" id="recommendSeafood">
+        </div>
+
+        <h2 class="sub-title">조회순 추천 레시피</h2>
+        <div class="latest" id="recommendReadcount">
+        </div>
+
+        <div class="etc">
+            <h3>요리 지식을 <br>나누어 보세요</h3>
+            <p>당신도 어느새 전문적인 <br>요리연구가 가 될 수 있습니다.</p>
+            <a href="#" class="etc-btn">정보가 더 필요 한가요?</a>
+        </div>
+
+        <h2 class="sub-title">굿즈</h2>
+
+        <div class="goods">
+            <div>
+            <img src="images/pots.jpg">
+            <p>현존 하는 냄비중 가장 땐땐합니다.</p>
+            </div>
+            <div>
+            <img src="images/plates.jpg">
+            <p>도마중에 아주 위생적입니다.</p>
+            </div>
+            <div>
+            <img src="images/pans.jpg">
+            <p>말안들을때 무기로 사용하기 아주 적합합니다.</p>
+            </div>
+        </div>
+
+        <a href="#" class="start-btn">당신의 능력을 보여 주세요</a>
+
+        <div class="about-msg">
+            <h2>레시피를 부탁해 관하여</h2>
+                <p>● 기획의도(목적) <br>
+                    - 자신만의 레시피를 다른 사람들과 공유하고 더 나아가 수익을 창출할 수 있는 앱을 만들어 보기위해 기획 <br>
+                    
+                    ● 주요분석 내용 추론    <br>
+                    - 사용자들이 자유롭게 자신들만의 레시피를 공유    <br>
+                    - 우수 업로더를 선정하여 리워드를 부여하고 레시피를 유료화할 수 있게 하여 수익 창출의 기회를 제공 <br>
+                    - 앱 이용자들이 사용하고 있는 주방 도구들을 함께 살펴볼 수 있음   <br>           
+                    
+                    ● 기대 효과   <br>
+                    - 우수 업로더들에게 보상 제공으로 이용자들의 참여 독려  <br>
+                    - 평가와 추천 기능으로 이용자들의 앱 사용 증대<br> 
+                </p>
+        </div>
+
+        <div class="footer">
+            <a href ="https://facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href ="https://youtube.com/"><i class="fa-brands fa-youtube"></i></a>
+            <a href ="https://google.com/"><i class="fa-brands fa-google"></i></a>
+            <a href ="https://linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href ="https://instagram.com/"><i class="fa-brands fa-instagram"></i></a>
+            <hr>
+            <p> Copyright By 2022, 레시피를 부탁해</p>
+        </div>
+
+    </div>
+
+    <script>
+        let navBar = document.getElementById("navBar")	
+        let recommendLivestock = {}
+        function togglebtn(){
+            navBar.classList.toggle("hidemenu");
+        }
+
+        function goRecipeDetail(recipeSeq) {
+            location.href = "food.html?recipeSeq=" + recipeSeq
+        }
+
+        function search() {
+            location.href = "search.html?search=" + $("#searchInput").val()
+        }
+
+	    $( document ).ready(function() {
+	    	$.ajax({
+	    		url: "http://192.168.0.4:3000/getRecommendRecipeTest",
+	    		    data: {
+	    			    category:"livestock"
+	    		    },
+	    		    success: function( result ) {
+	    			    recommendLivestock = result
+                        
+	    		        $.each(recommendLivestock, function(index, value){
+    		        	    $("<div onclick='goRecipeDetail(" + value.recipeSeq +")'>" + 
+    		        	    	"<img src=" + 'images/image-10.jpg' + ">" +	
+    		        	    	"<span>" +
+    		        	    	"<h3>" +  value.recipeTitle + "</h3>" +
+    		        	    	"<p>평점: " +  value.recipeRating + "</p>" +
+    		        	    	"</span>" +
+    		        	    "</div>")
+    		        	    .appendTo("#recommendLivestock");
+    		            });
+	    		  }
+	    	});
+
+	    	$.ajax({
+	    		url: "http://192.168.0.4:3000/getRecommendRecipeTest",
+	    		    data: { category:"seafood" },
+	    		    success: function( result ) {
+	    			    recommendLivestock = result
+	    		        $.each(recommendLivestock, function(index, value){
+    		        	    $("<div onclick='goRecipeDetail(" + value.recipeSeq +")'>" + 
+    		        	    	"<img src=" + 'images/image-10.jpg' + ">" +	
+    		        	    	"<span>" +
+    		        	    	"<h3>" +  value.recipeTitle + "</h3>" +
+    		        	    	"<p>평점: " +  value.recipeRating + "</p>" +
+    		        	    	"</span>" +
+    		        	    "</div>")
+    		        	    .appendTo("#recommendSeafood");
+    		            });
+	    		  }
+	    	});
+
+        $.ajax({
+	    		url: "http://192.168.0.4:3000/getRecommendRecipeTest",
+	    		    data: { category:"readcount" },
+	    		    success: function( result ) {
+	    			    recommendLivestock = result
+	    		        $.each(recommendLivestock, function(index, value){
+    		        	    $("<div onclick='goRecipeDetail(" + value.recipeSeq +")'>" + 
+    		        	    	"<img src=" + 'images/image-10.jpg' + ">" +	
+    		        	    	"<span>" +
+    		        	    	"<h3>" +  value.recipeTitle + "</h3>" +
+    		        	    	"<p>평점: " +  value.recipeRating + "</p>" +
+    		        	    	"</span>" +
+    		        	    "</div>")
+    		        	    .appendTo("#recommendReadcount");
+    		            });
+	    		  }
+	    	});
+	    });
+
+
+
+	</script>
+    
+</body>
+</html>

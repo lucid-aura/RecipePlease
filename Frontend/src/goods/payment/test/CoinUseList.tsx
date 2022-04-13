@@ -6,6 +6,11 @@ import config from "../../../project.config"
 
 const Item = ({docsSeq, coinCount, coinInOut, coinDate}:any) => {
 
+    // 숫자 자리수 구분
+    const divideNum = (num:number) => {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
     return (
         <ScrollView>
             <View style={styles.itemContainer}>
@@ -15,7 +20,7 @@ const Item = ({docsSeq, coinCount, coinInOut, coinDate}:any) => {
                         : <Text style={styles.coinIn}>{coinInOut}</Text>
                     }
                     
-                    <Text style={styles.coinCount}>{coinCount} 코인</Text>
+                    <Text style={styles.coinCount}>{divideNum(coinCount)} 코인</Text>
                 </View>
                 <Text>{docsSeq}</Text>
                 <Text>{coinDate}</Text>
@@ -41,7 +46,7 @@ export default function CoinUseList({user}:any) {
         }
     
         getCoinData();
-    }, [])
+    }, []);
 
     const renderItem = ({item}:any) => {
         return (

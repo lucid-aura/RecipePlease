@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="pay.css">
+
+</head>
+<body>
+
+<div class="container">
+
+    <form action="">
+
+        <div class="row">
+
+            <div class="col">
+
+                <h3 class="title">주소 입력</h3>
+
+                <div class="inputBox">
+                    <span>이름 :</span>
+                    <input type="text" placeholder="이름을 입력하세요">
+                </div>
+                <div class="inputBox">
+                    <span>이메일 :</span>
+                    <input type="email" placeholder="이메일 입력하세요">
+                </div>
+                <div class="inputBox">
+                    <span>주소 입력 :</span>
+                    <input type="text" placeholder="상세주소 입력하세요">
+                </div>
+                <div class="inputBox">
+                    <span>도시 입력 :</span>
+                    <input type="text" placeholder="도시 입력 하세요">
+                </div>
+
+                <div class="flex">
+                    <div class="inputBox">
+                        <span>도 입력 :</span>
+                        <input type="text" placeholder="행정 도 입력">
+                    </div>
+                    <div class="inputBox">
+                        <span>우편번호 :</span>
+                        <input type="number" placeholder="5자리 입력">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col">
+
+                <h3 class="title">결재 정보 입력</h3>
+
+                <div class="inputBox">
+                    <span>사용가능 한 카드 :</span>
+                    <img src="images/card_img.png" alt="">
+                </div>
+                <div class="inputBox">
+                    <span>카드 소유주 입력 :</span>
+                    <input type="text" placeholder="카드 소유주 입력">
+                </div>
+                <div class="inputBox">
+                    <span>카드 넘버 입력 :</span>
+                    <input type="number" placeholder="1111-2222-3333-4444">
+                </div>
+                <div class="inputBox">
+                    <span>유효기간(월) :</span>
+                    <input type="number" placeholder="ex)01">
+                </div>
+
+                <div class="flex">
+                    <div class="inputBox">
+                        <span>유효기간(년) :</span>
+                        <input type="number" placeholder="ex)22">
+                    </div>
+                    <div class="inputBox">
+                        <span>CVC :</span>
+                        <input type="text" placeholder="카드 뒷면 확인">
+                    </div>
+                </div>
+
+            </div>
+    
+        </div>
+
+        <input type="submit" value="결재 버튼" class="submit-btn">
+
+    </form>
+
+</div>    
+    
+</body>
+</html>

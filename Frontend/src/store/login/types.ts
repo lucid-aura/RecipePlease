@@ -3,7 +3,15 @@ import {Action} from 'redux'
 export type User = {
     memberId: string
     memberNickname: string
-    password?:string
+    memberEmail?: string
+    memberPhone?: string
+    memberCoin?: string
+    memberMainAddr?: string
+    memberDetailAddr?: string
+    memberZipcode?: number
+    memberName?: string
+    memberGender?: string
+    memberGrade?: string    
 }
 
 export type State = {

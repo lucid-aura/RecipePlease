@@ -9,5 +9,12 @@
 	SELECT COUNT(*) FROM RECIPELIKE
 </select>
 
+<insert id="likeRecipe" parameterType="com.recipe.a.dto.RecipeLikeDto">
+	INSERT INTO RECIPELIKE(LIKESEQ, RECIPESEQ, MEMBERID)
+	VALUES(NEXTVAL('LIKESEQ'), #{recipeSeq}, #{memberId})
+</insert>
 
+<delete id="unLikeRecipe">
+	DELETE FROM RECIPELIKE WHERE RECIPESEQ=#{recipeSeq} AND MEMBERID=#{memberId}
+</delete>
 </mapper>

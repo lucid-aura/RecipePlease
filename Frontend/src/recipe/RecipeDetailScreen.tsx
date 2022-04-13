@@ -2,10 +2,11 @@
 실행 전 Axios url 반드시 확인해주세요! 현재 각자의 로컬 주소로 되어있습니다.
 
 npm install react-native-tags-input
+npm install @react-native-community/blur
+
 */
 
-import { useNavigation } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Button, StyleSheet, Text, View, Image, SafeAreaView, ScrollView, Dimensions, Alert } from "react-native";
 import axios from 'axios';
@@ -17,14 +18,20 @@ import { Rating } from "react-native-ratings";
 import YoutubePlayer, {YoutubeIframeRef} from "react-native-youtube-iframe";
 import { NavigationHeader } from "../theme";
 import config from "../project.config"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../store";
 import * as L from '../store/login'
 import { BlurView } from "@react-native-community/blur";
+import * as D from "../store/drawer"
 
 export default function RecipeDetailScreen({ route }:any){
 
     const navigation = useNavigation()
+    const dispatch = useDispatch()
+    const goShoppingCart = () => {
+        dispatch(D.drawerChangeFalseAction())
+        navigation.dispatch(DrawerActions.openDrawer())
+    }
 
     const [thumbnail, setThumbnail] = useState({
         docsSeq:-1,
@@ -60,9 +67,9 @@ export default function RecipeDetailScreen({ route }:any){
 
     const { seq } = route.params; // 받아온 레시피 seq
     const { category } = route.params; // 받아온 카테고리
-    const { index } = route.params;
-    const { changeAvarage } = route.params;
-    const { changeReadcount } = route.params;
+    // const { index } = route.params;
+    // const { changeAvarage } = route.params;
+    // const { changeReadcount } = route.params;
     const log = useSelector<AppState, L.State>((state) => state.login)
     const {loggedIn, loggedUser} = log
     
@@ -128,7 +135,7 @@ export default function RecipeDetailScreen({ route }:any){
             if (recipeRes.data.recipeVideoUrl != ""){
                 setUrl(recipeRes.data.recipeVideoUrl.split("=")[1])
             } 
-            changeReadcount(index, recipeRes.data.recipeReadcount)
+            //changeReadcount(index, recipeRes.data.recipeReadcount)
             const thumbnailRes = await axios.get( config.address + "getThumbnailPhoto?docsSeq=" + seq +"&photoCategory=" + category) // 해당 레시피의 썸네일 사진을 받아옴
             setThumbnail(thumbnailRes.data);
 
@@ -172,11 +179,10 @@ export default function RecipeDetailScreen({ route }:any){
     return(
         
         <SafeAreaView style={styles.container}>
-
             <View>
             <NavigationHeader title="홈" 
-                Left= {() => <Icon name="arrow-left-bold" size={30} onPress={goBack} />}
-                Right= {() => <Icon name="cart-heart" size={30} />} />
+                Left= {() => <Icon name="arrow-left-bold" size={40} onPress={goBack} />}
+                Right= {() => <Icon name="cart-heart" size={40} onPress={goShoppingCart} />} />
 
             <ScrollView overScrollMode="never" style={styles.contentContainer}>
                 {/*조회수, 좋아요, 타이틀과 사진이 들어가는 View */}
@@ -189,7 +195,7 @@ export default function RecipeDetailScreen({ route }:any){
 
                     </View>
                     <View style={{alignItems:"center"}}>
-                        <Image style={{borderRadius:15}} source={{ uri:thumbnail.photoUrl, width:520, height:340 }} />
+                        <Image style={{borderRadius:15}} source={{uri:  config.photo+thumbnail.photoUrl, width:520, height:340 }} />
                     </View>
                 </View>
                 }
@@ -259,12 +265,13 @@ export default function RecipeDetailScreen({ route }:any){
                 <View>
                     {/* 평점 리스트 및 입력 부분 자식 컴포넌트 */}
                     <Text style={styles.subTitle}>평가</Text>
-                    <RecipeDetailRating  seq={seq} setAvarage={setAvarage} avarage={avarage} index={index} changeAvarage={changeAvarage} />
+                    <RecipeDetailRating  seq={seq} setAvarage={setAvarage} avarage={avarage} />
                 </View>
                 }
                 {blur}
 
             </ScrollView>
+            <Text></Text>
             </View>
         </SafeAreaView>
     )

@@ -28,10 +28,14 @@ public interface MembersDao {
 	public MembersDto login(String memberPwd);
 	
 	//레시피 시퀀스 받아오기
-	public List<RecipeDto> getRecipeSeq(String memberId);
-	public RecipeDto getRecipeInfo(int recipeSeq);
-	public PhotoDto getThumbnail(int recipeSeq);
-	public int getRatingCount(int recipeSeq);
-	
 	public List<RecipeDto> test1();
+	
+	// 이메일 수정
+	public int updateEmail(String memberId, String memberEmail);
+	// 닉네임 수정
+	public int updateNickname(String memberId, String memberNickname);
+	// 전화번호 수정
+	public int updatePhone(String memberId, String memberPhone);
+	// 주소 수정
+	public int updateAddr(MembersDto dto);
 }

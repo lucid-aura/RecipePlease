@@ -9,5 +9,13 @@
 	SELECT COUNT(*) FROM RATING
 </select>
 
+<select id="getAllRatingsBySeq" parameterType="Integer" resultType="com.recipe.a.dto.RatingDto">
+	SELECT * FROM RATING WHERE DOCSSEQ=#{docsSeq}
+</select>
+
+<insert id="writeComment" parameterType="com.recipe.a.dto.RatingDto">
+	INSERT INTO RATING(RATINGSEQ, MEMBERID, DOCSSEQ, RATINGCATEGORY, RATINGSCORE, RATINGCOMMENT)
+    VALUES(NEXTVAL('RATINGSEQ'), #{memberId}, #{docsSeq}, #{ratingCategory}, #{ratingScore}, #{ratingComment})
+</insert>
 
 </mapper>

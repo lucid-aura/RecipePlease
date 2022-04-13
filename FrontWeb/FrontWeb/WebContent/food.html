@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>food Detail - Code Chef</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/7a52739f2b.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+    <nav id="navBar" class="navbar-white">
+        <a href="index.html"><img src="images/logo2.png" class="logo"></a>
+        
+        <ul class="nav-links">
+            <li><a href="#" class="simple">홈</a></li>
+            <li><a href="listing.html?category=personal">개인용</a></li>
+            <li><a href="listing.html?category=entertain">접대용</a></li>
+            <li><a href="listing.html?category=nightmeal">야식용</a></li>
+        </ul>
+        <a href="#" class="register-btn">회원 가입하기</a>
+        <i class="fas fa-bars" onclick="togglebtn()"></i>
+    </nav>
+    <div class="food-details">
+        <div class="food-title" id="food-title">
+        </div>
+        <div class="gallery">
+            <div class="gallery-img-1"><img id="thumbnailPhoto" src=""></div>
+        </div>
+        
+        <div class="small-details" id="small-details"></div>
+
+        <hr class="line"> 
+        <form class="check-form">
+            <div>
+                <label>대분류</label>
+                <input id="bigCategory" type="text" placeholder="" readonly>
+            </div>
+            <div>
+                <label>소분류</label>
+                <input id="smallCategory"  type="text" placeholder="" readonly>
+            </div>
+            <div>
+                <label class="guest-field">인원수</label>
+                <input  id="capacity" type="text" placeholder="" readonly>
+            </div>
+            <button type="submit">별점 부탁드립니당</button>
+        </form>
+        
+        <ul class="detail-list host" id="detail-list">
+            <li><i class="fa-solid fa-kitchen-set"></i>전복 크림 파스타.
+                    <span>조리법이 쉽고 손님 접대로도 좋습니다.</span>
+            </li>
+        </ul>
+
+        <hr class="line">
+        
+        <p class="home-desc" id="home-desc"></p>
+
+        <hr class="line">
+
+        <div class="video">
+            <h3>유튜브 동영상</h3>
+            <iframe width="400" height="500" 
+                id="video"
+                src="" 
+                title="YouTube video player" 
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen></iframe>
+        </div>
+
+        <hr class="line">
+
+        <div class="host" id="host">
+            <img src="images/host.jpg">
+            <div>
+                <h2>Hosted By Beak's</h2>
+                <p><span>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                    <i class="fa-regular fa-star"></i>
+                </span>&nbsp; &nbsp; 300 reviews &nbsp; &nbsp; 질문 응답률 99% &nbsp; &nbsp; 질문 응답시간: 1시간이내</p>
+            </div>
+        </div>
+        <a href="#" class="contact-host">Contact Host</a>
+    </div>
+    <div class="container">
+        <div class="footer">
+            <a href ="https://facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href ="https://youtube.com/"><i class="fa-brands fa-youtube"></i></a>
+            <a href ="https://google.com/"><i class="fa-brands fa-google"></i></a>
+            <a href ="https://linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href ="https://instagram.com/"><i class="fa-brands fa-instagram"></i></a>
+            <hr>
+            <p> Copyright By 2022, 레시피를 부탁해</p>
+        </div>
+    </div>
+
+    <script>
+        let navBar = document.getElementById("navBar")
+
+        function togglebtn(){
+            navBar.classList.toggle("hidemenu");
+        }
+
+        const categories = {
+            livestock:"축산물",
+            seafood:"해산물",
+            personal:"개인용",
+            entertain:"접대용",
+            nightfood:"야식용"
+        }
+
+	    $( document ).ready(function() {
+            let ratingCount = 0;
+
+            var url = document.URL;
+        	console.log(url);
+        	let recipeSeq = url.substring(url.indexOf("recipeSeq")).split("=")[1]
+            console.log(recipeSeq);
+
+            $.ajax({ // 평가 글
+	    		url: "http://192.168.0.4:3000/getAllRatingsBySeq",
+	    		    data: {
+	    			    docsSeq:recipeSeq
+	    		    },
+	    		    success: function( result ) {
+                       ratingCount = result.length
+	    		  }
+	    	});
+
+	    	$.ajax({ // 디테일 레시피 정보
+	    		url: "http://192.168.0.4:3000/getOneRecipe",
+	    		    data: {
+	    			    recipeSeq:recipeSeq
+	    		    },
+	    		    success: function( result ) {
+                        $("<div><h1>" + result.recipeTitle + "</h1>" + 
+                                "<div class='row'>").appendTo("#food-title")
+                        for (var i = 0; i< 5; i++) {
+                            if (i < Math.round(result.recipeRating)) {
+                                $("<i class='fa-solid fa-star'></i>").appendTo("#food-title")
+                            }
+                            else {
+                                $("<i class='fa-regular fa-star'></i>").appendTo("#food-title")
+                            }
+                        }
+                        $("<span>리뷰 수 : " + ratingCount +"</span></div>" + 
+                            "<div><p>작성자 : " + result.memberId + "</p></div>"
+                        ).appendTo("#food-title")
+
+                        $("<h4>" + result.recipeGoodsTag + "</h4>").appendTo("#small-details")
+
+                        $("#bigCategory").attr("placeholder", categories[result.recipeBigCategory]);
+                        $("#smallCategory").attr("placeholder", categories[result.recipeSmallCategory]);
+                        $("#capacity").attr("placeholder", result.recipeCapacity);
+                        
+                        $("<p>" + result.recipeContent + "</p>").appendTo("#home-desc")
+
+                        // 유튜브 영상은 embed로 바꿔야 함
+                        $("#video").attr("src", "https://www.youtube.com/embed/"+result.recipeVideoUrl.split("=")[1]);
+
+
+	    		  }
+	    	});
+
+            $.ajax({ //  레시피 사진
+	    		url: "http://192.168.0.4:3000/getPhoto",
+	    		    data: {
+	    			    docsSeq:recipeSeq,
+                        photoCategory:"recipe"
+	    		    },
+	    		    success: function( result ) {
+                        result.forEach(function(element, index){
+                            if (element.photoTitle == "thumbnail") {
+                                //$("#thumbnailPhoto").attr("src", "images/food-1.jpg")
+                                $("#thumbnailPhoto").attr("src", "images/test.jpg")
+                            }
+                            else {
+                                $("<li>" + 
+                                    //"<img src=" + 'images/food-' + (index+2) +'.jpg' + ">" + 
+                                    "<img src=" + 'images/test.jpg' + ">" + 
+                                    "<span>" + element.photoContent + "</span>" +
+                                    "</li>").appendTo("#detail-list")
+                            }
+                        });  
+                       console.log(result)
+	    		  }
+	    	});
+
+
+
+                //     <div class="host" id="host">
+                //     <img src="images/host.jpg">
+                //     <div>
+                //         <h2>Hosted By Beak's</h2>
+                //         <p><span>
+                //             <i class="fa-solid fa-star"></i>
+                //             <i class="fa-solid fa-star"></i>
+                //             <i class="fa-solid fa-star"></i>
+                //             <i class="fa-solid fa-star-half-stroke"></i>
+                //             <i class="fa-regular fa-star"></i>
+                //         </span>&nbsp; &nbsp; 300 reviews &nbsp; &nbsp; 질문 응답률 99% &nbsp; &nbsp; 질문 응답시간: 1시간이내</p>
+                //     </div>
+                // </div>
+        });
+    </script>
+</body>
+</html>

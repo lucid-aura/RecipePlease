@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Chef</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/7a52739f2b.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+    <nav id="navBar" class="navbar-white">
+        <a href="index.html"><img src="images/logo2.png" class="logo"></a> <!--이거 나중에 jsp 작업할때 수정 하세요-->
+        <ul class="nav-links">
+            <li><a href="index.html" class="simple">홈</a></li>
+            <li><a href="listing.html?category=personal">개인용</a></li>
+            <li><a href="listing.html?category=entertain">접대용</a></li>
+            <li><a href="listing.html?category=nightmeal">야식용</a></li> <!--임의 설정입니다. 난주 jsp 작업할때 수정 하세요-->
+        </ul>
+        <a href="#" class="register-btn">회원 가입하기</a>
+        <i class="fas fa-bars" onclick="togglebtn()"></i>
+    </nav>
+
+    <div class="container">
+
+        <div class="list-container">
+            <div class="left-col" id="left-col">
+                <h1 id="listHead"></h1>
+                <!-- <div class="best" >
+                    <div class="best-img">
+                        <img src="images/image-s1.jpg">
+                    </div>
+                    <div class="best-info">
+                        <p>집에서 간단히 만드는 샌드위치 입니다.</p>
+                        <h3>손님 접대 및 야식으로 좋습니다.</h3>
+                        <p>샌드위치/ 야식/ 은근 손 많이감</p>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <div class="best-skill">
+                            <p>중급자 이상</p>
+                            <h4>재료준비에 취향에 따라 결정 <span>/주방일이 많음</span></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="best">
+                    <div class="best-img">
+                        <img src="images/image-s2.jpg">
+                    </div>
+                    <div class="best-info">
+                        <p>나들이 혹은 접대용으로 만드는 핫도그 입니다..</p>
+                        <h3>손님 접대 및 식사대용으로 좋습니다.</h3>
+                        <p>핫도그/ 손님접대/ 은근 손 많이감</p>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <div class="best-skill">
+                            <p>중급자 이상</p>
+                            <h4>재료준비에 취향에 따라 결정 <span>/주방일이 많음</span></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="best">
+                    <div class="best-img">
+                        <img src="images/image-s3.jpg">
+                    </div>
+                    <div class="best-info">
+                        <p>든든한 한끼로 오늘 식사해 보세요</p>
+                        <h3>주말 저녁은 갈비 덮밥으로</h3>
+                        <p>갈비덮밥/ 식사/ 재료비 비쌈</p>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <div class="best-skill">
+                            <p>초급자 이상</p>
+                            <h4>고기값에 따라 변동성이 있음 <span>/주방일이 적음</span></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="best">
+                    <div class="best-img">
+                        <img src="images/image-s4.jpg">
+                    </div>
+                    <div class="best-info">
+                        <p>가오 잡기 충분한 초밥 만들기</p>
+                        <h3>조리복에 사시미로 준비하면 일식요리사가 될수 있습니다.</h3>
+                        <p>초밥/ 손님접대/ 궁극의 기술을 요함</p>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <div class="best-skill">
+                            <p>고급자 이상</p>
+                            <h4>재료값 너무 비쌈 <span>/주방일 많지 않음</span></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="best">
+                    <div class="best-img">
+                        <img src="images/image-s5.jpg">
+                    </div>
+                    <div class="best-info">
+                        <p>초간편 파스타 만들기</p>
+                        <h3>누구나 쉽게 만들수 있습니다.</h3>
+                        <p>파스타/ 야식/ 너무 쉬움</p>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <div class="best-skill">
+                            <p>초급자 이상</p>
+                            <h4>재료준비에 취향에 따라 결정 <span>/주방일 너무 편함</span></h4>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+                
+            <div class="right-col">
+                <div class="sidebar">
+                    <h2>세부사항 선택</h2>
+                    <h3>분류</h3>
+                    <div class="filter">
+                        <input type="checkbox" id="checkBoxLivestock"> <p>축산물</p> <span id="countLivestock"></span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox" id="checkBoxSeafood"> <p>해산물</p> <span id="countSeafood"></span>
+                    </div>
+                    <h3>정렬방식</h3>
+                    <div class="filter">
+                        <input type="radio" value="readcount" name="sortRadio" id="sortReadcount" checked> <p>조회 순</p>
+                    </div>
+                    <div class="filter">
+                        <input type="radio" value="rating" name="sortRadio" id="sortRating"> <p>별점 순</p>
+                    </div>
+
+                    <div class="sidebar-link">
+                        <a href="food.html">더 보기</a><!--임의로 걸었습니다. 난주 JSP작업할때 유의 하세요-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <img src="images/arrow.png">
+            <span class="current">1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+            <span>&middot; &middot; &middot; &middot;</span>
+            <span>20</span>
+            <img src="images/arrow.png" class="right-arrow">
+        </div>
+
+        <div class="footer">
+            <hr>
+            <p> Copyright By 2022, 레시피를 부탁해</p>
+        </div>
+
+    </div>
+
+    
+
+    <script>
+        let navBar = document.getElementById("navBar")
+
+        const categories = {
+            livestock:"축산물",
+            seafood:"해산물",
+            personal:"개인용",
+            entertain:"접대용",
+            nightmeal:"야식용"
+        }
+
+        let category = ""
+        let sortOrder = "readcount"
+        let bigOptions = ["livestock", "seafood"]
+        let checked = [true, true]
+
+        function togglebtn(){
+            navBar.classList.toggle("hidemenu");
+        }
+
+        function goRecipeDetail(recipeSeq) {
+            location.href = "food.html?recipeSeq=" + recipeSeq
+        }
+
+        function filterRecipe(data){
+            $("#left-col").html("")
+            $("<h1 id='listHead'>" + categories[category]  + " 조회순</h1>").appendTo("#left-col")
+            $.each(data, function(index, value){
+    		        	    $("<div class='best' onclick='goRecipeDetail(" + value.recipeSeq +")'>" + 
+                                    "<div class='best-img'>" +
+    		        	    	        "<img src=" + 'images/image-10.jpg' + ">" +	
+                                    "</div>" +
+                                    "<div class='best-info'>" + 
+                                        "<p>" + categories[value.recipeBigCategory] +"</p>" +
+    		        	    	        "<h3>" +  value.recipeTitle + "</h3>" +
+    		        	    	        "<p>평점: " +  value.recipeRating + "</p>" +
+                                        "<p>조회수: " +  value.recipeReadcount + "</p>" +
+                                        "<p>" + value.recipeCapacity +"인분</p>" +
+                                    "</div>" + 
+    		        	        "</div>")
+    		        	    .appendTo("#left-col");
+    		            });
+        }
+
+        $( document ).ready(function() {
+            $("#checkBoxLivestock").attr("checked", true);
+            $("#checkBoxSeafood").attr("checked", true);
+        	var url = document.URL;
+        	category = url.substring(url.indexOf("category")).split("=")[1]
+        	$("#listHead").text(categories[category] +  " 조회순")
+            
+            $.ajax({
+	    		url: "http://192.168.0.4:3000/countRecipe",
+	    		    data: {
+	    			    bigCategory:"livestock",
+                        smallCategory:category
+	    		    },
+                    success: function ( result ) {
+                        if (result == 0) {
+                            $("#checkBoxLivestock").attr("checked", false)
+                            $("#checkBoxLivestock").attr("disabled", true)
+                        }
+                        $("#countLivestock").text("(" + result + ")")
+                    }
+            });
+
+            $.ajax({
+	    		url: "http://192.168.0.4:3000/countRecipe",
+	    		    data: {
+	    			    bigCategory:"seafood",
+                        smallCategory:category
+	    		    },
+                    success: function ( result ) {
+                        if (result == 0) {
+                            $("#checkBoxSeafood").attr("checked", false)
+                            $("#checkBoxSeafood").attr("disabled", true)
+                        }
+                        $("#countSeafood").text("(" + result + ")")
+                    }
+            });
+
+        	$.ajax({
+	    		url: "http://192.168.0.4:3000/getSmallRecommendRecipe",
+	    		    data: {
+	    			    category:category
+	    		    },
+	    		    success: function( result ) {
+	    			    recommendSmallCategory = result
+                        filterRecipe(result)
+
+                            //         <div class="best" >
+                            //     <div class="best-img">
+                            //         <img src="images/image-s1.jpg">
+                            //     </div>
+                            //     <div class="best-info">
+                            //         <p>집에서 간단히 만드는 샌드위치 입니다.</p>
+                            //         <h3>손님 접대 및 야식으로 좋습니다.</h3>
+                            //         <p>샌드위치/ 야식/ 은근 손 많이감</p>
+                            //         <i class="fa-solid fa-star"></i>
+                            //         <i class="fa-solid fa-star"></i>
+                            //         <i class="fa-solid fa-star"></i>
+                            //         <i class="fa-solid fa-star-half-stroke"></i>
+                            //         <i class="fa-regular fa-star"></i>
+                            //         <div class="best-skill">
+                            //             <p>중급자 이상</p>
+                            //             <h4>재료준비에 취향에 따라 결정 <span>/주방일이 많음</span></h4>
+                            //         </div>
+                            //     </div>
+                            // </div>
+
+	                    /* <img src="images/image-10.jpg">
+	                    <span>
+	                        <h3>버터 바른 구운감자</h3>
+	                        <p>Starts @how to cook</p>
+	                    </span> */
+						/* $.each(recommendLivestock, function(index, value){
+    		        	    $("<div>" + 
+    		        	    	"<img src=" + 'images/image-10.jpg' + ">" +	
+    		        	    	"<span>" +
+    		        	    	 
+    		        	    	"<h3>" +  value.recipeTitle + "</h3>" +
+
+    		        	    	"<p>" +  value.recipeRating + "</p>" +
+    
+    		        	    	"</span>" +
+    		        	    "</div>")
+    		        	    .appendTo("#recommendLivestock");
+    		            }); */
+	    		  }
+	    	});
+
+            $("#checkBoxLivestock").change(function(){
+                if($("#checkBoxLivestock").is(":checked")){
+                    checked[0] = true;
+                }else{
+                    checked[0] = false;
+                }
+
+                bigOptions = []
+                if(checked[0]) {
+                    bigOptions.push("livestock")
+                }
+                if (checked[1]) {
+                    bigOptions.push("seafood")
+                }
+                $.ajax({
+	    		url: "http://192.168.0.4:3000/searchRecipe",
+	    		    data: {
+                        search:"",
+	    			    bigOptions:bigOptions.toString(),
+                        smallOptions:category,
+                        sortOrder:sortOrder
+	    		    },
+                    success: function ( result ) {
+                        filterRecipe(result)
+                    }
+                });
+            })
+
+            $("#checkBoxSeafood").change(function(){
+                if($("#checkBoxSeafood").is(":checked")){
+                    checked[1] = true;
+                }else{
+                    checked[1] = false;
+                }
+
+                bigOptions = []
+                if(checked[0]) {
+                    bigOptions.push("livestock")
+                }
+                if (checked[1]) {
+                    bigOptions.push("seafood")
+                }
+                $.ajax({
+	    		url: "http://192.168.0.4:3000/searchRecipe",
+	    		    data: {
+                        search:"",
+	    			    bigOptions:bigOptions.toString(),
+                        smallOptions:category,
+                        sortOrder:sortOrder
+	    		    },
+                    success: function ( result ) {
+                        filterRecipe(result)
+                    }
+                });
+            })
+
+            $('input[type=radio][name=sortRadio]').change(function() {
+                if (this.value == 'readcount') {
+                    sortOrder = 'readcount'
+                }
+                else if (this.value == 'rating') {
+                    sortOrder = 'rating'
+                }
+
+                $.ajax({
+	    		url: "http://192.168.0.4:3000/searchRecipe",
+	    		    data: {
+                        search:"",
+	    			    bigOptions:bigOptions.toString(),
+                        smallOptions:category,
+                        sortOrder:sortOrder
+	    		    },
+                    success: function ( result ) {
+                        filterRecipe(result)
+                    }
+                });
+            });
+        })
+    </script>
+</body>
+</html>

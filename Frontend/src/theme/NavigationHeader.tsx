@@ -1,5 +1,6 @@
 import React, { FC, ReactNode } from "react";
 import { Text, View, StyleProp, ViewStyle, TextStyle, StyleSheet } from "react-native";
+import RecipeSearch from "../recipe/RecipeSearch";
 
 export type NavigationHeaderProps = {
     title?: string
@@ -15,7 +16,7 @@ export const NavigationHeader: FC<NavigationHeaderProps> = ({
             <View style={[styles.view, viewStyle]}>
                 {Left && Left()}
                 <View style={styles.flex}>
-                    <Text style={[styles.title]}>{title}</Text>
+                    <RecipeSearch /> 
                 </View>
                 {Right && Right()}
             </View>
@@ -23,7 +24,7 @@ export const NavigationHeader: FC<NavigationHeaderProps> = ({
     }
 
 const styles = StyleSheet.create({
-    view: {width: '100%', padding:5, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'},
+    view: {width: '100%', padding:5, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'center'},
     title: {fontSize:20, fontWeight: '500', textAlign:'center'},
     flex: {flex:1, backgroundColor: 'transparent'}
 })

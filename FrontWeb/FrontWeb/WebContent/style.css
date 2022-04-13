@@ -1,0 +1,854 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins','sans-serif';
+}/*전처리 초기화 및 폰트설정(깃에 올라 가기전 반드시 무료 폰트 100번 확인)*/
+
+.header{
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url(images/banner.jpg);
+    background-size: cover;
+    background-position: center;
+}/*전체 화면 설정에서 백그라운드 지정(vh->vertical height)*/
+
+.logo{
+    width: 140px;
+    cursor: pointer;
+}/*무료로고 너무 대빵만 해서 사이즈 강제 줄였음*/
+
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 7%;
+}/*nav 줄 정렬 & 헤더 부분 설정*/
+
+.nav-links li{
+    list-style: none;
+    display: inline-block;
+    margin: 10px 30px;
+}/*li 부분 스타일 재정렬 & 마진값 설정*/
+
+.nav-links li a{
+    text-decoration: none;
+    color: #fff;
+}/*li 부분 글자 색 지정*/
+
+.register-btn{
+    background: #fff;
+    color: #000;
+    padding: 8px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+}/*회원 가입 부분 버튼 처리 & 지정 부분 css처리*/
+
+.container{
+    padding: 0 7%;
+}/*컨테이너 설정*/
+
+.header h1{
+    font-size: 4vw;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+    padding-top: 22%;
+}/*h1 글자색,위치 지정 */
+
+.search-bar{
+    background: #fff;
+    width: 70%;
+    margin: 30px auto;
+    padding: 6px 10px 6px 30px;
+    border-radius: 50px;
+}/*search 바 설정*/
+
+.search-bar form{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}/*검색바 양식 설정*/
+
+.search-bar form input{
+    display: block;
+    border: 0;
+    outline: none;
+    background: transparent;
+    width: 320px;
+}/* 검색바 입력칸 설정(블록 미처리)*/
+
+.search-bar form button{
+    background: antiquewhite;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+}/*돋보기 설정*/
+
+.search-bar form button img{
+    width: 15px;
+    margin-top: 7px;
+}/*돋보기 크기 설정*/
+
+.meat-input{
+    flex: 1;
+}/*고기부분*/
+
+.search-bar form label{
+    font-weight: 600;
+}/*서치바 폰트 두께 조절*/
+
+/* ========================= exclusives ============================= */
+
+.sub-title{
+    margin: 50px 0 20px;
+    font-size: 2.2vw;
+    font-weight: 500;
+    color: #333;
+}/*h2 sub-title 설정*/
+
+.exclusives{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 30px;
+}/*사진 정렬*/
+
+.exclusives div img{
+    width: 100%;
+    border-radius: 10px;
+}/*너비 단 사진 길이값을 100% 나눈 분할 방식*/
+
+.exclusives div {
+    position: relative;
+}/*exclusives 하위단 포지션 설정*/
+
+.exclusives div span{
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    color: #fff;
+}/*문자열 span 처리시 사진안에 글자 삽입& 폰트 색상정하기*/
+
+
+/* ================ latest =============== */
+
+.latest{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 30px;
+    margin-bottom: 30px;
+}/*사진 정렬*/
+
+.latest div img {
+    width: 100%;
+    border-radius: 10px;
+}/*너비 단 사진 길이값을 100% 나눈 분할 방식*/
+
+.latest h3{
+    font-weight: 600;
+    margin-top: 10px;
+}/*문자열 크기 설정*/
+
+/* ========================= etc ================= */
+
+.etc{
+    margin: 80px 0;
+    background-image: linear-gradient(to right, #3f2321, transparent),url(images/banner2.jpg);
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    padding: 5%;
+    color: #fff;
+}/*이미지 처리로 배너2 생성 후 div공간 확장*/
+
+.etc h3{
+    font-size: 4vw;
+    line-height: 5.3vw;
+    font-weight: 500;
+}/*h3 처리*/
+
+.etc p{
+    font-size: 18px;
+    margin: 10px 0;
+}/*p 처리*/
+
+.etc-btn{
+    background: #ff5361;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    margin-top: 20px;
+    display: inline-block;
+}/*a 하위 etc-btn 처리*/
+
+/* =========================== goods ======================== */
+
+.goods{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 30px;
+    margin-bottom: 30px;
+}/*사진 정렬*/
+
+.goods div img{
+    width: 100%;
+    border-radius: 10px;
+}/*자간 정렬 */
+
+.goods div{
+    position: relative;
+    text-align: center;
+}/*goods 포지션 설정*/
+
+.goods p{
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 26px;
+}
+
+.start-btn{
+    text-decoration: none;
+    background: #ff5361;
+    color: #fff;
+    width: 80%;
+    max-width: 350px;
+    display: block;
+    text-align: center;
+    margin: 60px auto;
+    padding: 15px;
+    border-radius: 30px;
+    font-size: 20px;
+}/* start-btn 처리*/
+
+/* ================================== about-msg ================================ */
+
+.about-msg{
+    text-align: center;
+    margin: 80px 0;
+    color: #333;
+    font-size: 17px;
+}/*전체 자간 셋팅*/
+
+.about-msg h2{
+    font-size: 28px;
+    margin-bottom: 30px;
+    font-weight: 500;
+}/*about-msg h2 조정*/
+
+/* =============================== footer ================================= */
+
+.footer{
+    margin: 80px 0 10px;
+    text-align: center;
+}/*footer 셋팅값*/
+
+.footer a{
+    text-decoration: none;
+    color: #999;
+    font-size: 22px;
+    margin: 0 10px;
+}/*a 태그에 걸린 로고 색 처리*/
+
+.footer hr{
+    background: #999;
+    height: 1px;
+    width: 100%;
+    border: 0;
+    margin: 20px 0;
+}/*footer hr 선 처리 마진 값 & 색 설정*/
+
+.footer p{
+    padding-bottom: 15px;
+}/*footer p 패딩값 정렬*/
+
+.simple{
+    position: relative;
+}/*simple 정의*/
+
+.simple::after{
+    content: '';
+    background: #fff;
+    width: 25px;
+    height: 2px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -12px;
+    border-radius: 2px;
+}/*간편식 클릭 편하게 하단바 생성*/
+
+nav .fa-bars{
+    display: none;
+}/*브라우저 큰 화면단에 안보임*/
+
+/* ========================= 작은화면 이동시 설정잡는 구역==========================*/
+
+@media only screen and (max-width: 700px){
+
+    .logo{
+        width: 65px;
+        position: fixed;
+        top: 4%;
+        left: 7%;
+    }/*로고 부분에 모바일 작은 화면 변경시 크기 조절*/
+
+    nav{
+        position: fixed;
+        top: 0;
+        z-index: 100;
+        display: inline-block;
+        width: 100%;
+        padding: 100px 7% 0;
+        background: #000;
+        text-align: right;
+        max-height: 100px;
+        overflow: hidden;
+        transition: max-height 0.5s;
+    }/*nav 창 부분에 크기조절*/
+
+    nav .nav-links li{
+        margin: 10px 0;
+        display: block;
+    }/*li 부분 마진값 설정후 블록처리*/
+
+    .register-btn{
+      margin: 15px 0 30px;  
+      display: inline-block;
+    }/*회원 가입시 마진 설정*/
+
+    nav .fa-bars{
+        display: block;
+        position: fixed;
+        top: 4%;
+        right: 7%;
+        color: #fff;
+        font-size: 28px;
+    }/*기능창 활성화 (아디다스)*/
+
+    .simple::after{
+        left: -40px;
+        transform: translate(0,50%);
+        bottom: 50%;
+    }/*작은 화면시 왼쪽에 줄긋기*/
+
+    .hidemenu{
+        max-height: 300px;
+    }/*메뉴 처리시 길이값 설정*/
+
+    .header h1{
+        padding-top: 200px;
+        font-size: 7vw;
+    }/*h1 에서 폰트 사이즈 하고 패딩값 설정*/
+
+    .search-bar{
+        width: 90%;
+        margin: 30px auto;
+        padding: 20px 10px 30px;
+        border-radius: 5px;
+        position: relative;
+    }/*서치바 설정 잡을때 래디어스를 줄임*/
+
+    .search-bar form{
+        display: block;
+    }/*서치바 폼 태그시 블록처리*/
+
+    .search-bar form input{
+        border-bottom: 1px solid #ddd;
+        width: 100%;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        padding-bottom: 10px;
+    }/*서치 인풋영역 정렬*/
+
+    .search-bar form button{
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 50%);
+    }/*돋보기를 반 쯤 걸친상태*/
+
+    .sub-title{
+        font-size: 6vw;
+    }/*sub-title 폰트 크기조절*/
+
+    .etc{
+        padding: 15% 5%;  
+    }/*중간 배너 조절*/
+
+    .etc h3{
+        font-size: 7vw;
+        line-height: 8vw;
+    }/*중간 배너 글자조절*/
+
+    .etc p{
+        font-size: 14px; 
+    }/*중간 배너 p영역 글자조절*/
+
+    .etc-btn{
+        padding: 6px 15px;
+        border-radius: 4px;
+        margin-top: 10px;
+        font-size: 14px;
+    }/*중간 배너 버튼조절*/
+
+    .sub-title p{
+        font-size: 22px;
+    }/*굿즈 부분 p태그 처리*/
+
+    .about-msg{
+        font-size: 15px;
+    }/*부연설명 글자크기 처리*/
+}
+
+/* ================================== listing(상세페이지) ============================ */
+
+.navbar-white{
+    background: #fff;
+    box-shadow: 0 5px rgba(0,0,0,0.05);
+}/*위 헤더 경계선 지정*/
+
+.navbar-white .nav-links li a{
+    color: #000;
+}/*상단메뉴 글씨 검정색 표시*/
+
+.navbar-white .register-btn{
+    background: #ff5361;
+    color: #fff;
+}/*회원가입 버튼 컬러입히기*/
+
+nav.navbar-white .fa-bars{
+    color: #000;
+}/*상세페이지 부분 아디다스 검정표시*/
+
+.navbar-white .active::after{
+    background: #ff5361;
+}/*빨간줄이 나와야 하나 안나옴*/
+
+.list-container{
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}/*리스트 컨테이너 공간설정*/
+
+.left-col{
+    flex-basis: 70%;
+}/*왼쪽부분 공간설정*/
+
+.right-col{
+    flex-basis: 25%;
+}/*오른쪽부분 공간설정*/
+
+.left-col h1{
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 30px;
+}/*왼쪽부분 h1 폰트 설정*/
+
+.best{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 30px 0;
+    border-top: 1px solid #ccc;
+}/*움식 부연설명중에 공간설정*/
+
+.best-img{
+    flex-basis: 40%;
+}/*이미지 값 설정*/
+
+.best-info{
+    flex-basis: 58%;
+    color: #555;
+}/*부연란 폰트 색 & 위치설정*/
+
+.best-img img{
+    width: 100%;
+    border-radius: 12px;
+}/*각 올리는 사진마다 라운드 처리 및 길이값 설정*/
+
+.best-info h3{
+    font-weight: 600;
+    color: #333;
+    font-size: 22px;
+    margin: 4px 0;
+}/*글 들어 가는 설명란에 h3 글두께 & 사이즈 & 색감 조정*/
+
+.best-info i{
+    color: #ff5361;
+    font-size: 18px;
+    margin: 10px 1px;
+}/*별처리 부분 색조정 & 사이즈 & 마진값 처리*/
+
+.best-skill{
+    text-align: right;
+}/*글자 위치 조정*/
+
+.best-skill h4{
+    font-size: 20px;
+}/*h4 글자 크기조정*/
+
+.best-skill h4 span{
+    font-size: 16px;
+    font-weight: 500;
+}/*h4 span글자 크기조정*/
+
+.sidebar{
+    border: 1px solid #999;
+    padding: 20px 30px;
+    margin-top: 30px;
+}/*사이드 바 설정*/
+
+.sidebar h2{
+    font-weight: 500;
+}/*폰트 굵기 설정*/
+
+.sidebar h3{
+    font-weight: 500;
+    margin: 20px 0 10px;
+}/*폰트 굵기 설정*/
+
+.filter{
+    display: flex;
+    align-items: center;
+    color: #555;
+    margin-bottom: 10px;
+}/*필터 하위 클래스 지정*/
+
+.filter p{
+    flex: 1;
+}/*필터 p하위 클래스 지정*/
+
+.filter input{
+    margin-right: 15px;
+    cursor: pointer;
+}/*필터 input하위 숫자 정렬*/
+
+.sidebar-link{
+    text-align: right;
+    margin: 20px 0;
+}/*사이드 바 부분 텍스트 위치 선정 및 마진값 설정*/
+
+.sidebar-link a{
+    text-decoration: none;
+}/*사이드 a태그 설정*/
+
+.pagination{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0;
+}/*페이징 전체 설정*/
+
+.pagination img{
+    width: 15px;
+    margin: 10px;
+}/*페이징 화살표 설정*/
+
+.right-arrow{
+    transform: rotate(180deg);
+}/*페이징 화살표 오른쪽 방향 설정*/
+
+.pagination span{
+    margin: 10px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+}/*페이징 스판 숫자 처리(페이징 경우 백엔드 무조건 땡겨 와야함 이건 예시임)*/
+
+.pagination .current{
+    background: #333;
+    color: #fff;
+}/*페이징 선택시 버튼 백그라운드 & 숫자 색 처리*/
+
+/*============================== 작은 화면단 리스트 페이지 ============================ */
+
+@media only screen and (max-width: 700px){
+
+    .list-container{
+        margin-top: 150px;
+    }/*디바이스 단 마진 설정*/
+
+    .left-col, .right-col, .best-img, .best-info{
+        flex-basis: 100%;
+    }/*세부 설정 부분에 하단 내려가기*/
+
+    .left-col h1{
+        font-size: 22px;
+    }/*왼쪽 부분 h1 글자 크기 설정*/
+
+    .best-info h3{
+        font-size: 18px;  
+    }/*오른쪽 박스 h3 글자크기 조절*/
+
+    .best-info i{
+        font-size: 16px;
+    }/*별 크기 설정*/
+
+    .pagination span{
+        margin: 10px 2px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 12px;
+    }/*페이징 처리시 자간 설정& 폰트 크기 조절*/
+}
+
+/*============================== food-details 페이지===================================*/
+
+.food-details{
+    padding: 0 12%;
+}/*food-details 전체 패딩값 설정*/
+
+.food-title{
+    margin-top: 50px;
+}/*타이틀 값 50px 마진값 설정*/
+
+.food-title h1{
+    font-weight: 600;
+}/*폰트 두께 조절*/
+
+.food-title .row{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 10px 0;
+}/*row 값 지정*/
+
+.food-title span{
+    margin:  0 20px;
+}/*span값 조정*/
+
+.food-title i{
+    color: #ff5361;
+    font-size: 14px;
+}/*별 스타일 설정*/
+
+.gallery{
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas: 'first first . .' 'first first . .';
+    margin: 20px 0;
+}/*갤러리 그리드& dp설정*/
+
+.gallery div img{
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+}/*이미지 dp 보더 값 & 길이값 100% 맞추기*/
+
+.gallery-img-1{
+    grid-area: first;
+}/*div 클래스에 호출에 따른 사진 1번정하기*/
+
+.small-details h2{
+    font-weight: 500;
+}/*h2 두께 조절*/
+
+.small-details h4{
+    text-align: right;
+    font-size: 22px;
+}/*h2 두께 조절*/
+
+.line{
+    border: 0;
+    height: 1px;
+    background: #ccc;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px 0 50px;
+}/*hr 라인 설정*/
+
+.check-form{
+    margin: 30px 0;
+    background: #fff;
+    box-shadow: 0 0 30px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 10px 50px;
+}/*폼 태그 방식에 섀도우 처리*/
+
+.check-form label{
+    display: block;
+}/*폼 태그 방식에 라벨 블록처리*/
+
+.check-form div{
+    padding: 20px;
+}/*폼 태그 방식에 div처리*/
+
+.check-form input{
+    background: transparent;
+    border: 0;
+    outline: none;
+}/*인풋 부분에 처리*/
+
+.check-form button{
+    background: #ff5361;
+    border: 0;
+    outline: none;
+    color: #fff;
+    padding: 18px;
+    width: 350px;
+    border-radius: 8px;
+    font-size: 16px;
+}/*버튼 처리*/
+
+.guest-field{
+    flex: 1;
+}/*라벨값 지정*/
+
+.detail-list{
+    list-style: none;
+    margin: 50px 0;
+}/*리스트 스타일 제거*/
+
+.detail-list li{
+    margin-left: 50px;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #555;
+    position: relative;
+}/*li 처리*/
+
+.detail-list li span{
+    display: block;
+    font-weight: 400;
+    font-weight: 16px;
+}/*span 처리*/
+
+.detail-list li i{
+    position: absolute;
+    top: 5px;
+    left: -40px;
+}/*아이콘 포지션 별 처리*/
+
+.home-desc{
+    max-width: 700px;
+    margin-bottom: 50px;
+}/*부연 설명 부분 공간설정*/
+
+.video{
+    margin: 50px 0;
+}/*유튭 마진값 설정*/
+
+.video iframe{
+    width:100%;
+    margin-bottom: 30px;
+}/*유튜브 프레임 값 설정*/
+
+.video h3{
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}/*h3 글자 두께조절 & 사이즈 조정*/
+
+.map b{
+    display: block;
+    margin-bottom: 16px;
+}/*볼드체 수정*/
+
+.host{
+    display: flex;
+    align-items: center;
+}/*호스트 부분 자간 정렬*/
+
+.host img{
+    width: 130px;
+    border-radius: 20%;
+    margin-right: 30px;
+}/*사진 조절*/
+
+.host h2{
+    margin-bottom: 10px;
+    font-weight: 500;
+}/*올린이 글*/
+
+.host i{
+    color: #ff5361;
+}/*별 색깔*/
+
+.contact-host{
+    display: inline-block;
+    margin: 40px 0 40px 120px;
+    text-decoration: none;
+    color: #555;
+    padding: 15px 50px;
+    border: 1px solid #ff5361;
+    border-radius: 8px;
+}
+
+/* =========================== 미디어쿼리 값 작은화면 디테일 페이지 ============================*/
+
+@media only screen and (max-width: 700px){
+
+    .food-details{
+        margin-top: 150px;
+    }/*작은 화면단 마진값 설정*/
+
+    .row p{
+        margin-top: 10px;
+    }/*별아래 글 마진값 설정*/
+
+    .gallery{
+        grid-template-areas: 'first first' '. .' '. .';
+    }/*사진 부분 1번쨰 사진 부각*/
+
+    .small-details h2{
+        font-size: 20px;
+        margin-top: 24px;
+    }/*h2 부분 마진값& 크기 설정*/
+
+    .small-details h4{
+        text-align: left;
+        margin: 10px 0;
+        font-size: 18px;
+    }/*h4 부분 마진값& 크기 설정*/
+
+    .check-form{
+        padding: 10px 30px;   
+    }/*박스 안 패딩값 설정*/
+
+    .check-form div{
+        padding: 20px 0;
+        width: 100%;
+    }/*박스값 패딩 설정*/
+
+    .check-form input{
+        border-bottom: 1px solid #ccc;
+        width: 100%;
+        padding-bottom: 5px;
+    }/*인풋 박스 크기설정 & 패딩값 조정*/
+
+    .check-form button{
+        font-size: 14px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+    }/*버튼 값 조정*/
+
+    .host{
+        display: block;
+        line-height: 28px;
+    }/*호스트 설정*/
+
+    .contact-host{
+        margin: 40px 0;
+    }/*버튼 설정*/
+}

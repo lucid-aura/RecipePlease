@@ -1,28 +1,44 @@
 import { DrawerContentComponentProps, DrawerContentScrollView } from "@react-navigation/drawer";
-import { DrawerActions, useNavigation } from "@react-navigation/native";
+import { DrawerActions } from "@react-navigation/native";
 import React, { FC, useCallback } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Colors } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { NavigationHeader } from "../theme";
+import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "../store";
+import * as L from '../store/login'
+import {  signOutWithKakao } from "../mypage/utils";
+import * as D from "../store/drawer"
+import DrawerSettingLogout from "../mypage/component/DrawerSettingLogout";
+import DrawerSettingLogin from "../mypage/component/DrawerSettingLogIn";
+import DrawerCart from "../mypage/component/DrawerCart";
 
 
 const DrawerContent: FC<DrawerContentComponentProps> = (props) => {
-    const {navigation} = props
-    const Drawerclose = useCallback(() => navigation.dispatch(DrawerActions.closeDrawer()), [])
-
-    return (
-        <DrawerContentScrollView {...props} contentContainerStyle={[styles.view]}>
-            <NavigationHeader viewStyle={{backgroundColor:'white'}} 
-                    Left= {() => (<Icon name="arrow-left" size={50} onPress={Drawerclose}/>)}
-                    Right={() => (<Icon name="close" size={24} onPress={Drawerclose} />)} />
-            <Text>DrawerContent</Text>
-        </DrawerContentScrollView>
-    )
+    
+    const log = useSelector<AppState, L.State>((state) => state.login)
+    const change = useSelector<AppState, D.State>((state) => state.drawer)
+    const {loggedIn, loggedUser} = log
+    const {drawerChange} = change   // true면 setting, false면 shopping cart
+    console.log("DrawerContent: " + drawerChange + " loggedIn: " + loggedIn)
+    
+    if(!drawerChange) {
+        return(
+            <SafeAreaView style={{ flex:1, alignItems: 'center',  justifyContent:'center'}}>
+                <DrawerCart />
+            </SafeAreaView>
+        )
+    } else {
+        if(!loggedIn){
+            return (
+                <DrawerSettingLogout {...props} />
+            )
+        } else {
+            return (
+                <DrawerSettingLogin {...props} />
+            )
+        }
+    }
 }
 
 export default DrawerContent
-const styles = StyleSheet.create({
-    view: {flex:1},
-    text: {fontSize:20},
-    content: {flex:1, alignItems:'center', justifyContent:'center'}
-})

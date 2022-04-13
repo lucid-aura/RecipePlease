@@ -6,16 +6,21 @@
 <mapper namespace="com.recipe.a.dao.RecipeDao">
 
 <select id="countRecipe" resultType="Integer">
-	SELECT COUNT(*) FROM RECIPE
+	SELECT COUNT(*) FROM RECIPE WHERE RECIPEBIGCATEGORY=#{bigCategory} AND RECIPESMALLCATEGORY=#{smallCategory}
 </select>
 
+
 <insert id="insertRecipe" parameterType="com.recipe.a.dto.RecipeDto">
-	INSERT INTO RECIPE(RECIPESEQ, MEMBERID, RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEVIDEOURL, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING, RECIPEREADCOUNT)
-	VALUES(NEXTVAL('RECIPESEQ'), #{memberId}, #{recipeTitle}, #{recipe_content}, #{recipeBigCategory}, #{recipeSmallCategory}, #{recipeVideoUrl}, #{recipeGoodsTag}, #{recipePrice}, 0.0, 0) 
+	<selectKey keyProperty="recipeSeq" resultType="int" order="BEFORE">
+		SELECT NEXTVAL('recipeSeq') SEQ FROM dual
+	</selectKey>
+	INSERT INTO RECIPE(RECIPESEQ, MEMBERID, RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEVIDEOURL, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING, RECIPEREADCOUNT, RECIPETHUMBNAIL, RECIPECAPACITY)
+	VALUES(#{recipeSeq}, #{memberId}, #{recipeTitle}, #{recipeContent}, #{recipeBigCategory}, #{recipeSmallCategory}, #{recipeVideoUrl}, #{recipeGoodsTag}, #{recipePrice}, 0.0, 0, #{recipeThumbnail}, #{recipeCapacity}) 
 </insert>
 
+
 <select id="getOneRecipe" parameterType="Integer" resultType="com.recipe.a.dto.RecipeDto">
-	SELECT RECIPESEQ, MEMBERID, RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEVIDEOURL, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING, RECIPEREADCOUNT
+	SELECT RECIPESEQ, MEMBERID, RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, RECIPEVIDEOURL, RECIPEGOODSTAG, RECIPEPRICE, RECIPERATING, RECIPEREADCOUNT, RECIPETHUMBNAIL, RECIPECAPACITY
 	FROM RECIPE WHERE RECIPESEQ=#{recipeSeq}
 </select>
 
@@ -40,8 +45,12 @@
 	SELECT * FROM RECIPE WHERE RECIPEBIGCATEGORY=#{category} ORDER BY RECIPERATING DESC LIMIT 3
 </select>
 
+<select id="getSmallRecommendRecipe" parameterType="String" resultType="com.recipe.a.dto.RecipeDto">
+	SELECT * FROM RECIPE WHERE RECIPESMALLCATEGORY=#{category}
+</select>
+
 <select id="getRecommendReadcountRecipe" resultType="com.recipe.a.dto.RecipeDto">
-	SELECT * FROM RECIPE ORDER BY RECIPEREADCOUNT DESC LIMIT 3;
+	SELECT * FROM RECIPE ORDER BY RECIPEREADCOUNT DESC LIMIT 4;
 </select>
 
 <select id="searchRecipe" resultType="com.recipe.a.dto.RecipeDto">
@@ -54,5 +63,26 @@
 	<foreach collection="small" item="item" open="(" close=")" separator=",">
 		#{item}
 	</foreach>
+	<if test='sortOrder=="readcount"'>
+		ORDER BY RECIPEREADCOUNT DESC
+	</if>
+	<if test='sortOrder=="rating"'>
+		ORDER BY RECIPERATING DESC
+	</if>
+</select>
+
+<!-- 레시피 시퀀스에 해당하는 레시피 정보들 가져오기 -->
+<select id="getRecipeInfo" parameterType="Integer" resultType="com.recipe.a.dto.RecipeDto">
+	SELECT RECIPETITLE, RECIPEREADCOUNT, RECIPERATING
+	FROM RECIPE
+	WHERE RECIPESEQ = #{recipeSeq}
+</select>
+
+<!-- 내가 업로드한 레시피 정보 가져오기 -->
+<select id="myUploadedRecipe" parameterType="Integer" resultType="com.recipe.a.dto.RecipeDto">
+	SELECT RECIPESEQ, MEMBERID, RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, 
+		   RECIPERATING, RECIPEREADCOUNT, RECIPETHUMBNAIL
+	FROM RECIPE
+	WHERE RECIPESEQ = #{recipeSeq} 
 </select>
 </mapper>

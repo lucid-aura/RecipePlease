@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { Alert, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -6,48 +6,48 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { NavigationHeader } from "../theme";
 import config from "../project.config"
 import { Button, Card, Paragraph, Title } from 'react-native-paper';
+import { useDispatch } from "react-redux";
+import * as D from "../store/drawer"
 
 export default function RecipeSearchResult({ route }:any) { // 레시피 검색 결과
     const navigation = useNavigation()
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
+    const dispatch = useDispatch()
+    const goShoppingCart = () => {
+        dispatch(D.drawerChangeFalseAction())
+        navigation.dispatch(DrawerActions.openDrawer())
+    }
+
     const { search } = route.params
     const { bigOptions } = route.params
     const { smallOptions } = route.params
+    const { sortOrder } = route.params
     const [result, setResult] = useState(
-        {
-            recipes:[{
-                "memberId": "", 
-                "recipeBigCategory": "", 
-                "recipeContent": "", 
-                "recipeGoodsTag": "", 
-                "recipePrice": 0, 
-                "recipeRating": 0.0, 
-                "recipeReadcount": 0, 
-                "recipeSeq": 0, 
-                "recipeSmallCategory": "", 
-                "recipeTitle": "", 
-                "recipeVideoUrl": "/"
-            }],
-            thumbnails:[{
-                "docsSeq":0,
-                "photoCategory":"",
-                "photoContent":"",
-                "photoSeq":8,
-                "photoTitle":"",
-                "photoUrl":"/"
-            }]
-        }
+        [{
+            "memberId": "", 
+            "recipeBigCategory": "", 
+            "recipeContent": "", 
+            "recipeGoodsTag": "", 
+            "recipePrice": 0, 
+            "recipeRating": 0.0, 
+            "recipeReadcount": 0, 
+            "recipeSeq": 0, 
+            "recipeSmallCategory": "", 
+            "recipeThumbnail":"",
+            "recipeTitle": "", 
+            "recipeVideoUrl": "/"
+        }]
     )
 
     const changeReadcount = (index:number, newReadcount:any) => {
         let  newData = result;
-        (newData.recipes[index].recipeReadcount as any) = newReadcount;
+        (newData[index].recipeReadcount as any) = newReadcount;
         setResult(newData)
     }
     
     const changeAvarage = (index:number, newAvarage:any) =>{
        let  newData = result;
-       (newData.recipes[index].recipeRating as any) = newAvarage;
+       (newData[index].recipeRating as any) = newAvarage;
        setResult(newData)
     }
 
@@ -58,6 +58,7 @@ export default function RecipeSearchResult({ route }:any) { // 레시피 검색 
                     search:search,
                     bigOptions: encodeURI(bigOptions),
                     smallOptions: encodeURI(smallOptions),
+                    sortOrder: encodeURI(sortOrder)
                 } ,
             })
             setResult(searchRes.data)
@@ -72,14 +73,14 @@ export default function RecipeSearchResult({ route }:any) { // 레시피 검색 
   return (
     <SafeAreaView style={styles.container}>
          <NavigationHeader title="홈" 
-                Left= {() => <Icon name="arrow-left-bold" size={30} onPress={goBack} />}
-                Right= {() => <Icon name="cart-heart" size={30} />} />
+                Left= {() => <Icon name="arrow-left-bold" size={40} onPress={goBack} />}
+                Right= {() => <Icon name="cart-heart" size={40} onPress={goShoppingCart} />} />
 
         <Text>{search}</Text>
         <Text style={{fontSize:36}}>"{search}" 검색 결과</Text>
 
         <ScrollView style={{width:600}}>
-            {result.recipes.map((item, index) => (
+            {result.map((item, index) => (
                 
                 <View key={index} style={styles.card}>
                     <Card 
@@ -92,7 +93,7 @@ export default function RecipeSearchResult({ route }:any) { // 레시피 검색 
                                 changeReadcount : changeReadcount
                             } as never)
                         }}>
-                        <Card.Cover source={{ uri: result.thumbnails[index].photoUrl}} />
+                        <Card.Cover source={{ uri: config.photo +  item.recipeThumbnail}} />
                         <Card.Title title={item.recipeTitle} subtitle={"평점 : " + item.recipeRating} />
                         <Card.Content>
                             <Title>

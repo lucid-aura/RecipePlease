@@ -47,20 +47,19 @@ public class MembersController {
 	@RequestMapping(value = "/regist", method = {RequestMethod.GET, RequestMethod.POST})
 	public String regist(MembersDto dto) {
 		System.out.println("MembersController regist()");
-		String salt = BCrypt.gensalt(10);
-		dto.setSalt(salt);
-		dto.setMemberPwd(BCrypt.hashpw(dto.getMemberPwd(), salt));
+		String salt = BCrypt.gensalt(10);	// 임의의 솔트값 생성
+		dto.setSalt(salt);	// 솔트값 Dto 에 담기
+		dto.setMemberPwd(BCrypt.hashpw(dto.getMemberPwd(), salt));	//솔트값과 비밀번호 합쳐서 암호화후 Dto에 담기
 		System.out.println("dto.getMember_pwd: " + dto.getMemberPwd() );
 		
 		boolean b = memberService.regist(dto);
 		if (b) {
-			return "yes";
+			return "yes";	// 회원가입 실패
 		} else {
-			return "no";
+			return "no";	// 회원가입 성공
 		}
 		
 	}
-	
 	
 	//로그인
 	@PostMapping("/login")
@@ -96,6 +95,78 @@ public class MembersController {
 		
 		return result;
 	}
+	
+	// 내가 쓴 레시피 가져오기
+	@RequestMapping(value = "/myUploadedRecipe", method = {RequestMethod.GET})
+	public List<RecipeDto> myUploadedRecipe(String memberId) {
+		System.out.println("MemberController myUploadedRecipe");
+		System.out.println("memberId: " + memberId);
+		
+		List<RecipeDto> result = memberService.myUploadedRecipe(memberId);
+		System.out.println(result.toString());
+		
+		return result;
+	}
+		
+	
+	//이메일 업데이트
+	@RequestMapping(value = "/updateEmail", method = {RequestMethod.POST})
+	public String updateEmail(String memberId, String memberEmail) {
+		System.out.println("MemberController updateEmail");
+		System.out.println("memberId: " + memberId + " memberEmail" + memberEmail);
+		
+		boolean b = memberService.updateEmail(memberId, memberEmail);
+		
+		if(b) {
+			return "fail";
+		}		
+		
+		return "success";
+	}
+	
+	//닉네임 업데이트
+	@RequestMapping(value = "/updateNickname", method = {RequestMethod.POST})
+	public String updateNickname(String memberId, String memberNickname) {
+		System.out.println("MemberController updateEmail");
+		System.out.println("memberId: " + memberId + " memberEmail" + memberNickname);
+		
+		boolean b = memberService.updateNickname(memberId, memberNickname);
+		
+		if(b) {
+			return "fail";
+		}		
+		return "success";
+	}
+	
+	// 전화번호 업데이트
+	@RequestMapping(value = "/updatePhone", method = {RequestMethod.POST})
+	public String updatePhone(String memberId, String memberPhone) {
+		System.out.println("MemberController updateEmail");
+		System.out.println("memberId: " + memberId + " memberEmail: " + memberPhone);
+		
+		boolean b = memberService.updateNickname(memberId, memberPhone);
+		
+		if(b) {
+			return "fail";
+		}		
+		return "success";
+	}
+	
+	// 주소 업데이트
+	@RequestMapping(value = "/updateAddr", method = {RequestMethod.POST})
+	public String updateAddr(MembersDto dto) {
+		System.out.println("MemberController updateAddr");
+		System.out.println("MembersDto: " + dto.toString());
+		
+		boolean b = memberService.updateAddr(dto);
+		System.out.println("updateAddr result: " +b);
+		if(b) {
+			return "fail";
+		}		
+		return "success";
+	}
+	
+	
 	
 	//테스트용
 	@RequestMapping(value = "/test1", method = {RequestMethod.GET})

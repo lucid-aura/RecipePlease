@@ -16,6 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.recipe.a.dao.MembersDao;
+import com.recipe.a.dao.PhotoDao;
+import com.recipe.a.dao.RatingDao;
+import com.recipe.a.dao.RecipeDao;
+import com.recipe.a.dao.RecipeLikeDao;
 import com.recipe.a.dto.MembersDto;
 
 @Service
@@ -24,7 +28,16 @@ public class MembersService {
 	
 	static BCrypt bcr;
 	
+	@Autowired
 	private MembersDao dao;
+	@Autowired
+	private RecipeDao RDao;
+	@Autowired
+	private PhotoDao PDao;
+	@Autowired
+	private RecipeLikeDao RLDao;
+	@Autowired
+	private RatingDao RTDao;
 
 	public MembersService(MembersDao dao) {
 		this.dao = dao;
@@ -44,14 +57,14 @@ public class MembersService {
 	
 	// 회원가입 - 노승현
 	public boolean regist(MembersDto dto) {	
-		int b = dao.idCheck(dto);
+		int b = dao.idCheck(dto);	
 		
 		if(b == 1) {
-			return true;
+			return true;	// 아이디 중복됨(회원가입 실패)
 		} else {
 			int n = dao.regist(dto);
 			
-			return n>0? true:false;
+			return n>0? false:true;	// false: 회원가입 성공, true: 회원가입 실패
 		}
 	}
 	
@@ -59,10 +72,8 @@ public class MembersService {
 	public MembersDto login(String memberId, String memberPwd) {
 		
 		MembersDto salt = dao.getSalt(memberId, memberPwd);
-		System.out.println("memberService getSalt: " + salt.getSalt()+ " memberPwd: " + memberPwd);
 		
 		String encodedPassword = bcr.hashpw(memberPwd, salt.getSalt());
-		System.out.println("encodedPassword: " + encodedPassword);
 		
 		return dao.login(encodedPassword);
 	}
@@ -71,7 +82,7 @@ public class MembersService {
 	public List<MyFavoriteDto> myFavoriteRecipe(String memberId) {
 		System.out.println("myFavoriteRecipe service");
 		
-		List<RecipeDto> recipeSeqListDto = dao.getRecipeSeq(memberId);
+		List<RecipeDto> recipeSeqListDto = RLDao.getRecipeSeq(memberId);
 		System.out.println("recipeSeqListDto: " + recipeSeqListDto.toString());
 		System.out.println("recipeSeqListDto: " + recipeSeqListDto.size());
 		List<Integer> recipeSeqList = new ArrayList<Integer>();
@@ -85,9 +96,9 @@ public class MembersService {
 		List<MyFavoriteDto> recipeRatingCountList = new ArrayList<MyFavoriteDto>();
 		
 		for(int i=0; i<recipeSeqList.size(); i++) {
-			recipeInfo.add(dao.getRecipeInfo(recipeSeqList.get(i)));
-			thumbnailList.add(dao.getThumbnail(recipeSeqList.get(i)));
-			int test = dao.getRatingCount(recipeSeqList.get(i));
+			recipeInfo.add(RDao.getRecipeInfo(recipeSeqList.get(i)));
+			thumbnailList.add(PDao.getThumbnail(recipeSeqList.get(i)));
+			int test = RTDao.getRatingCount(recipeSeqList.get(i));
 			MyFavoriteDto my = new MyFavoriteDto();
 			my.setRecipeRatingCountList(test);
 			recipeRatingCountList.add(my);
@@ -124,17 +135,66 @@ public class MembersService {
 					memberId
 					));
 		}
-//		result.put("recipeSeq", recipeSeqList);
-//		result.put("recipeTitle", recipeTitleList);
-//		result.put("recipeReadCount", recipeReadcountList);
-//		result.put("recipeRating", recipeRatingList);
-//		result.put("recipeThumbnails", thumbnailList);
-//		result.put("recipeRatingCount", recipeRatingCountList);
 		
 		return result;
+	}
+	
+	// 내가 업로드한 레시피 불러오기
+	public List<RecipeDto> myUploadedRecipe(String memberId) {
+		System.out.println("myUploadedRecipe service");
 		
+		List<RecipeDto> recipeSeqListDto = RLDao.getRecipeSeq(memberId);
+		System.out.println("recipeSeqListDto: " + recipeSeqListDto.toString());
+		System.out.println("recipeSeqListDto: " + recipeSeqListDto.size());
+		
+		List<Integer> recipeSeqList = new ArrayList<Integer>();
+		for(int i=0; i < recipeSeqListDto.size(); i++) {
+			recipeSeqList.add(recipeSeqListDto.get(i).getRecipeSeq());
+		}
+		System.out.println("recipeSeqList: " + recipeSeqList.toString());
+		
+		List<RecipeDto> recipeInfo = new ArrayList<RecipeDto>();
+		for(int i=0; i<recipeSeqList.size(); i++) {
+			recipeInfo.add(RDao.myUploadedRecipe(recipeSeqList.get(i)));
+		}
+		
+		return recipeInfo;
 		
 	}
+	
+	// 이메일 수정
+	public boolean updateEmail(String memberId, String memberEmail) {
+		
+		int n = dao.updateEmail(memberId, memberEmail);
+		
+		return n>0? false : true; // false면 업데이트 성공, true면 업데이트 실패
+	}
+	
+	// 닉네임 수정
+	public boolean updateNickname(String memberId, String memberNickname) {
+		
+		int n = dao.updateNickname(memberId, memberNickname);
+		
+		return n>0? false : true; // false면 업데이트 성공, true면 업데이트 실패
+	}
+	
+	// 전화번호 수정
+	public boolean updatePhone(String memberId, String memberPhone) {
+		
+		int n = dao.updateNickname(memberId, memberPhone);
+		
+		return n>0? false : true; // false면 업데이트 성공, true면 업데이트 실패
+	}
+	
+	// 주소 수정
+	public boolean updateAddr(MembersDto dto) {
+		
+		int n = dao.updateAddr(dto);
+		System.out.println("updateAddr result int: " +n);
+		
+		return n>0? false : true; // false면 업데이트 성공, true면 업데이트 실패
+	}
+	
 	
 	public List<RecipeDto> test1() {
 		return dao.test1();

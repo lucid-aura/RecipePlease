@@ -30,6 +30,7 @@ export default function PaymentResult({ navigation, route }:any) {
         }})
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err));
+
     }, []);
     
     // addPaymentList 컨트롤러에 넘기기
