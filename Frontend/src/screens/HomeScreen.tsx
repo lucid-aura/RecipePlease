@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Dimensions, Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { FlatList, ScrollView, TextInput, TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -19,7 +19,7 @@ const HomeScreen = () => {
   const navigation = useNavigation()
     const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
 
-  const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0); //훅 설정
+  const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0); //훅 설정
 
   const ListCategories = () => { //리스트 카테고리 함수
     return (

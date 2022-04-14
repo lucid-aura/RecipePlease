@@ -21,9 +21,9 @@ export default function Login() {
     
     // 로그인 훅
     // 카카오 아이디
-    const [memberId, setMemberId] = useState<string>('')
+    const [memberId, setMemberId] = useState('')
     const [memberNickname, setMemberNickname] = useState<string | null>('')
-    const [password, setPassword] = useState<string>('')
+    const [password, setPassword] = useState('')
     
     const log = useSelector<AppState, L.State>((state) => state.login)
     const {loggedIn, loggedUser} = log
@@ -31,6 +31,11 @@ export default function Login() {
     console.log("loggedIn: "+ loggedIn + " loggedUser: " + loggedUser.memberEmail)
 
     let userInfo:string[]
+
+    useEffect(() => {   // 처음 시작할때 로그인 체크.
+        isSignedIn()
+        kakao()
+    },[])
 
     const goShoppingCart = () => {
         dispatch(D.drawerChangeFalseAction())
@@ -40,21 +45,16 @@ export default function Login() {
         dispatch(D.drawerChangeTrueAction())
         navigation.dispatch(DrawerActions.openDrawer())
     }
-    useEffect(() => {
-        GoogleSignin.configure()
-        isSignedIn()
-        kakao()
-    },[])
 
-    const isSignedIn = async () => {
+    const isSignedIn = async () => {    // 구글로그인 되어있는지 체크. 되어있으면 로그인하기.
         const isSignedIn = await GoogleSignin.isSignedIn();
-        console.log("isSignedIn: " +isSignedIn)
+        console.log("isSignedIn: " + isSignedIn)
         if(isSignedIn) {
             googleSignIn()
         }
-    };
+    }
 
-    const googleSignIn= async() => {
+    const googleSignIn= async() => {    // 구글 로그인하기.
         await GoogleSignin.hasPlayServices()
         const userInfo = await GoogleSignin.signIn()
         console.log(userInfo)
@@ -65,12 +65,13 @@ export default function Login() {
                 params: {
                     memberId: userInfo.user.id,
                     memberNickname: userInfo.user.name,
-                }
+            }
             }).then((response) => {
-                if(response.data == "no") {
+                if(response.data == memberId) {
                     console.log("로그인 및 회원가입 되었습니다.")
                     setPassword("")
-                    dispatch(L.loginAction({ memberId: response.data.memberId, 
+                    dispatch(L.loginAction({ 
+                        memberId: response.data.memberId, 
                         memberNickname: response.data.memberNickname,
                         memberEmail: response.data.memberEmail,
                         memberPhone: response.data.memberPhone,
@@ -81,10 +82,13 @@ export default function Login() {
                         memberMainAddr: response.data.memberMainAddr,
                         memberDetailAddr: response.data.memberDetailAddr
                     }))
+                } else if(response.data = '') {
+                    console.log("실패")
                 } else {
                     console.log("로그인 되었습니다.")
                     setPassword("")
-                    dispatch(L.loginAction({ memberId: response.data.memberId, 
+                    dispatch(L.loginAction({ 
+                        memberId: response.data.memberId, 
                         memberNickname: response.data.memberNickname,
                         memberEmail: response.data.memberEmail,
                         memberPhone: response.data.memberPhone,
@@ -97,18 +101,15 @@ export default function Login() {
                     }))
                 }
             }).catch((err:Error) => {})
-
     }
 
-    const googleSignOut = async () => {
+    const googleSignOut = async () => { // 구글 로그아웃
         try {
           await GoogleSignin.signOut();
-        } catch (error) {
-        }
+        } catch (error) {}
       };
 
-    //카카오 아이디 가져오기
-    const signInWithKakao = async (): Promise<void> => {
+    const signInWithKakao = async (): Promise<void> => {    //카카오 로그인
         const token: KakaoOAuthToken = await login();
         console.log("token: " + JSON.stringify(token))
         userInfo= (await getProfile()).split(" ")
@@ -122,66 +123,68 @@ export default function Login() {
         }
         
         axios.post(config.address + "regist", null, 
-        {
-            params: {
-                memberId: userInfo[0],
-                memberNickname: userInfo[1],
-                memberEmail: userInfo[2],
-                memberGender: userInfo[3]
-            }
-        }).then((response) => {
-            if(response.data.memberId == memberId) {
-                console.log("로그인 및 회원가입 되었습니다.")
-                setPassword("")
-                dispatch(L.loginAction({ 
-                    memberId: response.data.memberId, 
-                    memberNickname: response.data.memberNickname,
-                    memberEmail: response.data.memberEmail,
-                    memberPhone: response.data.memberPhone,
-                    memberName: response.data.memberName,
-                    memberCoin: response.data.memberCoin,
-                    memberGender: response.data.memberGender,
-                    memberGrade: response.data.memberGrade,
-                    memberMainAddr: response.data.memberMainAddr,
-                    memberDetailAddr: response.data.memberDetailAddr
-                }))
-            } else {
-                console.log("로그인 되었습니다.")
-                setPassword("")
-                dispatch(L.loginAction({ 
-                    memberId: response.data.memberId, 
-                    memberNickname: response.data.memberNickname,
-                    memberEmail: response.data.memberEmail,
-                    memberPhone: response.data.memberPhone,
-                    memberName: response.data.memberName,
-                    memberCoin: response.data.memberCoin,
-                    memberGender: response.data.memberGender,
-                    memberGrade: response.data.memberGrade,
-                    memberMainAddr: response.data.memberMainAddr,
-                    memberDetailAddr: response.data.memberDetailAddr
-                }))
-            }
-        }).catch((err:Error) => console.log(err.message))
-        
-        //navigation.navigate("MyPage")
-    };
+            {
+                params: {
+                    memberId: userInfo[0],
+                    memberNickname: userInfo[1],
+                    memberEmail: userInfo[2],
+                    memberGender: userInfo[3]
+                }
+            }).then((response) => {
+                if(response.data.memberId == memberId) {
+                    console.log("로그인 및 회원가입 되었습니다.")
+                    setPassword("")
+                    dispatch(L.loginAction({ 
+                        memberId: response.data.memberId, 
+                        memberNickname: response.data.memberNickname,
+                        memberEmail: response.data.memberEmail,
+                        memberPhone: response.data.memberPhone,
+                        memberName: response.data.memberName,
+                        memberCoin: response.data.memberCoin,
+                        memberGender: response.data.memberGender,
+                        memberGrade: response.data.memberGrade,
+                        memberMainAddr: response.data.memberMainAddr,
+                        memberDetailAddr: response.data.memberDetailAddr
+                    }))
+                } else if(response.data = '') {
+                    console.log("실패")
+                } else {
+                    console.log("로그인 되었습니다.")
+                    setPassword("")
+                    dispatch(L.loginAction({ 
+                        memberId: response.data.memberId, 
+                        memberNickname: response.data.memberNickname,
+                        memberEmail: response.data.memberEmail,
+                        memberPhone: response.data.memberPhone,
+                        memberName: response.data.memberName,
+                        memberCoin: response.data.memberCoin,
+                        memberGender: response.data.memberGender,
+                        memberGrade: response.data.memberGrade,
+                        memberMainAddr: response.data.memberMainAddr,
+                        memberDetailAddr: response.data.memberDetailAddr
+                    }))
+                }
+            }).catch((err:Error) => console.log(err.message))
+            
+        }
   
-    const kakao = useCallback(() => {
+    const kakao = useCallback(() => {   // 카카오 로그인 체크후 로그인 되었으면 로그인 하기.
             getProfile().then(value => {
                 userInfo = value.split(" ")
                 if(userInfo.length > 0){
                     console.log("koko")
-                    setMemberId(userInfo[0])
-                    setMemberNickname(userInfo[1])
-                    console.log(`useCallback ${memberId} ${memberNickname}`)
-                    signInWithKakao()
+                    dispatch(L.loginAction({
+                        memberId: userInfo[0],
+                        memberNickname: userInfo[1],
+                        memberEmail: userInfo[2],
+                        memberGender: userInfo[3]
+                    }))
+                    
                 }
             })
     }, [memberId, memberNickname])
     
-    
-    // 로그인
-    const userLogin = () => {
+    const userLogin = () => {   // 일반 로그인
         console.log('userLogin')
         console.log(`memberId: ${memberId}`)
         if(password == '') {
@@ -198,17 +201,18 @@ export default function Login() {
             
             if(response.data.memberId == memberId) {
                 console.log("로그인 되었습니다.")
-                dispatch(L.loginAction({ memberId: response.data.memberId, 
-                                         memberNickname: response.data.memberNickname,
-                                         memberEmail: response.data.memberEmail,
-                                         memberPhone: response.data.memberPhone,
-                                         memberName: response.data.memberName,
-                                         memberCoin: response.data.memberCoin,
-                                         memberGender: response.data.memberGender,
-                                         memberGrade: response.data.memberGrade,
-                                         memberMainAddr: response.data.memberMainAddr,
-                                         memberDetailAddr: response.data.memberDetailAddr
-                                    }))
+                dispatch(L.loginAction({   
+                        memberId: response.data.memberId, 
+                        memberNickname: response.data.memberNickname,
+                        memberEmail: response.data.memberEmail,
+                        memberPhone: response.data.memberPhone,
+                        memberName: response.data.memberName,
+                        memberCoin: response.data.memberCoin,
+                        memberGender: response.data.memberGender,
+                        memberGrade: response.data.memberGrade,
+                        memberMainAddr: response.data.memberMainAddr,
+                        memberDetailAddr: response.data.memberDetailAddr
+                }))
                 
             } 
         }).catch((err:Error) => console.log(err.message))
@@ -217,20 +221,6 @@ export default function Login() {
     const goMyfavoritePage = () => {
         navigation.navigate('MyFavoriteRecipe')
     }
-    
-
-    // useEffect(() => {
-    //     U.readFromStorage(L.loggedUserkey)
-    //         .then((value) => {
-    //             if(value.length > 0) {
-    //                 const savedUser = JSON.parse(value)
-    //                 setMemberId(savedUser.memberId)
-    //                 setPassword(savedUser.password)
-    //                 setMemberNickname(savedUser.memberNickname)
-    //             }
-    //         })
-    //         .catch((e) => {})
-    // }, [loggedIn])
 
     if(!loggedIn){  // 로그아웃 상태일 때
         return(
@@ -272,7 +262,7 @@ export default function Login() {
                                 <Image source={require("./utils/kakao_login_medium_narrow.png")} />
                             </TouchableOpacity>
                         </View>
-                        {/* 로그인 버튼 */}
+                        {/* 구글 로그인 버튼 */}
                         <TouchableOpacity>
                             <GoogleSigninButton
                                 style={{ marginTop:10,width: 192, height: 48 }}
