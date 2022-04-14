@@ -18,7 +18,7 @@ const initialLoggedUser: T.User = {
     memberNickname:'', 
     memberEmail: '',
     memberPhone: '',
-    memberCoin: '',
+    memberCoin: 0,
     memberMainAddr: '',
     memberDetailAddr: '',
     memberZipcode: 0,

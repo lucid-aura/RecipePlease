@@ -1,9 +1,9 @@
 import { DrawerActions, useNavigation } from "@react-navigation/native";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Alert, Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { NavigationHeader } from "../theme";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { getProfile, signOutWithKakao, test } from "./utils";
+import { getProfile, signOutWithKakao } from "./utils";
 import { KakaoOAuthToken, login } from "@react-native-seoul/kakao-login";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,8 @@ import * as L from '../store/login'
 import config from "../project.config"
 import * as D from "../store/drawer"
 import { GoogleSignin, GoogleSigninButton } from "@react-native-google-signin/google-signin";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { loggedUserkey } from "../store/login";
 
 
 export default function Login() {
@@ -32,11 +34,6 @@ export default function Login() {
 
     let userInfo:string[]
 
-    useEffect(() => {   // 처음 시작할때 로그인 체크.
-        isSignedIn()
-        kakao()
-    },[])
-
     const goShoppingCart = () => {
         dispatch(D.drawerChangeFalseAction())
         navigation.dispatch(DrawerActions.openDrawer())
@@ -44,14 +41,6 @@ export default function Login() {
     const goSetting = () => {
         dispatch(D.drawerChangeTrueAction())
         navigation.dispatch(DrawerActions.openDrawer())
-    }
-
-    const isSignedIn = async () => {    // 구글로그인 되어있는지 체크. 되어있으면 로그인하기.
-        const isSignedIn = await GoogleSignin.isSignedIn();
-        console.log("isSignedIn: " + isSignedIn)
-        if(isSignedIn) {
-            googleSignIn()
-        }
     }
 
     const googleSignIn= async() => {    // 구글 로그인하기.
@@ -167,23 +156,7 @@ export default function Login() {
             }).catch((err:Error) => console.log(err.message))
             
         }
-  
-    const kakao = useCallback(() => {   // 카카오 로그인 체크후 로그인 되었으면 로그인 하기.
-            getProfile().then(value => {
-                userInfo = value.split(" ")
-                if(userInfo.length > 0){
-                    console.log("koko")
-                    dispatch(L.loginAction({
-                        memberId: userInfo[0],
-                        memberNickname: userInfo[1],
-                        memberEmail: userInfo[2],
-                        memberGender: userInfo[3]
-                    }))
-                    
-                }
-            })
-    }, [memberId, memberNickname])
-    
+
     const userLogin = () => {   // 일반 로그인
         console.log('userLogin')
         console.log(`memberId: ${memberId}`)
@@ -201,7 +174,7 @@ export default function Login() {
             
             if(response.data.memberId == memberId) {
                 console.log("로그인 되었습니다.")
-                dispatch(L.loginAction({   
+                dispatch(L.signUpAction({   
                         memberId: response.data.memberId, 
                         memberNickname: response.data.memberNickname,
                         memberEmail: response.data.memberEmail,
@@ -216,10 +189,6 @@ export default function Login() {
                 
             } 
         }).catch((err:Error) => console.log(err.message))
-    }
-
-    const goMyfavoritePage = () => {
-        navigation.navigate('MyFavoriteRecipe')
     }
 
     if(!loggedIn){  // 로그아웃 상태일 때
@@ -297,8 +266,8 @@ export default function Login() {
                             <TouchableOpacity style={[styles.content]} onPress={() => {
                                 signOutWithKakao()
                                 googleSignOut()
+                                AsyncStorage.removeItem(loggedUserkey)
                                 dispatch(L.logoutAction())
-                                console.log(loggedIn)
                                 navigation.navigate("Login")
                             }}>
                                 <Text>로그아웃</Text>

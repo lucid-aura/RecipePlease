@@ -10,8 +10,8 @@ import * as L from '../store/login'
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import axios from 'axios';
 import { getProfile } from '../mypage/utils';
-import { KakaoOAuthToken, login } from '@react-native-seoul/kakao-login';
 import config from "../project.config"
+import * as U from '../mypage/utils'
 
 const OnBoardScreen = () => {
 
@@ -34,9 +34,16 @@ const OnBoardScreen = () => {
   useEffect(() => {   // 처음 시작할때 로그인 체크.
     isSignedIn()
     kakao()
+    U.readFromStorage(L.loggedUserkey)
+      .then(value => {
+        if(value.length > 0) {
+          const savedUser = JSON.parse(value)
+          dispatch(L.loginAction(savedUser))
+        }
+      }) 
     loggedIn ? navigation.navigate("HomeScreen") : console.log(`OnBoardScreen loggedIn: ${loggedIn}`)
-  },[loggedIn])
-
+  }, [loggedIn])
+ 
   const isSignedIn = async () => {    // 구글로그인 되어있는지 체크. 되어있으면 로그인하기.
     const isSignedIn = await GoogleSignin.isSignedIn();
     console.log("isSignedIn: " + isSignedIn)
