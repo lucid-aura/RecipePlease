@@ -44,3 +44,22 @@ export const unlinkKakao = async (): Promise<void> => {
     const message = await unlink();
 
 };
+/*
+export const test = async (accessToken:any) => {
+    axios.post("https://kapi.kakao.com/v2/user/me", null, {
+            headers: {
+                'Content-Type': "application/x-www-form-urlencoded",
+                Authorization: `Bearer ${accessToken}`
+            },
+            params: {
+                property_keys: ["properties.nickname", "properties.profile_image", "properties.thumbnail_image	", "kakao_account.email","kakao_account.gender"]
+            },
+        }).then(function (response) {
+            console.log(response.data)
+
+        }).catch(function (error) {
+            console.log(error)
+            //Alert.alert("추가되지 않았습니다.")
+        })
+}
+*/

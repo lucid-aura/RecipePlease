@@ -53,6 +53,10 @@
 	SELECT * FROM RECIPE ORDER BY RECIPEREADCOUNT DESC LIMIT 4;
 </select>
 
+<select id="getRecommendRatingRecipe" resultType="com.recipe.a.dto.RecipeDto">
+	SELECT * FROM RECIPE ORDER BY RECIPERATING DESC LIMIT 20;
+</select>
+
 <select id="searchRecipe" resultType="com.recipe.a.dto.RecipeDto">
 	SELECT * FROM RECIPE WHERE RECIPETITLE LIKE CONCAT('%', #{search}, '%') 
 	AND RECIPEBIGCATEGORY IN

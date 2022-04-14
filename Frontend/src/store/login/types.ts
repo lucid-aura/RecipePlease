@@ -5,7 +5,7 @@ export type User = {
     memberNickname: string
     memberEmail?: string
     memberPhone?: string
-    memberCoin?: string
+    memberCoin?: number
     memberMainAddr?: string
     memberDetailAddr?: string
     memberZipcode?: number

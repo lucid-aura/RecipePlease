@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Alert, Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { NavigationHeader } from "../theme";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { getProfile, signOutWithKakao } from "./utils";
+import { getProfile, signOutWithKakao, test } from "./utils";
 import { KakaoOAuthToken, login } from "@react-native-seoul/kakao-login";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";

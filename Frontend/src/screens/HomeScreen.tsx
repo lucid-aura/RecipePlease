@@ -1,16 +1,18 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Dimensions, Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { FlatList, ScrollView, TextInput, TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {default as Icons } from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import COLORS from '../consts/colors';
-import categories from '../consts/categories';
+//import categories from '../consts/categories';
 import foods from '../consts/foods';
 
 import { NavigationHeader } from '../theme';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { getProfile } from '../mypage/utils';
+import axios from 'axios';
+import config from '../project.config'
 
 const {width} = Dimensions.get('screen'); //스크린 
 const cardWidth = width / 2 - 20; //카드값 길이시 2개에서 부터 20개까지 설정
@@ -19,7 +21,19 @@ const HomeScreen = () => {
   const navigation = useNavigation()
     const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
 
-  const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0); //훅 설정
+  const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0); //훅 설정
+  const [categories, setCategories] = useState([])
+  const [load, setLoad] = useState(false)
+
+  useEffect( () => {
+    const fetchRecipe = async() =>{
+        const recipeRes =await axios.get(config.address + "getRecommendRecipeByCategory?category=rating")
+        setCategories(recipeRes.data)          
+        console.log(recipeRes.data)
+        setLoad(true)
+    }
+    fetchRecipe()
+}, [])
 
   const ListCategories = () => { //리스트 카테고리 함수
     return (
@@ -74,7 +88,6 @@ const HomeScreen = () => {
           screen: 'RecipeDetail',
           params:{
             seq:0, 
-            updateRecipeDataAfterComment: console.log("여기에 평가 작성 시 데이터 리로드 하는 함수가 들어가야 합니다."),
             category: 'recipe'
           }
         }  as never)}>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <title>로그인 페이지 입니다.</title>
+        <link rel="stylesheet" href="login.css">
+        <script type="text/javascript" defer src="login.js"></script> <!-- defer(외부 참조용 연동 필수)-->
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="project.config.js" charset="utf-8"></script>
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    </head>
+
+    <body>
+        <div class="hero">
+            <div class="form-box">
+                <div class="button-box">
+                    <div id="btn"></div>
+                    <button type="button" class="toggle-btn" onclick="login()">로그인</button>
+                    <button type="button" class="toggle-btn" onclick="register()">회원가입</button>
+                </div>
+
+                <div class="social-icons">
+                    <a href="javascript:kakaoLogin();"><img src="https://www.gb.go.kr/Main/Images/ko/member/certi_kakao_login.png"  style="height: 60px; width: auto;"/></a>
+                </div>
+
+                <form id="login" class="input-group"  method="post">
+                    
+                    <input type="text" class="input-field" name="memberId" placeholder="아이디 입력" required>
+                    <input type="password" class="input-field" name="memberPwd" placeholder="패스워드 입력" required>
+                    <input type="checkbox" class="check-box"><span>암호 기억하기</span>
+                    <button type="button" class="submit-btn" onclick="doLogin()">로그인</button>
+                </form>
+
+                <form id="register" class="input-group"  method="post">
+                    <input type="text" class="input-field" name="memberId" id="registId" placeholder="아이디 입력" required>
+                    <!-- <input type="email" class="input-field" placeholder="이메일 입력" required> -->
+                    <input type="password" class="input-field" name="memberPwd" placeholder="패스워드 입력" required>
+                    <input type="text" class="input-field" name="memberNickname" placeholder="닉네임 입력" required>
+                    <input type="checkbox" class="check-box"><span>위 사항에 동의합니다.</span>
+                    <button type="button" class="submit-btn" onclick="doRegist()">로그인</button>
+                </form>
+            </div>
+            
+        </div>
+
+        
+
+    </body>
+
+    <script>
+        //0b51ddc9f24f741b7aa493bdde5908b2
+        //28125d6e902519d48fa96e75483578bf
+        window.Kakao.init('28125d6e902519d48fa96e75483578bf');
+        console.log(window.Kakao.isInitialized());
+        console.log(sessionStorage.getItem('AccessKEY'))
+        if (sessionStorage.getItem('AccessKEY') != null) {
+            console.log("session alive!")
+            window.Kakao.Auth.setAccessToken(JSON.parse(sessionStorage.getItem('AccessKEY')));
+        }
+
+        function saveToDos(token) { //item을 localStorage에 저장합니다. 
+            typeof(Storage) !== 'undefined' && sessionStorage.setItem('AccessKEY', JSON.stringify(token)); 
+        };
+
+        function kakaoLogin(){   
+            //sessionStorage.removeItem("AccessKey")
+            window.Kakao.Auth.login({
+                scope:'profile_nickname, profile_image, account_email, gender',
+                success: function(authObj) {
+                    console.log(authObj);
+                    saveToDos(authObj.access_token)  // 로그인 성공하면 사용자 엑세스 토큰 sessionStorage에 저장
+                    
+                    window.Kakao.API.request({
+                        url:'/v2/user/me', 
+                        success: (res) => {
+                            const kakao_account = res.kakao_account
+                            console.log(kakao_account);
+                            /*
+                            memberCoin: 0
+                            memberDetailAddr: ""
+                            memberEmail: ""
+                            memberGender: ""
+                            memberGrade: ""
+                            memberId: "sss"
+                            memberMainAddr: ""
+                            memberName: ""
+                            memberNickname: "sss"
+                            memberPhone: ""
+                            memberPwd: ""
+                            memberZipcode: 0
+                            salt: ""
+                            */
+                            //location.href="http://192.168.0.4:5500/WebContent/index.html"
+
+                            window.Kakao.API.request({
+                                url: '/v2/user/me',
+                                data: {
+                                    property_keys: ["properties.nickname", "kakao_account.email","kakao_account.gender"]
+                                },
+                                success: function(response) {
+                                    $.ajax({
+                                        url : webAddress + "idCheck",
+                                        type : 'POST', 
+                                        data : {memberId:response.id}, 
+                                        success : function(res) {
+                                            let userInfo = {
+                                                memberId:String(response.id),
+                                                memberName:response.properties.nickname,
+                                                memberNickname:response.properties.nickname,
+                                                memberGender:response.kakao_account.gender,
+                                                memberPwd:"",
+                                                salt:""
+                                            }
+                                            if (res == "no"){
+                                                $.ajax({
+                                                    cache : false,
+                                                    url : webAddress + "regist",
+                                                    type : 'POST', 
+                                                    data : userInfo, 
+                                                    success : function(res) {
+                                                        $.ajax({
+                                                            cache : false,
+                                                            url : webAddress + "login",
+                                                            type : 'POST', 
+                                                            data : userInfo, 
+                                                            success : function(res) {
+                                                                sessionStorage.setItem("loggedUser", JSON.stringify(res));
+                                                                sessionStorage.setItem("loginType", "kakao");
+                                                                //location.href="index.html"
+                                                            },
+                                                            error : function(xhr, status) {
+                                                                alert(xhr + " : " + status);
+                                                            }
+                                                            });
+                                                    },
+                                                    error : function(xhr, status) {
+                                                        alert(xhr + " : " + status);
+                                                    }
+                                                })
+                                            }
+                                            else {
+                                                $.ajax({
+                                                cache : false,
+                                                url : webAddress + "login",
+                                                type : 'POST', 
+                                                data : userInfo, 
+                                                success : function(res) {
+                                                    console.log(res)
+                                                    sessionStorage.setItem("loggedUser", JSON.stringify(res));
+                                                    sessionStorage.setItem("loginType", "kakao");
+                                                    console.log(window.Kakao.Auth.getAccessToken());
+                                                    location.href="index.html"
+                                                },
+                                                error : function(xhr, status) {
+                                                    alert(xhr + " : " + status);
+                                                }
+                                                });
+                                            }
+                                            
+
+                                        },
+                                        error : function(xhr, status) {
+                                            alert(xhr + " : " + status);
+                                        }
+                                    });
+                                },
+                                fail: function(error) {
+                                    console.log(error);
+                            }
+                        });
+
+                        },
+                        fail: function(error) {
+                            console.log(error);
+                        }
+                    });
+                }
+            });
+        }
+        function doLogin() {
+            
+            // 저장 sessionStorage.getItem("mineSession"); 
+            // mineItRecord sessionStorage.length; 
+            // 1 sessionStorage.key(0); 
+            // mineItRecord sessionStorage.removeItem("mineSession"); 
+            // 삭제 sessionStorage.clear(); // 전체삭제
+
+
+            var formData = $("form[id=login]").serialize() ;
+
+            $.ajax({
+            cache : false,
+            url : webAddress + "login",
+            type : 'POST', 
+            data : formData, 
+            success : function(res) {
+                console.log(res)
+                console.log(formData)
+                sessionStorage.setItem("loggedUser", JSON.stringify(res));
+                sessionStorage.setItem("loginType", "normal");
+                location.href="index.html"
+            },
+            error : function(xhr, status) {
+                alert(xhr + " : " + status);
+            }
+            });
+        }
+
+        function doRegist() {
+            
+            var formData = $("form[id=register]").serialize() ;
+            $.ajax({
+                url : webAddress + "idCheck",
+                type : 'POST', 
+                data : {memberId:$("#registId").val()}, 
+                success : function(res) {
+                    if (res == "yes"){
+                        alert("이미 존재하는 ID입니다.")
+                    }
+                    else {
+                        $.ajax({
+                            cache : false,
+                            url : webAddress + "regist",
+                            type : 'POST', 
+                            data : formData, 
+                            success : function(res) {
+                                console.log(res)
+                                location.href="login.html"
+                            },
+                            error : function(xhr, status) {
+                                alert(xhr + " : " + status);
+                            }
+                        })
+                    }
+                },
+                error : function(xhr, status) {
+                    alert(xhr + " : " + status);
+                }
+            });
+        }
+    
+    </script>
+
+</html>
