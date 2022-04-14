@@ -184,12 +184,10 @@ public class RecipeController {
 		return recipeService.getSmallRecommendRecipe(category);
 	}	
 	
-	@RequestMapping(value = "/getRecommendRecipeTest", method = {RequestMethod.GET})
-	public List<RecipeDto> getRecommendRecipeTest(String category) {
-		
-		System.out.println("RecipeController getRecommendRecipeTest() " + category);
-
-		return recipeService.getRecommendRecipeTest(category);
+	@RequestMapping(value = "/getRecommendRecipeByCategory", method = {RequestMethod.GET})
+	public List<RecipeDto> getRecommendRecipeByCategory(String category) {
+		System.out.println("RecipeController getRecommendRecipeByCategory() " + category);
+		return recipeService.getRecommendRecipeByCategory(category);
 	}	
 	
 	

@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,900|Montserrat|Roboto");
+
+body{
+    background: linear-gradient(to right, #2ed573, #f9ca24);
+    overflow-x: hidden;
+}/*바디값 전체 설정*/
+
+.Container{
+    background: #fff;
+    width: 540px;
+    height: 450px;
+    margin: 0 auto;
+    position: relative;
+    margin-top: 10%;
+    box-shadow: 2px 5px 20px rgba(119,119,119,.5);
+}/*컨테이너 설정*/
+
+.leftbox{
+    float: left;
+    top: -5%;
+    left: 5%;
+    position: absolute;
+    width: 15%;
+    height: 110%;
+    background: #2ed573;
+    box-shadow: 3px 3px 10px rgba(119,119,119,.5);
+    border: .1em solid #fff;
+}/*왼 박스 설정*/
+
+nav a{
+    list-style: none;
+    padding: 35px;
+    color: #fff;
+    font-size: 1.1em;
+    display: block;
+    transition: all .3s ease-in-out;
+}/*아이콘 설정*/
+
+nav a:hover{
+    color: #10ac84;
+    cursor: pointer;
+    transform: scale(1.2);
+}/*아이콘 호버 처리*/
+
+nav a:first-child{
+    margin-top: 7px;
+}/*자손 선택시 마진 값*/
+
+nav a.active{
+    color: #10ac84;
+}/*액티브 설정*/
+
+.rightbox{
+    width: 60%;
+    margin-left: 27%;
+    padding-top: 5px;
+}/*오른 박스 설정*/
+
+.tabshow{
+    transition: all .5s ease-in;
+    width: 80%;
+    position: absolute;
+}/*호출부분*/
+
+h1{
+    font-family: "Montserrat", sans-serif;
+    columns: #7ed386;
+    font-size: 1.2rem;
+    margin-top: 40px;
+    margin-bottom: 35px;
+}/*h1 설정*/
+
+h2{
+    color: #777;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    font-size: 8px;
+    letter-spacing: 1px;
+    margin-left: 2px;
+    margin-top: 10px;
+}/*h2 설정*/
+
+.input, p{
+    border: 0;
+    border-bottom: 1px solid #3fb6a8;
+    width: 80%;
+    font-family: 'montserrat', sans-serif;
+    font-size: .7em;
+    padding: 7px 0;
+    color: #070707;
+    outline: none;
+}/*인풋 이하 태그 처리*/
+
+span{
+    font-size: .7em;
+    color: #777;
+}/*span 처리*/
+
+.btn{
+   font-family: "roboto", sans-serif; 
+   text-transform: uppercase;
+   font-size: 15px;
+   border: 0;
+   color: #fff;
+   background: #7ed386;
+   padding: 7px 15px;
+   box-shadow: 0px 2px 4px 0px rgba(0,0,0,.2);
+   cursor: pointer;
+   margin-top: 15px;
+}/*버튼 설정*/
+
+.tabshow{
+    display: none;
+}/*탭을 할 경우 이하 설정*/

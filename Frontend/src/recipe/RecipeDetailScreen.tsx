@@ -63,13 +63,10 @@ export default function RecipeDetailScreen({ route }:any){
     const [blur, setBlur] = useState(<Text> </Text>) 
     const [load, setLoad] = useState(false)
 
-    const playerRef = useRef<YoutubeIframeRef>(null) // ???
+    const playerRef = useRef<YoutubeIframeRef>(null)
 
     const { seq } = route.params; // 받아온 레시피 seq
     const { category } = route.params; // 받아온 카테고리
-    // const { index } = route.params;
-    // const { changeAvarage } = route.params;
-    // const { changeReadcount } = route.params;
     const log = useSelector<AppState, L.State>((state) => state.login)
     const {loggedIn, loggedUser} = log
     
@@ -102,14 +99,41 @@ export default function RecipeDetailScreen({ route }:any){
                 }
                 else {
                     // memberId를 통해 레시피 구매여부 확인
-                    const purchaseRes = await axios.get( config.address + "coin/checkPurchaseRecipe?memberId=" + loggedUser.memberId + "&docsSeq=" + seq)
-                    if (purchaseRes.data > 0){ // 구매 확인
-                        // 레시피와 태그, 평균, 조회수를 갱신
-                    }
-                    else {
+                    const purchaseRes = await axios.post( config.address + "coin/checkPurchaseRecipe?memberId=" + loggedUser.memberId + "&docsSeq=" + seq)
+                    if (purchaseRes.data == "비구매" && loggedUser.memberId != recipeRes.data.memberId){ // 구매 확인
                         // 구매 페이지로 단순 alert? 이동?
-                        check = false;
-                        Alert.alert("", "구매가 필요합니다.")
+                        if (loggedUser.memberCoin >= recipeRes.data.recipePrice){
+                            Alert.alert("유료 레시피입니다.", "구매가 필요합니다." ,
+                            [
+                            {
+                                text: "구매",
+                                onPress: () => {
+                                    setBlur(<></>)
+                                    navigation.navigate('RecipeHome' as never)
+                                    navigation.navigate('GoodsNavigator' as never, {
+                                        screen: 'purchaseRecipe',
+                                        params: {
+                                            docsSeq: seq,
+                                            coinCount:recipeRes.data.recipePrice,
+                                        }
+                                    } as never)
+                                }},
+                            {
+                                text: "뒤로가기",
+                                onPress: () => {
+                                    setBlur(<></>)
+                                    navigation.navigate('RecipeHome' as never)
+                                }},
+                            ],
+                            { cancelable: false}
+                            );
+                        
+                            check = false;
+                        }
+                        else {
+                            // 코인 굿즈 구매로 이동 필요
+                        }
+                        
                         
                     }
                 }   

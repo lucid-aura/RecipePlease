@@ -192,6 +192,7 @@ export default function UploadScreen() {
                         setSeq(response.data)
                         uploadRecipeThumbnailImg(response.data)
                         uploadRecipeContentImg(response.data)
+                        navigation.navigate('Login' as never)
                         navigation.navigate('RecipeNavigator' as never, {
                             screen: 'RecipeDetail',
                             params: {

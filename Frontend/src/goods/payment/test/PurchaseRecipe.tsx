@@ -1,13 +1,21 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Alert, Animated, Button, Dimensions, Modal, PanResponder, Pressable, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import { useSelector } from "react-redux";
 import config from  "../../../project.config"
-
-export default function PurchaseRecipe({navigation}:any) {
+import { AppState } from "../../../store";
+import * as L from '../../../store/login'
+export default function PurchaseRecipe({ route }:any) {
+    const navigation = useNavigation()
+    const { docsSeq } = route.params; // 받아온 레시피 seq
+    const { coinCount } = route.params; // 받아온 가격
 
     // 로그인 세션 정보
     const [loginData, setLoginData] = useState(Object);
+    const log = useSelector<AppState, L.State>((state) => state.login)
+    const {loggedIn, loggedUser} = log
 
     // 보유코인 및 레시피 가격 세팅
     const [userCoin, setUserCoin] = useState(0);
@@ -20,7 +28,7 @@ export default function PurchaseRecipe({navigation}:any) {
                 if (data !== null) {
                     let loginSessionData = JSON.parse(data);
                     setLoginData(loginSessionData);
-                    setUserCoin(loginData.memberCoin);
+                    setUserCoin(loggedUser.memberCoin as number);
                 }
             } catch (err) {
                 console.log(err);
@@ -30,16 +38,21 @@ export default function PurchaseRecipe({navigation}:any) {
     }, [userCoin]);
 
     // 레시피 구매 버튼 tap할 때 구매 요청을 보낼 함수
-    const requestPurchaseRecipe = async () => {
-        await axios.post(config.address + "coin/useCoin", null, {params: {
-            memberId: loginData.memberId,
-            docsSeq: 1,
-            coinCount: recipePrice
+    const requestPurchaseRecipe = () => {
+        axios.post(config.address + "coin/useCoin", null, {params: {
+            memberId: loggedUser.memberId,
+            docsSeq: docsSeq,
+            coinCount: coinCount,
         }})
         .then((res) => {
             console.log(res.data);
             Alert.alert("구매 성공", "구매가 완료되었습니다.", [
-                {text: "확인", onPress: () => navigation.navigate("Home")}
+                {text: "확인", onPress: () =>{
+                    navigation.navigate('RecipeDetail' as never,{
+                        seq: docsSeq,
+                        category: 'recipe',
+                    } as never)
+                }}
             ]);
         })
         .catch((err) => console.log(err));
@@ -128,8 +141,8 @@ export default function PurchaseRecipe({navigation}:any) {
                             {/* 모달에 들어갈 내용을 아래에 작성 */}
                             <View>
                                 <Text style={modalInnerStyle.recipeTitle}>레시피 제목</Text>
-                                <Text style={[modalInnerStyle.coin, {color: '#00f'}]}>{`보유코인 ${divideNum(userCoin)}원`}</Text>
-                                <Text style={[modalInnerStyle.coin, { color: '#f00'}]}>{`구매가격 ${divideNum(recipePrice)}원`}</Text>
+                                <Text style={[modalInnerStyle.coin, {color: '#00f'}]}>{`보유코인 ${divideNum(loggedUser.memberCoin as number)}원`}</Text>
+                                <Text style={[modalInnerStyle.coin, { color: '#f00'}]}>{`구매가격 ${divideNum(coinCount)}원`}</Text>
 
                                 <TouchableOpacity 
                                     style={modalInnerStyle.modalBtn}

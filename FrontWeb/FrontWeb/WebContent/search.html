@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/7a52739f2b.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="project.config.js" charset="utf-8"></script>
+    <script type="text/javascript" src="commons.js" charset="utf-8"></script>
 </head>
 <body>
     <nav id="navBar" class="navbar-white">
@@ -18,7 +20,7 @@
             <li><a href="listing.html?category=entertain">접대용</a></li>
             <li><a href="listing.html?category=nightmeal">야식용</a></li>
         </ul>
-        <a href="#" class="register-btn">회원 가입하기</a>
+        <a href="login.html" class="register-btn" id="loginBtn" onclick="logout()">로그인</a>
         <i class="fas fa-bars" onclick="togglebtn()"></i>
     </nav>
 

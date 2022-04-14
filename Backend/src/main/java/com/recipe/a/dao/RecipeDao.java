@@ -28,6 +28,8 @@ public interface RecipeDao {
 	public List<RecipeDto> getSmallRecommendRecipe(String category);
 	
 	public List<RecipeDto> getRecommendReadcountRecipe();
+	
+	public List<RecipeDto> getRecommendRatingRecipe();
 
 	public int oneUpReadcount(int recipeSeq);
 
