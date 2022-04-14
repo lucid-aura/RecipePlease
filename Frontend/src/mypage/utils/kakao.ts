@@ -39,9 +39,9 @@ export const signOutWithKakao = async (): Promise<void> => {
 
 // 프로필 조회
 export const getProfile = async (): Promise<string> => {
-    const profile: KakaoProfile = await getKakaoProfile();
-    JSON.stringify(profile)
-    return profile.id +" "+ profile.nickname
+    const profile: KakaoProfile  = await getKakaoProfile();
+    console.log( JSON.stringify(profile))
+    return profile.id +" "+ profile.nickname + " " + profile.email + " " + profile.gender 
 };
 
 export const unlinkKakao = async (): Promise<void> => {
