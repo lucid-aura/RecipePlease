@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { NavigationHeader } from "../theme";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { getProfile, signOutWithKakao } from "./utils";
+import { getProfile, signOutWithKakao, test } from "./utils";
 import { KakaoOAuthToken, login } from "@react-native-seoul/kakao-login";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,7 +44,6 @@ export default function Login() {
     //카카오 아이디 가져오기
     const signInWithKakao = async (): Promise<void> => {
         const token: KakaoOAuthToken = await login();
-
         userInfo= (await getProfile()).split(" ")
         console.log("userInfo: " + userInfo[0])
         

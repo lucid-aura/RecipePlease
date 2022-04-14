@@ -140,11 +140,15 @@ public class RecipeService {
 		return res;
 	}
 	
-	public List<RecipeDto> getRecommendRecipeTest(String category) {
+	public List<RecipeDto> getRecommendRecipeByCategory(String category) {
 		List<RecipeDto> recipes;
 		if (category.equals("readcount")) {
 			recipes = recipeDao.getRecommendReadcountRecipe();
-		} else {
+		}
+		else if (category.equals("rating")) {
+			recipes = recipeDao.getRecommendRatingRecipe();
+		}
+		else {
 			recipes = recipeDao.getRecommendRecipe(category);
 		}
 		return recipes;
