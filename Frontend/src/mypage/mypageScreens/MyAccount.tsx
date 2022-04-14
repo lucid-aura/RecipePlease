@@ -33,8 +33,21 @@ export default function MyAccount() {
 
     const navigation = useNavigation()
     const dispatch = useDispatch()
-    const goMyPage = useCallback((response) => {
-        dispatch(L.loginAction({ 
+
+    const goLoginPage = useCallback((response) => {
+        /* dispatch(L.loginAction({ 
+            memberId: response.memberId, 
+            memberNickname: response.memberNickname,
+            memberEmail: response.memberEmail,
+            memberPhone: response.memberPhone,
+            memberName: response.memberName,
+            memberCoin: response.memberCoin,
+            memberGender: response.memberGender,
+            memberGrade: response.memberGrade,
+            memberMainAddr: response.memberMainAddr,
+            memberDetailAddr: response.memberDetailAddr
+        })) */
+        dispatch(L.signUpAction({
             memberId: response.memberId, 
             memberNickname: response.memberNickname,
             memberEmail: response.memberEmail,
@@ -99,7 +112,7 @@ export default function MyAccount() {
                         Alert.alert("회원가입","가입되었습니다.", 
                                     [{
                                         text:"확인",
-                                        onPress: () => goMyPage(response.data)
+                                        onPress: () => goLoginPage(response.data)
                                     }]
                         )
                     } else {

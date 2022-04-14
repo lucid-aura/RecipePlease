@@ -22,6 +22,8 @@ public interface MembersDao {
 	public int idCheck(MembersDto dto);
 	// 회원가입 
 	public int regist(MembersDto dto);	// 회원가입 
+	// 아이디 체크후 Salt반환
+	public String idCheckGetSalt(MembersDto dto);
 	
 	// 로그인
 	public MembersDto getSalt(String memberId, String memberPwd);

@@ -1,6 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
-
 export const writeToStorage = (key:string, value:string) =>
     new Promise((resolve, reject) => {
         AsyncStorage.setItem(key, value).then(resolve).catch(reject)

@@ -58,17 +58,27 @@ public class MembersService {
 	// 회원가입 - 노승현
 	public MembersDto regist(MembersDto dto) {	
 		
+		String salt;
 		int n = dao.idCheck(dto);
+		
 		int b;
 		if(n>0) {	// 아이디 있음
-			b = 0;
-		} else {
+			salt = dao.idCheckGetSalt(dto);
+			System.out.println("regist service salt: " + salt);
+			dto.setMemberPwd(BCrypt.hashpw(dto.getMemberPwd(), salt));
+			return dao.login(dto.getMemberPwd());
+		} else {	// 아이디 없음
+			salt = BCrypt.gensalt(10);	// 임의의 솔트값 생성
+			dto.setSalt(salt);	// 솔트값 Dto 에 담기
+			dto.setMemberPwd(BCrypt.hashpw(dto.getMemberPwd(), salt));	//솔트값과 비밀번호 합쳐서 암호화후 Dto에 담기
+			System.out.println("regist memgbersService: " + dto.toString()  );
+			System.out.println("memberId: " + dto.getMemberId() + " " + "memberPwd: " + dto.getMemberPwd());
+
 			b = dao.regist(dto);
 		}
 		
 		if(b > 0) {
 			return dao.login(dto.getMemberPwd());
-			
 		} else {
 			MembersDto onlyLogin = new MembersDto();
 			return onlyLogin;
