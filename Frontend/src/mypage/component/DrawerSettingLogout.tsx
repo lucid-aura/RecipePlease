@@ -9,11 +9,7 @@ const DrawerSettingLogout: FC<DrawerContentComponentProps> = (props) => {
     
     const {navigation} = props
     const Drawerclose = useCallback(() => navigation.dispatch(DrawerActions.closeDrawer()), [])
-
-    useEffect(() => {
-        fetch
-    }, [])
-
+    
     const goMyFavoriteRecipe = useCallback(() => {
         props.navigation.navigate("MyFavoriteRecipe")
     },[])
