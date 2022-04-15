@@ -9,5 +9,8 @@
 	SELECT COUNT(*) FROM GOODS
 </select>
 
+<select id="goodsData" resultType="com.recipe.a.dto.GoodsDto">
+	SELECT * FROM GOODS WHERE GOODSPRICE = 70000
+</select>
 
 </mapper>

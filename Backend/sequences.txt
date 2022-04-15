@@ -2,13 +2,13 @@ use mysql;
 
 select * from recipe;
 
---CREATE PROCEDURE create_sequence(IN the_name text)
---MODIFIES SQL DATA
---DETERMINISTIC
---BEGIN
---    DELETE FROM sequences WHERE name=the_name;
---    INSERT INTO sequences VALUES (the_name, 0)
---END
+CREATE PROCEDURE create_sequence(IN the_name text)
+MODIFIES SQL DATA
+DETERMINISTIC
+BEGIN
+    DELETE FROM sequences WHERE name=the_name;
+    INSERT INTO sequences VALUES (the_name, 0)
+END
 
 INSERT INTO sequences 
 VALUES('LIKESEQ', 0);
@@ -59,3 +59,30 @@ delete from SEQUENCES where name='LIKESEQ';
 DELETE FROM SEQUENCES;
 
 commit;
+
+
+DROP TABLE SEQUENCES;
+-- 시퀀스를 생성하는 프로시저 생성
+
+ CREATE PROCEDURE create_sequence(IN the_name text)
+ MODIFIES SQL DATA
+ DETERMINISTIC
+ BEGIN
+     DELETE FROM sequences WHERE name=the_name;
+     INSERT INTO sequences VALUES (the_name, 0)
+ END
+
+
+
+-- -- nextval function 생성
+
+ CREATE FUNCTION `NEXTVAL`(the_name varchar(32)) 
+ RETURNS BIGINT UNSIGNED
+ MODIFIES SQL DATA
+ DETERMINISTIC
+ BEGIN
+     DECLARE ret BIGINT UNSIGNED;
+     UPDATE sequences SET currval=currval+1 WHERE name=the_name;
+     SELECT currval INTO ret FROM sequences WHERE name=the_name limit 1;
+ RETURN ret;
+ END
