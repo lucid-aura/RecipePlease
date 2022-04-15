@@ -15,7 +15,6 @@ import { GoogleSignin, GoogleSigninButton } from "@react-native-google-signin/go
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { loggedUserkey } from "../store/login";
 
-
 export default function Login() {
     const navigation = useNavigation()
     const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
@@ -34,8 +33,7 @@ export default function Login() {
     useEffect(() => {
         GoogleSignin.configure()
         console.log(`GoogleSignin.configure(): ${GoogleSignin.configure()}`)
-    }, [])
-    
+    })
     let userInfo:string[]
 
     const goShoppingCart = useCallback(() => {
@@ -47,11 +45,11 @@ export default function Login() {
         navigation.dispatch(DrawerActions.openDrawer())
     },[])
 
-    const googleSignIn= async() => {    // 구글 로그인하기.
+    const googleSignIn= useCallback(async() => {    // 구글 로그인하기.
+        try{
         await GoogleSignin.hasPlayServices()
         const userInfo = await GoogleSignin.signIn()
         console.log(userInfo)
-        
         axios.post(config.address + "regist", null, 
             {
                 params: {
@@ -79,7 +77,7 @@ export default function Login() {
                         memberThumbnail: userInfo.user.photo,
                         idSeq:2
                     }))
-                } else if(response.data = '') {
+                } else if(response.data == '') {
                     console.log("실패")
                 } else {
                     console.log("로그인 되었습니다.")
@@ -103,7 +101,9 @@ export default function Login() {
                     }))
                 }
             }).catch((err:Error) => {})
-    }
+        }catch(err) {err}
+        
+    },[memberId, memberNickname])
 
     const googleSignOut = useCallback(async () => { // 구글 로그아웃
         try {
@@ -170,7 +170,7 @@ export default function Login() {
                 }
             }).catch((err:Error) => console.log(err.message))
             
-        },[])
+        },[memberId,memberNickname])
 
     const userLogin = () => {   // 일반 로그인
         console.log('userLogin')
@@ -190,6 +190,7 @@ export default function Login() {
                 if(response.data.memberId == memberId) {
                     console.log("로그인 되었습니다.")
                     AsyncStorage.getItem('thumbnail').then((value)=> {
+                        console.log("thumbnail: "+ value)
                         dispatch(L.signUpAction({   
                             memberId: response.data.memberId, 
                             memberNickname: response.data.memberNickname,

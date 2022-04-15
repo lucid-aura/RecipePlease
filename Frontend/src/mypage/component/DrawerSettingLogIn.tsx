@@ -10,7 +10,6 @@ import * as L from '../../store/login'
 import { AppState } from "../../store"
 import { launchImageLibrary } from "react-native-image-picker"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { isChromeDebugger } from "react-native-reanimated/src/reanimated2/PlatformChecker"
 
 const DrawerSettingLogin: FC<DrawerContentComponentProps> = (props) => {
     
@@ -53,11 +52,13 @@ const DrawerSettingLogin: FC<DrawerContentComponentProps> = (props) => {
                 ...loggedUser,
                 memberThumbnail: response.assets[0].uri           
             }))
-            //loggedUser.memberThumbnail = response.assets[0].uri
+            console.log("response.assets[0].uri: "+response.assets[0].uri + " loggedUser.memberThumbnail: " + loggedUser.memberThumbnail)
+            
             console.log(JSON.stringify(loggedUser))
-            AsyncStorage.setItem('thumbnail', loggedUser.memberThumbnail)
+            AsyncStorage.setItem('thumbnail', response.assets[0].uri)
         })
     }
+    
 
     return (
         <DrawerContentScrollView {...props} contentContainerStyle={[styles.container]}>
