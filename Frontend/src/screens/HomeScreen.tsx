@@ -70,6 +70,8 @@ useEffect( () => {
     permission()
 }, [])
 
+  
+
   useEffect( () => {
     const fetchRecipe = async(category:string) =>{
         const recipeRes =await axios.get(config.address + "getRecommendRecipeByCategory?category=" + category)

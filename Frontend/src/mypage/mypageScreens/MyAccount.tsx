@@ -1,7 +1,7 @@
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useCallback, useState } from "react";
-import { Alert, Pressable, SafeAreaView, StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, View } from "react-native";
+import { Alert, Pressable, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Colors, RadioButton } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDispatch } from "react-redux";
@@ -35,18 +35,6 @@ export default function MyAccount() {
     const dispatch = useDispatch()
 
     const goLoginPage = useCallback((response) => {
-        /* dispatch(L.loginAction({ 
-            memberId: response.memberId, 
-            memberNickname: response.memberNickname,
-            memberEmail: response.memberEmail,
-            memberPhone: response.memberPhone,
-            memberName: response.memberName,
-            memberCoin: response.memberCoin,
-            memberGender: response.memberGender,
-            memberGrade: response.memberGrade,
-            memberMainAddr: response.memberMainAddr,
-            memberDetailAddr: response.memberDetailAddr
-        })) */
         dispatch(L.signUpAction({
             memberId: response.memberId, 
             memberNickname: response.memberNickname,
@@ -95,8 +83,8 @@ export default function MyAccount() {
             Alert.alert('닉네임을 입력해주세요')
         } else {
             console.log(`memberId: ` + memberId + " password: " + password)
-            const chkPassword = checkPasswordRule(password)
-            const chkId = checkIdRule(memberId)
+            const chkPassword = checkPasswordRule(password) // 비밀번호 정규식
+            const chkId = checkIdRule(memberId) // 아이디 정규식
             if(chkPassword && chkId) {
                 axios.post(config.address + "regist", null, 
                 {

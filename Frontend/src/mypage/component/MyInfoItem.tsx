@@ -14,11 +14,11 @@ const MyInfoItem = ({loggedUser}:any) => {
 
     //console.log(`MyInfoItem ${loggedUser}`)
     const [modalVisible, setModalVisible] = useState<boolean>(false)
-    const [title, setTitle] = useState<string>("")
-    const [updateUrl, setUpdateUrl] = useState<string>("")
-    const [updateInfo, setUpdateInfo] = useState<string>("")
-    const [updateValue, setUpdateValue] = useState<string>("")
-
+    const [title, setTitle] = useState("")
+    const [updateUrl, setUpdateUrl] = useState("")
+    const [updateInfo, setUpdateInfo] = useState("")
+    const [updateValue, setUpdateValue] = useState("")
+    
     const navigation = useNavigation()
     const dispatch = useDispatch()
     const goShoppingCart = useCallback(() => {
@@ -46,8 +46,9 @@ const MyInfoItem = ({loggedUser}:any) => {
                 Alert.alert("수정이 완료되었습니다.")
                 dispatch(L.loginAction({
                                         ...loggedUser,
-                                        [updateInfo]: updateValue}
-                                      ))
+                                        [updateInfo]: updateValue
+                                    })
+                        )
             } else {
                 Alert.alert("수정이 안되었습니다. 다시 확인해주세요")
             }

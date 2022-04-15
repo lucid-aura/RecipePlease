@@ -1,5 +1,5 @@
 import { DrawerActions, useNavigation } from "@react-navigation/native";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Alert, Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { NavigationHeader } from "../theme";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -19,7 +19,6 @@ import { loggedUserkey } from "../store/login";
 export default function Login() {
     const navigation = useNavigation()
     const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
-    console.log("Login")
     
     // 로그인 훅
     // 카카오 아이디
@@ -30,25 +29,29 @@ export default function Login() {
     const log = useSelector<AppState, L.State>((state) => state.login)
     const {loggedIn, loggedUser} = log
     const dispatch = useDispatch()
-    console.log("loggedIn: "+ loggedIn + " loggedUser: " + loggedUser.memberEmail)
+    console.log("loggedIn: "+ loggedIn + " loggedUser: " + JSON.stringify(loggedUser))
 
+    useEffect(() => {
+        GoogleSignin.configure()
+        console.log(`GoogleSignin.configure(): ${GoogleSignin.configure()}`)
+    }, [])
+    
     let userInfo:string[]
 
-    const goShoppingCart = () => {
+    const goShoppingCart = useCallback(() => {
         dispatch(D.drawerChangeFalseAction())
         navigation.dispatch(DrawerActions.openDrawer())
-    }
-    const goSetting = () => {
+    },[])
+    const goSetting = useCallback(() => {
         dispatch(D.drawerChangeTrueAction())
         navigation.dispatch(DrawerActions.openDrawer())
-    }
+    },[])
 
     const googleSignIn= async() => {    // 구글 로그인하기.
         await GoogleSignin.hasPlayServices()
         const userInfo = await GoogleSignin.signIn()
         console.log(userInfo)
-        setMemberId(userInfo.user.id)
-        setMemberNickname(userInfo.user.name)
+        
         axios.post(config.address + "regist", null, 
             {
                 params: {
@@ -59,6 +62,8 @@ export default function Login() {
                 if(response.data == memberId) {
                     console.log("로그인 및 회원가입 되었습니다.")
                     setPassword("")
+                    setMemberId(userInfo.user.id)
+                    setMemberNickname(userInfo.user.name)
                     dispatch(L.loginAction({ 
                         memberId: response.data.memberId, 
                         memberNickname: response.data.memberNickname,
@@ -69,13 +74,18 @@ export default function Login() {
                         memberGender: response.data.memberGender,
                         memberGrade: response.data.memberGrade,
                         memberMainAddr: response.data.memberMainAddr,
-                        memberDetailAddr: response.data.memberDetailAddr
+                        memberDetailAddr: response.data.memberDetailAddr,
+                        memberZipcode: response.data.Zipcode,
+                        memberThumbnail: userInfo.user.photo,
+                        idSeq:2
                     }))
                 } else if(response.data = '') {
                     console.log("실패")
                 } else {
                     console.log("로그인 되었습니다.")
                     setPassword("")
+                    setMemberId(userInfo.user.id)
+                    setMemberNickname(userInfo.user.name)
                     dispatch(L.loginAction({ 
                         memberId: response.data.memberId, 
                         memberNickname: response.data.memberNickname,
@@ -86,30 +96,27 @@ export default function Login() {
                         memberGender: response.data.memberGender,
                         memberGrade: response.data.memberGrade,
                         memberMainAddr: response.data.memberMainAddr,
-                        memberDetailAddr: response.data.memberDetailAddr
+                        memberDetailAddr: response.data.memberDetailAddr,
+                        memberZipcode: response.data.Zipcode,
+                        memberThumbnail: userInfo.user.photo,
+                        idSeq:2
                     }))
                 }
             }).catch((err:Error) => {})
     }
 
-    const googleSignOut = async () => { // 구글 로그아웃
+    const googleSignOut = useCallback(async () => { // 구글 로그아웃
         try {
           await GoogleSignin.signOut();
+          console.log("구글 비동기 로그아웃")
         } catch (error) {}
-      };
+      },[])
 
-    const signInWithKakao = async (): Promise<void> => {    //카카오 로그인
+    const signInWithKakao = useCallback(async (): Promise<void> => {    //카카오 로그인
         const token: KakaoOAuthToken = await login();
         console.log("token: " + JSON.stringify(token))
         userInfo= (await getProfile()).split(" ")
         console.log("userInfo: " + userInfo)
-        setMemberId(userInfo[0])
-        setMemberNickname(userInfo[1])
-        if(userInfo[3] == 'MAIL') {
-            userInfo[3] = '남자'
-        } else if(userInfo[3] == 'FEMAIL') {
-            userInfo[3] = '여자'
-        }
         
         axios.post(config.address + "regist", null, 
             {
@@ -118,11 +125,13 @@ export default function Login() {
                     memberNickname: userInfo[1],
                     memberEmail: userInfo[2],
                     memberGender: userInfo[3]
-                }
+            }
             }).then((response) => {
+                console.log("response: " + JSON.stringify(response.data))
+
                 if(response.data.memberId == memberId) {
                     console.log("로그인 및 회원가입 되었습니다.")
-                    setPassword("")
+                    
                     dispatch(L.loginAction({ 
                         memberId: response.data.memberId, 
                         memberNickname: response.data.memberNickname,
@@ -133,13 +142,16 @@ export default function Login() {
                         memberGender: response.data.memberGender,
                         memberGrade: response.data.memberGrade,
                         memberMainAddr: response.data.memberMainAddr,
-                        memberDetailAddr: response.data.memberDetailAddr
+                        memberDetailAddr: response.data.memberDetailAddr,
+                        memberZipcode: response.data.memberZipcode,
+                        memberThumbnail: userInfo[4],
+                        idSeq:1
                     }))
-                } else if(response.data = '') {
+                } else if(response.data == '') {
                     console.log("실패")
                 } else {
                     console.log("로그인 되었습니다.")
-                    setPassword("")
+                    console.log("카카오로그인 받은 값: " + JSON.stringify(response.data))
                     dispatch(L.loginAction({ 
                         memberId: response.data.memberId, 
                         memberNickname: response.data.memberNickname,
@@ -150,12 +162,15 @@ export default function Login() {
                         memberGender: response.data.memberGender,
                         memberGrade: response.data.memberGrade,
                         memberMainAddr: response.data.memberMainAddr,
-                        memberDetailAddr: response.data.memberDetailAddr
+                        memberDetailAddr: response.data.memberDetailAddr,
+                        memberZipcode: response.data.memberZipcode,
+                        memberThumbnail: userInfo[4],
+                        idSeq:1
                     }))
                 }
             }).catch((err:Error) => console.log(err.message))
             
-        }
+        },[])
 
     const userLogin = () => {   // 일반 로그인
         console.log('userLogin')
@@ -165,27 +180,32 @@ export default function Login() {
         }
 
         axios.post(config.address + "login", null, 
-        {
-            params: {
-                memberId: memberId,
-                memberPwd: password
-        }
-        }).then((response) => {
+            {
+                params: {
+                    memberId: memberId,
+                    memberPwd: password
+            }
+            }).then((response) => {
             
-            if(response.data.memberId == memberId) {
-                console.log("로그인 되었습니다.")
-                dispatch(L.signUpAction({   
-                        memberId: response.data.memberId, 
-                        memberNickname: response.data.memberNickname,
-                        memberEmail: response.data.memberEmail,
-                        memberPhone: response.data.memberPhone,
-                        memberName: response.data.memberName,
-                        memberCoin: response.data.memberCoin,
-                        memberGender: response.data.memberGender,
-                        memberGrade: response.data.memberGrade,
-                        memberMainAddr: response.data.memberMainAddr,
-                        memberDetailAddr: response.data.memberDetailAddr
-                }))
+                if(response.data.memberId == memberId) {
+                    console.log("로그인 되었습니다.")
+                    AsyncStorage.getItem('thumbnail').then((value)=> {
+                        dispatch(L.signUpAction({   
+                            memberId: response.data.memberId, 
+                            memberNickname: response.data.memberNickname,
+                            memberEmail: response.data.memberEmail,
+                            memberPhone: response.data.memberPhone,
+                            memberName: response.data.memberName,
+                            memberCoin: response.data.memberCoin,
+                            memberGender: response.data.memberGender,
+                            memberGrade: response.data.memberGrade,
+                            memberMainAddr: response.data.memberMainAddr,
+                            memberDetailAddr: response.data.memberDetailAddr,
+                            memberZipcode: response.data.memberZipcode,
+                            memberThumbnail: value,
+                            idSeq: 3
+                        }))
+                    })
                 
             } 
         }).catch((err:Error) => console.log(err.message))
@@ -195,9 +215,9 @@ export default function Login() {
         return(
             <SafeAreaView style={styles.container}>
                 <View style={[styles.topBar]}>
-                    <NavigationHeader title="홈" viewStyle={{}}
-                    Left= {() => <Icon name="text-account" size={40} onPress={drawerOpen} />}
-                    Right= {() => <Icon name="cart-heart" size={40} />}
+                    <NavigationHeader title="홈"
+                    Left= {() => <Icon name="text-account" size={40} onPress={goSetting} />}
+                    Right= {() => <Icon name="cart-heart" size={40} onPress={goShoppingCart} />}
                     />
                 </View>
 
@@ -256,18 +276,20 @@ export default function Login() {
             <SafeAreaView style={[styles.container]}>
                 <View style={[styles.topBar]}> 
                     <NavigationHeader title="홈" 
-                    Left= {() => <Icon name="text-account" size={40} onPress={drawerOpen} />}
-                    Right= {() => <Icon name="cart-heart" size={40} />} />
+                    Left= {() => <Icon name="text-account" size={40} onPress={goSetting} />}
+                    Right= {() => <Icon name="cart-heart" size={40} onPress={goShoppingCart} />} />
                 </View>
                 <View style={[styles.contentView]}>
                     <Text>마이페이지</Text>
                     <View style={[styles.contentBox]}>
                         <View >
                             <TouchableOpacity style={[styles.content]} onPress={() => {
-                                signOutWithKakao()
-                                googleSignOut()
-                                AsyncStorage.removeItem(loggedUserkey)
                                 dispatch(L.logoutAction())
+                                signOutWithKakao()
+                                console.log("동기1")
+                                googleSignOut()
+                                console.log("동기2")
+                                AsyncStorage.removeItem(loggedUserkey)
                                 navigation.navigate("Login")
                             }}>
                                 <Text>로그아웃</Text>

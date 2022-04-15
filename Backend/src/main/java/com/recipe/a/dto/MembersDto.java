@@ -43,7 +43,7 @@ public class MembersDto {
 		this.memberMainAddr = "";
 		this.memberDetailAddr = "";
 		this.memberZipcode = 0;
-		this.memberGender = "일반";
+		this.memberGender = "";
 		this.memberName = "";
 		this.memberGrade = "일반";
 		this.salt = "";
