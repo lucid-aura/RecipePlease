@@ -52,8 +52,8 @@
         //0b51ddc9f24f741b7aa493bdde5908b2
         //28125d6e902519d48fa96e75483578bf
         window.Kakao.init('28125d6e902519d48fa96e75483578bf');
-        console.log(window.Kakao.isInitialized());
-        console.log(sessionStorage.getItem('AccessKEY'))
+        // console.log(window.Kakao.isInitialized());
+        // console.log(sessionStorage.getItem('AccessKEY'))
         if (sessionStorage.getItem('AccessKEY') != null) {
             console.log("session alive!")
             window.Kakao.Auth.setAccessToken(JSON.parse(sessionStorage.getItem('AccessKEY')));
@@ -91,7 +91,7 @@
                             memberZipcode: 0
                             salt: ""
                             */
-                            //location.href="http://192.168.0.4:5500/WebContent/index.html"
+                            //location.href="http://59.22.29.192:5500/WebContent/index.html"
 
                             window.Kakao.API.request({
                                 url: '/v2/user/me',
@@ -110,6 +110,7 @@
                                                 memberNickname:response.properties.nickname,
                                                 memberGender:response.kakao_account.gender,
                                                 memberPwd:"",
+                                                memberEmail:response.kakao_account.email,
                                                 salt:""
                                             }
                                             if (res == "no"){
@@ -127,7 +128,7 @@
                                                             success : function(res) {
                                                                 sessionStorage.setItem("loggedUser", JSON.stringify(res));
                                                                 sessionStorage.setItem("loginType", "kakao");
-                                                                //location.href="index.html"
+                                                                location.href="index.html"
                                                             },
                                                             error : function(xhr, status) {
                                                                 alert(xhr + " : " + status);

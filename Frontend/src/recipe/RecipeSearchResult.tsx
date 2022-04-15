@@ -62,10 +62,6 @@ export default function RecipeSearchResult({ route }:any) { // 레시피 검색 
                 } ,
             })
             setResult(searchRes.data)
-
-            console.log(searchRes.data)
-            console.log(bigOptions)
-            console.log(smallOptions)
         }
         fetchSearch()
     }, [])

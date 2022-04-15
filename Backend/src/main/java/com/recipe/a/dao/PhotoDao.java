@@ -25,4 +25,14 @@ public interface PhotoDao {
 	
 	//내가 좋아하는 레시피 썸네일
 	public PhotoDto getThumbnail(int recipeSeq);
+
+	public int updateRecipeThumbnailImage(PhotoDto photoDto);
+
+	public int updatePhotoThumbnailImage(PhotoDto photoDto);
+
+	public int updateRecipeOrderContent(PhotoDto photoDto);
+	
+	public int updatePhotoThumbnailContent(PhotoDto photoDto);
+	
+	public int updateRecipeOrderImage(PhotoDto photoDto);
 }

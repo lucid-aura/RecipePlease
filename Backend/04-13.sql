@@ -24,3 +24,14 @@ ALTER TABLE `COINTRANSACTION` MODIFY `MEMBERID` VARCHAR(40);
 		SELECT COUNT(*)
 		FROM MEMBERS
 		WHERE MEMBERID = '2200039450';
+        
+        use mysql;
+
+select * from members;
+select * from recipe;
+select * from rating;
+select * from photo;
+
+delete from members where MEMBERID='2200039450';
+delete from recipe where recipeseq=30;
+update members set membergrade='일반';

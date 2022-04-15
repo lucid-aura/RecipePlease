@@ -2,6 +2,7 @@ function logout() {
     if (sessionStorage.getItem("loginType") == "kakao"){
         kakaoLogout()
     }
+    sessionStorage.removeItem('AccessKEY')
     sessionStorage.removeItem("loggedUser")
     sessionStorage.removeItem("loginType")
 }
@@ -10,11 +11,13 @@ function checkLogin(loggedUser){
     if (loggedUser == null){
         $("#loginBtn").text('로그인')
         $("#loginBtn").attr("href", "login.html")
+        $("#settingBtn").bind('click', false)
         sessionStorage.setItem("loginType", "normal");
     }
     else {
         $("#loginBtn").text('로그아웃')
         $("#loginBtn").attr("href", "index.html")
+        $("#settingBtn").bind('click', true)
     }
 }
 
