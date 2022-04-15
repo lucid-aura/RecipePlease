@@ -25,6 +25,8 @@ const HomeScreen = () => {
   const [categories, setCategories] = useState([])
   const [load, setLoad] = useState(false)
 
+  
+
   useEffect( () => {
     const fetchRecipe = async() =>{
         const recipeRes =await axios.get(config.address + "getRecommendRecipeByCategory?category=rating")

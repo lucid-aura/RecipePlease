@@ -30,6 +30,7 @@ export const signInWithKakao = async (): Promise<void> => {
 // 로그아웃
 export const signOutWithKakao = async (): Promise<void> => {
     const message = await logout();
+    console.log("카카오 로그아웃")
 
 };
 
@@ -37,7 +38,13 @@ export const signOutWithKakao = async (): Promise<void> => {
 export const getProfile = async (): Promise<string> => {
     const profile: KakaoProfile  = await getKakaoProfile();
     console.log( JSON.stringify(profile))
-    return profile.id +" "+ profile.nickname + " " + profile.email + " " + profile.gender 
+    if(profile.gender === 'MALE' ) profile.gender = '남자'
+    else profile.gender = '여자'
+    return  profile.id +" " + 
+            profile.nickname + " " + 
+            profile.email + " " + 
+            profile.gender+ " " + 
+            profile.profileImageUrl
 };
 
 export const unlinkKakao = async (): Promise<void> => {

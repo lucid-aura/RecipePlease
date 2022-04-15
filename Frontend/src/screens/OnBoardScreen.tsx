@@ -39,23 +39,23 @@ const OnBoardScreen = () => {
         if(value.length > 0) {
           const savedUser = JSON.parse(value)
           dispatch(L.loginAction(savedUser))
+          loggedIn ? navigation.navigate("HomeScreen") : console.log(`OnBoardScreen loggedIn: ${loggedIn}`)
         }
       }) 
-    loggedIn ? navigation.navigate("HomeScreen") : console.log(`OnBoardScreen loggedIn: ${loggedIn}`)
-  }, [loggedIn])
+  }, [])
  
-  const isSignedIn = async () => {    // 구글로그인 되어있는지 체크. 되어있으면 로그인하기.
+  const isSignedIn = useCallback(async () => {    // 구글로그인 되어있는지 체크. 되어있으면 로그인하기.
     const isSignedIn = await GoogleSignin.isSignedIn();
     console.log("isSignedIn: " + isSignedIn)
     if(isSignedIn) {
         googleSignIn()
     }
-  }
+  },[])
 
-  const googleSignIn= async() => {    // 구글 로그인하기.
+  const googleSignIn= useCallback(async() => {    // 구글 로그인하기.
     await GoogleSignin.hasPlayServices()
     const userInfo = await GoogleSignin.signIn()
-    console.log(userInfo)
+    console.log("onBoardScreen GoogleLogin: "+userInfo)
     setMemberId(userInfo.user.id)
     setMemberNickname(userInfo.user.name)
     axios.post(config.address + "regist", null, 
@@ -65,23 +65,6 @@ const OnBoardScreen = () => {
                 memberNickname: userInfo.user.name,
             }
         }).then((response) => {
-            if(response.data == memberId) {
-                console.log("로그인 및 회원가입 되었습니다.")
-                setPassword("")
-                dispatch(L.loginAction({ memberId: response.data.memberId, 
-                    memberNickname: response.data.memberNickname,
-                    memberEmail: response.data.memberEmail,
-                    memberPhone: response.data.memberPhone,
-                    memberName: response.data.memberName,
-                    memberCoin: response.data.memberCoin,
-                    memberGender: response.data.memberGender,
-                    memberGrade: response.data.memberGrade,
-                    memberMainAddr: response.data.memberMainAddr,
-                    memberDetailAddr: response.data.memberDetailAddr
-                }))
-            } else if(response.data = '') {
-                console.log("실패")
-            } else {
                 console.log("로그인 되었습니다.")
                 setPassword("")
                 dispatch(L.loginAction({ 
@@ -94,26 +77,55 @@ const OnBoardScreen = () => {
                     memberGender: response.data.memberGender,
                     memberGrade: response.data.memberGrade,
                     memberMainAddr: response.data.memberMainAddr,
-                    memberDetailAddr: response.data.memberDetailAddr
+                    memberDetailAddr: response.data.memberDetailAddr,
+                    memberZipcode: response.data.Zipcode,
+                    memberThumbnail: userInfo.user.photo,
+                    idSeq:2
                 }))
-            }
+                loggedIn ? navigation.navigate("HomeScreen") : console.log(`OnBoardScreen loggedIn: ${loggedIn}`)
         }).catch((err:Error) => {})
-  }
+  },[memberId, memberNickname])
 
-const kakao = useCallback(() => {   // 카카오 로그인 체크후 로그인 되었으면 로그인 하기.
+const kakao = useCallback( async() => {   // 카카오 로그인 체크후 로그인 되었으면 로그인 하기.
         getProfile().then(value => {
-            userInfo = value.split(" ")
-            if(userInfo.length > 0){
-              console.log("koko")
-              dispatch(L.loginAction({
-                  memberId: userInfo[0],
-                  memberNickname: userInfo[1],
-                  memberEmail: userInfo[2],
-                  memberGender: userInfo[3]
-              }))
-            }
-        })
-}, [memberId, memberNickname])
+          userInfo = value.split(" ")
+          
+        }).catch((err) => {})
+        console.log("onBoardScreen kakaoLogin: "+userInfo)
+        if(userInfo.length > 0){
+          axios.post(config.address + "regist", null, 
+                {
+                  params: {
+                      memberId: userInfo[0],
+                      memberNickname: userInfo[1],
+                      memberEmail: userInfo[2],
+                      memberGender: userInfo[3]
+                  } 
+                }
+              ).then((response) => {
+                console.log("로그인 되었습니다.")
+                      setPassword("")
+                      setMemberId(userInfo[0])
+                      setMemberNickname(userInfo[1])
+                      dispatch(L.loginAction({ 
+                          memberId: response.data.memberId, 
+                          memberNickname: response.data.memberNickname,
+                          memberEmail: response.data.memberEmail,
+                          memberPhone: response.data.memberPhone,
+                          memberName: response.data.memberName,
+                          memberCoin: response.data.memberCoin,
+                          memberGender: response.data.memberGender,
+                          memberGrade: response.data.memberGrade,
+                          memberMainAddr: response.data.memberMainAddr,
+                          memberDetailAddr: response.data.memberDetailAddr,
+                          memberZipcode: response.data.memberZipcode,
+                          memberThumbnail: userInfo[4],
+                          idSeq:1
+                      }))
+                      loggedIn ? navigation.navigate("HomeScreen") : console.log(`OnBoardScreen loggedIn: ${loggedIn}`)
+              }).catch((err)=>{}) 
+          } 
+}, [memberId, memberNickname]) 
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>

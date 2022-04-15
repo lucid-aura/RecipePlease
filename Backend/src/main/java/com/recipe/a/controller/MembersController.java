@@ -47,8 +47,9 @@ public class MembersController {
 	@RequestMapping(value = "/regist", method = {RequestMethod.GET, RequestMethod.POST})
 	public MembersDto regist(MembersDto dto) {
 		System.out.println("MembersController regist()");
+		System.out.println("regist dto: " + dto.toString());
 		MembersDto result = memberService.regist(dto);
-		System.out.println("result: " + result.toString());
+		System.out.println("regist result: " + result.toString());
 		return result;
 		
 	}
