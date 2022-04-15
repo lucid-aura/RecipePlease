@@ -45,7 +45,7 @@ public class MembersDto {
 		this.memberZipcode = 0;
 		this.memberGender = "";
 		this.memberName = "";
-		this.memberGrade = "";
+		this.memberGrade = "일반";
 		this.salt = "";
 	}
 	
@@ -82,7 +82,7 @@ public class MembersDto {
 		this.memberZipcode = 0;
 		this.memberGender = "";
 		this.memberName = "";
-		this.memberGrade = "";
+		this.memberGrade = "일반";
 		this.salt = "";
 		
 	}

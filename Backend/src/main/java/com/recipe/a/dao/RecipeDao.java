@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.recipe.a.dto.PhotoDto;
 import com.recipe.a.dto.RecipeDto;
 
 @Mapper
@@ -40,5 +41,13 @@ public interface RecipeDao {
 	public RecipeDto getRecipeInfo(int recipeSeq);
 	// 내가 업로드한 레시피
 	public RecipeDto myUploadedRecipe(int reicpeSeq);
+
+	public int deleteRecipe(int recipeSeq);
+
+	public int updateRecipe(RecipeDto recipeDto);
+
+	public int countThumbnailByUrl(String url);
+
+	public int updateRecipeThumbnailUrl(RecipeDto recipeDto);
 	
 }

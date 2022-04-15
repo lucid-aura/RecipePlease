@@ -163,7 +163,26 @@ public class MembersController {
 		return "success";
 	}
 	
+	/****************** 웹 업데이트를 위한 컨트롤러 기능 *********************/
 	
+	@RequestMapping(value = "/updatePersonalInfo", method = {RequestMethod.POST})
+	public MembersDto updatePersonalInfo(MembersDto dto) {
+		System.out.println("MemberController updatePersonalInfo");
+		System.out.println("MembersDto: " + dto.toString());
+		memberService.updatePersonalInfo(dto);
+		return memberService.updateLoggedInfo(dto.getMemberId());
+	}
+	
+	@RequestMapping(value = "/updatePaymentInfo", method = {RequestMethod.POST})
+	public MembersDto updatePaymentInfo(MembersDto dto) {
+		System.out.println("MemberController updatePaymentInfo");
+		System.out.println("MembersDto: " + dto.toString());
+		memberService.updatePaymentInfo(dto);
+		return memberService.updateLoggedInfo(dto.getMemberId());
+		
+	}
+	
+	/*****************************************************************/
 	
 	//테스트용
 	@RequestMapping(value = "/test1", method = {RequestMethod.GET})

@@ -227,7 +227,7 @@ public class RecipeController {
 	
 	// 도움 받은 사이트 : https://velog.io/@gmtmoney2357/스프링-부트-파일-업로드-다운로드-이미지-보여주기
 	@RequestMapping(value = "/imageUploadToServer", method = { RequestMethod.POST })
-	public String testUpload(HttpServletRequest request) throws Exception {
+	public String imageUploadToServer(HttpServletRequest request) throws Exception {
 		System.out.println("RecipeController imageUploadToServer()");
 
 		String fileName = "";
@@ -260,5 +260,92 @@ public class RecipeController {
  		// 이미지가 서버에 저장된 주소(localhost:3000)가 DB에 저장되어야 함
  		System.out.println("http://localhost:3000/photo/" + fileName);
 		return "http://localhost:3000/photo/" + fileName;
+	}
+	
+	@RequestMapping(value = "/imageUpdateToServer", method = { RequestMethod.POST })
+	public String imageUpdateToServer(HttpServletRequest request) throws Exception {
+		System.out.println("RecipeController imageUpdateToServer()");
+
+		String fileName = "";
+		InputStream imageInputStream = null;
+		Part imagePart = null;
+		
+		//헤더에서 받아온 키 값이 fileName 인 경우 사진의 파일 이름이 들어있다. -> 파일 이름 저장
+		fileName = request.getParameter("fileName");
+		System.out.println("itemName? " + fileName);
+		System.out.println(recipeService.countThumbnailByUrl(fileName));
+		if (recipeService.countThumbnailByUrl(fileName) == 0) { // 파일이 없을 경우 (새롭게 갱신/추가된 파일일 경우)
+		    Collection<Part> parts = request.getParts();
+		    for (Part part : parts) {
+		 		if (part.getName().equals("photo")) {
+		        	imageInputStream = part.getInputStream(); //데이터 읽기
+		        	imagePart = part;
+		        }
+		    }
+		    String fullPath = "C://recipeUpload/" + fileName;	    
+	        System.out.println("경로및 이름 : "+  fullPath);
+	 		imagePart.write(fullPath);
+	 		
+		}
+		return "http://localhost:3000/photo/" + fileName;
+	}
+	
+	@RequestMapping(value = "/updateRecipeThumbnailUrl", method = {RequestMethod.POST})
+	public int updateRecipeThumbnailUrl(RecipeDto recipeDto) {
+		System.out.println("RecipeController updateRecipeThumbnailUrl()");
+		System.out.println(recipeDto.toString());
+		return recipeService.updateRecipeThumbnailUrl(recipeDto);
+	}
+	
+	
+	@RequestMapping(value = "/deleteRecipe", method = {RequestMethod.GET})
+	public int deleteRecipe(int recipeSeq) {
+		System.out.println("RecipeController deleteRecipe()");
+		System.out.println(recipeSeq);
+		return recipeService.deleteRecipe(recipeSeq);
+		//return recipeService.getPhoto(photoDto);
+	}
+	
+	@RequestMapping(value = "/getPostedRecipeData", method = {RequestMethod.GET})
+	public Map<String, Object> getPostedRecipeData(int recipeSeq) {
+		System.out.println("RecipeController getPostedRecipeData()");
+		System.out.println(recipeSeq);
+		return recipeService.getPostedRecipeData(recipeSeq);
+		//return recipeService.getPhoto(photoDto);
+	}
+	
+	@RequestMapping(value = "/updateRecipe", method = {RequestMethod.POST})
+	public int updateRecipe(RecipeDto recipeDto) {
+		System.out.println("RecipeController updateRecipe()");
+		System.out.println(recipeDto.toString());
+		return recipeService.updateRecipe(recipeDto);
+	}
+	
+	@RequestMapping(value = "/updateRecipeThumbnailImage", method = {RequestMethod.POST})
+	public int updateRecipeThumbnailImage(PhotoDto photoDto) {
+		System.out.println("RecipeController updateRecipeThumbnailImage()");
+		System.out.println(photoDto.toString());
+		return recipeService.updateRecipeThumbnailImage(photoDto);
+	}
+	
+	@RequestMapping(value = "/updatePhotoThumbnailContent", method = {RequestMethod.POST})
+	public int updatePhotoThumbnailContent(PhotoDto photoDto) {
+		System.out.println("RecipeController updatePhotoThumbnailContent()");
+		System.out.println(photoDto.toString());
+		return recipeService.updatePhotoThumbnailContent(photoDto);
+	}
+	
+	@RequestMapping(value = "/updateRecipeOrderImage", method = {RequestMethod.POST})
+	public int updateRecipeThumbnail(PhotoDto photoDto) {
+		System.out.println("RecipeController updateRecipeOrderImage()");
+		System.out.println(photoDto.toString());
+		return recipeService.updateRecipeOrderImage(photoDto);
+	}
+	
+	@RequestMapping(value = "/updateRecipeOrderContent", method = {RequestMethod.POST})
+	public int updateRecipeOrderContent(PhotoDto photoDto) {
+		System.out.println("RecipeController updateRecipeOrderContent()");
+		System.out.println(photoDto.toString());
+		return recipeService.updateRecipeOrderContent(photoDto);
 	}
 }

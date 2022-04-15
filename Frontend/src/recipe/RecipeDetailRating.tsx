@@ -110,8 +110,8 @@ export default function RecipeDetailOrder( { seq, setAvarage /*, index, changeAv
                     style={{marginRight:10}}
             />
 
-
-            <Button mode="contained" onPress={writeCommentReq}>
+            
+            <Button mode="contained" onPress={writeCommentReq} disabled={!loggedIn}>
                 등록
             </Button>
         </View>

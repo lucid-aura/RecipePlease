@@ -1,23 +1,27 @@
 import axios from "axios";
 import Color from "color";
-import React, { Component, useState } from "react";
+import React, { Component, useCallback, useEffect, useState } from "react";
 import { StyleSheet, Text, View, TextInput, FlatList, ScrollView, Alert, Dimensions, Image, TouchableOpacity, ToastAndroid, Platform } from "react-native";
 import { Button } from "react-native-paper";
 import RNPickerSelect from 'react-native-picker-select'
 import Icon from 'react-native-vector-icons/Ionicons'
 import TagInput from 'react-native-tags-input';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import * as L from '../../store/login'
-import { AppState } from "../../store";
+import * as L from '../store/login'
+import { AppState } from "../store";
 import { black, white } from "react-native-paper/lib/typescript/styles/colors";
-import DetailList from "./DetailList";
+import DetailList from "../mypage/mypageScreens/DetailList";
 import { useSelector } from "react-redux";
-import config from "../../project.config"
-import { useNavigation } from "@react-navigation/native";
+import config from "../project.config"
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 // yarn add react-native-image-picker
 
-export default function UploadScreen() {
+export default function RecipeUpdate({route}:any) {
+    const { recipeSeq } = route.params
+    const [photoSeq, setPhotoSeq] = useState([])
+    const [thumbnailSeq, setThumbnailSeq] = useState([])
+    
     const [thumbnailAssets, setThumnailAssets] = useState(
         {
             // "assets": 
@@ -45,10 +49,10 @@ export default function UploadScreen() {
     const [seq, setSeq] = useState({})
 
     // 사진 url
-    const [titleimgurl, setTitleimgurl] = useState("")
+    const [titleimgurl, setTitleimgurl] = useState("/")
 
     // 유튜브 주소
-    const [youtubeurl, setYoutubeurl] = useState('')
+    const [youtubeurl, setYoutubeurl] = useState('/')
 
     // 제목, 내용, 가격
     const [recipeTitle, setTitle] = useState('')
@@ -63,12 +67,11 @@ export default function UploadScreen() {
     const [tagsColor, setTagsColor] = useState("")
     const [tagsText, setTagsText] = useState("")
 
-
     // 레시피 내용 순서 추가
     const [tests, setTests] = useState([
         {
             imgAssets: {},
-            imglist: "/",
+            imglist: "",
             imgText: ""
         }
     ])
@@ -79,45 +82,75 @@ export default function UploadScreen() {
 
     const [list, setList] = useState([<DetailList setData={setImglist} setData2={setTests} setData3={tests} setData4={0} setData5={setImgText} />])
 
-    console.log("RecipeUpload : " + imglist)
-
     const onAddDetailDiv = () => {
         let countArr = [...countList]
         let counter = countArr.slice(-1)[0]
         counter += 1
-        countArr.push(counter)	// index 사용 X
-        // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
+        countArr.push(counter)
         setCountList(countArr)
         let num = list
         console.log("tests: " + JSON.stringify(tests[counter - 1]))
         tests.push({ imgAssets: "", imglist: "/", imgText: "" })
         num.push(<DetailList setData={setImglist} setData2={setTests} setData3={tests} setData4={counter} setData5={setImgText} />)
         setList(num)
-        //onCreate()
+
     }
 
-    // const onCreate = () => {
-    //     console.log("onCreate 테스트 : " + imglist)
-    //     console.log("onCreate 테스트 : " + imgText)
-    //     const test = {
-    //         imglist,
-    //         imgText
-    //     }
-    //     setTests([...tests, test])
-    // }
+    
+    useEffect(() => {
+        const init = () => {
+            console.log("getPostedRecipeData")
+            axios.get(config.address + "getPostedRecipeData?recipeSeq=" + recipeSeq)
+            .then((recipeRes) =>{
+                console.log(recipeRes.data)
+                setTitle(recipeRes.data.recipeData.recipeTitle)
+                setTitleimgurl(config.photo + recipeRes.data.recipeData.recipeThumbnail)
 
+                setContent(recipeRes.data.recipeData.recipeContent)
+                setPickerSelect(recipeRes.data.recipeData.recipeBigCategory)
+                setPickerSelect2(recipeRes.data.recipeData.recipeSmallCategory)
+                setPickerSelect3(recipeRes.data.recipeData.recipeCapacity)
+                setYoutubeurl(recipeRes.data.recipeData.recipeVideoUrl)
+                setTags({tag:"", tagsArray:recipeRes.data.recipeData.recipeGoodsTag.split(",")})
+                setPrice(String(recipeRes.data.recipeData.recipePrice))
+                setTests([])
+                setList([])
 
+                let recipeOrderPhotos:any = []
+                let oneOrderPhoto:any = []
+                recipeRes.data.photoData.forEach((element:any) => {
 
-    // const addImage = () => {
-    //     launchCamera({ saveToPhotos: true }, response => {
-    //         setData(response.assets[0].uri)
-    //     })
-    // }
+                    if (element.photoTitle == "cookOrder"){
+                        photoSeq.push(element.photoSeq as never)
+                        oneOrderPhoto.push({ imgAssets: {}, imglist: element.photoUrl, imgText: element.photoContent })
+                        console.log("결과는")
+                        console.log(oneOrderPhoto)
+                    }
+                    else {
+                        setThumbnailSeq(element.photoSeq)
+                    }
+                });
+                setTests(oneOrderPhoto)
+                oneOrderPhoto.forEach(async (element:any, index:number) => {
+                    await recipeOrderPhotos.push(<DetailList setData={setImglist} setData2={setTests} setData3={oneOrderPhoto} setData4={index} setData5={setImgText} />)
+                })
+                setList(recipeOrderPhotos)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        return () => {
 
+            return (<View></View>)
+            // 포커스가 벗어날 때 처리 추가
+        };
+    }
+    init()
+    }, []);
 
     // 썸네일 이미지 등록
     const titleimgshow = () => {
-        launchImageLibrary({}, response => {
+        launchImageLibrary({} as never, response => {
             setTitleimgurl(response.assets[0].uri)
             setThumnailAssets(response)
             console.log(response)
@@ -125,7 +158,7 @@ export default function UploadScreen() {
     }
 
     // 이미지 서버 저장
-    const uploadImageToServer = (assets: any) => {
+    const updateImageToServer = (assets: any, category:string, idx:number) => {
         console.log("assets!!: " + assets)
         const createFormData = (body: any = {}) => {
             const data = new FormData();
@@ -143,120 +176,126 @@ export default function UploadScreen() {
             return data;
         };
 
-        const handleUploadPhoto = () => {
-
-            fetch(config.address + 'imageUploadToServer', {
+        const handleUploadPhoto = async () => {
+            console.log("handleUploadPhoto")
+            await fetch(config.address + 'imageUpdateToServer', {
                 method: 'POST',
                 body: createFormData({ fileName: assets.fileName }),
             })
-                .catch((error) => {
-                    console.log('error', error);
-                });
+            .then((response) => {
+                if (category == 'thumbnail'){
+                    axios.post(config.address + "updateRecipeThumbnailImage", null,
+                    {
+                        params: {
+                            photoSeq: thumbnailSeq,
+                            docsSeq: recipeSeq,
+                            photoTitle: "thumbnail",
+                            photoContent: recipeTitle,
+                            photoUrl: thumbnailAssets.assets[0].fileName
+                        }
+                    }).then(function (res) {
+                        axios.post(config.address + "updateRecipeThumbnailUrl", null, {
+                            params: {
+                                recipeSeq:recipeSeq,
+                                recipeThumbnail: thumbnailAssets.assets[0].fileName,
+                            }
+                        })
+                    }).catch(function (err) {
+                        console.log(err)
+                    })
+                }
+                else {
+                    axios.post(config.address + "updateRecipeOrderImage", null,
+                    {
+                        params: {
+                            photoSeq:photoSeq[idx],
+                            docsSeq: recipeSeq,
+                            photoTitle: "cookOrder",
+                            photoContent: tests[idx].imgText,
+                            photoUrl: tests[idx].imgAssets.fileName,
+    
+                        }
+    
+                    }).then(function (res) {
+    
+                    }).catch(function (err) {
+                        console.log(err)
+                    })
+                }
+
+            })
+            .catch((error) => {
+                console.log('error', error);
+            });
         }
         handleUploadPhoto()
     }
 
 
     // 업로드 버튼
-    const RecipeUploadBtn = () => {
-        // console.log("memberId : " + loggedUser.memberId)
-        // console.log("제목 : " + recipeTitle)
-        // console.log("내용 : " + recipeContent)
-        // console.log("대분류 : " + recipeBigCategory)
-        // console.log("소분류 : " + recipeSmallCategory)
-        // console.log("굿즈태그 : " + tags.tagsArray)
-        // console.log("레시피가격 : " + recipePrice)
-        // console.log("이미지 경로 : " + titleimgurl)
-
-        // 레시피 업로드
-        const uploadRecipe = () => {
-            axios.get(config.address + "insertRecipe",
-                {
-                    params: {
-                        memberId: loggedUser.memberId,
-                        recipeTitle: recipeTitle,
-                        recipeContent: recipeContent,
-                        recipeBigCategory: recipeBigCategory,
-                        recipeSmallCategory: recipeSmallCategory,
-                        recipeVideoUrl: youtubeurl,
-                        recipeGoodsTag: String(tags.tagsArray),
-                        recipePrice: recipePrice,
-                        recipeCapacity: recipeInformation,
-                        recipeThumbnail: thumbnailAssets.assets[0].fileName
-                    }
-                }).then(function (response) {
-                    console.log("seq값 : " + response.data)
-
-                    if (response.data != null && response.data != "") {
-                        Alert.alert("레시피 추가되었습니다..")
-                        setSeq(response.data)
-                        uploadRecipeThumbnailImg(response.data)
-                        uploadRecipeContentImg(response.data)
-                        navigation.navigate('Login' as never)
-                        navigation.navigate('RecipeNavigator' as never, { screen: 'RecipeHome'} as never)
-                        navigation.navigate('RecipeNavigator' as never, {
-                            screen: 'RecipeDetail',
-                            params: {
-                                seq: response.data,
-                                category: 'recipe'
-                            }
-                        } as never) 
-                    }
-
-                }).catch(function () {
-                    Alert.alert("레시피 추가되지 않았습니다.")
-                })
+    const RecipeUpdateBtn = async () => {
+        console.log("RecipeUpdateBtn")
+        console.log(thumbnailAssets)
+        
+        // 썸네일 사진이 우선 변경되야 함 -> 썸네일 갱신 시도 시 레시피 썸네일 열 비교 후 업로드 하기 때문에
+        console.log("길이는 : " + Object.keys(thumbnailAssets).length)
+        if (Object.keys(thumbnailAssets).length){ // 썸네일 사진이 변경되었을 경우
+            await updateImageToServer(thumbnailAssets.assets[0], "thumbnail", -1)
+        }
+        else { // 제목만 수정되었을 경우
+            axios.post(config.address + "updatePhotoThumbnailContent", null,
+            {
+                params: {
+                    docsSeq: recipeSeq,
+                    photoTitle: "thumbnail",
+                    photoContent: recipeTitle
+                }
+            }).then(function (res) {
+                
+            }).catch(function (err) {
+                console.log(err)
+            })
         }
 
-        // 썸네일 이미지 업로드
-        const uploadRecipeThumbnailImg = (temp: any) => {
-            uploadImageToServer(thumbnailAssets.assets[0])
-            axios.post(config.address + "uploadRecipeImg", null,
-                {
-                    params: {
-                        docsSeq: temp,
-                        photoTitle: "thumbnail",
-                        photoContent: recipeTitle,
-                        photoCategory: "recipe",
-                        photoUrl: thumbnailAssets.assets[0].fileName
-                    }
-                }).then(function (response) {
-                    console.log(response.data)
-
-                    if (response.data == "YES") {
-                        //Alert.alert("이미지 추가되었습니다..")
-                    }
-                }).catch(function () {
-                    //Alert.alert("이미지 추가되지 않았습니다.")
-                })
-
-        }
-
-        // 레시피 순서 이미지 업로드
-        const uploadRecipeContentImg = (temp: any) => {
-            console.log("size?" + tests.length)
-            for (let i = 0; i < tests.length; i++) {
-                uploadImageToServer(tests[i].imgAssets)
-                axios.get(config.address + "uploadRecipeImg",
-                    {
-                        params: {
-                            docsSeq: temp,
-                            photoTitle: "cookOrder",
-                            photoContent: tests[i].imgText,
-                            photoCategory: "recipe",
-                            photoUrl: tests[i].imgAssets.fileName,
-                        }
-                    }).then(function (response) {
-                        console.log(response.data)
-                        if (response.data == "YES") {
-                            //Alert.alert("이미지 추가되었습니다..")
-                        }
-                    }).catch(function () {
-                        //Alert.alert("이미지 추가되지 않았습니다.")
-                    })
+        // 레시피 업데이트
+        console.log("updateRecipe")
+        await axios.post(config.address + "updateRecipe", null, {
+            params: {
+                recipeSeq:recipeSeq,
+                memberId: loggedUser.memberId,
+                recipeTitle: recipeTitle,
+                recipeContent: recipeContent,
+                recipeBigCategory: recipeBigCategory,
+                recipeSmallCategory: recipeSmallCategory,
+                recipeVideoUrl: youtubeurl,
+                recipeGoodsTag: String(tags.tagsArray),
+                recipePrice: recipePrice,
+                recipeCapacity: recipeInformation,
             }
-        }
-        uploadRecipe()
+        })
+
+        for (let i = 0; i < tests.length; i++) {
+            if (Object.keys(tests[i].imgAssets).length){ // 조리법 이미지가 수정되었을 경우
+                await updateImageToServer(tests[i].imgAssets, "cookOrder", i)
+                console.log("updateRecipeOrderImage")
+               
+            }
+            else { // 조리법 내용만 수정되었을 경우
+                console.log("updateRecipeOrderContent")
+                axios.post(config.address + "updateRecipeOrderContent", null,
+                {
+                    params: {
+                        photoSeq:photoSeq[i],
+                        photoContent: tests[i].imgText,
+                    }
+
+                }).then(function (res) {
+
+                }).catch(function (err) {
+                    console.log(err)
+                })
+            }
+        }        
     }
 
     const values = [
@@ -326,6 +365,7 @@ export default function UploadScreen() {
                 <View style={styles.categoryframe}>
                     <View style={styles.picker}>
                         <RNPickerSelect onValueChange={(value) => setPickerSelect(value)}
+                            value={recipeBigCategory}
                             items={values}
                             placeholder={{
                                 label: '대분류'
@@ -335,6 +375,7 @@ export default function UploadScreen() {
                     </View>
                     <View style={styles.picker}>
                         <RNPickerSelect onValueChange={(value) => setPickerSelect2(value)}
+                            value={recipeSmallCategory}
                             items={values2}
                             placeholder={{
                                 label: '소분류'
@@ -350,6 +391,7 @@ export default function UploadScreen() {
                 <View style={styles.categoryframe}>
                     <View style={styles.picker}>
                         <RNPickerSelect onValueChange={(value) => setPickerSelect3(value)}
+                            value={recipeInformation}
                             items={values3}
                             placeholder={{
                                 label: '선택'
@@ -407,7 +449,7 @@ export default function UploadScreen() {
                 <View style={styles.priceframe}>
                     <TextInput style={styles.textinput} value={(recipePrice)} onChangeText={(recipePrice) => setPrice(recipePrice)} keyboardType="number-pad" placeholder="예) 1000, 5000 숫자를 입력 원단위" ></TextInput>
                 </View>
-                <Button style={styles.btn} onPress={RecipeUploadBtn}>레시피작성</Button>
+                <Button style={styles.btn} onPress={RecipeUpdateBtn}>레시피변경</Button>
             </ScrollView>
 
         </View>
@@ -418,7 +460,7 @@ export default function UploadScreen() {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        //height: '100%',
+        height: '100%',
     },
     recipeframe: {
         width: '100%',
