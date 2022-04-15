@@ -4,7 +4,7 @@ import { Button, Text, TextInput } from "react-native-paper"
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { black, white } from "react-native-paper/lib/typescript/styles/colors";
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import config from "../../project.config"
 
 const DetailList = (props: any) => {
     const [contentImglist, setContentimglist] = useState("")
@@ -49,6 +49,14 @@ const DetailList = (props: any) => {
     useEffect(() => {
         const test = () => {
             JSON.stringify(imgdata)
+            console.log("넘어왔니?" + JSON.stringify(props.setData3) + " " + parseInt(props.setData4))
+            console.log(props.setData3[parseInt(props.setData4)])
+            console.log(config.photo + props.setData3[parseInt(props.setData4)]['imglist'])
+            if (props.setData3[parseInt(props.setData4)]['imglist'] == '/'){
+                props.setData3[parseInt(props.setData4)]['imglist']='plus.png'
+            }
+            setContentimglist(config.photo +  props.setData3[parseInt(props.setData4)]['imglist'])
+            setContentText(props.setData3[parseInt(props.setData4)]['imgText'])
         }
         test()
     }, [])
@@ -59,7 +67,7 @@ const DetailList = (props: any) => {
             <TouchableOpacity onPress={contentimgshow1} style={styles.contentcameraframe}>
                 <Image
                     style={styles.contentcamera}
-                    source={{ uri: contentImglist }}
+                    source={{ uri: (contentImglist == "") ? "/" : contentImglist}}
                 >
                 </Image>
 
@@ -129,7 +137,7 @@ const styles = StyleSheet.create({
     photoContentText: {
         // flex: 4,
         fontSize: 15,
-        height: '100%',
+        //height: '100%',
         backgroundColor: 'white'
     },
 

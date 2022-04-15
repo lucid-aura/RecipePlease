@@ -17,10 +17,11 @@
         <a href="index.html"><img src="images/logo2.png" class="logo"></a>
         
         <ul class="nav-links">
-            <li><a href="#" class="simple">홈</a></li>
+            <li><a href="index.html" class="simple">홈</a></li>
             <li><a href="listing.html?category=personal">개인용</a></li>
             <li><a href="listing.html?category=entertain">접대용</a></li>
             <li><a href="listing.html?category=nightmeal">야식용</a></li>
+            <li><a href="profilePage.html" id="settingBtn">개인설정</a></li>
         </ul>
         <a href="login.html" class="register-btn" id="loginBtn" onclick="logout()">로그인</a>
         <i class="fas fa-bars" onclick="togglebtn()"></i>
@@ -75,15 +76,17 @@
         <hr class="line">
 
                 
-        <div class="container host">
-        <table id="ratingTable">
-            <tr>
-                <th>ID</th>
-                <th>내용</th>
-                <th>평가점수</th>
-            </tr>
+        <div class="list-container">
 
-        </table>
+                <table id="ratingTable">
+                    <tr>
+                        <th>ID</th>
+                        <th>내용</th>
+                        <th>평가점수</th>
+                    </tr>
+
+                </table>
+                
         </div>
 
 
@@ -170,7 +173,7 @@
             seafood:"해산물",
             personal:"개인용",
             entertain:"접대용",
-            nightfood:"야식용"
+            nightmeal:"야식용"
         }
 
 	    $( document ).ready(function() {

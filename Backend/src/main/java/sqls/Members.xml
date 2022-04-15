@@ -76,4 +76,53 @@
 		WHERE MEMBERID = #{memberId}
 		
 	</update>
+	
+	<!-- 웹 업데이트를 위한 XML 기능 -->
+	<update id="updatePersonalInfo" parameterType="com.recipe.a.dto.MembersDto">
+		UPDATE MEMBERS
+		SET MEMBERID=#{memberId}
+		<if test="salt != null and salt != ''">
+			, SALT=#{salt}
+		</if>
+		<if test="memberPwd != null and memberPwd != ''">
+			, MEMBERPWD=#{memberPwd}
+		</if>
+		<if test="memberName != null and memberName != ''">
+			, MEMBERNAME=#{memberName}
+		</if>
+		<if test="memberNickname != null and memberNickname != ''">
+			, MEMBERNICKNAME=#{memberNickname}
+		</if>
+		<if test="memberGender != null and memberGender != ''">
+			, MEMBERGENDER=#{memberGender}
+		</if>
+		<if test="memberEmail != null and memberEmail != ''">
+			, MEMBEREMAIL=#{memberEmail}
+		</if>
+		WHERE MEMBERID = #{memberId}
+	</update>
+		<update id="updatePaymentInfo" parameterType="com.recipe.a.dto.MembersDto">
+		UPDATE MEMBERS
+		SET MEMBERID=#{memberId}
+		<if test="memberPhone != null and memberPhone != ''">
+			, MEMBERPHONE=#{memberPhone}
+		</if>
+		<if test="memberMainAddr != null and memberMainAddr != ''">
+			, MEMBERMAINADDR=#{memberMainAddr}
+		</if>
+		<if test="memberDetailAddr != null and memberDetailAddr != ''">
+			, MEMBERDETAILADDR=#{memberDetailAddr}
+		</if>
+		<if test="memberZipcode != null and memberZipcode != ''">
+			, MEMBERZIPCODE=#{memberZipcode}
+		</if>
+		WHERE MEMBERID = #{memberId}
+	</update>
+	<select id="updateLoggedInfo" parameterType="String" resultType="com.recipe.a.dto.MembersDto">
+		SELECT MEMBERID, MEMBERNICKNAME, MEMBEREMAIL, MEMBERPHONE, MEMBERCOIN, MEMBERMAINADDR, MEMBERDETAILADDR,
+			   MEMBERZIPCODE, MEMBERGENDER, MEMBERNAME, MEMBERGRADE
+		FROM MEMBERS
+		WHERE MEMBERID = #{memberId}
+	</select>
+	
 </mapper>

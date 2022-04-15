@@ -82,6 +82,7 @@ public class RecipeService {
 	}
 
 	public int writeComment(RatingDto ratingDto) {
+		System.out.println(ratingDto.toString());
 		ratingDao.writeComment(ratingDto);
 		return recipeDao.updateRecipeRating(ratingDto.getDocsSeq());
 	}
@@ -185,5 +186,47 @@ public class RecipeService {
 		
 	}
 
+	public int deleteRecipe(int recipeSeq) {
+		return recipeDao.deleteRecipe(recipeSeq);
+	}
+
+	public Map<String, Object> getPostedRecipeData(int recipeSeq) {
+		PhotoDto temp = new PhotoDto();
+		temp.setDocsSeq(recipeSeq);
+		temp.setPhotoCategory("recipe");
+		Map<String, Object> res = new HashMap<String, Object>();
+		res.put("recipeData", recipeDao.getOneRecipe(recipeSeq));
+		res.put("photoData", photoDao.getPhoto(temp));
+		return res;
+	}
+
+	public int countThumbnailByUrl(String url) {
+		return recipeDao.countThumbnailByUrl(url);
+	}
+
+	public int updateRecipe(RecipeDto recipeDto) {
+		return recipeDao.updateRecipe(recipeDto);
+	}
+
+	public int updateRecipeThumbnailImage(PhotoDto photoDto) {
+		photoDao.updatePhotoThumbnailImage(photoDto);
+		return photoDao.updateRecipeThumbnailImage(photoDto);
+	}
+
+	public int updateRecipeThumbnailUrl(RecipeDto recipeDto) {
+		return recipeDao.updateRecipeThumbnailUrl(recipeDto);
+	}
+
+	public int updatePhotoThumbnailContent(PhotoDto photoDto) {
+		return photoDao.updatePhotoThumbnailContent(photoDto);
+	}
+
+	public int updateRecipeOrderImage(PhotoDto photoDto) {
+		return photoDao.updateRecipeOrderImage(photoDto);
+	}
+
+	public int updateRecipeOrderContent(PhotoDto photoDto) {
+		return photoDao.updateRecipeOrderContent(photoDto);
+	}
 
 }

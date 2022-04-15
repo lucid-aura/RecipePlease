@@ -22,8 +22,10 @@
                 <li><a href="listing.html?category=personal">개인용</a></li>
                 <li><a href="listing.html?category=entertain">접대용</a></li>
                 <li><a href="listing.html?category=nightmeal">야식용</a></li>
+                <li><a href="profilePage.html" id="settingBtn">개인설정</a></li>
             </ul>
             <a href="login.html" class="register-btn" id="loginBtn" onclick="logout()">로그인</a>
+            
             <i class="fa-solid fa-bars" onclick="togglebtn()"></i>
         </nav>
         <div class="container">
@@ -124,14 +126,16 @@
 
 	    $( document ).ready(function() {
             let loggedUser = sessionStorage.getItem("loggedUser")
+            console.log("로그인 정보:" + loggedUser)
             console.log("로그인 방식 : " + sessionStorage.getItem("loginType"))
+            
             kakaoInit()
             checkLogin(loggedUser)
             console.log(window.Kakao.Auth.getAccessToken())
  
 
 	    	$.ajax({
-	    		url: webAddress + "getRecommendRecipeTest",
+	    		url: webAddress + "getRecommendRecipeByCategory",
 	    		    data: {
 	    			    category:"livestock"
 	    		    },
@@ -152,7 +156,7 @@
 	    	});
 
 	    	$.ajax({
-	    		url: webAddress + "getRecommendRecipeTest",
+	    		url: webAddress + "getRecommendRecipeByCategory",
 	    		    data: { category:"seafood" },
 	    		    success: function( result ) {
 	    			    recommendLivestock = result
@@ -170,7 +174,7 @@
 	    	});
 
         $.ajax({
-	    		url: webAddress + "getRecommendRecipeTest",
+	    		url: webAddress + "getRecommendRecipeByCategory",
 	    		    data: { category:"readcount" },
 	    		    success: function( result ) {
 	    			    recommendLivestock = result

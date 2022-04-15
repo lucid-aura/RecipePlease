@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Dimensions, Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, Image, PermissionsAndroid, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { FlatList, ScrollView, TextInput, TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {default as Icons } from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import COLORS from '../consts/colors';
-//import categories from '../consts/categories';
+import categories from '../consts/categories';
 import foods from '../consts/foods';
 
 import { NavigationHeader } from '../theme';
@@ -13,28 +13,71 @@ import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { getProfile } from '../mypage/utils';
 import axios from 'axios';
 import config from '../project.config'
+import { useDispatch } from 'react-redux';
+import * as D from "../store/drawer"
 
 const {width} = Dimensions.get('screen'); //스크린 
 const cardWidth = width / 2 - 20; //카드값 길이시 2개에서 부터 20개까지 설정
 
+const categoryTrans = {
+  livestock:"축산물",
+  seafood:"해산물",
+  personal:"개인용",
+  entertain:"접대용",
+  nightmeal:"야식용"
+}
+
 const HomeScreen = () => {
   const navigation = useNavigation()
-    const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
+  const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
 
+  const dispatch = useDispatch()
+  const goShoppingCart = () => {
+      dispatch(D.drawerChangeFalseAction())
+      navigation.dispatch(DrawerActions.openDrawer())
+  }
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0); //훅 설정
-  const [categories, setCategories] = useState([])
-  const [load, setLoad] = useState(false)
+  const [recipies, setRecipies] = useState([])
+
+  const fetchRecipe = async(category:string) =>{
+    const recipeRes =await axios.get(config.address + "getRecommendRecipeByCategory?category=" + category)
+    setRecipies(recipeRes.data)
+  }
+
+     
+  const permission = async() => {
+    if (Platform.OS === "android") {
+        await PermissionsAndroid.requestMultiple([
+            PermissionsAndroid.PERMISSIONS.CAMERA,
+            PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+            PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+        ]).then((result)=>{
+            if (result['android.permission.CAMERA']
+            && result['android.permission.WRITE_EXTERNAL_STORAGE']
+            && result['android.permission.READ_EXTERNAL_STORAGE']
+            === 'granted') {
+                console.log("모든 권한 획득");
+            } else{
+                console.log("권한거절");
+            }
+        })
+    }else{
+    }
+}
+
+
+useEffect( () => {
+    permission()
+}, [])
 
   
 
   useEffect( () => {
-    const fetchRecipe = async() =>{
-        const recipeRes =await axios.get(config.address + "getRecommendRecipeByCategory?category=rating")
-        setCategories(recipeRes.data)          
-        console.log(recipeRes.data)
-        setLoad(true)
+    const fetchRecipe = async(category:string) =>{
+        const recipeRes =await axios.get(config.address + "getRecommendRecipeByCategory?category=" + category)
+        setRecipies(recipeRes.data)          
     }
-    fetchRecipe()
+    fetchRecipe("rating")
 }, [])
 
   const ListCategories = () => { //리스트 카테고리 함수
@@ -47,7 +90,10 @@ const HomeScreen = () => {
           <TouchableOpacity
             key={index}
             activeOpacity={0.8}
-            onPress={() => setSelectedCategoryIndex(index)}>
+            onPress={() => {
+              setSelectedCategoryIndex(index)
+              fetchRecipe(category.value)
+            }}>
             <View
               style={{
                 backgroundColor:
@@ -86,21 +132,22 @@ const HomeScreen = () => {
       <TouchableHighlight//사진 및 디테일 설정
         underlayColor={COLORS.white}
         activeOpacity={0.9}
-        onPress={() => navigation.navigate('RecipeNavigator'  as never, { 
-          screen: 'RecipeDetail',
-          params:{
-            seq:0, 
-            category: 'recipe'
-          }
-        }  as never)}>
+        onPress={() => {
+          navigation.navigate('RecipeNavigator'  as never, { 
+            screen: 'RecipeDetail',
+            params:{
+              seq:food.recipeSeq, 
+              category: 'recipe'
+            }
+        }  as never)}}>
         <View style={style.card}>
           <View style={{alignItems: 'center', top: -40}}>
-            <Image source={food.image} style={{height: 120, width: 120}} />
+            <Image source={{uri: config.photo + food.recipeThumbnail}} style={{height: 120, width: 120}} />
           </View>
           <View style={{marginHorizontal: 20}}>
-            <Text style={{fontSize: 18, fontWeight: 'bold'}}>{food.name}</Text>
+            <Text style={{fontSize: 18, fontWeight: 'bold'}}>{food.recipeTitle}</Text>
             <Text style={{fontSize: 14, color: COLORS.grey, marginTop: 2}}>
-              {food.ingredients}
+              {food.recipeCapacity + "인용"}
             </Text>
           </View>
           <View //+ 기호 삭제 + $삭제
@@ -111,7 +158,8 @@ const HomeScreen = () => {
               justifyContent: 'space-between',
             }}>
             <Text style={{fontSize: 18, fontWeight: 'bold'}}>
-              {food.prompt}
+              {/* {food.recipeBigCategory / food.recipeBigCategory} */}
+              {categoryTrans[food['recipeBigCategory'] as never ] } / {categoryTrans[food['recipeSmallCategory'] as never]}
             </Text>
           </View>
         </View>
@@ -121,9 +169,9 @@ const HomeScreen = () => {
   return (//최상단 부분에 글귀 타이틀 + 사진 처리
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
       <NavigationHeader title="홈" 
-                Left= {() => <Icons name="text-account" size={30} onPress={drawerOpen} />}
-                Right= {() => <Icons name="cart-heart" size={30} />}
-                />
+        Left= {() => <Icons name="arrow-left-bold" size={40} onPress={goBack} />}
+        Right= {() => <Icons name="cart-heart" size={40} onPress={goShoppingCart} />}
+        />
 
       <View style={style.header}>
         <View>
@@ -148,13 +196,6 @@ const HomeScreen = () => {
           flexDirection: 'row',
           paddingHorizontal: 20,
         }}>
-        <View style={style.inputContainer}>
-          <Icon name="search" size={28} />
-          <TextInput //검색바 + 우측 검색 구간 아이콘 삭제(현재 슬라이더로 메뉴 구성단 완성으로 삭제)
-            style={{flex: 1, fontSize: 18}}
-            placeholder="요리법을 선택하세요"
-          />
-        </View>
       </View>
       <View>
         <ListCategories />
@@ -162,7 +203,7 @@ const HomeScreen = () => {
       <FlatList
         showsVerticalScrollIndicator={false}
         numColumns={2}
-        data={foods}
+        data={recipies}
         renderItem={({item}) => <Card food={item} />}
       />
     </SafeAreaView> //여기에 검색바에서 메뉴 검색 슬라이딩 메뉴 기능 구현을 해야함
