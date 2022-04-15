@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.recipe.a.dto.GoodsDto;
 import com.recipe.a.service.GoodsService;
 
 
@@ -17,8 +18,11 @@ public class GoodsController {
 	@RequestMapping(value = "/countGoods", method = {RequestMethod.GET, RequestMethod.POST})
 	public String countMembers() {
 		System.out.println("GoodsController countGoods()");
-		int res = goodsService.countGoods();
-		System.out.println(res);
-		return "개수는: " + res;
+		return "asd";
+	}
+	@RequestMapping(value = "/goodsData", method = {RequestMethod.GET, RequestMethod.POST})
+	public GoodsDto goodsData() {
+		System.out.println("GoodsController goodsData()");
+		return goodsService.goodsData();
 	}
 }

@@ -1,12 +1,13 @@
 import {  useNavigation, } from "@react-navigation/native";
-import React, { useCallback } from "react";
+import axios from "axios";
+import React, { useCallback,useEffect,useState } from "react";
 import {  BackHandler, Button, Image, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
 import { white } from "react-native-paper/lib/typescript/styles/colors";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import COLORS from "../consts/colors";
 import { NavigationHeader } from "../theme/NavigationHeader";
 import GoodsSearch from "./goodshome/GoodsSearch";
-
+import config from "../project.config";
 
 
 
@@ -16,8 +17,42 @@ export default function GoodsDetail({route}:any){
     const navigation = useNavigation()
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
     const { seq } = route.params;
-    
-    
+    const [count, setCount] = useState(1);
+    const [price,setprice] = useState(0);
+
+    const [goodsName,setgoodsName] = useState("");
+    const [goodsCategory, setgoodsCategory] = useState("");
+    const [goodsContent, setgoodsContent] =useState("");
+    const [goodsCount, setgoodsCount] = useState(0);
+    const [goodsPrice, setgoodsPrice] = useState(0);
+    const [goodsRating, setgoodRating] = useState(0.0);
+    const [goodsReadcount, setgoodsReadcount] = useState(0);
+    const [goodsSeq, setgoodSeq] = useState(0);
+    const [goodsView, setgoodsView] = useState(0);
+
+    useEffect( () => {
+
+        const fetchGoods = async() =>{
+            const goodsData =await axios.post(config.address + "goodsData")
+            console.log(goodsData.data)
+            setgoodsName(goodsData.data.goodsName)
+            setgoodsCategory(goodsData.data.goodsCategory)
+            setgoodsContent(goodsData.data.goodsContent)
+            setgoodsCount(goodsData.data.goodsCount)
+            setgoodsPrice(goodsData.data.goodsPrice)
+            setgoodRating(goodsData.data.goodsRating)
+            setgoodsReadcount(goodsData.data.goodsReadcount)
+            setgoodSeq(goodsData.data.goodsSeq)
+            setgoodsView(goodsData.data.goodsView)
+            setprice(goodsData.data.goodsPrice)
+
+        }
+         fetchGoods()
+    }, [])
+
+
+    const onIncrease = () => {setCount(count + 1); setprice(goodsPrice*(count + 1))};
+    const onDecrease = () => {setCount(count - 1); setprice(goodsPrice*(count - 1))};
     return(
         <ScrollView>
             {/* 상단 네비게이터 */}
@@ -58,42 +93,40 @@ export default function GoodsDetail({route}:any){
                 <View style={{flexDirection: 'row',}}>
                     <View style={styles.price}>
                         <View style={styles.pricetext1}>
-                            <Text style={styles.pricetext}>키치니스 나무도마 월넛 플레이팅 수제 원목 KH-5355H</Text>
+                            <Text style={styles.pricetext}>{goodsName}</Text>
                         </View>
                         <View style={styles.pricetext1}>
-                            <Text style={styles.pricetext2}>70,000원</Text>
+                            <Text style={styles.pricetext2}>{goodsPrice}원</Text>
                         </View>
                     </View>
                     
-                    <View style={styles.likebox}>
-
-                        <Text>좋아요</Text>
-                        {/* { load &&
-                        <View style={{paddingBottom:20}}>
-                            <View style={styles.alienRow}>
-                                <Text style={styles.readcount}>조회수 : {recipe.recipeReadcount}</Text>
-                                <Icon name={likeIconName} size={40} onPress={likeRecipe} />
-
-                            </View>
-                            <View style={{alignItems:"center"}}>
-                                <Image style={{borderRadius:15}} source={{ uri:thumbnail.photoUrl, width:520, height:340 }} />
-                            </View>
-                        </View>
-                        } */}
-
-                    </View>
+                    
             </View>  
                     <View>
                         <View style={styles.order}>
                             <Text style={{fontSize:16,marginTop:11,}}>택배배송 | 3,000원(주문시 결제)</Text>
                             <Text style={{fontSize:16,marginTop:5,}}>50,000원 이상 구매 시 무료 / 제주,도서지역 추가 5,000원 / 제주 및 도서산간 지역 추가배송비 발생합니다.</Text>
                         </View>
-                        <View style={{height:50,width:"100%",borderWidth:1,borderColor:"#A6A6A6",backgroundColor:"#F0F0F0"}}>
+                        <View style={{height:60,width:"100%",borderWidth:1,borderColor:"#A6A6A6",backgroundColor:"#F0F0F0"}}>
                             <Text>상품 수량</Text>
+                            <View style={{flexDirection: 'row', position:"absolute",bottom:0}}>
+                                <View style={{width:35}}>
+                                    <Button color={"#9999FF"} title="-" onPress={onDecrease}></Button>
+                                </View>
+                                <View style={{backgroundColor:"white",width:40,height:35,alignItems:"center",}}>
+                                  <Text style={{fontSize:18, paddingTop:5}}>{count}</Text>
+                                </View> 
+                                <View style={{width:35}}>
+                                    <Button color={"#9999FF"} title="+" onPress={onIncrease}></Button>
+                                </View>
+                            </View>
+                            <View style={{flexDirection: 'row', position:"absolute",bottom:0,right:3,}}>
+                                <Text style={{fontSize:20}}>{price}원</Text>
+                            </View>
                         </View>
-                        <View style={{flexDirection: 'row',justifyContent:"space-between",marginTop:10}}>
+                        <View style={{flexDirection: 'row',justifyContent:"space-between",marginTop:15}}>
                             <View style={{width:"48.5%"}}>
-                                <Button title="장바구니" onPress={()=>navigation.navigate('paymentInfo')}></Button>
+                                <Button disabled color={"pink"} title="장바구니" ></Button>
                             </View>
                             <View style={{width:"48.5%",}}>
                                 <Button title="구매하기" onPress={()=>navigation.navigate('paymentInfo')}></Button>
@@ -102,7 +135,7 @@ export default function GoodsDetail({route}:any){
                     </View>
                     <View style={{marginTop:19}}>
                          <Image source={require('../assets/goodsdetail/good1.jpg')}
-                         style={{width:"auto",height:6000}}></Image>
+                         style={{width:"auto",height:600}}></Image>
                     </View>
             </View>
 

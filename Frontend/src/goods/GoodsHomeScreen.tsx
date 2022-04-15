@@ -139,9 +139,12 @@ export default function GoodsHomeScreen(){
                     onPress={() => navigation.navigate('goodsDetail', {"seq": 8})}>
                 <View style={styles.card}>
                     <View style={styles.img}>
-                        <View>
-                           
-                        </View>
+                        
+                        <Image 
+                        style={styles.stretch}
+                        source={require('../assets/goodsdetail/goods1.jpg')}
+                        ></Image>
+                        
                     </View>
                         <View style={styles.mainstory}>
                            <View style={styles.story}>
@@ -437,13 +440,23 @@ card2: {
     img:{
       elevation: 16,
       width:"92%",
-      paddingBottom:"92%",
+      height: 50,
+      paddingBottom:"92%",     
       backgroundColor:'#FAFAFA',
       left:"4%",
       top:"4%",
-      borderRadius:10,
-    
+      borderRadius:10,    
+
     },
+
+    stretch:{
+        alignSelf:'center',
+        width: "100%",
+        height:50,
+        paddingBottom:"100%",  
+        resizeMode: "stretch"
+    },
+
     mainstory:{
         left:"4%",
         top:"5%"
