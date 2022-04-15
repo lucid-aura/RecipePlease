@@ -53,6 +53,10 @@
 	SELECT * FROM RECIPE ORDER BY RECIPEREADCOUNT DESC LIMIT 4;
 </select>
 
+<select id="getRecommendRatingRecipe" resultType="com.recipe.a.dto.RecipeDto">
+	SELECT * FROM RECIPE ORDER BY RECIPERATING DESC LIMIT 20;
+</select>
+
 <select id="searchRecipe" resultType="com.recipe.a.dto.RecipeDto">
 	SELECT * FROM RECIPE WHERE RECIPETITLE LIKE CONCAT('%', #{search}, '%') 
 	AND RECIPEBIGCATEGORY IN
@@ -78,6 +82,13 @@
 	WHERE RECIPESEQ = #{recipeSeq}
 </select>
 
+<!-- 해당 썸네일 시퀀스로 썸네일 url가져오기 -->
+<select id="countThumbnailByUrl" parameterType="String" resultType="Integer" >
+	SELECT COUNT(*)
+	FROM RECIPE
+	WHERE RECIPETHUMBNAIL=#{photoUrl}
+</select>
+
 <!-- 내가 업로드한 레시피 정보 가져오기 -->
 <select id="myUploadedRecipe" parameterType="Integer" resultType="com.recipe.a.dto.RecipeDto">
 	SELECT RECIPESEQ, MEMBERID, RECIPETITLE, RECIPECONTENT, RECIPEBIGCATEGORY, RECIPESMALLCATEGORY, 
@@ -85,4 +96,20 @@
 	FROM RECIPE
 	WHERE RECIPESEQ = #{recipeSeq} 
 </select>
+
+<delete id="deleteRecipe" parameterType="Integer">
+	DELETE FROM RECIPE WHERE RECIPESEQ=#{recipeSeq}
+</delete>
+
+<update id="updateRecipeThumbnailUrl" parameterType="com.recipe.a.dto.RecipeDto">
+	UPDATE RECIPE SET RECIPETHUMBNAIL=#{recipeThumbnail}
+	WHERE RECIPESEQ=#{recipeSeq}
+</update>
+
+<update id="updateRecipe" parameterType="com.recipe.a.dto.RecipeDto">
+<!-- [recipeSeq=37, memberId=Aaa, recipeTitle=8, recipeContent=9, recipeBigCategory=livestock, recipeSmallCategory=entertain, recipeVideoUrl=, recipeGoodsTag=ㅐ,ㅡ, recipePrice=0, recipeRating=0.0, recipeReadcount=0, recipeCapacity=1, recipeThumbnail=] -->
+	UPDATE RECIPE SET RECIPETITLE=#{recipeTitle}, RECIPECONTENT=#{recipeContent}, RECIPEBIGCATEGORY=#{recipeBigCategory}, RECIPESMALLCATEGORY=#{recipeSmallCategory}, RECIPEVIDEOURL=#{recipeVideoUrl}, RECIPEGOODSTAG=#{recipeGoodsTag}, RECIPEPRICE=#{recipePrice}, RECIPECAPACITY=#{recipeCapacity}
+	WHERE RECIPESEQ=#{recipeSeq}
+</update>
+
 </mapper>

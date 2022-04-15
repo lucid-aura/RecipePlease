@@ -7,14 +7,17 @@
     <title>Code Chef</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/7a52739f2b.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="project.config.js" charset="utf-8"></script>
 </head>
 <body>
     <nav id="navBar" class="navbar-white">
         <a href="index.html"><img src="images/logo2.png" class="logo"></a> <!--이거 나중에 jsp 작업할때 수정 하세요-->
         <ul class="nav-links">
-            <li><a href="#" class="simple">간편식</a></li>
-            <li><a href="#">야식</a></li>
-            <li><a href="listing.html">손님접대용</a></li> <!--임의 설정입니다. 난주 jsp 작업할때 수정 하세요-->
+            <li><a href="index.html" class="simple">홈</a></li>
+            <li><a href="listing.html?category=personal">개인용</a></li>
+            <li><a href="listing.html?category=entertain">접대용</a></li>
+            <li><a href="listing.html?category=nightmeal">야식용</a></li>
+            <li><a href="profilePage.html" id="settingBtn">개인설정</a></li>
         </ul>
         <a href="#" class="register-btn">회원 가입하기</a>
         <i class="fas fa-bars" onclick="togglebtn()"></i>
@@ -22,54 +25,77 @@
 
     <div class="container">
 
-        <div class="small-container single-product">
-            <div class="row">
-                <div class="col-2">
-                    <img src="images/kichen1.jpg" width="100%" id="productImg">
-
-                    <div class="small-img-row">
-                        <div class="small-img-col">
-                            <img src="images/kichen1.jpg" width="100%" class="smallImg">
-                        </div>
-                        <div class="small-img-col">
-                            <img src="images/kichen2.jpg" width="100%" class="smallImg">
-                        </div>
-                        <div class="small-img-col">
-                            <img src="images/kichen3.jpg" width="100%" class="smallImg">
-                        </div>
-                        <div class="small-img-col">
-                            <img src="images/kichen4.jpg" width="100%" class="smallImg">
+        <div class="list-container single-product">
+            <div class="left-col">
+                <div class="row">
+                    <div class="col-2">
+                        <img src="images/kichen1.jpg" width="100%" id="productImg" class="big">
+    
+                        <div class="small-img-row">
+                            <div class="small-img-col">
+                                <img src="images/kichen1.jpg" width="100%" class="smallImg">
+                            </div>
+                            <div class="small-img-col">
+                                <img src="images/kichen2.jpg" width="100%" class="smallImg">
+                            </div>
+                            <div class="small-img-col">
+                                <img src="images/kichen3.jpg" width="100%" class="smallImg">
+                            </div>
+                            <div class="small-img-col">
+                                <img src="images/kichen4.jpg" width="100%" class="smallImg">
+                            </div>
                         </div>
                     </div>
 
-
+                    <div class="col-2">
+                        <p>주방 도구 / 도마</p>
+                        <h1>나무가 아주 좋습니다.</h1>
+                        <h4>35,000원</h4>
+                        <select>
+                            <option>크기를 고르세요</option>
+                            <option>대</option>
+                            <option>중</option>
+                            <option>소</option>
+                        </select>
+                        <input type="number" value="1">
+                        <a href="" class="btn">카트에 추가하기</a>
+                        <br>
+                        <h3>Product Details <i class="fa-solid fa-indent"></i></h3>
+                        <p>이 도마는 친환경적 제작으로 호르몬발생이 적으며 더군다나 멸균처리로 된 나무로 가공되어 참 좋습니다.</p>
+                    </div>
                 </div>
-                <div class="col-2">
-                    <p>주방 도구 / 도마</p>
-                    <h1>나무가 아주 좋습니다.</h1>
-                    <h4>35,000원</h4>
-                    <select>
-                        <option>크기를 고르세요</option>
-                        <option>대</option>
-                        <option>중</option>
-                        <option>소</option>
-                    </select>
-                    <input type="number" value="1">
-                    <a href="" class="btn">카트에 추가하기</a>
-                    <br>
-                    <h3>Product Details <i class="fa-solid fa-indent"></i></h3>
-                    <p>이 도마는 친환경적 제작으로 호르몬발생이 적으며 더군다나 멸균처리로 된 나무로 가공되어 참 좋습니다.</p>
+            </div>
+                
+            <div class="right-col">
+                <div class="sidebar">
+                    <h2>세부사항 선택</h2>
+                    <h3>구성 타입</h3>
+                    <div class="filter">
+                        <input type="checkbox"> <p>식기 관련</p> <span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox"> <p>주방 도구</p> <span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox"> <p>기타</p> <span>(0)</span>
+                    </div>
+                    <h3>조회 순</h3>
+                    <div class="filter">
+                        <input type="checkbox"> <p>많이 선택한 물품</p> <span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox"> <p>조회 많은순</p> <span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox"> <p>문의 많은순</p> <span>(0)</span>
+                    </div>
+
+                    <div class="sidebar-link">
+                        <a href="food.html">더 보기</a><!--임의로 걸었습니다. 난주 JSP작업할때 유의 하세요-->
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="small-container">
-            <div class="row row-2">
-                <h2>품목 등급</h2>
-                <p>더 필요한거 있으신가요?</p>
-            </div>
-        </div>
-        
 
         
 
@@ -95,9 +121,9 @@
         }
     </script>
 
-    <!-- js for Product gallery-->
+     <!-- js for Product gallery-->
 
-    <script>
+     <script>
         let productImg = document.getElementById("productImg")
         let smallImg = document.getElementsByClassName("smallImg")
 

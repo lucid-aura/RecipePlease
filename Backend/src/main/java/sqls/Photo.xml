@@ -52,4 +52,31 @@
 	FROM PHOTO
 	WHERE DOCSSEQ = #{recipeSeq} AND PHOTOCATEGORY = 'recipe' AND PHOTOTITLE = 'thumbnail'
 </select>
+
+<update id="updateRecipeThumbnailImage" parameterType="com.recipe.a.dto.PhotoDto">
+	UPDATE RECIPE SET RECIPETHUMBNAIL=#{photoUrl}
+	WHERE RECIPESEQ=#{docsSeq}
+</update>
+
+<update id="updatePhotoThumbnailImage" parameterType="com.recipe.a.dto.PhotoDto">
+	UPDATE PHOTO SET PHOTOURL=#{photoUrl}
+	WHERE PHOTOSEQ=#{photoSeq}
+</update>
+
+<update id="updatePhotoThumbnailContent" parameterType="com.recipe.a.dto.PhotoDto">
+	UPDATE PHOTO SET PHOTOCONTENT=#{photoContent}
+	WHERE PHOTOSEQ=#{photoSeq}
+</update>
+
+<update id="updateRecipeOrderImage" parameterType="com.recipe.a.dto.PhotoDto">
+	UPDATE PHOTO SET PHOTOURL=#{photoUrl}
+	WHERE PHOTOSEQ=#{photoSeq}
+</update>
+
+<update id="updateRecipeOrderContent" parameterType="com.recipe.a.dto.PhotoDto">
+	UPDATE PHOTO SET PHOTOCONTENT=#{photoContent}
+	WHERE PHOTOSEQ=#{photoSeq}
+</update>
+
+
 </mapper>

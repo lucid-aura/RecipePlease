@@ -8,45 +8,11 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/7a52739f2b.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    
-
+    <script type="text/javascript" src="project.config.js" charset="utf-8"></script>
+    <script type="text/javascript" src="commons.js" charset="utf-8"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
-
-    <!-- 
-        <a href="javascript:kakaoLogin();"><img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" alt="카카오계정 로그인" style="height: 100px;"/></a>
-        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-        <script>
-            window.Kakao.init('694bef496dca2e0892b337ea4ddeaf9b');
-            
-            function kakaoLogin() {
-                window.Kakao.Auth.authorize({
-                    redirectUri: encodeURI('http://192.168.0.4:5500/WebContent/cart.html')
-                })
-                   
-
-                window.Kakao.Auth.login({
-                    scope: 'profile_nickname', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
-                    success: function(response) {
-                        console.log(response) // 로그인 성공하면 받아오는 데이터
-                        window.Kakao.API.request({ // 사용자 정보 가져오기 
-                            url: '/v2/user/me',
-                            success: (res) => {
-                                const kakao_account = res.kakao_account;
-                                console.log(kakao_account)
-                                window.location.href='http://192.168.0.4:5500/WebContent/cart.html' //리다이렉트 되는 코드
-                            }
-                        });
-                        
-                    },
-                    fail: function(error) {
-                        console.log(error);
-                    }
-                });
-            }
-        </script>
-        -->
-
 
     <div class="header">
         <nav id="navBar">
@@ -56,15 +22,17 @@
                 <li><a href="listing.html?category=personal">개인용</a></li>
                 <li><a href="listing.html?category=entertain">접대용</a></li>
                 <li><a href="listing.html?category=nightmeal">야식용</a></li>
+                <li><a href="profilePage.html" id="settingBtn">개인설정</a></li>
             </ul>
-            <a href="#" class="register-btn">회원 가입하기</a>
+            <a href="login.html" class="register-btn" id="loginBtn" onclick="logout()">로그인</a>
+            
             <i class="fa-solid fa-bars" onclick="togglebtn()"></i>
         </nav>
         <div class="container">
             <h1>먹을거 고민은 이제 그만~</h1>
             <div class="search-bar">
                 <form>
-                    <div>
+                    <div class="meat-input">
                         <label>레시피 검색</label>
                         <input id="searchInput" type="text" placeholder="검색어를 입력해주세요">
                     </div>
@@ -74,7 +42,7 @@
         </div>
     </div>
 
-
+    <div class="container">
         <h2 class="sub-title">축산물 추천 레시피</h2>
         <div class="latest" id="recommendLivestock">
         </div>
@@ -155,9 +123,19 @@
             location.href = "search.html?search=" + $("#searchInput").val()
         }
 
+
 	    $( document ).ready(function() {
+            let loggedUser = sessionStorage.getItem("loggedUser")
+            console.log("로그인 정보:" + loggedUser)
+            console.log("로그인 방식 : " + sessionStorage.getItem("loginType"))
+            
+            kakaoInit()
+            checkLogin(loggedUser)
+            console.log(window.Kakao.Auth.getAccessToken())
+ 
+
 	    	$.ajax({
-	    		url: "http://192.168.0.4:3000/getRecommendRecipeTest",
+	    		url: webAddress + "getRecommendRecipeByCategory",
 	    		    data: {
 	    			    category:"livestock"
 	    		    },
@@ -166,7 +144,7 @@
                         
 	    		        $.each(recommendLivestock, function(index, value){
     		        	    $("<div onclick='goRecipeDetail(" + value.recipeSeq +")'>" + 
-    		        	    	"<img src=" + 'images/image-10.jpg' + ">" +	
+    		        	    	"<img src=" + webPhoto + value.recipeThumbnail + ">" +	
     		        	    	"<span>" +
     		        	    	"<h3>" +  value.recipeTitle + "</h3>" +
     		        	    	"<p>평점: " +  value.recipeRating + "</p>" +
@@ -178,13 +156,13 @@
 	    	});
 
 	    	$.ajax({
-	    		url: "http://192.168.0.4:3000/getRecommendRecipeTest",
+	    		url: webAddress + "getRecommendRecipeByCategory",
 	    		    data: { category:"seafood" },
 	    		    success: function( result ) {
 	    			    recommendLivestock = result
 	    		        $.each(recommendLivestock, function(index, value){
     		        	    $("<div onclick='goRecipeDetail(" + value.recipeSeq +")'>" + 
-    		        	    	"<img src=" + 'images/image-10.jpg' + ">" +	
+    		        	    	"<img src=" + webPhoto + value.recipeThumbnail + ">" +	
     		        	    	"<span>" +
     		        	    	"<h3>" +  value.recipeTitle + "</h3>" +
     		        	    	"<p>평점: " +  value.recipeRating + "</p>" +
@@ -196,13 +174,13 @@
 	    	});
 
         $.ajax({
-	    		url: "http://192.168.0.4:3000/getRecommendRecipeTest",
+	    		url: webAddress + "getRecommendRecipeByCategory",
 	    		    data: { category:"readcount" },
 	    		    success: function( result ) {
 	    			    recommendLivestock = result
 	    		        $.each(recommendLivestock, function(index, value){
     		        	    $("<div onclick='goRecipeDetail(" + value.recipeSeq +")'>" + 
-    		        	    	"<img src=" + 'images/image-10.jpg' + ">" +	
+    		        	    	"<img src=" + webPhoto + value.recipeThumbnail + ">" +	
     		        	    	"<span>" +
     		        	    	"<h3>" +  value.recipeTitle + "</h3>" +
     		        	    	"<p>평점: " +  value.recipeRating + "</p>" +
@@ -213,8 +191,6 @@
 	    		  }
 	    	});
 	    });
-
-
 
 	</script>
     

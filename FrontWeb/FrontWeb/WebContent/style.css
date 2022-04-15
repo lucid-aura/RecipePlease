@@ -46,7 +46,7 @@ nav{
 }/*회원 가입 부분 버튼 처리 & 지정 부분 css처리*/
 
 .container{
-    padding: 0 7%;
+    padding: 7%;
 }/*컨테이너 설정*/
 
 .header h1{
@@ -59,7 +59,7 @@ nav{
 
 .search-bar{
     background: #fff;
-    width: 70%;
+    width: 50%;
     margin: 30px auto;
     padding: 6px 10px 6px 30px;
     border-radius: 50px;
@@ -851,4 +851,163 @@ nav.navbar-white .fa-bars{
     .contact-host{
         margin: 40px 0;
     }/*버튼 설정*/
+}
+
+/* ================================= goodsList ========================================= */
+
+.single-product{
+    margin-top: 80px;
+}/*전체 div 설정*/
+
+.single-product .col-2 img{
+    padding: 0;
+}/*사진 설정*/
+
+.single-product .col-2{
+    padding: 20px;
+}/*col-2 사진 및 패딩값 설정*/
+
+.single-product .col-2 .big{
+    width: 480px;
+    height: 480px;
+    margin-right: 10px;
+}/*사진 및 패딩값 설정*/
+
+.single-product h4{
+    margin: 20px 0;
+    font-size: 22px;
+    font-weight: bold;
+}/*h4 설정*/
+
+.single-product select{
+    display: block;
+    padding: 10px;
+    margin-top: 20px;
+}/*select 설정*/
+
+.single-product input{
+    width: 50px;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 20px;
+    margin-right: 10px;
+    border: 1px solid #ff523b;
+}/*input 설정*/
+
+input:focus{
+    outline: none;
+}/*focus 설정*/
+
+.single-product .fa-solid{
+    color: #ff523b;
+    margin: 10px;
+}/*이미지 부분 색 지정+ 마진값 설정*/
+
+.small-img-row{
+    display: flex;
+    justify-content: space-between;
+    width: 480px;
+    height: 280px;
+}/*small-img-row 지정*/
+
+.small-img-col{
+    flex-basis: 24%;
+    cursor: pointer;
+}/*작은 화면 분할처리*/
+
+
+
+/* =========================== 미디어쿼리 값 작은화면 디테일 페이지 ============================*/
+
+@media only screen and (max-width: 700px){
+
+    .row {
+        text-align: center;
+    }
+    .col-2, .col-3, .col-4{
+        flex-basis: 100%;
+    }
+    .single-product .row{
+        text-align: left;
+    }
+    .single-product .col-2{
+        padding: 20px 0;
+    }
+    .single-product h1{
+        font-size: 26px;
+        line-height: 32px;
+    }
+}
+
+/* ============================ cart 관련 ============================== */
+
+.cart-page{
+    margin: 80px auto; 
+}/*카트 페이지 설정*/
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}/*테이블 설정*/
+
+.cart-info{
+    display: flex;
+    flex-wrap: wrap;
+}/*인포 부분 재 정렬*/
+
+th{
+    text-align: left;
+    padding: 5px;
+    color: #fff;
+    background: #ff523b;
+    font-weight: normal;
+}/*윗 상단 설정*/
+
+td{
+    padding: 10px 5px;
+}/*사잇공간에 띄우기 설정*/
+
+td input{
+    width: 40px;
+    height: 30px;
+    padding: 5px;
+}/*넘버 처리*/
+
+td a{
+    color: #ff523b;
+    font-size: 12px;
+}/*리무브 부분*/
+
+td img{
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+}/*사진 이미지 부분*/
+
+.total-price{
+    display: flex;
+    justify-content: flex-end;
+}/*가격 설정*/
+
+.total-price table{
+    border-top: 3px solid #ff523b;
+    width: 100%;
+    max-width: 400px;
+}/*테이블 구간 설정 공간*/
+
+td:last-child{
+    text-align: right;
+}/*td 값 마지막 설정*/
+
+th:last-child{
+    text-align: right;
+}/*th 값 마지막 설정*/
+
+/* =========================== 미디어쿼리 값 작은화면 디테일 페이지 ============================*/
+
+@media only screen and (max-width: 700px){
+
+    .cart-info p {
+        display: none;
+    }
 }

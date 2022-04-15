@@ -1,6 +1,6 @@
 import { DrawerContentComponentProps, DrawerContentScrollView } from "@react-navigation/drawer"
 import { DrawerActions } from "@react-navigation/native"
-import React, { FC, useCallback } from "react"
+import React, { FC, useCallback, useEffect } from "react"
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { Colors } from "react-native-paper"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
@@ -10,10 +10,13 @@ const DrawerSettingLogout: FC<DrawerContentComponentProps> = (props) => {
     const {navigation} = props
     const Drawerclose = useCallback(() => navigation.dispatch(DrawerActions.closeDrawer()), [])
 
+    useEffect(() => {
+        fetch
+    }, [])
+
     const goMyFavoriteRecipe = useCallback(() => {
         props.navigation.navigate("MyFavoriteRecipe")
     },[])
-    
     const goMyInfo = useCallback(() => {
         props.navigation.navigate("MyInfo")
     },[])

@@ -1,9 +1,5 @@
 import { KakaoOAuthToken, KakaoProfile, login, logout, getProfile as getKakaoProfile, unlink } from "@react-native-seoul/kakao-login";
 import axios from "axios";
-import { Value } from "react-native-reanimated";
-import { useSelector } from "react-redux";
-import { AppState } from "../../store";
-import * as L from "../../store/login"
 import config from "../../project.config"
 
 // 로그인
@@ -34,17 +30,43 @@ export const signInWithKakao = async (): Promise<void> => {
 // 로그아웃
 export const signOutWithKakao = async (): Promise<void> => {
     const message = await logout();
+    console.log("카카오 로그아웃")
 
 };
 
 // 프로필 조회
 export const getProfile = async (): Promise<string> => {
-    const profile: KakaoProfile = await getKakaoProfile();
-    JSON.stringify(profile)
-    return profile.id +" "+ profile.nickname
+    const profile: KakaoProfile  = await getKakaoProfile();
+    console.log( JSON.stringify(profile))
+    if(profile.gender === 'MALE' ) profile.gender = '남자'
+    else profile.gender = '여자'
+    return  profile.id +" " + 
+            profile.nickname + " " + 
+            profile.email + " " + 
+            profile.gender+ " " + 
+            profile.profileImageUrl
 };
 
 export const unlinkKakao = async (): Promise<void> => {
     const message = await unlink();
 
 };
+/*
+export const test = async (accessToken:any) => {
+    axios.post("https://kapi.kakao.com/v2/user/me", null, {
+            headers: {
+                'Content-Type': "application/x-www-form-urlencoded",
+                Authorization: `Bearer ${accessToken}`
+            },
+            params: {
+                property_keys: ["properties.nickname", "properties.profile_image", "properties.thumbnail_image	", "kakao_account.email","kakao_account.gender"]
+            },
+        }).then(function (response) {
+            console.log(response.data)
+
+        }).catch(function (error) {
+            console.log(error)
+            //Alert.alert("추가되지 않았습니다.")
+        })
+}
+*/

@@ -56,15 +56,32 @@ public class MembersService {
 	}
 	
 	// 회원가입 - 노승현
-	public boolean regist(MembersDto dto) {	
-		int b = dao.idCheck(dto);	
+	public MembersDto regist(MembersDto dto) {	
 		
-		if(b == 1) {
-			return true;	// 아이디 중복됨(회원가입 실패)
+		String salt;
+		int n = dao.idCheck(dto);
+		
+		int b;
+		if(n>0) {	// 아이디 있음
+			salt = dao.idCheckGetSalt(dto);
+			System.out.println("regist service salt: " + salt);
+			dto.setMemberPwd(BCrypt.hashpw(dto.getMemberPwd(), salt));
+			return dao.login(dto.getMemberPwd());
+		} else {	// 아이디 없음
+			salt = BCrypt.gensalt(10);	// 임의의 솔트값 생성
+			dto.setSalt(salt);	// 솔트값 Dto 에 담기
+			dto.setMemberPwd(BCrypt.hashpw(dto.getMemberPwd(), salt));	//솔트값과 비밀번호 합쳐서 암호화후 Dto에 담기
+			System.out.println("regist memgbersService: " + dto.toString()  );
+			System.out.println("memberId: " + dto.getMemberId() + " " + "memberPwd: " + dto.getMemberPwd());
+
+			b = dao.regist(dto);
+		}
+		
+		if(b > 0) {
+			return dao.login(dto.getMemberPwd());
 		} else {
-			int n = dao.regist(dto);
-			
-			return n>0? false:true;	// false: 회원가입 성공, true: 회원가입 실패
+			MembersDto onlyLogin = new MembersDto();
+			return onlyLogin;
 		}
 	}
 	
@@ -199,6 +216,25 @@ public class MembersService {
 	public List<RecipeDto> test1() {
 		return dao.test1();
 	}
-
 	
+	/****************** 웹 업데이트를 위한 서비스 기능 *********************/
+
+	public int updatePersonalInfo(MembersDto dto) {
+		if (dto.getMemberPwd().length() > 0) {
+			String salt = BCrypt.gensalt(10);
+			dto.setSalt(salt);
+			dto.setMemberPwd(BCrypt.hashpw(dto.getMemberPwd(), salt));
+		}
+		return dao.updatePersonalInfo(dto);
+	}
+
+	public int updatePaymentInfo(MembersDto dto) {
+		return dao.updatePaymentInfo(dto);
+	}
+	
+	public MembersDto updateLoggedInfo(String memberId) {
+		return dao.updateLoggedInfo(memberId);
+	}
+	/****************************************************************/
+
 }

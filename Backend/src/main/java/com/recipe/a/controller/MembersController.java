@@ -45,19 +45,12 @@ public class MembersController {
 	
 	//회원가입 - 노승현
 	@RequestMapping(value = "/regist", method = {RequestMethod.GET, RequestMethod.POST})
-	public String regist(MembersDto dto) {
+	public MembersDto regist(MembersDto dto) {
 		System.out.println("MembersController regist()");
-		String salt = BCrypt.gensalt(10);	// 임의의 솔트값 생성
-		dto.setSalt(salt);	// 솔트값 Dto 에 담기
-		dto.setMemberPwd(BCrypt.hashpw(dto.getMemberPwd(), salt));	//솔트값과 비밀번호 합쳐서 암호화후 Dto에 담기
-		System.out.println("dto.getMember_pwd: " + dto.getMemberPwd() );
-		
-		boolean b = memberService.regist(dto);
-		if (b) {
-			return "yes";	// 회원가입 실패
-		} else {
-			return "no";	// 회원가입 성공
-		}
+		System.out.println("regist dto: " + dto.toString());
+		MembersDto result = memberService.regist(dto);
+		System.out.println("regist result: " + result.toString());
+		return result;
 		
 	}
 	
@@ -166,7 +159,26 @@ public class MembersController {
 		return "success";
 	}
 	
+	/****************** 웹 업데이트를 위한 컨트롤러 기능 *********************/
 	
+	@RequestMapping(value = "/updatePersonalInfo", method = {RequestMethod.POST})
+	public MembersDto updatePersonalInfo(MembersDto dto) {
+		System.out.println("MemberController updatePersonalInfo");
+		System.out.println("MembersDto: " + dto.toString());
+		memberService.updatePersonalInfo(dto);
+		return memberService.updateLoggedInfo(dto.getMemberId());
+	}
+	
+	@RequestMapping(value = "/updatePaymentInfo", method = {RequestMethod.POST})
+	public MembersDto updatePaymentInfo(MembersDto dto) {
+		System.out.println("MemberController updatePaymentInfo");
+		System.out.println("MembersDto: " + dto.toString());
+		memberService.updatePaymentInfo(dto);
+		return memberService.updateLoggedInfo(dto.getMemberId());
+		
+	}
+	
+	/*****************************************************************/
 	
 	//테스트용
 	@RequestMapping(value = "/test1", method = {RequestMethod.GET})

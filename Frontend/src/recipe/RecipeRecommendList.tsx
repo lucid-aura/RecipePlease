@@ -2,7 +2,7 @@
 npm i react-native-swiper
 */
 
-import { useNavigation } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { Alert,  Image,  StyleSheet, Text, View } from "react-native";
@@ -29,6 +29,7 @@ export default function RecipeRecommendList( { category } :any) { // 굿즈 태�
     const [load, setLoad] = useState(false)
     const log = useSelector<AppState, L.State>((state) => state.login)
     const {loggedIn, loggedUser} = log
+    const isFocused = useIsFocused();
 
     const [recipeData, setRecipeData] = useState({
         "recipePrice":[],
@@ -42,36 +43,35 @@ export default function RecipeRecommendList( { category } :any) { // 굿즈 태�
 
     useFocusEffect(
         useCallback(() => {
-            console.log("screen mounted");
-                axios.get(config.address + "getRecommendRecipe?category=" + category)
-                .then((recipeRes) =>{
-                    setRecipeData(recipeRes.data)          
-                    console.log(recipeRes.data)        
-                    setLoad(true)
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
+            axios.get(config.address + "getRecommendRecipe?category=" + category)
+            .then((recipeRes) =>{
+                setRecipeData(recipeRes.data)               
+                setLoad(true)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
           return () => {
-            console.log("screen unmounted");
+
             return (<View></View>)
             // 포커스가 벗어날 때 처리 추가
           };
         }, []));
 
     useEffect( () => {
+
         const fetchRecipe = async() =>{
             const recipeRes =await axios.get(config.address + "getRecommendRecipe?category=" + category)
             setRecipeData(recipeRes.data)          
-            console.log(recipeRes.data)
+
             setLoad(true)
         }
-        fetchRecipe()
+        if (isFocused) {
+            fetchRecipe()
+        } 
     }, [])
 
     function checkRecipe(index:number){ // 특정 레시피 선택 시
-        console.log(recipeData.recipePrice[index])
-        
         navigation.navigate('RecipeDetail' as never,{
             seq: recipeData.recipeSeq[index], 
             category: 'recipe',
