@@ -47,13 +47,8 @@ public class MembersController {
 	@RequestMapping(value = "/regist", method = {RequestMethod.GET, RequestMethod.POST})
 	public MembersDto regist(MembersDto dto) {
 		System.out.println("MembersController regist()");
-		String salt = BCrypt.gensalt(10);	// 임의의 솔트값 생성
-		dto.setSalt(salt);	// 솔트값 Dto 에 담기
-		dto.setMemberPwd(BCrypt.hashpw(dto.getMemberPwd(), salt));	//솔트값과 비밀번호 합쳐서 암호화후 Dto에 담기
-		System.out.println("dto.getMember_pwd: " + dto.getMemberPwd() + " memberEmail: " + dto.getMemberEmail()  );
-		System.out.println("memberId: " + dto.getMemberId() + " " + "memberPwd: " + dto.getMemberPwd());
 		MembersDto result = memberService.regist(dto);
-		
+		System.out.println("result: " + result.toString());
 		return result;
 		
 	}

@@ -13,7 +13,19 @@ const loggedInReducer = (state = initialLoggedIn, action: T.Actions) => {
     return state
 }
 
-const initialLoggedUser: T.User = {memberId:'', memberNickname:''}
+const initialLoggedUser: T.User = {
+    memberId:'', 
+    memberNickname:'', 
+    memberEmail: '',
+    memberPhone: '',
+    memberCoin: 0,
+    memberMainAddr: '',
+    memberDetailAddr: '',
+    memberZipcode: 0,
+    memberName: '',
+    memberGender: '',
+    memberGrade: ''    
+}
 const loggedUserReducer = (state = initialLoggedUser, action: T.Actions) => {   // 과거의 상태(매개변수 state)에서 현재 가지고 있는 상태(state)를 유지해줌.
     switch(action.type) {
         case 'login':

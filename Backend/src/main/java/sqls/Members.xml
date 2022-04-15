@@ -28,6 +28,13 @@
 		WHERE MEMBERID = #{memberId} 
 	</select>
 	
+	<!-- id체크 후 Dto 반환 -->
+	<select id="idCheckGetSalt" parameterType="com.recipe.a.dto.MembersDto" resultType="String">
+		SELECT SALT
+		FROM MEMBERS
+		WHERE MEMBERID = #{memberId} 
+	</select>
+	
 	<!-- 회원가입 -->
 	<insert id="regist" parameterType="com.recipe.a.dto.MembersDto">
 		INSERT INTO MEMBERS(

@@ -1,9 +1,5 @@
 import { KakaoOAuthToken, KakaoProfile, login, logout, getProfile as getKakaoProfile, unlink } from "@react-native-seoul/kakao-login";
 import axios from "axios";
-import { Value } from "react-native-reanimated";
-import { useSelector } from "react-redux";
-import { AppState } from "../../store";
-import * as L from "../../store/login"
 import config from "../../project.config"
 
 // 로그인
