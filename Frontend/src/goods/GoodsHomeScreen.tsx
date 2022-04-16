@@ -22,14 +22,10 @@ export default function GoodsHomeScreen(){
 
         <ScrollView style={styles.viewcoler}> 
             {/* 상단 네비게이터 */}
-            <NavigationHeader title="만개의 레시피" viewStyle={{}}
+            <NavigationHeader title="레시피를 부탁해" viewStyle={{}}
+                target="goods"
                 Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
                 Right= {() => <Icon name="cart-heart" size={30} />}/>
-             
-             
-            
-             {/* 검색창 */}
-             <GoodsSearch />
 
 
              <View style={styles.categoryname}>

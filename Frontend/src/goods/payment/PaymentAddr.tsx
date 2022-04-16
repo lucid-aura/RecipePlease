@@ -66,6 +66,7 @@ export default function PaymentAddr({navigation}:any) {
                 
                 // 에러 발생시 
                 onError={(err) => {
+                    console.log(err)
                     throw new Error("Function not implemented.");
                 }}
             />
