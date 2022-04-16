@@ -28,6 +28,7 @@ export default function RecipeHomeScreen(){
     return(
         <SafeAreaView style={styles.container}>
             <NavigationHeader
+                target="recipe"
                 Left= {() => <Icon name="arrow-left-bold" size={40} onPress={goBack} />}
                 Right= {() => <Icon name="cart-heart" size={40} onPress={goShoppingCart} />} />
 
