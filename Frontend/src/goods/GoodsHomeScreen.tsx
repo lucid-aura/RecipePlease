@@ -314,7 +314,6 @@ export default function GoodsHomeScreen(){
                  foods={foods}
               />
              </View>  */}
-
              <Text>개인정보 처리방침</Text>
              <Button title="Pay로 이동" onPress={()=>navigation.navigate('paymentInfo')}></Button>
 
