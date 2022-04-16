@@ -9,6 +9,7 @@ import { NavigationHeader } from "../theme/NavigationHeader";
 import GoodsSearch from "./goodshome/GoodsSearch";
 import config from "../project.config";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import GoodsDetailRating from "./GoodsDetailRating";
 
 export default function GoodsDetail({route}:any){
     
@@ -23,7 +24,7 @@ export default function GoodsDetail({route}:any){
     const [goodsContent, setgoodsContent] =useState("");
     const [goodsCount, setgoodsCount] = useState(1);
     const [goodsPrice, setgoodsPrice] = useState(0);
-    const [goodsRating, setgoodRating] = useState(0.0);
+    const [goodsRating, setgoodsRating] = useState(0.0);
     const [goodsReadcount, setgoodsReadcount] = useState(0);
     const [goodsSeq, setgoodSeq] = useState(0);
     const [goodsView, setgoodsView] = useState(0);
@@ -45,7 +46,7 @@ export default function GoodsDetail({route}:any){
     useFocusEffect(
         useCallback( () => {
             const fetchGoods = async() =>{
-                const goodsData =await axios.post(config.address + "goodsData")
+                const goodsData =await axios.post(config.address + "goodsData?goodsSeq=" + seq)
                 setgoodsData(goodsData)
                 console.log(goodsData.data + "!!!!!!!!!")
                 setgoodsName(goodsData.data.goodsName)
@@ -53,13 +54,14 @@ export default function GoodsDetail({route}:any){
                 setgoodsContent(goodsData.data.goodsContent)
                 setgoodsCount(goodsData.data.goodsCount)
                 setgoodsPrice(goodsData.data.goodsPrice)
-                setgoodRating(goodsData.data.goodsRating)
+                setgoodsRating(goodsData.data.goodsRating)
                 setgoodsReadcount(goodsData.data.goodsReadcount)
                 setgoodSeq(goodsData.data.goodsSeq)
                 setgoodsView(goodsData.data.goodsView)
                 setprice(goodsData.data.goodsPrice)
                 setTitle(config.titleImageUri[goodsData.data.goodsSeq-1])
                 setContent(config.subImageUri[goodsData.data.goodsSeq-1])
+
             }
          fetchGoods()
     }, []));
@@ -103,13 +105,13 @@ export default function GoodsDetail({route}:any){
             {/* 상품/리뷰 탭 */}
             <View style={styles.tap}>
                  <TouchableHighlight activeOpacity={0.9} style={styles.subtap}
-                    onPress={() => navigation.navigate('goodsDetail', {"seq": 8})}>
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": seq})}>
                     <View>
                         <Text>삼품페이지 </Text>
                     </View>
                 </TouchableHighlight>
                 <TouchableHighlight activeOpacity={0.9} style={styles.subtap}
-                    onPress={() => navigation.navigate('goodsDetailRating', {"seq": 8})}>
+                    onPress={() => navigation.navigate('goodsDetailRating', {"seq":seq, "setAvarage":setgoodsRating, "avarage":goodsRating})}>
                     <View>
                         <Text>상품리뷰 </Text>
                     </View>
@@ -123,14 +125,14 @@ export default function GoodsDetail({route}:any){
 
     
             <View style={styles.viewStyle1}>
-                <Image source={config.titleImageUri[0]}
+                <Image source={config.titleImageUri[seq-1]}
                         style={styles.img1}></Image>
             </View>
             <View style={{paddingLeft:15,paddingRight:15,backgroundColor:"white"}}>
                 <View style={{flexDirection: 'row',}}>
                     <View style={styles.price}>
                         <View style={styles.pricetext1}>
-                            <Text style={styles.pricetext}>{goodsSeq}</Text>
+                            <Text style={styles.pricetext}>{goodsName}</Text>
                         </View>
                         <View style={styles.pricetext1}>
                             <Text style={styles.pricetext2}>{goodsPrice}원</Text>
@@ -142,7 +144,6 @@ export default function GoodsDetail({route}:any){
                     <View>
                         <View style={styles.order}>
                             <Text style={{fontSize:16,marginTop:11,}}>택배배송 | 3,000원(주문시 결제)</Text>
-                            <Text style={{fontSize:16,marginTop:5,}}>50,000원 이상 구매 시 무료 / 제주,도서지역 추가 5,000원 / 제주 및 도서산간 지역 추가배송비 발생합니다.</Text>
                         </View>
                         <View style={{height:60,width:"100%",borderWidth:1,borderColor:"#A6A6A6",backgroundColor:"#F0F0F0"}}>
                             <Text>상품 수량</Text>
@@ -172,15 +173,14 @@ export default function GoodsDetail({route}:any){
                     </View>
                     <View style={{marginTop:19}}>
                          {/* <Image source={imageUri[goodsSeq]} */}
-                         <Image source={require('../assets/goodsdetail/main/gt1.jpg')}
-                         
-                         style={{width:"auto",height:600}}></Image>
+                         <Image resizeMode="contain" source={config.subImageUri[seq-1]}
+                         style={{width:"auto"}}></Image>
                     </View>
             </View>
 
-                <View style={styles.pricedetail}>
-                    
-                </View>
+            {/* <View>
+                <GoodsDetailRating  />
+            </View> */}
             
            
            
@@ -224,9 +224,6 @@ const styles = StyleSheet.create({
         fontSize:24,
         fontWeight: "bold",
         marginLeft:5,
-    },
-    pricedetail:{
-        
     },
     img1:{
         width:600,

@@ -13,7 +13,9 @@ public interface GoodsDao {
 
 	public int countGoods();
 
-	public GoodsDto goodsData();
+	public GoodsDto goodsData(int goodsSeq);
 	
 	public List<GoodsDto> getGoodsByCategory(String category);
+
+	public int updateGoodsRating(int docsSeq);
 }

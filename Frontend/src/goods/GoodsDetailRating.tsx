@@ -1,21 +1,21 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { Alert, Image, SafeAreaView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from "react-native";
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Rating } from "react-native-ratings";
 import { Button, DataTable, TextInput } from 'react-native-paper';
-import config from "../../../project.config"
+import config from "../project.config"
 import { useSelector } from "react-redux";
-import { AppState } from "../../../store";
-import * as L from '../../../store/login'
+import { AppState } from "../store";
+import * as L from '../store/login'
 import { useNavigation } from "@react-navigation/native";
-import { NavigationHeader } from "../../../theme";
-import GoodsSearch from "../GoodsSearch";
+import { NavigationHeader } from "../theme";
+import GoodsSearch from "./goodshome/GoodsSearch";
 
 /*
 npm install react-native-table-component
 */
-export default function RecipeDetailRating( { seq, setAvarage, index, changeAvarage } :any) { // 평가 및 별점 부여 컴포넌트
+export default function GoodsDetailRating( { route } :any) { // 평가 및 별점 부여 컴포넌트
 
     const [point, setPoint] = useState(3) // 댓글 입력시 기본 3점 default 값
     const [rating, setRating] = useState([]) // 해당 레시피의 평가글들을 모아놓은 배열
@@ -27,12 +27,15 @@ export default function RecipeDetailRating( { seq, setAvarage, index, changeAvar
     const navigation = useNavigation()
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
 
+    const { seq } = route.params
+    const { setAvarage } = route.params
+
     function writeCommentReq(){ // 평가글 및 점수 입력 등록 했을 시
-        const response = axios.post(config.address + "writeComment", null , {
+        const response = axios.post(config.address + "writeGoodsComment", null , {
             params: {
                 memberId:loggedUser.memberId,
                 docsSeq:seq,
-                ratingCategory:'recipe',
+                ratingCategory:'goods',
                 ratingScore:point,
                 ratingComment:text,
             } 
@@ -45,8 +48,7 @@ export default function RecipeDetailRating( { seq, setAvarage, index, changeAvar
                 sum += item.ratingScore
             })
             let avg = (sum/res.data.length).toFixed(2)
-            setAvarage(parseFloat(avg)) // 여기있는 이  setter함수는 부모 컴포넌트(RecipeDetailScreen)에서 받아온 함수
-            changeAvarage(index, parseFloat(avg))
+            setAvarage(parseFloat(avg))
         }).catch(function(err){
             console.log(err)
         })
@@ -61,10 +63,11 @@ export default function RecipeDetailRating( { seq, setAvarage, index, changeAvar
     
     useEffect( () => { // 첫 진입 시 랜더링
         console.log("rating effect rerendering")
+        console.log("seq: " + seq)
         let completed = false;
         const fetchRating = async() =>{
             console.log("Rating 컴포넌트 " + seq)
-            const ratingRes =await axios.get(config.address + "getAllRatingsBySeq?docsSeq=" + seq )
+            const ratingRes =await axios.get(config.address + "getGoodsRatingsBySeq?docsSeq=" + seq )
             setRating(ratingRes.data)
         }
 
@@ -79,29 +82,29 @@ export default function RecipeDetailRating( { seq, setAvarage, index, changeAvar
   return (
     // 평가 보여주는 View
     <SafeAreaView style={styles.container}>
-        {/* 상단 네비게이터 */}
-        <NavigationHeader title="만개의 레시피"
-            Left={() => <Icon name="arrow-left-bold" size={30} onPress={goBack} />}
-            Right={() => <Icon name="cart-heart" size={30} />} />
+    {/* 상단 네비게이터 */}
+    <NavigationHeader title="만개의 레시피"
+        Left={() => <Icon name="arrow-left-bold" size={30} onPress={goBack} />}
+        Right={() => <Icon name="cart-heart" size={30} />} />
 
-            {/* 검색참 */}
-            <GoodsSearch />
+        {/* 검색참 */}
+        <GoodsSearch />
 
-            {/* 상품/리뷰 탭 */}
-            <View style={styles.tap}>
-                 <TouchableHighlight activeOpacity={0.9} style={styles.subtap}
-                    onPress={() => navigation.navigate('goodsDetail', {"seq": 8})}>
-                    <View>
-                        <Text>삼품페이지 </Text>
-                    </View>
-                </TouchableHighlight>
-                <TouchableHighlight activeOpacity={0.9} style={styles.subtap}
-                    onPress={() => navigation.navigate('goodsDetailRating', {"seq": 8})}>
-                    <View>
-                        <Text>상품리뷰 </Text>
-                    </View>
-                </TouchableHighlight>
-            </View>
+        {/* 상품/리뷰 탭 */}
+        <View style={styles.tap}>
+             <TouchableHighlight activeOpacity={0.9} style={styles.subtap}
+                onPress={() => navigation.navigate('goodsDetail', {"seq": 8})}>
+                <View>
+                    <Text>삼품페이지 </Text>
+                </View>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={0.9} style={styles.subtap}
+                onPress={() => navigation.navigate('goodsDetailRating', {"seq": 8})}>
+                <View>
+                    <Text>상품리뷰 </Text>
+                </View>
+            </TouchableHighlight>
+        </View>
         
         <DataTable>
             <DataTable.Header>
