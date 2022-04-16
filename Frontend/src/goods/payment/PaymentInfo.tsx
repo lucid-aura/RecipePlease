@@ -1,9 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { Alert, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import RNPickerSelect from 'react-native-picker-select';
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useSelector } from "react-redux";
+import { AppState } from "../../store";
+import * as L from '../store/login'
 
 // 다른 디바이스로 실행
 // devices list : xcrun simctl list devices
@@ -24,8 +27,8 @@ const addHyphenToPhoneNumber = (phoneNum:String) => {
     return collectNum;
 }
 
-export default function PaymentInfo({navigation}:any, props:any) {
-
+export default function PaymentInfo({route}:any) {
+    const navigation = useNavigation()
     // 결제관련 정보(상품 이미지, 상품명, 구매수량, 가격 추가 필요)
     const [userId, setUserId] = useState('');                         // 구매자 아이디
     const [buyerName, setBuyerName] = useState('');                   // 구매자 이름
@@ -35,55 +38,84 @@ export default function PaymentInfo({navigation}:any, props:any) {
     const [buyerTel, setBuyerTel] = useState('');                     // 전화번호
     const [buyerEmail, setBuyerEmail] = useState('');                 // 이메일
     const [pg, setPg] = useState('');                                 // 결제수단
-    const amount = 20000                                              // 상품가격
+    const [amount, setAmount] =useState(0)                      // 상품가격
     const [toPay, setToPay] = useState("결제 수단이 선택되지 않았습니다.");   // 결제수단 선택시 메시지
     const [category, setCategory] = useState('goods');       // 구매품목 카테고리(코인 or 굿즈)
 
+    const [goodsSeq, setGoodsSeq] = useState('');          
+    const [goodsName, setGoodsName] = useState('');          
+    const [count, setCount] =useState(0);          
+    const [goodsPrice, setGoodsPrice] = useState(0);          
     
+    const log = useSelector<AppState, L.State>((state) => state.login)
+    const {loggedIn, loggedUser} = log
+
+    const [cart, setCart] = useState([])
+    /*
+    goodsSeq:goodsSeq,
+    goodsName:goodsName,
+    goodsCount:goodsCount,
+    goodsPrice:goodsPrice
+    */
+
 
     // 주소 변경에서 가져온 값으로 화면상의 주소를 바꿔줌
     // 주소를 화면단으로 가져와 반영하여 새로고침 해주기 위해 useIsFocused, useEffect 사용
     const isFocused = useIsFocused();
     useEffect(() => {
-
-        // 로그인 시 db에서 가져온 회원정보를 바탕으로 기본 데이터 세팅
-        const getLoginData = async () => {
-            let loginData = await AsyncStorage.getItem("loginData");
-            try {
-                if (loginData !== null) {
-                    let data = JSON.parse(loginData);
-                    setUserId(data.memberId);
-                    setBuyerName(data.memberName);
-                    setBuyerPostcode(data.memberZipcode);
-                    setBuyerAddr(data.memberMainAddr);
-                    setBuyerAddrDetail(data.memberDetailAddr);
-                    setBuyerTel(data.memberPhone);
-                    setBuyerEmail(data.memberEmail);
-                }
-            } catch (err) {
-                console.log(err)
-            }
-        }
-    
-        getLoginData();
-
         // 새로운 주소 입력 시 주소만 변경
         const getNewAddr = async () => {
-            let addrData = await AsyncStorage.getItem('addrData');  // PaymentAddr 컴포넌트에서 가져온 주소 정보
-            try {
-                if (addrData !== null) {
-                    let data = JSON.parse(addrData);
-                    // console.log(`넘겨받는 데이터: ${addrData}`);
-                    setBuyerPostcode(data.zipcode);                 // 우편번호 set
-                    setBuyerAddr(data.roadAddr);                    // 도로명주소 set
+                console.log("2" + buyerAddr)
+                let addrData = await AsyncStorage.getItem('addrData');  // PaymentAddr 컴포넌트에서 가져온 주소 정보
+                try {
+                    if (addrData !== null) {
+                        let data = JSON.parse(addrData);
+                        // console.log(`넘겨받는 데이터: ${addrData}`);
+                        setBuyerPostcode(data.zipcode);                 // 우편번호 set
+                        setBuyerAddr(data.roadAddr);                    // 도로명주소 set
+                    }
+                } catch(err) {
+                    console.log(err);
                 }
-            } catch(err) {
-                console.log(err);
-            }
+                AsyncStorage.removeItem('addrData')
+            //}
+
         }
     
         getNewAddr();
 
+        // 로그인 시 db에서 가져온 회원정보를 바탕으로 기본 데이터 세팅
+        const getLoginData = () => {
+            setUserId(loggedUser.memberId);
+            setBuyerName(loggedUser.memberName);
+            setBuyerPostcode(loggedUser.memberZipcode);
+            console.log("1" + buyerAddr)
+            if (buyerAddr == ""){
+                setBuyerAddr(loggedUser.memberMainAddr);
+                setBuyerAddrDetail(loggedUser.memberDetailAddr);
+            }
+            setBuyerTel(loggedUser.memberPhone);
+            setBuyerEmail(loggedUser.memberEmail);
+        }
+        getLoginData()
+
+        // 제품 정보 가져옴
+        const getGoodsData = async () => {
+            let goodsData = await AsyncStorage.getItem('goodsData');  // PaymentAddr 컴포넌트에서 가져온 주소 정보
+            try {
+                if (goodsData !== null) {
+                    let datas = JSON.parse(goodsData);
+                    setCart(datas)
+                    setAmount((datas.reduce(function (sum, data) {
+                        return sum + parseInt(data.goodsPrice)*parseInt(data.count);
+                    }, 0)));
+                    AsyncStorage.removeItem('goodsData')
+                }
+            } catch(err) {
+                console.log(err);
+            }
+        }       
+        getGoodsData()
     }, [isFocused]);
 
 
@@ -102,12 +134,14 @@ export default function PaymentInfo({navigation}:any, props:any) {
                         {/* 주문정보(주문 상품 확인), 임의로 기입되었으므로 향후 보완 필요 */}
                         <View>
                             <Text style={styles.subTitle}>주문 정보</Text>
-                            <View style={styles.buyContainer}>
-                                <Text>IMG</Text>
-                                <Text>카카오 도마 칼세트</Text>
-                                <Text>1개</Text>
-                                <Text>{amount}원</Text>
-                            </View>
+                            {cart.map((goods:{goodsName:string, goodsPrice:string, count:string}, index) :any=> (
+                                <View key={index} style={styles.buyContainer}>
+                                    <Text>{goods.goodsName}</Text>
+                                    <Text>{goods.count}</Text>
+                                    <Text>{parseInt(goods.goodsPrice)*parseInt(goods.count)}원</Text>
+                                </View>
+                            ))}
+
                         </View>
 
                         <View>
@@ -142,6 +176,7 @@ export default function PaymentInfo({navigation}:any, props:any) {
                                                         top: 7
                                                     }}
                                                     onPress={() => {
+                                                        //setBuyerAddr("")
                                                         navigation.navigate('paymentAddr');
                                                     }}
                                                 >

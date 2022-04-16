@@ -99,10 +99,10 @@ const styles = StyleSheet.create({
         
         alignItems: 'center',
         justifyContent:'center',
-        backgroundColor:"white"
+        backgroundColor:"#eeeeee"
     },
     inputback:{
-        backgroundColor:"white"
+        backgroundColor:"#eeeeee"
     },
     inputContainer: {
         height: 45,

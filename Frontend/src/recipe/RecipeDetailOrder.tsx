@@ -16,7 +16,7 @@ export default function RecipeDetailOrder({seq, category}:any) {
             const photoRes = await axios.get(config.address + "getPhoto?docsSeq=" + seq +"&photoCategory=" + category)
             if (!completed) {
 
-                //console.log(photoRes.data)
+                console.log(photoRes.data)
 
                 setCookorder(photoRes.data.filter((element: { photoTitle: string; }) => {
                     return element.photoTitle == 'cookOrder'

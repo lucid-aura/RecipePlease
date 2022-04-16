@@ -295,7 +295,12 @@ export default function RecipeUpdate({route}:any) {
                     console.log(err)
                 })
             }
-        }        
+        }
+        navigation.navigate('RecipeDetail' as never,{
+            seq: recipeSeq,
+            category: 'recipe',
+        } as never)
+
     }
 
     const values = [
