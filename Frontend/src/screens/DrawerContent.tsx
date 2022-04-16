@@ -12,6 +12,7 @@ import * as D from "../store/drawer"
 import DrawerSettingLogout from "../mypage/component/DrawerSettingLogout";
 import DrawerSettingLogin from "../mypage/component/DrawerSettingLogIn";
 import DrawerCart from "../mypage/component/DrawerCart";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const DrawerContent: FC<DrawerContentComponentProps> = (props) => {
@@ -22,10 +23,24 @@ const DrawerContent: FC<DrawerContentComponentProps> = (props) => {
     const {drawerChange} = change   // true면 setting, false면 shopping cart
     console.log("DrawerContent: " + drawerChange + " loggedIn: " + loggedIn)
     
+    const getCartData = async() => {
+        let cartData = await AsyncStorage.getItem('cartData');
+        let cart=""
+        if (cartData !== null) {
+            console.log("1 " + JSON.parse(cartData as never))
+            console.log("2 " + cartData as never)
+            cart = JSON.stringify(JSON.parse(cartData as never))
+        }
+        return cart
+    }
+
     if(!drawerChange) {
+        let cart = getCartData()
+        
+        
         return(
             <SafeAreaView style={{ flex:1, alignItems: 'center',  justifyContent:'center'}}>
-                <DrawerCart />
+                <DrawerCart cartData={cart}/>
             </SafeAreaView>
         )
     } else {

@@ -69,7 +69,7 @@ export default function GoodsDetail({route}:any){
     const onIncrease = () => {setCount(count + 1); setprice(goodsPrice*(count + 1))};
     const onDecrease = () => {setCount(count - 1); setprice(goodsPrice*(count - 1))};
     const addCart = async () => {
-        console.log("clock")
+        console.log("click")
         let cartData = await AsyncStorage.getItem('cartData'); 
         try {
             let cart = []
@@ -83,6 +83,7 @@ export default function GoodsDetail({route}:any){
                 goodsPrice:goodsPrice
             }
             cart.push(item)
+            console.log("a " + JSON.stringify(cart))
             await AsyncStorage.setItem('cartData', JSON.stringify(cart));
             Alert.alert("장바구니에 추가되었습니다.")
 
