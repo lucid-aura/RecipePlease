@@ -9,9 +9,22 @@
 	SELECT COUNT(*) FROM GOODS
 </select>
 
-<select id="goodsData" resultType="com.recipe.a.dto.GoodsDto">
-	SELECT * FROM GOODS WHERE GOODSPRICE = 70000
+<select id="goodsData" parameterType="Integer" resultType="com.recipe.a.dto.GoodsDto">
+	SELECT * FROM GOODS WHERE GOODSSEQ=#{goodsSeq}
 </select>
+
+<update id="updateGoodsRating" parameterType="Integer">
+	UPDATE GOODS
+	SET GOODSRATING=(
+	    SELECT ROUND(AVG(RATINGSCORE), 2)
+	    FROM RATING
+	    WHERE RATINGCATEGORY='GOODS'
+	    GROUP BY DOCSSEQ
+	    HAVING DOCSSEQ=#{docsSeq} 
+		
+	    )
+	WHERE GOODSSEQ=#{docsSeq}
+</update>
 
 <select id="getGoodsByCategory" parameterType="String" resultType="com.recipe.a.dto.GoodsDto">
 	SELECT * FROM GOODS 

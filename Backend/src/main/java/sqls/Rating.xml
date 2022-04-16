@@ -10,7 +10,11 @@
 </select>
 
 <select id="getAllRatingsBySeq" parameterType="Integer" resultType="com.recipe.a.dto.RatingDto">
-	SELECT * FROM RATING WHERE DOCSSEQ=#{docsSeq}
+	SELECT * FROM RATING WHERE DOCSSEQ=#{docsSeq} AND RATINGCATEGORY='recipe'
+</select>
+
+<select id="getGoodsRatingsBySeq" parameterType="Integer" resultType="com.recipe.a.dto.RatingDto">
+	SELECT * FROM RATING WHERE DOCSSEQ=#{docsSeq} AND RATINGCATEGORY='goods'
 </select>
 
 <insert id="writeComment" parameterType="com.recipe.a.dto.RatingDto">

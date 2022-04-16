@@ -12,7 +12,7 @@ import GoodsItem from '../goods/goodshome/manycategory/GoodsItem';
 import GoodsKitchenTools from '../goods/goodshome/manycategory/GoodsKitchenTools';
 import GoodsOtherTools from '../goods/goodshome/manycategory/GoodsOtherTools';
 import GoodsTableware from '../goods/goodshome/manycategory/GoodsTableware';
-import GoodsDetailRating from '../goods/goodshome/manygoods/GoodsDetailRating';
+import GoodsDetailRating from '../goods/GoodsDetailRating';
 import GoodsHomeScreen from '../goods/GoodsHomeScreen';
 import GoodsSpoonList from '../goods/GoodsSpoonList';
 import Payment from '../goods/payment/Payment';
