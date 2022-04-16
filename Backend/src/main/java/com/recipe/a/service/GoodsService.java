@@ -8,6 +8,7 @@ import com.recipe.a.dao.GoodsDao;
 import com.recipe.a.dao.MembersDao;
 import com.recipe.a.dao.PhotoDao;
 import com.recipe.a.dao.RatingDao;
+import com.recipe.a.dto.GoodsDto;
 
 @Service
 @Transactional
@@ -25,5 +26,11 @@ public class GoodsService {
 	public int countGoods() {
 		System.out.println("GoodsService");
 		return goodsDao.countGoods();
+	}
+
+	public GoodsDto goodsData() {
+		return goodsDao.goodsData();
+		// TODO Auto-generated method stub
+		
 	}
 }
