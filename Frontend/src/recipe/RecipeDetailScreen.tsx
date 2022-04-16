@@ -225,6 +225,7 @@ export default function RecipeDetailScreen({ route }:any){
         <SafeAreaView style={styles.container}>
             <View>
             <NavigationHeader title="홈" 
+                target="recipe"
                 Left= {() => <Icon name="arrow-left-bold" size={40} onPress={goBack} />}
                 Right= {() => <Icon name="cart-heart" size={40} onPress={goShoppingCart} />} />
 

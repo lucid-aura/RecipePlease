@@ -1,13 +1,14 @@
-import {  useNavigation, } from "@react-navigation/native";
+import {  useFocusEffect, useNavigation, } from "@react-navigation/native";
 import axios from "axios";
 import React, { useCallback,useEffect,useState } from "react";
-import {  BackHandler, Button, Image, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
+import {  Alert, BackHandler, Button, Image, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
 import { white } from "react-native-paper/lib/typescript/styles/colors";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import COLORS from "../consts/colors";
 import { NavigationHeader } from "../theme/NavigationHeader";
 import GoodsSearch from "./goodshome/GoodsSearch";
 import config from "../project.config";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 
@@ -23,36 +24,72 @@ export default function GoodsDetail({route}:any){
     const [goodsName,setgoodsName] = useState("");
     const [goodsCategory, setgoodsCategory] = useState("");
     const [goodsContent, setgoodsContent] =useState("");
-    const [goodsCount, setgoodsCount] = useState(0);
+    const [goodsCount, setgoodsCount] = useState(1);
     const [goodsPrice, setgoodsPrice] = useState(0);
     const [goodsRating, setgoodRating] = useState(0.0);
     const [goodsReadcount, setgoodsReadcount] = useState(0);
     const [goodsSeq, setgoodSeq] = useState(0);
     const [goodsView, setgoodsView] = useState(0);
+    const [goodsData, setgoodsData] = useState({});
 
-    useEffect( () => {
+    function goPayment() {
+        AsyncStorage.setItem('goodsData', JSON.stringify([{
+            /*썸네일사진*/
+            
+            goodsSeq:goodsSeq,
+            goodsName:goodsName,
+            count:count,
+            goodsPrice:goodsPrice
+        }]));
+        navigation.navigate('paymentInfo' as never) 
+    }
 
-        const fetchGoods = async() =>{
-            const goodsData =await axios.post(config.address + "goodsData")
-            console.log(goodsData.data)
-            setgoodsName(goodsData.data.goodsName)
-            setgoodsCategory(goodsData.data.goodsCategory)
-            setgoodsContent(goodsData.data.goodsContent)
-            setgoodsCount(goodsData.data.goodsCount)
-            setgoodsPrice(goodsData.data.goodsPrice)
-            setgoodRating(goodsData.data.goodsRating)
-            setgoodsReadcount(goodsData.data.goodsReadcount)
-            setgoodSeq(goodsData.data.goodsSeq)
-            setgoodsView(goodsData.data.goodsView)
-            setprice(goodsData.data.goodsPrice)
+    useFocusEffect(
+        useCallback( () => {
+            const fetchGoods = async() =>{
+                const goodsData =await axios.post(config.address + "goodsData")
+                setgoodsData(goodsData)
+                console.log(goodsData.data)
+                setgoodsName(goodsData.data.goodsName)
+                setgoodsCategory(goodsData.data.goodsCategory)
+                setgoodsContent(goodsData.data.goodsContent)
+                setgoodsCount(goodsData.data.goodsCount)
+                setgoodsPrice(goodsData.data.goodsPrice)
+                setgoodRating(goodsData.data.goodsRating)
+                setgoodsReadcount(goodsData.data.goodsReadcount)
+                setgoodSeq(goodsData.data.goodsSeq)
+                setgoodsView(goodsData.data.goodsView)
+                setprice(goodsData.data.goodsPrice)
 
-        }
+            }
          fetchGoods()
-    }, [])
+    }, []));
 
 
     const onIncrease = () => {setCount(count + 1); setprice(goodsPrice*(count + 1))};
     const onDecrease = () => {setCount(count - 1); setprice(goodsPrice*(count - 1))};
+    const addCart = async () => {
+        console.log("clock")
+        let cartData = await AsyncStorage.getItem('cartData'); 
+        try {
+            let cart = []
+            if (cartData !== null) {
+                cart = JSON.parse(cartData);
+            }
+            let item = {
+                /*이미지*/
+                goodsName:goodsName,
+                count:count,
+                goodsPrice:goodsPrice
+            }
+            cart.push(item)
+            await AsyncStorage.setItem('cartData', JSON.stringify(cart));
+            Alert.alert("장바구니에 추가되었습니다.")
+
+        } catch(err) {
+            console.log(err);
+        }
+    }
     return(
         <ScrollView>
             {/* 상단 네비게이터 */}
@@ -126,10 +163,10 @@ export default function GoodsDetail({route}:any){
                         </View>
                         <View style={{flexDirection: 'row',justifyContent:"space-between",marginTop:15}}>
                             <View style={{width:"48.5%"}}>
-                                <Button disabled color={"pink"} title="장바구니" ></Button>
+                                <Button color={"pink"} title="장바구니" onPress={addCart}></Button>
                             </View>
                             <View style={{width:"48.5%",}}>
-                                <Button title="구매하기" onPress={()=>navigation.navigate('paymentInfo')}></Button>
+                                <Button title="구매하기" onPress={goPayment}></Button>
                             </View>
                         </View>
                     </View>
