@@ -16,7 +16,6 @@ import com.recipe.a.dto.MembersDto;
 @Repository
 public interface MembersDao {
 
-	public int countMembers();
 	
 	// 아이디 체크
 	public int idCheck(MembersDto dto);
