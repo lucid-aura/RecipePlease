@@ -12,8 +12,7 @@ import { address } from "../../project.config";
 
 const MyInfoItem = ({loggedUser}:any) => {
 
-    //console.log(`MyInfoItem ${loggedUser}`)
-    const [modalVisible, setModalVisible] = useState<boolean>(false)
+    const [modalVisible, setModalVisible] = useState(false)
     const [title, setTitle] = useState("")
     const [updateUrl, setUpdateUrl] = useState("")
     const [updateInfo, setUpdateInfo] = useState("")
@@ -58,85 +57,86 @@ const MyInfoItem = ({loggedUser}:any) => {
 
     return (
         <SafeAreaView style={[styles.container]}>
-             
-            <View style={[styles.topBar]}> 
-                <NavigationHeader title="내 정보" 
-                    Left= {() => <Icon name="text-account" size={30} onPress={goSetting} />}
-                    Right= {() => <Icon name="cart-heart" size={30} onPress={goShoppingCart} />} 
-                />
-            </View>
-            <View style={[styles.contentView]}>
-                <Text style={{fontSize:23}}>아이디: {loggedUser.memberId}</Text>
-            </View>
-            <View style={[styles.contentView]}>
-                <Text style={{fontSize:23}}>닉네임: {loggedUser.memberNickname}</Text>
-                <Pressable 
-                    style={[styles.pressAble]} 
-                    onPress={() => {
-                        setTitle("닉네임")
-                        setUpdateUrl("updateNickname")
-                        setUpdateInfo("memberNickname")
-                        setUpdateValue(loggedUser.memberNickname)
-                        setModalVisible(!modalVisible)}
-                    }>
-                    <Text>수정하기</Text>
-                </Pressable>
-            </View>
-            <View style={[styles.contentView]}>
-                <Text style={{fontSize:23}}>이름: {loggedUser.memberName}</Text>
-            </View>
-            <View style={[styles.contentView]}>
-                <Text style={{fontSize:23}}>성별: {loggedUser.memberGender}</Text>
-            </View>
-            <View style={[styles.contentView]}>
-                <Text style={{fontSize:23}}>회원등급: {loggedUser.memberGrade}</Text>
-            </View>
-            <View style={[styles.contentView]}>
-                <Text style={{fontSize:23}}>이메일: {loggedUser.memberEmail}</Text>
-                <Pressable 
-                    style={[styles.pressAble]} 
-                    onPress={() => {
-                        setTitle("이메일")
-                        setUpdateUrl("updateEmail")
-                        setUpdateInfo("memberEmail")
-                        setUpdateValue(loggedUser.memberEmail)
-                        setModalVisible(!modalVisible)}
-                    }>
-                    <Text>수정하기</Text>
-                </Pressable>
-            </View>
-            <View style={[styles.contentView]}>
-                <Text style={{fontSize:23}}>전화번호: {loggedUser.memberPhone}</Text>
-                <Pressable 
-                    style={[styles.pressAble]} 
-                    onPress={() => {
-                        setTitle("전화번호")
-                        setUpdateUrl("updatePhone")
-                        setUpdateInfo("memberPhone")
-                        setUpdateValue(loggedUser.memberPhone)
-                        setModalVisible(!modalVisible)}
-                    }>
-                    <Text>수정하기</Text>
-                </Pressable>
-            </View>
-            <View style={[styles.contentView]}>
-                <Text style={{fontSize:23}}>코인: {loggedUser.memberCoin}</Text>
-            </View>
-            <View style={[styles.contentView]}>
-                <Text style={{fontSize:23}}>주소: {loggedUser.memberMainAddr + loggedUser.memberDetailAddr}</Text>
-                <Pressable 
-                    style={[styles.pressAble]} 
-                    onPress={() => {
-                        navigation.navigate("MyInfoAddr")
-                    }}>
-                    <Text>수정하기</Text>
-                </Pressable>
+            <View style={[styles.viewContainer]}>
+                <View style={[styles.topBar]}> 
+                    <NavigationHeader title="내 정보" 
+                        Left= {() => <Icon name="text-account" size={30} onPress={goSetting} />}
+                        Right= {() => <Icon name="cart-heart" size={30} onPress={goShoppingCart} />} 
+                    />
+                </View>
+                <View style={[styles.contentView]}>
+                    <Text style={{fontSize:23}}>아이디: {loggedUser.memberId}</Text>
+                </View>
+                <View style={[styles.contentView]}>
+                    <Text style={{fontSize:23}}>닉네임: {loggedUser.memberNickname}</Text>
+                    <Pressable 
+                        style={[styles.pressAble]} 
+                        onPress={() => {
+                            setTitle("닉네임")
+                            setUpdateUrl("updateNickname")
+                            setUpdateInfo("memberNickname")
+                            setUpdateValue(loggedUser.memberNickname)
+                            setModalVisible(!modalVisible)}
+                        }>
+                        <Text>수정하기</Text>
+                    </Pressable>
+                </View>
+                <View style={[styles.contentView]}>
+                    <Text style={{fontSize:23}}>이름: {loggedUser.memberName}</Text>
+                </View>
+                <View style={[styles.contentView]}>
+                    <Text style={{fontSize:23}}>성별: {loggedUser.memberGender}</Text>
+                </View>
+                <View style={[styles.contentView]}>
+                    <Text style={{fontSize:23}}>회원등급: {loggedUser.memberGrade}</Text>
+                </View>
+                <View style={[styles.contentView]}>
+                    <Text style={{fontSize:23}}>이메일: {loggedUser.memberEmail}</Text>
+                    <Pressable 
+                        style={[styles.pressAble]} 
+                        onPress={() => {
+                            setTitle("이메일")
+                            setUpdateUrl("updateEmail")
+                            setUpdateInfo("memberEmail")
+                            setUpdateValue(loggedUser.memberEmail)
+                            setModalVisible(!modalVisible)}
+                        }>
+                        <Text>수정하기</Text>
+                    </Pressable>
+                </View>
+                <View style={[styles.contentView]}>
+                    <Text style={{fontSize:23}}>전화번호: {loggedUser.memberPhone}</Text>
+                    <Pressable 
+                        style={[styles.pressAble]} 
+                        onPress={() => {
+                            setTitle("전화번호")
+                            setUpdateUrl("updatePhone")
+                            setUpdateInfo("memberPhone")
+                            setUpdateValue(loggedUser.memberPhone)
+                            setModalVisible(!modalVisible)}
+                        }>
+                        <Text>수정하기</Text>
+                    </Pressable>
+                </View>
+                <View style={[styles.contentView]}>
+                    <Text style={{fontSize:23}}>코인: {loggedUser.memberCoin}</Text>
+                </View>
+                <View style={[styles.contentView]}>
+                    <Text style={{fontSize:23}}>주소: {loggedUser.memberMainAddr + loggedUser.memberDetailAddr}</Text>
+                    <Pressable 
+                        style={[styles.pressAble]} 
+                        onPress={() => {
+                            navigation.navigate("MyInfoAddr")
+                        }}>
+                        <Text>수정하기</Text>
+                    </Pressable>
+                </View>
             </View>
             
             <Modal
-                style={{justifyContent:'center', alignItems:'center'}}
+                style={{flex:1, justifyContent:'center', alignItems:'center'}}
                 animationType="slide"
-                transparent={true}
+                //transparent={true}
                 visible={modalVisible}
                 onRequestClose={() => {
                     Alert.alert("Modal has been closed")
@@ -144,14 +144,15 @@ const MyInfoItem = ({loggedUser}:any) => {
                 }}
             >
                 <View style={[styles.modalView]}>
-                    <View style={[{borderWidth:1}]}>
-                        <Text>{title} 수정하기</Text>
+                    <View style={[{borderWidth:1, width:"80%"}]}>
+                        <Text style={{justifyContent:"center", alignSelf:'center', fontSize:15, marginBottom:5}}>{title} 수정하기</Text>
                         <TextInput 
+                            style={{borderWidth:0.3, width:"50%"}}
                             value={updateValue}
                             placeholderTextColor='#003f5c'
                             onChangeText={(text) => setUpdateValue(text)}
                         />
-                        <View style={{flexDirection:'row', justifyContent:"flex-end"}}>
+                        <View style={{flexDirection:'row', justifyContent:"flex-end", }}>
                             <Pressable style={{ marginRight:10}} onPress={() => setModalVisible(!modalVisible)}>
                                 <Text>취소</Text>
                             </Pressable>
@@ -180,6 +181,9 @@ const styles = StyleSheet.create({
         flex:1,
         //backgroundColor: 'rgba(52,52,52, 0.5)'
     },
+    viewContainer: {
+        flex:1
+    },
     topBar: {
         borderWidth: 0.5,
     },
@@ -203,6 +207,6 @@ const styles = StyleSheet.create({
         alignItems:'center',
         borderwidth:1,
         borderColor:Colors.amber700
-
     },
+
 })

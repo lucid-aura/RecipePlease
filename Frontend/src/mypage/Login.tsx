@@ -17,7 +17,6 @@ import { loggedUserkey } from "../store/login";
 
 export default function Login() {
     const navigation = useNavigation()
-    const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
     
     // 로그인 훅
     // 카카오 아이디
@@ -34,7 +33,6 @@ export default function Login() {
         GoogleSignin.configure()
         console.log(`GoogleSignin.configure(): ${GoogleSignin.configure()}`)
     })
-    let userInfo:string[]
 
     const goShoppingCart = useCallback(() => {
         dispatch(D.drawerChangeFalseAction())
@@ -115,7 +113,7 @@ export default function Login() {
     const signInWithKakao = useCallback(async (): Promise<void> => {    //카카오 로그인
         const token: KakaoOAuthToken = await login();
         console.log("token: " + JSON.stringify(token))
-        userInfo= (await getProfile()).split(" ")
+        const userInfo= (await getProfile()).split(" ")
         console.log("userInfo: " + userInfo)
         
         axios.post(config.address + "regist", null, 
