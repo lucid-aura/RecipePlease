@@ -14,4 +14,6 @@ public interface GoodsDao {
 	public int countGoods();
 
 	public GoodsDto goodsData();
+	
+	public List<GoodsDto> getGoodsByCategory(String category);
 }
