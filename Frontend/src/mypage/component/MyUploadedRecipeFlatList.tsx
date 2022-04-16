@@ -5,6 +5,7 @@ import { Colors } from "react-native-paper";
 import { Rating } from "react-native-ratings";
 import { MyUploadedRecipeProps } from "../data/MyUploadedRecipeProps";
 import { useNavigation } from "@react-navigation/native";
+import config from '../../project.config'
 
 export type MyUploadedRecipeDatas = {
     datas:MyUploadedRecipeProps
@@ -33,7 +34,7 @@ const MyUploadedRecipeFlatList:FC<MyUploadedRecipeDatas> = ({datas: initialDatas
         
         <Pressable style={[styles.container]} onPress={goRecipeDetail} >
             <View style={[styles.leftView]}>
-                <Image style={{width:190, height:160}} source={require("./foodPicture.jpg")} />
+                <Image style={{width:190, height:160}} source={{uri: config.photo + myRecipe.recipeThumbnail}} />
             </View>
             <View style={[styles.rightView]}>
                 <Text 

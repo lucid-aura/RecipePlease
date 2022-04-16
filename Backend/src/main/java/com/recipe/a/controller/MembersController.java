@@ -35,14 +35,6 @@ public class MembersController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@RequestMapping(value = "/countMembers", method = {RequestMethod.GET, RequestMethod.POST})
-	public String countMembers() {
-		System.out.println("MembersController countMembers()");
-		int res = memberService.countMembers();
-		System.out.println(res);
-		return "개수는: " + res;
-	}
-	
 	//회원가입 - 노승현
 	@RequestMapping(value = "/regist", method = {RequestMethod.GET, RequestMethod.POST})
 	public MembersDto regist(MembersDto dto) {

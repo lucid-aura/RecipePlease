@@ -43,11 +43,6 @@ public class MembersService {
 		this.dao = dao;
 	}
 
-	public int countMembers() {
-		System.out.println("MembersService");
-		return dao.countMembers();
-	}
-	
 	// 아이디 중복
 	public boolean idCheck(MembersDto dto) {
 		int n = dao.idCheck(dto);

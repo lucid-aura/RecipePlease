@@ -4,6 +4,7 @@ import { MyFavoriteRecipeProps } from "../data";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { Colors } from "react-native-paper";
 import { Rating } from "react-native-ratings";
+import config from '../../project.config'
 
 export type MyFavoriteRecipeDatas = {
     datas:MyFavoriteRecipeProps
@@ -11,12 +12,13 @@ export type MyFavoriteRecipeDatas = {
 
 const MyFavoriteFlatlist:FC<MyFavoriteRecipeDatas> = ({datas: initialDatas}) => {
     const [myRecipe, setMyRecipe] = useState<MyFavoriteRecipeProps>(initialDatas)
-    
+
     return (
         
         <View style={[styles.container]}>
             <View style={[styles.leftView]}>
-                <Image style={{width:190, height:160}} source={require("./foodPicture.jpg")} />
+                <Image style={{width:190, height:160}} source={{uri: config.photo + myRecipe.thumbnailList}}
+ />
             </View>
             <View style={[styles.rightView]}>
                 <Text 
