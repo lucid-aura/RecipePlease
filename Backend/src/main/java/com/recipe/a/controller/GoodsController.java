@@ -25,4 +25,6 @@ public class GoodsController {
 		System.out.println("GoodsController goodsData()");
 		return goodsService.goodsData();
 	}
+
+	
 }
