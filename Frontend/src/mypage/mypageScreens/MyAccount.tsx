@@ -143,7 +143,7 @@ export default function MyAccount() {
                             <View>
                                 <Text style={{fontSize:17}}>{msg}</Text>
                             </View>
-                            <Pressable style={{borderWidth:0.3, padding:5}} onPress={() => idCheck()}>
+                            <Pressable style={{borderWidth:1, padding:5}} onPress={() => idCheck()}>
                                 <Text>Id 중복 확인</Text>
                             </Pressable>
                         </View>
@@ -221,7 +221,7 @@ const styles = StyleSheet.create ({
         justifyContent: 'center'
     },
     topBar: {
-        borderWidth: 0.5,
+        borderWidth: 1,
         borderRadius:1
     },
     contentView: {
@@ -247,11 +247,11 @@ const styles = StyleSheet.create ({
         backgroundColor: Colors.amber300,
         justifyContent: "center",
         alignItems: "center",
-        borderWidth:0.3,
+        borderWidth:1,
         marginTop:10
     },
     textInput: {
-        borderWidth: 0.3,
+        borderWidth: 1,
         width: '70%',
         margin:10
 
