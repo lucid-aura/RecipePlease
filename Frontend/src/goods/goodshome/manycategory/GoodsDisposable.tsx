@@ -9,13 +9,13 @@ import GoodsSearch from "../GoodsSearch";
 
 
 
-export default function GoodsBestAll({route}:any){
+export default function GoodsDisposable({route}:any){
     
  
     const navigation = useNavigation()
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
     const { seq } = route.params;
-    
+    const deliveryCharge = "3000원"
     
     return(
         <ScrollView style={styles.viewcoler}>
@@ -99,46 +99,53 @@ export default function GoodsBestAll({route}:any){
             </View>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
+                        <Image source={require('../../../assets/goodsdetail/main/ly1.jpg')}
+                            style={styles.imgicon}></Image>
+                    </View>
+                    <View style={{marginLeft:10,}}>
+                        <Text>상품명다용도 일회용 포장용기(믿음인터내셔널)</Text>
+                        <Text style={{}}>25000원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-                <View style={{marginLeft:10,}}>
-                    <Text>ddddddddddddddddddddd</Text>
-                    <Text style={{}}>49,900원</Text>
-                    <Text style={{}}>배송비</Text>
-                    <View></View>
+                <View style={styles.icon}>
+                    <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+                        <Image source={require('../../../assets/goodsdetail/main/ly2.jpg')}
+                            style={styles.imgicon}></Image>
+                    </View>
+                    <View style={{marginLeft:10,}}>
+                        <Text>크린랲상품명 크린랩 지퍼백 고무장갑 크린백 위생장갑 호일 롤백</Text>
+                        <Text style={{}}>4000원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
+                <View style={styles.icon}>
+                    <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+                        <Image source={require('../../../assets/goodsdetail/main/ly3.jpg')}
+                            style={styles.imgicon}></Image>
+                    </View>
+                    <View style={{marginLeft:10,}}>
+                        <Text>에콜그린상품명 못난이 개별포장 요쿠르트빨대 35개입 특가판매 국산</Text>
+                        <Text style={{}}>1000원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-                <Text></Text>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
+                <View style={styles.icon}>
+                    <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+                        <Image source={require('../../../assets/goodsdetail/main/ly4.jpg')} 
+                            style={styles.imgicon}></Image>
+                    </View>
+
+                    <View style={{marginLeft:10,}}>
+                        <Text>상품명750cc 기본종이용기 1박스 1000개</Text>
+                        <Text style={{}}>73000원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-                <Text></Text>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
-                </View>
-                <Text></Text>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
-                </View>
-                <View style={{width:10, height:10, backgroundColor: "black",}}>
-                    <Text>ddddddddddddddddddddd</Text>
-                </View>
-            </View>
         </ScrollView>
         )
 

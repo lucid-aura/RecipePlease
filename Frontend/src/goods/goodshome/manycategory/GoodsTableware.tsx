@@ -9,13 +9,12 @@ import GoodsSearch from "../GoodsSearch";
 
 
 
-export default function GoodsBestAll({route}:any){
+export default function GoodsTableware({route}:any){
     
- 
     const navigation = useNavigation()
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
     const { seq } = route.params;
-    
+    const deliveryCharge = "3000원"
     
     return(
         <ScrollView style={styles.viewcoler}>
@@ -98,45 +97,51 @@ export default function GoodsBestAll({route}:any){
                 <Text style={{fontSize:10}}>239개의 검색결과</Text>
             </View>
             <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
+            <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+                     <Image source={require('../../../assets/goodsdetail/main/sk1.jpg')}
                         style={styles.imgicon}></Image>
                 </View>
                 <View style={{marginLeft:10,}}>
-                    <Text>ddddddddddddddddddddd</Text>
-                    <Text style={{}}>49,900원</Text>
-                    <Text style={{}}>배송비</Text>
+                    <Text>상품명듀헨 2인조 홈세트 11p</Text>
+                    <Text style={{}}>45900원</Text>
+                    <Text style={{}}>{deliveryCharge}</Text>
                     <View></View>
                 </View>
             </View>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
+                     <Image source={require('../../../assets/goodsdetail/main/sk2.jpg')}
                         style={styles.imgicon}></Image>
                 </View>
-                <Text></Text>
+                <View style={{marginLeft:10,}}>
+                    <Text>상품명스텐/이중/진공/식기/면기/그릇/컵/물컵/세트/주방용</Text>
+                    <Text style={{}}>3600원</Text>
+                    <Text style={{}}>{deliveryCharge}</Text>
+                    <View></View>
+                </View>
             </View>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
+                     <Image source={require('../../../assets/goodsdetail/main/sk3.jpg')}
                         style={styles.imgicon}></Image>
                 </View>
-                <Text></Text>
+                <View style={{marginLeft:10,}}>
+                    <Text>상품명꼼플 심플 도자기식기 스페인하숙 옳음 4인 26P홈세트</Text>
+                    <Text style={{}}>130000원</Text>
+                    <Text style={{}}>{deliveryCharge}</Text>
+                    <View></View>
+                </View>
             </View>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
+                     <Image source={require('../../../assets/goodsdetail/main/sk4.jpg')}
                         style={styles.imgicon}></Image>
                 </View>
-                <Text></Text>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
-                </View>
-                <View style={{width:10, height:10, backgroundColor: "black",}}>
-                    <Text>ddddddddddddddddddddd</Text>
+                <View style={{marginLeft:10,}}>
+                    <Text>상품명도자기 그릇세트 식기세트 밥그릇 대접 홈세트 14p</Text>
+                    <Text style={{}}>18600원</Text>
+                    <Text style={{}}>{deliveryCharge}</Text>
+                    <View></View>
                 </View>
             </View>
         </ScrollView>

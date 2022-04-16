@@ -9,13 +9,13 @@ import GoodsSearch from "../GoodsSearch";
 
 
 
-export default function GoodsBestAll({route}:any){
+export default function GoodsInduction({route}:any){
     
  
     const navigation = useNavigation()
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
     const { seq } = route.params;
-    
+    const deliveryCharge = "3000원"
     
     return(
         <ScrollView style={styles.viewcoler}>
@@ -99,46 +99,53 @@ export default function GoodsBestAll({route}:any){
             </View>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
+                        <Image source={require('../../../assets/goodsdetail/main/id1.jpg')}
+                            style={styles.imgicon}></Image>
+                    </View>
+                    <View style={{marginLeft:10,}}>
+                        <Text>홈쇼핑상품상품명 램프쿡 만능 자동회전냄비</Text>
+                        <Text style={{}}>89000원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-                <View style={{marginLeft:10,}}>
-                    <Text>ddddddddddddddddddddd</Text>
-                    <Text style={{}}>49,900원</Text>
-                    <Text style={{}}>배송비</Text>
-                    <View></View>
+                <View style={styles.icon}>
+                    <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+                        <Image source={require('../../../assets/goodsdetail/main/id2.jpg')}
+                            style={styles.imgicon}></Image>
+                    </View>
+                    <View style={{marginLeft:10,}}>
+                        <Text>해피콜상품명 해피콜 에고 블랙에디션 IH 전골 냄비 인덕션 24cm</Text>
+                        <Text style={{}}>30900원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
+                <View style={styles.icon}>
+                    <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+                        <Image source={require('../../../assets/goodsdetail/main/id3.jpg')}
+                            style={styles.imgicon}></Image>
+                    </View>
+                    <View style={{marginLeft:10,}}>
+                        <Text>키친웰상품명 인덕션용 훠궈 샤브샤브 마라탕 세라믹 반반냄비 전골</Text>
+                        <Text style={{}}>24600원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-                <Text></Text>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
+                <View style={styles.icon}>
+                    <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+                        <Image source={require('../../../assets/goodsdetail/main/id4.jpg')} 
+                            style={styles.imgicon}></Image>
+                    </View>
+
+                    <View style={{marginLeft:10,}}>
+                        <Text>디토상품명 디토 매직홀더 주물 IH 인덕션 후라이팬 냄비 세트</Text>
+                        <Text style={{}}>89000원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-                <Text></Text>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
-                </View>
-                <Text></Text>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
-                </View>
-                <View style={{width:10, height:10, backgroundColor: "black",}}>
-                    <Text>ddddddddddddddddddddd</Text>
-                </View>
-            </View>
         </ScrollView>
         )
 

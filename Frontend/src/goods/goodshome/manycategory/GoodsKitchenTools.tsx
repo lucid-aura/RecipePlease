@@ -9,13 +9,13 @@ import GoodsSearch from "../GoodsSearch";
 
 
 
-export default function GoodsBestAll({route}:any){
+export default function GoodsKitchenTools({route}:any){
     
  
     const navigation = useNavigation()
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
     const { seq } = route.params;
-    
+    const deliveryCharge = "3000원"    
     
     return(
         <ScrollView style={styles.viewcoler}>
@@ -97,47 +97,54 @@ export default function GoodsBestAll({route}:any){
                 <Text style={{fontSize:10}}>239개의 검색결과</Text>
             </View>
             <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
+            <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+                        <Image source={require('../../../assets/goodsdetail/main/jj1.jpg')}
+                            style={styles.imgicon}></Image>
+                    </View>
+                    <View style={{marginLeft:10,}}>
+                        <Text>상품명키친 접시 정리대 2p</Text>
+                        <Text style={{}}>7200원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-                <View style={{marginLeft:10,}}>
-                    <Text>ddddddddddddddddddddd</Text>
-                    <Text style={{}}>49,900원</Text>
-                    <Text style={{}}>배송비</Text>
-                    <View></View>
+                <View style={styles.icon}>
+                    <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+                        <Image source={require('../../../assets/goodsdetail/main/jj2.jpg')}
+                            style={styles.imgicon}></Image>
+                    </View>
+                    <View style={{marginLeft:10,}}>
+                        <Text>상품명데이앤데이 주방 스탠드 선반 330</Text>
+                        <Text style={{}}>12900원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
+                <View style={styles.icon}>
+                    <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+                        <Image source={require('../../../assets/goodsdetail/main/jj3.jpg')}
+                            style={styles.imgicon}></Image>
+                    </View>
+                    <View style={{marginLeft:10,}}>
+                        <Text>360도회전 원형선반 주방양념선반 화장품소품정리(중)</Text>
+                        <Text style={{}}>12900원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-                <Text></Text>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
+                <View style={styles.icon}>
+                    <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+                        <Image source={require('../../../assets/goodsdetail/main/jj4.jpg')} 
+                            style={styles.imgicon}></Image>
+                    </View>
+
+                    <View style={{marginLeft:10,}}>
+                        <Text>다다리빙상품명 기둥식 식기건조대 800 2단 골드 /주방 싱크대 선반</Text>
+                        <Text style={{}}>33070원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-                <Text></Text>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
-                </View>
-                <Text></Text>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
-                </View>
-                <View style={{width:10, height:10, backgroundColor: "black",}}>
-                    <Text>ddddddddddddddddddddd</Text>
-                </View>
-            </View>
         </ScrollView>
         )
 

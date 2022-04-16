@@ -9,13 +9,13 @@ import GoodsSearch from "../GoodsSearch";
 
 
 
-export default function GoodsBestAll({route}:any){
+export default function GoodsItem({route}:any){
     
  
     const navigation = useNavigation()
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
     const { seq } = route.params;
-    
+    const deliveryCharge = "3000원"
     
     return(
         <ScrollView style={styles.viewcoler}>
@@ -98,47 +98,54 @@ export default function GoodsBestAll({route}:any){
                 <Text style={{fontSize:10}}>239개의 검색결과</Text>
             </View>
             <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
+            <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+                        <Image source={require('../../../assets/goodsdetail/main/ji1.jpg')}
+                            style={styles.imgicon}></Image>
+                    </View>
+                    <View style={{marginLeft:10,}}>
+                        <Text>상품명아이템톡 오븐렌지대선반 / 다용도 선반 / 국내생산</Text>
+                        <Text style={{}}>24900원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-                <View style={{marginLeft:10,}}>
-                    <Text>ddddddddddddddddddddd</Text>
-                    <Text style={{}}>49,900원</Text>
-                    <Text style={{}}>배송비</Text>
-                    <View></View>
+                <View style={styles.icon}>
+                    <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+                        <Image source={require('../../../assets/goodsdetail/main/ji2.jpg')}
+                            style={styles.imgicon}></Image>
+                    </View>
+                    <View style={{marginLeft:10,}}>
+                        <Text>상품명아이템톡 싱크대하부수납정리대 길이조절 국내생산</Text>
+                        <Text style={{}}>16000원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
+                <View style={styles.icon}>
+                    <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+                        <Image source={require('../../../assets/goodsdetail/main/ji3.jpg')}
+                            style={styles.imgicon}></Image>
+                    </View>
+                    <View style={{marginLeft:10,}}>
+                        <Text>상품명아이템톡 큐브 멀티 정리 선반 길이조절형 국내생산 1p</Text>
+                        <Text style={{}}>12900원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-                <Text></Text>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
+                <View style={styles.icon}>
+                    <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+                        <Image source={require('../../../assets/goodsdetail/main/ji4.jpg')} 
+                            style={styles.imgicon}></Image>
+                    </View>
+
+                    <View style={{marginLeft:10,}}>
+                        <Text>상품명아이템톡 오븐렌지대 선반 2단 / 국내생산</Text>
+                        <Text style={{}}>32930원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-                <Text></Text>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
-                </View>
-                <Text></Text>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
-                </View>
-                <View style={{width:10, height:10, backgroundColor: "black",}}>
-                    <Text>ddddddddddddddddddddd</Text>
-                </View>
-            </View>
         </ScrollView>
         )
 

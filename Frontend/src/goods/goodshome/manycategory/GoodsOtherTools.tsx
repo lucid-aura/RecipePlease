@@ -9,13 +9,13 @@ import GoodsSearch from "../GoodsSearch";
 
 
 
-export default function GoodsBestAll({route}:any){
+export default function GoodsOtherTools({route}:any){
     
  
     const navigation = useNavigation()
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
     const { seq } = route.params;
-    
+    const deliveryCharge = "3000원"
     
     return(
         <ScrollView style={styles.viewcoler}>
@@ -98,47 +98,54 @@ export default function GoodsBestAll({route}:any){
                 <Text style={{fontSize:10}}>239개의 검색결과</Text>
             </View>
             <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
+            <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+                        <Image source={require('../../../assets/goodsdetail/main/gt1.jpg')}
+                            style={styles.imgicon}></Image>
+                    </View>
+                    <View style={{marginLeft:10,}}>
+                        <Text>대한상품명 사진 촬영 배경 소품 보헤미안 패브릭 배경천 BF-025</Text>
+                        <Text style={{}}>6800원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-                <View style={{marginLeft:10,}}>
-                    <Text>ddddddddddddddddddddd</Text>
-                    <Text style={{}}>49,900원</Text>
-                    <Text style={{}}>배송비</Text>
-                    <View></View>
+                <View style={styles.icon}>
+                    <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+                        <Image source={require('../../../assets/goodsdetail/main/gt2.jpg')}
+                            style={styles.imgicon}></Image>
+                    </View>
+                    <View style={{marginLeft:10,}}>
+                        <Text>북유럽풍 테이블매트 조약돌 식탁매트 방수 식탁보</Text>
+                        <Text style={{}}>2750원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
+                <View style={styles.icon}>
+                    <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+                        <Image source={require('../../../assets/goodsdetail/main/gt3.jpg')}
+                            style={styles.imgicon}></Image>
+                    </View>
+                    <View style={{marginLeft:10,}}>
+                        <Text>상품명조화꽃장식 제비꽃화분 주방화분 인테리어화분</Text>
+                        <Text style={{}}>11760원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-                <Text></Text>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
+                <View style={styles.icon}>
+                    <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+                        <Image source={require('../../../assets/goodsdetail/main/gt4.jpg')} 
+                            style={styles.imgicon}></Image>
+                    </View>
+
+                    <View style={{marginLeft:10,}}>
+                        <Text>상품명(3호) 짚받침 쌀독 인테리어매트 그릇 항아리</Text>
+                        <Text style={{}}>26130원</Text>
+                        <Text style={{}}>{deliveryCharge}</Text>
+                        <View></View>
+                    </View>
                 </View>
-                <Text></Text>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
-                </View>
-                <Text></Text>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
-                </View>
-                <View style={{width:10, height:10, backgroundColor: "black",}}>
-                    <Text>ddddddddddddddddddddd</Text>
-                </View>
-            </View>
         </ScrollView>
         )
 
