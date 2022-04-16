@@ -1,5 +1,5 @@
-import { DrawerActions, useNavigation } from "@react-navigation/native";
-import React, { useCallback } from "react";
+import { DrawerActions, useFocusEffect, useNavigation } from "@react-navigation/native";
+import React, { useCallback, useState } from "react";
 import { View, Text,StyleSheet, Button, TextInput, Image, TouchableHighlight, Dimensions, FlatList, ScrollView } from "react-native";
 import COLORS from "../consts/colors";
 import {default as Icons } from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -11,13 +11,26 @@ import { NavigationHeader } from "../theme";
 import { black, white } from "react-native-paper/lib/typescript/styles/colors";
 import GoodsCategoryHome from "./GoodsCategoryHome";
 import GoodsSearch from "./goodshome/GoodsSearch";
-
+import axios from "axios";
+import config from "../project.config";
 
 export default function GoodsHomeScreen(){
     
  
     const navigation = useNavigation()
     const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
+    const [goodsData, setGoodsData] = useState({})
+
+    useFocusEffect(
+        useCallback( () => {
+            const fetchGoods = async() =>{
+                const goodsData =await axios.post(config.address + "getGoodsByCategory")
+                setGoodsData(goodsData.data)
+                console.log(goodsData)
+            }
+         fetchGoods()
+    }, []));
+
     return(
 
         <ScrollView style={styles.viewcoler}> 
@@ -46,7 +59,7 @@ export default function GoodsHomeScreen(){
                     <TouchableHighlight activeOpacity={0.9}
                     onPress={() => navigation.navigate('goodsBestAll', {"seq": 8})}>
                         <View style={styles.category}>
-                            <Image source={require('../assets/goodscategory/bestall.jpg')}
+                            <Image source={require('../assets/goodsdetail/main/gt1.jpg')}
                             style={styles.icon}></Image>
                             <Text style={styles.name}>베스트 전체</Text>
                         </View>
@@ -138,7 +151,7 @@ export default function GoodsHomeScreen(){
                         
                         <Image 
                         style={styles.stretch}
-                        source={require('../assets/goodsdetail/goods1.jpg')}
+                        source={require('../assets/goodsdetail/main/gt1.jpg')}
                         ></Image>
                         
                     </View>

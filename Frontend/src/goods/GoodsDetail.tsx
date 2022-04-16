@@ -10,11 +10,8 @@ import GoodsSearch from "./goodshome/GoodsSearch";
 import config from "../project.config";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
-
 export default function GoodsDetail({route}:any){
     
- 
     const navigation = useNavigation()
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
     const { seq } = route.params;
@@ -31,7 +28,8 @@ export default function GoodsDetail({route}:any){
     const [goodsSeq, setgoodSeq] = useState(0);
     const [goodsView, setgoodsView] = useState(0);
     const [goodsData, setgoodsData] = useState({});
-
+    const [content, setContent] = useState()
+    const [title, setTitle] = useState()
     function goPayment() {
         AsyncStorage.setItem('goodsData', JSON.stringify([{
             /*썸네일사진*/
@@ -49,7 +47,7 @@ export default function GoodsDetail({route}:any){
             const fetchGoods = async() =>{
                 const goodsData =await axios.post(config.address + "goodsData")
                 setgoodsData(goodsData)
-                console.log(goodsData.data)
+                console.log(goodsData.data + "!!!!!!!!!")
                 setgoodsName(goodsData.data.goodsName)
                 setgoodsCategory(goodsData.data.goodsCategory)
                 setgoodsContent(goodsData.data.goodsContent)
@@ -60,7 +58,8 @@ export default function GoodsDetail({route}:any){
                 setgoodSeq(goodsData.data.goodsSeq)
                 setgoodsView(goodsData.data.goodsView)
                 setprice(goodsData.data.goodsPrice)
-
+                setTitle(config.titleImageUri[goodsData.data.goodsSeq-1])
+                setContent(config.subImageUri[goodsData.data.goodsSeq-1])
             }
          fetchGoods()
     }, []));
@@ -124,14 +123,14 @@ export default function GoodsDetail({route}:any){
 
     
             <View style={styles.viewStyle1}>
-                <Image source={require('../assets/goodsdetail/goods1.jpg')}
+                <Image source={config.titleImageUri[0]}
                         style={styles.img1}></Image>
             </View>
             <View style={{paddingLeft:15,paddingRight:15,backgroundColor:"white"}}>
                 <View style={{flexDirection: 'row',}}>
                     <View style={styles.price}>
                         <View style={styles.pricetext1}>
-                            <Text style={styles.pricetext}>{goodsName}</Text>
+                            <Text style={styles.pricetext}>{goodsSeq}</Text>
                         </View>
                         <View style={styles.pricetext1}>
                             <Text style={styles.pricetext2}>{goodsPrice}원</Text>
@@ -172,7 +171,9 @@ export default function GoodsDetail({route}:any){
                         </View>
                     </View>
                     <View style={{marginTop:19}}>
-                         <Image source={require('../assets/goodsdetail/good1.jpg')}
+                         {/* <Image source={imageUri[goodsSeq]} */}
+                         <Image source={require('../assets/goodsdetail/main/gt1.jpg')}
+                         
                          style={{width:"auto",height:600}}></Image>
                     </View>
             </View>
