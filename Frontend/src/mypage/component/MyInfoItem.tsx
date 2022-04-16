@@ -132,19 +132,7 @@ const MyInfoItem = ({loggedUser}:any) => {
                     <Text>수정하기</Text>
                 </Pressable>
             </View>
-            <View style={[styles.contentView]}>
-                <Text style={{fontSize:23}}>테스트</Text>
-                <Pressable 
-                    style={[styles.pressAble]} 
-                    onPress={() => {
-                        navigation.navigate('IamportNavigator', {
-                            screen: 'IamportHome'
-                        })
-                    }}
-                    >
-                    <Text>수정하기</Text>
-                </Pressable>
-            </View>
+            
             <Modal
                 style={{justifyContent:'center', alignItems:'center'}}
                 animationType="slide"

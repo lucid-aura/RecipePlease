@@ -1,4 +1,4 @@
-import { DrawerActions, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useCallback, useState } from "react";
 import { Alert, Pressable, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
@@ -22,7 +22,6 @@ npm i react-native-webview
 
 export default function MyAccount() {
 
-    const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
     const [memberId, setMemberId] = useState('')
     const [password, setPassword] = useState('')
@@ -45,7 +44,10 @@ export default function MyAccount() {
             memberGender: response.memberGender,
             memberGrade: response.memberGrade,
             memberMainAddr: response.memberMainAddr,
-            memberDetailAddr: response.memberDetailAddr
+            memberDetailAddr: response.memberDetailAddr,
+            memberThumbnail: '',
+            memberZipcode: 0,
+            idSeq:3
         }))
         navigation.navigate('Login')
       }, [memberId, memberNickname, password, confirmPassword])
