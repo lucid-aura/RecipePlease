@@ -13,4 +13,12 @@
 	SELECT * FROM GOODS WHERE GOODSPRICE = 70000
 </select>
 
+<select id="getGoodsByCategory" parameterType="String" resultType="com.recipe.a.dto.GoodsDto">
+	SELECT * FROM GOODS 
+	<if test='category==""'>
+
+	</if>
+
+</select>
+
 </mapper>

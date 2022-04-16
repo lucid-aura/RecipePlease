@@ -9,12 +9,13 @@ import GoodsSearch from "../GoodsSearch";
 
 
 
-export default function GoodsBestAll({route}:any){
+export default function GoodsCookingTongs({route}:any){
     
  
     const navigation = useNavigation()
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
     const { seq } = route.params;
+    const deliveryCharge = "3000원"
     
     
     return(
@@ -99,44 +100,50 @@ export default function GoodsBestAll({route}:any){
             </View>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
+                     <Image source={require('../../../assets/goodsdetail/main/jz1.jpg')}
                         style={styles.imgicon}></Image>
                 </View>
                 <View style={{marginLeft:10,}}>
-                    <Text>ddddddddddddddddddddd</Text>
-                    <Text style={{}}>49,900원</Text>
-                    <Text style={{}}>배송비</Text>
+                    <Text>상품명벅칼 악어집게 중 230mm 스텐 주방 고기 업소용 집게</Text>
+                    <Text style={{}}>1400원</Text>
+                    <Text style={{}}>{deliveryCharge}</Text>
                     <View></View>
                 </View>
             </View>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
+                     <Image source={require('../../../assets/goodsdetail/main/jz2.jpg')}
                         style={styles.imgicon}></Image>
                 </View>
-                <Text></Text>
+                <View style={{marginLeft:10,}}>
+                    <Text>상품명벅칼 숯 집게 BBQ 바베큐 스텐 캠핑 화로 장작</Text>
+                    <Text style={{}}>3000원</Text>
+                    <Text style={{}}>{deliveryCharge}</Text>
+                    <View></View>
+                </View>
             </View>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
+                     <Image source={require('../../../assets/goodsdetail/main/jz3.jpg')}
                         style={styles.imgicon}></Image>
                 </View>
-                <Text></Text>
+                <View style={{marginLeft:10,}}>
+                    <Text>상품명스텐 주방 캠핑 바베큐 고기 집게</Text>
+                    <Text style={{}}>7900원</Text>
+                    <Text style={{}}>{deliveryCharge}</Text>
+                    <View></View>
+                </View>
             </View>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
+                     <Image source={require('../../../assets/goodsdetail/main/jz4.jpg')}
                         style={styles.imgicon}></Image>
                 </View>
-                <Text></Text>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
-                </View>
-                <View style={{width:10, height:10, backgroundColor: "black",}}>
-                    <Text>ddddddddddddddddddddd</Text>
+                <View style={{marginLeft:10,}}>
+                    <Text>상품명벅칼 다용도 집게 대 225mm 주방 고기 업소용 치킨</Text>
+                    <Text style={{}}>1600원</Text>
+                    <Text style={{}}>{deliveryCharge}</Text>
+                    <View></View>
                 </View>
             </View>
         </ScrollView>

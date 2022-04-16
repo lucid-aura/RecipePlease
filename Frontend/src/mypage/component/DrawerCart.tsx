@@ -21,6 +21,7 @@ export default function DrawerCart({ cartData } :any) {
     function reset() {
         //AsyncStorage.removeItem('cartData'); 
         //console.log("3" + JSON.parse(cartData))
+        /*
         console.log("111" + cart)
         let temp = JSON.stringify(cartData._W)
         console.log(temp)
@@ -28,6 +29,7 @@ export default function DrawerCart({ cartData } :any) {
         console.log(temp2)
         setCart(temp2)
         console.log("4" +JSON.stringify(cartData._W[0]))
+        */
         console.log("리셋완료")
     }
 

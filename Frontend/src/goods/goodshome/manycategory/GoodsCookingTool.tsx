@@ -9,12 +9,13 @@ import GoodsSearch from "../GoodsSearch";
 
 
 
-export default function GoodsBestAll({route}:any){
+export default function GoodsCookingTool({route}:any){
     
  
     const navigation = useNavigation()
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
     const { seq } = route.params;
+    const deliveryCharge = "3000원"
     
     
     return(
@@ -99,46 +100,54 @@ export default function GoodsBestAll({route}:any){
             </View>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
+                     <Image source={require('../../../assets/goodsdetail/main/jr1.jpg')}
                         style={styles.imgicon}></Image>
                 </View>
                 <View style={{marginLeft:10,}}>
-                    <Text>ddddddddddddddddddddd</Text>
-                    <Text style={{}}>49,900원</Text>
-                    <Text style={{}}>배송비</Text>
+                    <Text>실리콘 주방 조리도구 키친툴 9P 세트</Text>
+                    <Text style={{}}>40000원</Text>
+                    <Text style={{}}>{deliveryCharge}</Text>
                     <View></View>
                 </View>
             </View>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
+                     <Image source={require('../../../assets/goodsdetail/main/jr2.jpg')}
                         style={styles.imgicon}></Image>
                 </View>
-                <Text></Text>
+                <View style={{marginLeft:10,}}>
+                    <Text>인블룸 안심실리콘 키친툴 조리기구 5개세트</Text>
+                    <Text style={{}}>17010원</Text>
+                    <Text style={{}}>{deliveryCharge}</Text>
+                    <View></View>
+                </View>
             </View>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
+                     <Image source={require('../../../assets/goodsdetail/main/jr3.jpg')}
                         style={styles.imgicon}></Image>
                 </View>
-                <Text></Text>
+                <View style={{marginLeft:10,}}>
+                    <Text>키친블루밍 조리도구 7종 세트 (국내산)</Text>
+                    <Text style={{}}>30000원</Text>
+                    <Text style={{}}>{deliveryCharge}</Text>
+                    <View></View>
+                </View>
             </View>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
+                     <Image source={require('../../../assets/goodsdetail/main/jr4.jpg')} 
                         style={styles.imgicon}></Image>
                 </View>
-                <Text></Text>
-            </View>
-            <View style={styles.icon}>
-                <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                     <Image source={require('../../../assets/goods.jpg')}
-                        style={styles.imgicon}></Image>
-                </View>
-                <View style={{width:10, height:10, backgroundColor: "black",}}>
-                    <Text>ddddddddddddddddddddd</Text>
+
+                <View style={{marginLeft:10,}}>
+                    <Text>상품명실리콘 조리도구 키친툴 주방용품</Text>
+                    <Text style={{}}>2900원</Text>
+                    <Text style={{}}>{deliveryCharge}</Text>
+                    <View></View>
                 </View>
             </View>
+            
         </ScrollView>
         )
 
