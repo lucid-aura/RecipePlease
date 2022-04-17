@@ -28,7 +28,7 @@ export const MyFavoriteRecipe = () => {
                 })
     }
 
-   useEffect(() => {
+    useEffect(() => {
         datas()
     }, [myData.length]) 
     

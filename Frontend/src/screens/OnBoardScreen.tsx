@@ -36,8 +36,10 @@ const OnBoardScreen = () => {
   useEffect(() => {   // 처음 시작할때 로그인 체크.
     isSignedIn()
     kakao()
-    U.readFromStorage(loggedUserkey).then(value => console.log(value))
-    loggedIn ? navigation.navigate("HomeScreen") : console.log(`OnBoardScreen loggedIn: ${loggedIn}`)
+    U.readFromStorage(loggedUserkey).then((value) =>{
+      
+    })
+    
   }, [loggedIn])
  
   const isSignedIn = useCallback(async () => {    // 구글로그인 되어있는지 체크. 되어있으면 로그인하기.
@@ -78,6 +80,7 @@ const OnBoardScreen = () => {
                     memberThumbnail: userInfo.user.photo,
                     idSeq:2
                 }))
+                loggedIn ? navigation.navigate("HomeScreen") : console.log(`OnBoardScreen loggedIn: ${loggedIn}`)
         }).catch((err:Error) => {})
   },[memberId, memberNickname])
 
@@ -115,6 +118,7 @@ const kakao = useCallback( async() => {   // 카카오 로그인 체크후 로�
                             memberThumbnail: userInfo[4],
                             idSeq:1
                         }))
+                        loggedIn ? navigation.navigate("HomeScreen") : console.log(`OnBoardScreen loggedIn: ${loggedIn}`)
                 }).catch((err)=>{}) 
             } 
         }).catch((err) => {})
@@ -155,6 +159,7 @@ const userLogin = () => {   // 일반 로그인
                       memberThumbnail: value,
                       idSeq: 3
                   }))
+                  loggedIn ? navigation.navigate("HomeScreen") : console.log(`OnBoardScreen loggedIn: ${loggedIn}`)
               })
           
       } 

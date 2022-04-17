@@ -34,4 +34,6 @@ public class GoodsController {
 		System.out.println("GoodsController getGoodsByCategory()");
 		return goodsService.getGoodsByCategory(category);
 	}
+	
+	
 }
