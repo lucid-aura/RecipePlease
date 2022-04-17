@@ -5,12 +5,13 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Rating } from "react-native-ratings";
 import { Button, DataTable, TextInput } from 'react-native-paper';
 import config from "../project.config"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../store";
 import * as L from '../store/login'
-import { useNavigation } from "@react-navigation/native";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 import { NavigationHeader } from "../theme";
 import GoodsSearch from "./goodshome/GoodsSearch";
+import * as D from "../store/drawer"
 
 /*
 npm install react-native-table-component
@@ -29,6 +30,12 @@ export default function GoodsDetailRating( { route } :any) { // 평가 및 별�
 
     const { seq } = route.params
     const { setAvarage } = route.params
+
+    const dispatch = useDispatch()
+    const goShoppingCart = () => {
+        dispatch(D.drawerChangeFalseAction())
+        navigation.dispatch(DrawerActions.openDrawer())
+    }
 
     function writeCommentReq(){ // 평가글 및 점수 입력 등록 했을 시
         const response = axios.post(config.address + "writeGoodsComment", null , {
@@ -83,12 +90,10 @@ export default function GoodsDetailRating( { route } :any) { // 평가 및 별�
     // 평가 보여주는 View
     <SafeAreaView style={styles.container}>
     {/* 상단 네비게이터 */}
-    <NavigationHeader title="만개의 레시피"
-        Left={() => <Icon name="arrow-left-bold" size={30} onPress={goBack} />}
-        Right={() => <Icon name="cart-heart" size={30} />} />
-
-        {/* 검색참 */}
-        <GoodsSearch />
+    <NavigationHeader title="레시피를 부탁해" viewStyle={{}}
+                target="goods"
+                Left= {() => <Icon name="arrow-left-bold" size={40} onPress={goBack} />}
+                Right= {() => <Icon name="cart-heart" size={40} onPress={goShoppingCart} />}/>
 
         {/* 상품/리뷰 탭 */}
         <View style={styles.tap}>

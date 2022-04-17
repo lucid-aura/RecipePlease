@@ -27,11 +27,15 @@
 </update>
 
 <select id="getGoodsByCategory" parameterType="String" resultType="com.recipe.a.dto.GoodsDto">
-	SELECT * FROM GOODS 
+	SELECT * FROM GOODS WHERE GOODSSEQ>0
 	<if test='category==""'>
 
 	</if>
 
+</select>
+
+<select id="searchGoods" parameterType="String" resultType="com.recipe.a.dto.GoodsDto">
+	SELECT * FROM GOODS WHERE GOODSNAME LIKE CONCAT('%', #{search}, '%') AND GOODSSEQ>0
 </select>
 
 </mapper>

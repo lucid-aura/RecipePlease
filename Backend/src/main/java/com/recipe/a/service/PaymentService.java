@@ -35,8 +35,7 @@ public class PaymentService {
 
 	// 결제 성공시 db에 구매품 추가
 	public int addGoodsShoppingList(PaymentDto dto) {
-		boolean b = paymentDao.addGoodsShoppingList(dto);
-		return b ? 1 : 0;
+		return paymentDao.addGoodsShoppingList(dto);
 	}
 
 	// 환불시 db에 반품관련 컬럼 업데이트

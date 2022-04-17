@@ -24,6 +24,7 @@ import * as L from '../store/login'
 import { BlurView } from "@react-native-community/blur";
 import * as D from "../store/drawer"
 import { TouchableHighlight } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function RecipeDetailScreen({ route }:any){
 
@@ -78,9 +79,10 @@ export default function RecipeDetailScreen({ route }:any){
                 const recipeRes =await axios.get(config.address + "getOneRecipe?recipeSeq=" + seq )
                 let check = true;
                 if (recipeRes.data.memberId == loggedUser.memberId){
+                    console.log(loggedUser.memberId)
                     setOwner(true)
                 }
-                if (recipeRes.data.recipePrice > 0 && owner){ // 유료 레시피인 경우
+                if (recipeRes.data.recipePrice > 0 && !owner){ // 유료 레시피인 경우
                     if (!loggedIn) { // 로그인 여부 확인
                         Alert.alert("유료 레시피입니다.", "로그인이 필요합니다." ,
                             [
@@ -105,13 +107,14 @@ export default function RecipeDetailScreen({ route }:any){
                     else {
                         // memberId를 통해 레시피 구매여부 확인
                         const purchaseRes = await axios.post( config.address + "coin/checkPurchaseRecipe?memberId=" + loggedUser.memberId + "&docsSeq=" + seq)
-                        if (purchaseRes.data == "비구매" && loggedUser.memberId != recipeRes.data.memberId){ // 구매 확인
+                        console.log(purchaseRes.data)
+                        if (purchaseRes.data == "비구매" && !owner){ // 구매 확인
                             // 구매 페이지로 단순 alert? 이동?
                             if (loggedUser.memberCoin as never >= recipeRes.data.recipePrice){
-                                Alert.alert("유료 레시피입니다.", "구매가 필요합니다." ,
+                                Alert.alert("유료 레시피입니다.", "레시피를 구매하시겠습니까?" ,
                                 [
                                 {
-                                    text: "구매",
+                                    text: "레시피 구매",
                                     onPress: () => {
                                         setBlur(<></>)
                                         navigation.navigate('RecipeHome' as never)
@@ -136,7 +139,34 @@ export default function RecipeDetailScreen({ route }:any){
                                 check = false;
                             }
                             else {
-                                // 코인 굿즈 구매로 이동 필요
+                                Alert.alert("유료 레시피입니다.", "코인이 부족합니다 구매하시겠습니까?" ,
+                                [
+                                {
+                                    text: "코인 구매",
+                                    onPress: async () => {
+                                        setBlur(<></>)
+                                        await AsyncStorage.setItem('goodsData', JSON.stringify([{
+                                            goodsSeq:0,
+                                            goodsName:'코인',
+                                            count:recipeRes.data.recipePrice,
+                                            goodsPrice:1,
+                                            goodsCategory:'코인'
+                                        }]));
+                                        navigation.navigate('RecipeHome' as never)
+                                        navigation.navigate('GoodsNavigator' as never, {
+                                            screen: 'paymentInfo'
+                                        } as never)
+                                    }},
+                                {
+                                    text: "뒤로가기",
+                                    onPress: () => {
+                                        setBlur(<></>)
+                                        navigation.navigate('RecipeHome' as never)
+                                    }},
+                                ],
+                                { cancelable: false}
+                                );
+                                check = false;
                             } 
                         }
                     }   

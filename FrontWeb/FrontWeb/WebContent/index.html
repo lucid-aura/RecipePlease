@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Chef</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" defer src="js/index/index.js"></script> <!-- defer(외부 참조용 연동 필수)-->
     <script src="https://kit.fontawesome.com/7a52739f2b.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="project.config.js" charset="utf-8"></script>
-    <script type="text/javascript" src="commons.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/project.config.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/commons.js" charset="utf-8"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
@@ -81,7 +82,7 @@
         <a href="#" class="start-btn">당신의 능력을 보여 주세요</a>
 
         <div class="about-msg">
-            <h2>레시피를 부탁해 관하여</h2>
+           <!-- <h2>레시피를 부탁해 관하여</h2>
                 <p>● 기획의도(목적) <br>
                     - 자신만의 레시피를 다른 사람들과 공유하고 더 나아가 수익을 창출할 수 있는 앱을 만들어 보기위해 기획 <br>
                     
@@ -93,7 +94,7 @@
                     ● 기대 효과   <br>
                     - 우수 업로더들에게 보상 제공으로 이용자들의 참여 독려  <br>
                     - 평가와 추천 기능으로 이용자들의 앱 사용 증대<br> 
-                </p>
+                </p>-->
         </div>
 
         <div class="footer">
@@ -107,92 +108,6 @@
         </div>
 
     </div>
-
-    <script>
-        let navBar = document.getElementById("navBar")	
-        let recommendLivestock = {}
-        function togglebtn(){
-            navBar.classList.toggle("hidemenu");
-        }
-
-        function goRecipeDetail(recipeSeq) {
-            location.href = "food.html?recipeSeq=" + recipeSeq
-        }
-
-        function search() {
-            location.href = "search.html?search=" + $("#searchInput").val()
-        }
-
-
-	    $( document ).ready(function() {
-            let loggedUser = sessionStorage.getItem("loggedUser")
-            console.log("로그인 정보:" + loggedUser)
-            console.log("로그인 방식 : " + sessionStorage.getItem("loginType"))
-            
-            kakaoInit()
-            checkLogin(loggedUser)
-            console.log(window.Kakao.Auth.getAccessToken())
- 
-
-	    	$.ajax({
-	    		url: webAddress + "getRecommendRecipeByCategory",
-	    		    data: {
-	    			    category:"livestock"
-	    		    },
-	    		    success: function( result ) {
-	    			    recommendLivestock = result
-                        
-	    		        $.each(recommendLivestock, function(index, value){
-    		        	    $("<div onclick='goRecipeDetail(" + value.recipeSeq +")'>" + 
-    		        	    	"<img src=" + webPhoto + value.recipeThumbnail + ">" +	
-    		        	    	"<span>" +
-    		        	    	"<h3>" +  value.recipeTitle + "</h3>" +
-    		        	    	"<p>평점: " +  value.recipeRating + "</p>" +
-    		        	    	"</span>" +
-    		        	    "</div>")
-    		        	    .appendTo("#recommendLivestock");
-    		            });
-	    		  }
-	    	});
-
-	    	$.ajax({
-	    		url: webAddress + "getRecommendRecipeByCategory",
-	    		    data: { category:"seafood" },
-	    		    success: function( result ) {
-	    			    recommendLivestock = result
-	    		        $.each(recommendLivestock, function(index, value){
-    		        	    $("<div onclick='goRecipeDetail(" + value.recipeSeq +")'>" + 
-    		        	    	"<img src=" + webPhoto + value.recipeThumbnail + ">" +	
-    		        	    	"<span>" +
-    		        	    	"<h3>" +  value.recipeTitle + "</h3>" +
-    		        	    	"<p>평점: " +  value.recipeRating + "</p>" +
-    		        	    	"</span>" +
-    		        	    "</div>")
-    		        	    .appendTo("#recommendSeafood");
-    		            });
-	    		  }
-	    	});
-
-        $.ajax({
-	    		url: webAddress + "getRecommendRecipeByCategory",
-	    		    data: { category:"readcount" },
-	    		    success: function( result ) {
-	    			    recommendLivestock = result
-	    		        $.each(recommendLivestock, function(index, value){
-    		        	    $("<div onclick='goRecipeDetail(" + value.recipeSeq +")'>" + 
-    		        	    	"<img src=" + webPhoto + value.recipeThumbnail + ">" +	
-    		        	    	"<span>" +
-    		        	    	"<h3>" +  value.recipeTitle + "</h3>" +
-    		        	    	"<p>평점: " +  value.recipeRating + "</p>" +
-    		        	    	"</span>" +
-    		        	    "</div>")
-    		        	    .appendTo("#recommendReadcount");
-    		            });
-	    		  }
-	    	});
-	    });
-
-	</script>
     
 </body>
 </html>

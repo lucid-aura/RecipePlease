@@ -2,7 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { useSelector } from "react-redux";
 import config from "../../../project.config"
+import { AppState } from "../../../store";
+import * as L from "../../../store/login"
 
 const Item = ({docsSeq, coinCount, coinInOut, coinDate}:any) => {
 
@@ -29,14 +32,15 @@ const Item = ({docsSeq, coinCount, coinInOut, coinDate}:any) => {
     )
 }
 
-export default function CoinUseList({user}:any) {
+export default function CoinUseList() {
 
     const [coinData, setCoinData] = useState([]);
-
+    const log = useSelector<AppState, L.State>((state) => state.login)
+    const {loggedIn, loggedUser} = log
     useEffect(() => {
         const getCoinData = () => {
             axios.post(config.address +"coin/getUserCoinData", null, { params: {
-                memberId: user
+                memberId: loggedUser.memberId
             }})
             .then((res) => {
                 console.log(res.data);
@@ -51,7 +55,7 @@ export default function CoinUseList({user}:any) {
     const renderItem = ({item}:any) => {
         return (
             <Item
-                memberId={user}
+                memberId={loggedUser.memberId}
                 coinCount={item.coinCount}
                 coinInOut={item.coinInOut}
                 docsSeq={item.docsSeq}      // 해당 레시피 이름

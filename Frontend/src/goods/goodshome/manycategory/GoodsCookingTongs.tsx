@@ -99,7 +99,7 @@ export default function GoodsCookingTongs({route}:any){
                 <Text style={{fontSize:10}}>239개의 검색결과</Text>
             </View>
             <TouchableHighlight activeOpacity={0.9}
-                    onPress={() => navigation.navigate('goodsDetail', {"seq": 1})}>
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 21})}>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                      <Image source={require('../../../assets/goodsdetail/main/jz1.jpg')}
@@ -114,7 +114,7 @@ export default function GoodsCookingTongs({route}:any){
             </View>
             </TouchableHighlight>
             <TouchableHighlight activeOpacity={0.9}
-                    onPress={() => navigation.navigate('goodsItem', {"seq": 2})}>
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 22})}>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                      <Image source={require('../../../assets/goodsdetail/main/jz2.jpg')}
@@ -129,7 +129,7 @@ export default function GoodsCookingTongs({route}:any){
             </View>
             </TouchableHighlight>
             <TouchableHighlight activeOpacity={0.9}
-                    onPress={() => navigation.navigate('goodsItem', {"seq": 8})}>
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 23})}>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                      <Image source={require('../../../assets/goodsdetail/main/jz3.jpg')}
@@ -143,6 +143,8 @@ export default function GoodsCookingTongs({route}:any){
                 </View>
             </View>
             </TouchableHighlight>
+            <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 24})}>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                      <Image source={require('../../../assets/goodsdetail/main/jz4.jpg')}
@@ -155,6 +157,7 @@ export default function GoodsCookingTongs({route}:any){
                     <View></View>
                 </View>
             </View>
+            </TouchableHighlight>
         </ScrollView>
         )
 

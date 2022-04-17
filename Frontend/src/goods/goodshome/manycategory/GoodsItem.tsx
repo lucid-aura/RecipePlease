@@ -95,44 +95,55 @@ export default function GoodsItem({route}:any){
             </View>
             </ScrollView>
             <View style={styles.count}>
-                <Text style={{fontSize:10}}>239개의 검색결과</Text>
+                <Text style={{fontSize:10}}>4개의 검색결과</Text>
             </View>
+            <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 29})}>
             <View style={styles.icon}>
             <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                         <Image source={require('../../../assets/goodsdetail/main/ji1.jpg')}
                             style={styles.imgicon}></Image>
                     </View>
                     <View style={{marginLeft:10,}}>
-                        <Text>상품명아이템톡 오븐렌지대선반 / 다용도 선반 / 국내생산</Text>
+                        <Text>아이템톡 오븐렌지대선반 / 다용도 선반 / 국내생산</Text>
                         <Text style={{}}>24900원</Text>
                         <Text style={{}}>{deliveryCharge}</Text>
                         <View></View>
                     </View>
                 </View>
+                </TouchableHighlight>
+                <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 30})}>
                 <View style={styles.icon}>
                     <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                         <Image source={require('../../../assets/goodsdetail/main/ji2.jpg')}
                             style={styles.imgicon}></Image>
                     </View>
                     <View style={{marginLeft:10,}}>
-                        <Text>상품명아이템톡 싱크대하부수납정리대 길이조절 국내생산</Text>
+                        <Text>아이템톡 싱크대하부수납정리대 길이조절 국내생산</Text>
                         <Text style={{}}>16000원</Text>
                         <Text style={{}}>{deliveryCharge}</Text>
                         <View></View>
                     </View>
                 </View>
+                </TouchableHighlight>
+                <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 31})}>
                 <View style={styles.icon}>
                     <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                         <Image source={require('../../../assets/goodsdetail/main/ji3.jpg')}
                             style={styles.imgicon}></Image>
                     </View>
                     <View style={{marginLeft:10,}}>
-                        <Text>상품명아이템톡 큐브 멀티 정리 선반 길이조절형 국내생산 1p</Text>
+                        <Text>아이템톡 큐브 멀티 정리 선반 길이조절형 국내생산 1p</Text>
                         <Text style={{}}>12900원</Text>
                         <Text style={{}}>{deliveryCharge}</Text>
                         <View></View>
                     </View>
                 </View>
+                </TouchableHighlight>
+                <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 32})}>
                 <View style={styles.icon}>
                     <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                         <Image source={require('../../../assets/goodsdetail/main/ji4.jpg')} 
@@ -140,12 +151,13 @@ export default function GoodsItem({route}:any){
                     </View>
 
                     <View style={{marginLeft:10,}}>
-                        <Text>상품명아이템톡 오븐렌지대 선반 2단 / 국내생산</Text>
+                        <Text>아이템톡 오븐렌지대 선반 2단 / 국내생산</Text>
                         <Text style={{}}>32930원</Text>
                         <Text style={{}}>{deliveryCharge}</Text>
                         <View></View>
                     </View>
                 </View>
+                </TouchableHighlight>
         </ScrollView>
         )
 
