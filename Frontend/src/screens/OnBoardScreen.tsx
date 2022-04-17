@@ -26,8 +26,6 @@ const OnBoardScreen = () => {
   const {loggedIn, loggedUser} = log
   const dispatch = useDispatch()
 
-  let userInfo:string[]
-
   useEffect(() => {
     GoogleSignin.configure()
     console.log(`GoogleSignin.configure(): ${GoogleSignin.configure()}`)
@@ -36,8 +34,29 @@ const OnBoardScreen = () => {
   useEffect(() => {   // 처음 시작할때 로그인 체크.
     isSignedIn()
     kakao()
-    U.readFromStorage(loggedUserkey).then(value => console.log(value))
-    loggedIn ? navigation.navigate("HomeScreen") : console.log(`OnBoardScreen loggedIn: ${loggedIn}`)
+    AsyncStorage.getItem(loggedUserkey).then((value) =>{
+      if(value !=null && value.length > 0) {
+        const userInfo = JSON.parse(value)
+        dispatch(L.loginAction({
+          memberId: userInfo.memberId,
+          memberNickname: userInfo.memberNickname,
+          memberEmail: userInfo.memberEmail,
+          memberPhone: userInfo.memberPhone,
+          memberName: userInfo.memberName,
+          memberCoin: userInfo.memberCoin,
+          memberGender: userInfo.memberGender,
+          memberGrade: userInfo.memberGrade,
+          memberMainAddr: userInfo.memberMainAddr,
+          memberDetailAddr: userInfo.memberDetailAddr,
+          memberZipcode: userInfo.memberZipcode,
+          memberThumbnail: userInfo.memberThumbnail,
+          idSeq: 3
+        }))
+        loggedIn ? navigation.navigate("HomeScreen") : console.log(`OnBoardScreen loggedIn: ${loggedIn}`)
+      }
+      
+    })
+    
   }, [loggedIn])
  
   const isSignedIn = useCallback(async () => {    // 구글로그인 되어있는지 체크. 되어있으면 로그인하기.
@@ -48,12 +67,10 @@ const OnBoardScreen = () => {
     }
   },[])
 
-  const googleSignIn= useCallback(async() => {    // 구글 로그인하기.
+  const googleSignIn= async() => {    // 구글 로그인하기.
     await GoogleSignin.hasPlayServices()
     const userInfo = await GoogleSignin.signIn()
     console.log("onBoardScreen GoogleLogin: "+userInfo)
-    setMemberId(userInfo.user.id)
-    setMemberNickname(userInfo.user.name)
     axios.post(config.address + "regist", null, 
         {
             params: {
@@ -78,12 +95,13 @@ const OnBoardScreen = () => {
                     memberThumbnail: userInfo.user.photo,
                     idSeq:2
                 }))
+                loggedIn ? navigation.navigate("HomeScreen") : console.log(`OnBoardScreen loggedIn: ${loggedIn}`)
         }).catch((err:Error) => {})
-  },[memberId, memberNickname])
+  }
 
-const kakao = useCallback( async() => {   // 카카오 로그인 체크후 로그인 되었으면 로그인 하기.
+const kakao = async() => {   // 카카오 로그인 체크후 로그인 되었으면 로그인 하기.
         getProfile().then((value) => {
-          userInfo = value.split(" ")
+          const userInfo = value.split(" ")
           console.log("onBoardScreen kakaoLogin: "+userInfo)
           if(userInfo.length > 0){
             axios.post(config.address + "regist", null, 
@@ -115,11 +133,12 @@ const kakao = useCallback( async() => {   // 카카오 로그인 체크후 로�
                             memberThumbnail: userInfo[4],
                             idSeq:1
                         }))
+                        loggedIn ? navigation.navigate("HomeScreen") : console.log(`OnBoardScreen loggedIn: ${loggedIn}`)
                 }).catch((err)=>{}) 
             } 
         }).catch((err) => {})
         
-}, [memberId, memberNickname]) 
+}
 
 const userLogin = () => {   // 일반 로그인
   console.log('userLogin')
@@ -155,6 +174,7 @@ const userLogin = () => {   // 일반 로그인
                       memberThumbnail: value,
                       idSeq: 3
                   }))
+                  loggedIn ? navigation.navigate("HomeScreen") : console.log(`OnBoardScreen loggedIn: ${loggedIn}`)
               })
           
       } 
