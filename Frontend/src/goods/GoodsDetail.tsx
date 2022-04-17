@@ -1,15 +1,13 @@
-import {  useFocusEffect, useNavigation, } from "@react-navigation/native";
+import {  DrawerActions, useFocusEffect, useNavigation, } from "@react-navigation/native";
 import axios from "axios";
-import React, { useCallback,useEffect,useState } from "react";
-import {  Alert, BackHandler, Button, Image, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
-import { white } from "react-native-paper/lib/typescript/styles/colors";
+import React, { useCallback, useState } from "react";
+import {  Alert, Button, Image, ScrollView, StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import COLORS from "../consts/colors";
 import { NavigationHeader } from "../theme/NavigationHeader";
-import GoodsSearch from "./goodshome/GoodsSearch";
 import config from "../project.config";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import GoodsDetailRating from "./GoodsDetailRating";
+import * as D from "../store/drawer"
+import { useDispatch } from "react-redux";
 
 export default function GoodsDetail({route}:any){
     
@@ -18,6 +16,11 @@ export default function GoodsDetail({route}:any){
     const { seq } = route.params;
     const [count, setCount] = useState(1);
     const [price,setprice] = useState(0);
+    const dispatch = useDispatch()
+    const goShoppingCart = () => {
+        dispatch(D.drawerChangeFalseAction())
+        navigation.dispatch(DrawerActions.openDrawer())
+    }
 
     const [goodsName,setgoodsName] = useState("");
     const [goodsCategory, setgoodsCategory] = useState("");
@@ -33,15 +36,24 @@ export default function GoodsDetail({route}:any){
     const [title, setTitle] = useState()
     function goPayment() {
         AsyncStorage.setItem('goodsData', JSON.stringify([{
-            /*썸네일사진*/
-            
             goodsSeq:goodsSeq,
             goodsName:goodsName,
             count:count,
-            goodsPrice:goodsPrice
+            goodsPrice:goodsPrice,
+            goodsCategory:goodsCategory
         }]));
         navigation.navigate('paymentInfo' as never) 
     }
+
+
+    useFocusEffect(
+        useCallback( () => {
+            const fetchGoods = async() =>{
+                const goodsData =await axios.post(config.address + "getGoodsByCategory")
+                setgoodsData(goodsData.data)
+            }
+         fetchGoods()
+    }, []));
 
     useFocusEffect(
         useCallback( () => {
@@ -79,6 +91,7 @@ export default function GoodsDetail({route}:any){
             }
             let item = {
                 /*이미지*/
+                goodsSeq:goodsSeq,
                 goodsName:goodsName,
                 count:count,
                 goodsPrice:goodsPrice
@@ -95,23 +108,21 @@ export default function GoodsDetail({route}:any){
     return(
         <ScrollView>
             {/* 상단 네비게이터 */}
-            <NavigationHeader title="만개의 레시피"
-            Left={() => <Icon name="arrow-left-bold" size={30} onPress={goBack} />}
-            Right={() => <Icon name="cart-heart" size={30} />} />
-
-            {/* 검색참 */}
-            <GoodsSearch />
+            <NavigationHeader title="레시피를 부탁해" viewStyle={{}}
+                target="goods"
+                Left= {() => <Icon name="arrow-left-bold" size={40} onPress={goBack} />}
+                Right= {() => <Icon name="cart-heart" size={40} onPress={goShoppingCart} />}/>
 
             {/* 상품/리뷰 탭 */}
             <View style={styles.tap}>
                  <TouchableHighlight activeOpacity={0.9} style={styles.subtap}
-                    onPress={() => navigation.navigate('goodsDetail', {"seq": seq})}>
+                    onPress={() => navigation.navigate('goodsDetail' as never, {"seq": seq} as never)}>
                     <View>
                         <Text>삼품페이지 </Text>
                     </View>
                 </TouchableHighlight>
                 <TouchableHighlight activeOpacity={0.9} style={styles.subtap}
-                    onPress={() => navigation.navigate('goodsDetailRating', {"seq":seq, "setAvarage":setgoodsRating, "avarage":goodsRating})}>
+                    onPress={() => navigation.navigate('goodsDetailRating' as never, {"seq":seq, "setAvarage":setgoodsRating, "avarage":goodsRating} as never)}>
                     <View>
                         <Text>상품리뷰 </Text>
                     </View>

@@ -1,12 +1,13 @@
-import { useNavigation } from "@react-navigation/native";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 import React, { useCallback } from "react";
 import {  Image, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
 import { black } from "react-native-paper/lib/typescript/styles/colors";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { useDispatch } from "react-redux";
 import COLORS from "../../../consts/colors";
 import { NavigationHeader } from "../../../theme";
 import GoodsSearch from "../GoodsSearch";
-
+import * as D from "../../../store/drawer"
 
 
 export default function GoodsBestAll({route}:any){
@@ -16,16 +17,19 @@ export default function GoodsBestAll({route}:any){
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
     const { seq } = route.params;
     
-    
+    const dispatch = useDispatch()
+    const goShoppingCart = () => {
+        dispatch(D.drawerChangeFalseAction())
+        navigation.dispatch(DrawerActions.openDrawer())
+    }
+
     return(
         <ScrollView style={styles.viewcoler}>
             {/* 상단 네비게이터 */}
-            <NavigationHeader title="만개의 레시피" viewStyle={{}}
-                Left= {() => <Icon name="arrow-left-bold" size={30} onPress={goBack} />}
-                Right= {() => <Icon name="cart-heart" size={30} />}/>
-             
-            {/* 검색창 */}
-            <GoodsSearch />
+            <NavigationHeader title="레시피를 부탁해" viewStyle={{}}
+                target="goods"
+                Left= {() => <Icon name="arrow-left-bold" size={40} onPress={goBack} />}
+                Right= {() => <Icon name="cart-heart" size={40} onPress={goShoppingCart} />}/>
 
              <View style={styles.categoryname}>
             </View>

@@ -49,4 +49,8 @@ public class GoodsService {
 		ratingDao.writeComment(ratingDto);
 		return goodsDao.updateGoodsRating(ratingDto.getDocsSeq());		
 	}
+
+	public List<GoodsDto> searchGoods(String search) {
+		return goodsDao.searchGoods(search);
+	}
 }

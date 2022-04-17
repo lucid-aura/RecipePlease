@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import CoinUseList from "./CoinUseList";
 import PurchaseList from "./PurchaseList";
+import * as L from "../../../store/login"
 
 export default function UserPurchaseList(props:any, {route}:any) {
 
@@ -29,8 +30,8 @@ export default function UserPurchaseList(props:any, {route}:any) {
             </View>
             <View>
                 { initComponentVisible
-                    ? <PurchaseList user={loginId}  />
-                    : <CoinUseList user={loginId} />
+                    ? <PurchaseList  />
+                    : <CoinUseList />
                 }
             </View>
         </View>

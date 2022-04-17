@@ -97,6 +97,7 @@
 			, MEMBEREMAIL=#{memberEmail}
 		</if>
 		WHERE MEMBERID = #{memberId}
+		
 	</update>
 		<update id="updatePaymentInfo" parameterType="com.recipe.a.dto.MembersDto">
 		UPDATE MEMBERS
@@ -115,11 +116,10 @@
 		</if>
 		WHERE MEMBERID = #{memberId}
 	</update>
-	<select id="updateLoggedInfo" parameterType="String" resultType="com.recipe.a.dto.MembersDto">
-		SELECT MEMBERID, MEMBERNICKNAME, MEMBEREMAIL, MEMBERPHONE, MEMBERCOIN, MEMBERMAINADDR, MEMBERDETAILADDR,
-			   MEMBERZIPCODE, MEMBERGENDER, MEMBERNAME, MEMBERGRADE
-		FROM MEMBERS
+	
+	<update id="plusCoin" parameterType="com.recipe.a.dto.MembersDto">
+		UPDATE MEMBERS SET MEMBERCOIN = MEMBERCOIN + #{memberCoin}
 		WHERE MEMBERID = #{memberId}
-	</select>
+	</update>
 	
 </mapper>

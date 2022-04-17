@@ -18,4 +18,6 @@ public interface GoodsDao {
 	public List<GoodsDto> getGoodsByCategory(String category);
 
 	public int updateGoodsRating(int docsSeq);
+
+	public List<GoodsDto> searchGoods(String search);
 }

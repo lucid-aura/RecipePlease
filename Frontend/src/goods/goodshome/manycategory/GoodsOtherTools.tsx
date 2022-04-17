@@ -95,8 +95,10 @@ export default function GoodsOtherTools({route}:any){
             </View>
             </ScrollView>
             <View style={styles.count}>
-                <Text style={{fontSize:10}}>239개의 검색결과</Text>
+                <Text style={{fontSize:10}}>4개의 검색결과</Text>
             </View>
+            <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 17})}>
             <View style={styles.icon}>
             <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                         <Image source={require('../../../assets/goodsdetail/main/gt1.jpg')}
@@ -109,6 +111,9 @@ export default function GoodsOtherTools({route}:any){
                         <View></View>
                     </View>
                 </View>
+                </TouchableHighlight>
+                <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 18})}>
                 <View style={styles.icon}>
                     <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                         <Image source={require('../../../assets/goodsdetail/main/gt2.jpg')}
@@ -121,6 +126,9 @@ export default function GoodsOtherTools({route}:any){
                         <View></View>
                     </View>
                 </View>
+                </TouchableHighlight>
+                <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 19})}>
                 <View style={styles.icon}>
                     <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                         <Image source={require('../../../assets/goodsdetail/main/gt3.jpg')}
@@ -133,6 +141,9 @@ export default function GoodsOtherTools({route}:any){
                         <View></View>
                     </View>
                 </View>
+                </TouchableHighlight>
+                <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 20})}>
                 <View style={styles.icon}>
                     <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                         <Image source={require('../../../assets/goodsdetail/main/gt4.jpg')} 
@@ -146,6 +157,7 @@ export default function GoodsOtherTools({route}:any){
                         <View></View>
                     </View>
                 </View>
+                </TouchableHighlight>
         </ScrollView>
         )
 

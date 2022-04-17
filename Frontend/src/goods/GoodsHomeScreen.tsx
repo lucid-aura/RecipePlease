@@ -1,32 +1,30 @@
 import { DrawerActions, useFocusEffect, useNavigation } from "@react-navigation/native";
 import React, { useCallback, useState } from "react";
-import { View, Text,StyleSheet, Button, TextInput, Image, TouchableHighlight, Dimensions, FlatList, ScrollView } from "react-native";
-import COLORS from "../consts/colors";
-import {default as Icons } from 'react-native-vector-icons/MaterialCommunityIcons';
+import { View, Text,StyleSheet, Button, Image, TouchableHighlight, ScrollView } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import foods from "../consts/foods";
-import { FlipInEasyX } from "react-native-reanimated";
-import Goodslisthome from "./Goodslisthome";
 import { NavigationHeader } from "../theme";
-import { black, white } from "react-native-paper/lib/typescript/styles/colors";
-import GoodsCategoryHome from "./GoodsCategoryHome";
-import GoodsSearch from "./goodshome/GoodsSearch";
 import axios from "axios";
 import config from "../project.config";
+import { useDispatch } from "react-redux";
+import * as D from "../store/drawer"
 
 export default function GoodsHomeScreen(){
     
  
     const navigation = useNavigation()
-    const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
+    const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
     const [goodsData, setGoodsData] = useState([])
+    const dispatch = useDispatch()
+    const goShoppingCart = () => {
+        dispatch(D.drawerChangeFalseAction())
+        navigation.dispatch(DrawerActions.openDrawer())
+    }
 
     useFocusEffect(
         useCallback( () => {
             const fetchGoods = async() =>{
                 const goodsData =await axios.post(config.address + "getGoodsByCategory")
                 setGoodsData(goodsData.data)
-                //console.log(goodsData.data)
             }
          fetchGoods()
     }, []));
@@ -37,9 +35,8 @@ export default function GoodsHomeScreen(){
             {/* 상단 네비게이터 */}
             <NavigationHeader title="레시피를 부탁해" viewStyle={{}}
                 target="goods"
-                Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
-                Right= {() => <Icon name="cart-heart" size={30} />}/>
-
+                Left= {() => <Icon name="arrow-left-bold" size={40} onPress={goBack} />}
+                Right= {() => <Icon name="cart-heart" size={40} onPress={goShoppingCart} />}/>
 
              <View style={styles.categoryname}>
                 <Text style={{fontSize:17, fontWeight: "bold"}}>BEST 카테고리</Text>

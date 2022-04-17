@@ -232,4 +232,8 @@ public class MembersService {
 	}
 	/****************************************************************/
 
+	public int plusCoin(MembersDto dto) {
+		return dao.plusCoin(dto);
+	}
+
 }

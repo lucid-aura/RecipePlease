@@ -172,6 +172,14 @@ public class MembersController {
 	
 	/*****************************************************************/
 	
+	@RequestMapping(value = "/plusCoin", method = {RequestMethod.POST})
+	public int plusCoin(MembersDto dto) {
+		System.out.println("MemberController plusCoin");
+		System.out.println("MembersDto " + dto.toString());
+		
+		return memberService.plusCoin(dto);
+		
+	}
 	//테스트용
 	@RequestMapping(value = "/test1", method = {RequestMethod.GET})
 	public List<RecipeDto> test1() {

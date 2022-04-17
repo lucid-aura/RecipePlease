@@ -1,5 +1,7 @@
 package com.recipe.a.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,13 +46,16 @@ public class GoodsController {
 	
 	@RequestMapping(value = "/writeGoodsComment", method = {RequestMethod.POST})
 	public List<RatingDto> writeGoodsComment(RatingDto ratingDto) {
-		System.out.println("RecipeController writeGoodsComment()");
-		System.out.println(ratingDto.toString());
-		
+		System.out.println("GoodsController writeGoodsComment()");
+		System.out.println(ratingDto.toString());	
 		goodsService.writeGoodsComment(ratingDto);
 		return goodsService.getGoodsRatingsBySeq(ratingDto.getDocsSeq());
-		
-		// return recipeService.getAllRatingsBySeq(docsSeq);
-		//return Arrays.asList(recipeService.getOneRecipe(recipeSeq).getRecipeGoodsTag().split(","));
 	}	
+	
+	@RequestMapping(value = "/searchGoods", method = {RequestMethod.GET, RequestMethod.POST})
+	public List<GoodsDto> searchGoods(String search) {
+		System.out.println("GoodsController searchGoods()");
+
+		return goodsService.searchGoods(search);
+	}
 }

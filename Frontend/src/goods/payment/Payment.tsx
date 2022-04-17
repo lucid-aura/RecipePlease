@@ -30,9 +30,10 @@ export default function Payment({ navigation }:any) {
         escrow: false
     });
 
-    // AsyncStorage로 저장해서 받아온 값을 poaymentInfo에 넣어줌.
+    // AsyncStorage로 저장해서 받아온 값을 paymentInfo에 넣어줌.
     const getPaymentInform = async () => {
         let payInform = await AsyncStorage.getItem('payment');
+        
         try {
             if (payInform !== null) {
                 setPaymentInform(JSON.parse(payInform));

@@ -2,6 +2,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Pressable, Text, View } from "react-native";
+import { useSelector } from "react-redux";
+import { AppState } from "../../../store";
+import * as L from "../../../store/login"
 
 // 테스트 페이지 메인(구매 목록 리스트 화면과 레시피를 코인으로 구매하는 경우 모달 구현)
 
@@ -9,21 +12,12 @@ export default function TestPage({ navigation }:any, props:any) {
 
     const [userId, setUserId] = useState('');
 
+    const log = useSelector<AppState, L.State>((state) => state.login)
+    const {loggedIn, loggedUser} = log
+
     useEffect(() => {
         const getLoginData = async () => {
-            let loginData = await AsyncStorage.getItem("loginData");
-            
-            try {
-                if (loginData !== null) {
-                    let data = JSON.parse(loginData);
-                    setUserId(data.memberId);
-                    console.log("로그인 데이터 userId: " + data.memberId);
-                } else {
-                    console.log("login data가 없음");
-                }
-            } catch (err) {
-                console.log(err);
-            }
+            setUserId(loggedUser.memberId);
         }
 
         getLoginData();

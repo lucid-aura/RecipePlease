@@ -95,8 +95,10 @@ export default function GoodsInduction({route}:any){
             </View>
             </ScrollView>
             <View style={styles.count}>
-                <Text style={{fontSize:10}}>239개의 검색결과</Text>
+                <Text style={{fontSize:10}}>4개의 검색결과</Text>
             </View>
+            <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 9})}>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                         <Image source={require('../../../assets/goodsdetail/main/id1.jpg')}
@@ -109,6 +111,9 @@ export default function GoodsInduction({route}:any){
                         <View></View>
                     </View>
                 </View>
+                </TouchableHighlight>
+                <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 10})}>
                 <View style={styles.icon}>
                     <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                         <Image source={require('../../../assets/goodsdetail/main/id2.jpg')}
@@ -121,6 +126,9 @@ export default function GoodsInduction({route}:any){
                         <View></View>
                     </View>
                 </View>
+                </TouchableHighlight>
+                <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 11})}>
                 <View style={styles.icon}>
                     <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                         <Image source={require('../../../assets/goodsdetail/main/id3.jpg')}
@@ -133,6 +141,9 @@ export default function GoodsInduction({route}:any){
                         <View></View>
                     </View>
                 </View>
+                </TouchableHighlight>
+                <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 12})}>
                 <View style={styles.icon}>
                     <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                         <Image source={require('../../../assets/goodsdetail/main/id4.jpg')} 
@@ -146,6 +157,7 @@ export default function GoodsInduction({route}:any){
                         <View></View>
                     </View>
                 </View>
+                </TouchableHighlight>
         </ScrollView>
         )
 

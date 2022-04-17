@@ -46,4 +46,6 @@ public interface MembersDao {
 	public int updatePaymentInfo(MembersDto dto);
 	
 	public MembersDto updateLoggedInfo(String memberId);
+	
+	public int plusCoin(MembersDto dto);
 }

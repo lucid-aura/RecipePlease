@@ -22,20 +22,11 @@ export default function PurchaseRecipe({ route }:any) {
     const [recipePrice, setRecipePrice] = useState(3000);
     
     useEffect(() => {
-        const getLoginData = async () => {
-            let data = await AsyncStorage.getItem("loginData");
-            try {
-                if (data !== null) {
-                    let loginSessionData = JSON.parse(data);
-                    setLoginData(loginSessionData);
-                    setUserCoin(loggedUser.memberCoin as number);
-                }
-            } catch (err) {
-                console.log(err);
-            }
-        }
+        const getLoginData = () => {
+            setUserCoin(loggedUser.memberCoin as number);
+        } 
         getLoginData();
-    }, [userCoin]);
+    }, []);
 
     // 레시피 구매 버튼 tap할 때 구매 요청을 보낼 함수
     const requestPurchaseRecipe = () => {
