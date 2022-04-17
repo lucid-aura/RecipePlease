@@ -201,7 +201,7 @@ export default function RecipeDetailScreen({ route }:any){
 
             fetchRecipe()
         }
-    }, []);
+    }, [isFocused]);
 
     const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
 

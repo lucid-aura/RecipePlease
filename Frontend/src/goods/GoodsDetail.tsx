@@ -118,7 +118,7 @@ export default function GoodsDetail({route}:any){
                  <TouchableHighlight activeOpacity={0.9} style={styles.subtap}
                     onPress={() => navigation.navigate('goodsDetail' as never, {"seq": seq} as never)}>
                     <View>
-                        <Text>삼품페이지 </Text>
+                        <Text>상품페이지 </Text>
                     </View>
                 </TouchableHighlight>
                 <TouchableHighlight activeOpacity={0.9} style={styles.subtap}
