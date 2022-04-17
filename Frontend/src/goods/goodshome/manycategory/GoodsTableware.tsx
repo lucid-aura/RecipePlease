@@ -93,8 +93,10 @@ export default function GoodsTableware({route}:any){
             </View>
             </ScrollView>
             <View style={styles.count}>
-                <Text style={{fontSize:10}}>239개의 검색결과</Text>
+                <Text style={{fontSize:10}}>4개의 검색결과</Text>
             </View>
+            <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 1})}>
             <View style={styles.icon}>
             <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                      <Image source={require('../../../assets/goodsdetail/main/sk1.jpg')}
@@ -107,6 +109,9 @@ export default function GoodsTableware({route}:any){
                     <View></View>
                 </View>
             </View>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 2})}>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                      <Image source={require('../../../assets/goodsdetail/main/sk2.jpg')}
@@ -119,6 +124,9 @@ export default function GoodsTableware({route}:any){
                     <View></View>
                 </View>
             </View>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 3})}>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                      <Image source={require('../../../assets/goodsdetail/main/sk3.jpg')}
@@ -131,6 +139,9 @@ export default function GoodsTableware({route}:any){
                     <View></View>
                 </View>
             </View>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 4})}>
             <View style={styles.icon}>
                 <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                      <Image source={require('../../../assets/goodsdetail/main/sk4.jpg')}
@@ -143,6 +154,7 @@ export default function GoodsTableware({route}:any){
                     <View></View>
                 </View>
             </View>
+            </TouchableHighlight>
         </ScrollView>
         )
 

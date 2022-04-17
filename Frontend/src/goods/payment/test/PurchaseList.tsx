@@ -9,7 +9,10 @@ import { Alert,
     View } 
 from "react-native";
 import { resolvePath } from "react-native-reanimated/src/reanimated2/animation/styleAnimation";
+import { useSelector } from "react-redux";
 import config from  "../../../project.config"
+import { AppState } from "../../../store";
+import * as L from "../../../store/login"
 
 // 구매리스트
 export default function PurchaseList({user}:any, props:any) {
@@ -18,6 +21,8 @@ export default function PurchaseList({user}:any, props:any) {
     console.log(`memberId는 ${user}`);
     const [userId, setUserId] = useState(user);
     const [completed, setCompleted] = useState(false);
+    const log = useSelector<AppState, L.State>((state) => state.login)
+    const {loggedIn, loggedUser} = log
 
     /* 2. 로그인 데이터 가져오기(AsyncStorage에 저장된 로그인 세션 정보를 가져오는 방법)
     const getLoginData = async () => {

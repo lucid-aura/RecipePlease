@@ -94,8 +94,10 @@ export default function GoodsKitchenTools({route}:any){
             </View>
             </ScrollView>
             <View style={styles.count}>
-                <Text style={{fontSize:10}}>239개의 검색결과</Text>
+                <Text style={{fontSize:10}}>4개의 검색결과</Text>
             </View>
+            <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 13})}>
             <View style={styles.icon}>
             <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                         <Image source={require('../../../assets/goodsdetail/main/jj1.jpg')}
@@ -108,6 +110,9 @@ export default function GoodsKitchenTools({route}:any){
                         <View></View>
                     </View>
                 </View>
+                </TouchableHighlight>
+                <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 14})}>
                 <View style={styles.icon}>
                     <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                         <Image source={require('../../../assets/goodsdetail/main/jj2.jpg')}
@@ -120,6 +125,9 @@ export default function GoodsKitchenTools({route}:any){
                         <View></View>
                     </View>
                 </View>
+                </TouchableHighlight>
+                <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 15})}>
                 <View style={styles.icon}>
                     <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                         <Image source={require('../../../assets/goodsdetail/main/jj3.jpg')}
@@ -132,6 +140,9 @@ export default function GoodsKitchenTools({route}:any){
                         <View></View>
                     </View>
                 </View>
+                </TouchableHighlight>
+                <TouchableHighlight activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": 16})}>
                 <View style={styles.icon}>
                     <View style={{flexDirection:"column",justifyContent:'space-around'}}>
                         <Image source={require('../../../assets/goodsdetail/main/jj4.jpg')} 
@@ -145,6 +156,7 @@ export default function GoodsKitchenTools({route}:any){
                         <View></View>
                     </View>
                 </View>
+                </TouchableHighlight>
         </ScrollView>
         )
 

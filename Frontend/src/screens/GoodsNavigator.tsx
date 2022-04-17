@@ -12,9 +12,8 @@ import GoodsItem from '../goods/goodshome/manycategory/GoodsItem';
 import GoodsKitchenTools from '../goods/goodshome/manycategory/GoodsKitchenTools';
 import GoodsOtherTools from '../goods/goodshome/manycategory/GoodsOtherTools';
 import GoodsTableware from '../goods/goodshome/manycategory/GoodsTableware';
-import GoodsDetailRating from '../goods/goodshome/manygoods/GoodsDetailRating';
+import GoodsDetailRating from '../goods/GoodsDetailRating';
 import GoodsHomeScreen from '../goods/GoodsHomeScreen';
-import GoodsSpoonList from '../goods/GoodsSpoonList';
 import Payment from '../goods/payment/Payment';
 import PaymentAddr from '../goods/payment/PaymentAddr';
 import PaymentFailed from '../goods/payment/PaymentFailed';
@@ -43,7 +42,6 @@ export default function GoodsNavigator(){
       <Stack.Navigator screenOptions={{headerShown:false}}>
         <Stack.Screen name="Home" component={GoodsHomeScreen}></Stack.Screen>
         <Stack.Screen name="goodsDetail" component={GoodsDetail}></Stack.Screen>
-        <Stack.Screen name="goodsSpoonList" component={GoodsSpoonList}></Stack.Screen>
         <Stack.Screen name="goodsBestAll" component={GoodsBestAll}></Stack.Screen> 
         <Stack.Screen name="goodsSearchResult" component={GoodsSearchResult}></Stack.Screen>
         <Stack.Screen name="goodsDetailRating" component={GoodsDetailRating}></Stack.Screen>

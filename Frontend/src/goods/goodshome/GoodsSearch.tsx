@@ -63,32 +63,11 @@ export default function GoodsSearch() { // 굿즈 검색 컴포넌트
                             if (element) smallOptions.push(smallCategoryArray[index])
                         });
 
-                        navigation.navigate(" " as never ,{ search:search, bigOptions:bigOptions, smallOptions:smallOptions } as never)
-                    }}
-                />
-                <Icons 
-                    name={expandIcon[expandBtn]} size={28} 
-                    onPress ={ () =>{
-                        setExpandBtn((expandBtn+1)%2)
-                        setAdvanced(!advanced)
+                        navigation.navigate("goodsSearchResult" as never ,{ search:search } as never)
                     }}
                 />
             </View>
         </View>
-
-
-
-        {/* <View style={{width:560}}>
-        <Searchbar
-            placeholder="레시피를 입력하세요"
-            onChangeText={text => setSearch(text)}
-            value={search}
-            onIconPress ={ () =>{
-                let options = [livestock, seafood, personal, entertain, nightMeal]
-                navigation.navigate("RecipeSearchResult" as never ,{ search:search, options:livestock } as never)
-            }}
-            />
-        </View> */}
     </SafeAreaView>
   );
 }

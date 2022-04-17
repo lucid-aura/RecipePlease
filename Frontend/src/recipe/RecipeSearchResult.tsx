@@ -18,6 +18,14 @@ export default function RecipeSearchResult({ route }:any) { // 레시피 검색 
         navigation.dispatch(DrawerActions.openDrawer())
     }
 
+    const categories = {
+        livestock:"축산물",
+        seafood:"해산물",
+        personal:"개인용",
+        entertain:"접대용",
+        nightmeal:"야식용"
+    }
+
     const { search } = route.params
     const { bigOptions } = route.params
     const { smallOptions } = route.params
@@ -73,7 +81,6 @@ export default function RecipeSearchResult({ route }:any) { // 레시피 검색 
             Left= {() => <Icon name="arrow-left-bold" size={40} onPress={goBack} />}
             Right= {() => <Icon name="cart-heart" size={40} onPress={goShoppingCart} />} />
 
-        <Text>{search}</Text>
         <Text style={{fontSize:36}}>"{search}" 검색 결과</Text>
 
         <ScrollView style={{width:600}}>
@@ -94,7 +101,7 @@ export default function RecipeSearchResult({ route }:any) { // 레시피 검색 
                         <Card.Title title={item.recipeTitle} subtitle={"평점 : " + item.recipeRating} />
                         <Card.Content>
                             <Title>
-                                {item.recipeBigCategory + " / " + item.recipeSmallCategory}
+                                {categories[item.recipeBigCategory]+ " / " + categories[item.recipeSmallCategory]}
                             </Title>
                         </Card.Content>
                     </Card>

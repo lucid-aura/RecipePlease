@@ -42,18 +42,18 @@ public class PaymentController {
 
 	// 결제완료 후 구매내역을 테이블에 추가
 	@PostMapping("/addGoodsShoppingList")
-	public String addGoodsShoppingList(PaymentDto dto) {
+	public int addGoodsShoppingList(PaymentDto dto) {
+		System.out.println(dto);
 		logger.info("PaymentController addGoodsShoppingList()");
-		int res = service.addGoodsShoppingList(dto);
-		if (res > 0) {
-			return "purchased";
-		}
-		return "not-purchased";
+		int a = service.addGoodsShoppingList(dto);
+		System.out.println("paymentSeq : " + a);
+		return a;
 	}
 
 	@PostMapping("/addPaymentList")
 	public String addPaymentList(PaymentListDto dto) {
 		logger.info("PaymentController addPaymentList()");
+		System.out.println(dto.toString());
 		boolean checker = service.addPaymentList(dto);
 		return checker ? "added" : "fail";
 	}

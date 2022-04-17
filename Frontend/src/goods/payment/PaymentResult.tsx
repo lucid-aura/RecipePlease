@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import config from  "../../project.config"
 
@@ -19,31 +19,61 @@ export default function PaymentResult({ navigation, route }:any) {
     const paymentData = route.params.key;
     console.log(paymentData);
 
+    const [paymentSeq, setPaymentSeq] = useState(0)
     // 결제 성공시 배송 및 주문 정보를 axios로 addGoodsShoppingList 컨트롤러에 넘겨서 처리
     useEffect(() => {
-        axios.post(config.address + 'payment/addGoodsShoppingList', null, { params: {
-            memberId: paymentData.buyer_id,
-            paymentPay: paymentData.amount,
-            paymentMainAddr: paymentData.buyer_addr,
-            paymentDetailAddr: paymentData.buyer_detail_addr,
-            paymentZipcode: paymentData.buyer_postcode
-        }})
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err));
+        const addPayment = async() => {
+            axios.post(config.address + 'payment/addGoodsShoppingList', null, { params: {
+                memberId: paymentData.buyer_id,
+                paymentPay: paymentData.amount,
+                paymentMainAddr: paymentData.buyer_addr,
+                paymentDetailAddr: paymentData.buyer_detail_addr,
+                paymentZipcode: paymentData.buyer_postcode,
+                paymentCategory:(paymentData.name == '코인') ? '코인' : '굿즈'
+            }})
+            .then((res) => {
+                console.log(res.data); 
+                setPaymentSeq(res.data)
+                const addPaymentList = async() => {
+                    let goodsData = await AsyncStorage.getItem('goodsData');
+                    try {
+                        if (goodsData !== null) {
+                            let datas = JSON.parse(goodsData);
+                            datas.forEach(element => {
+                                axios.post(config.address + 'payment/addPaymentList', null, { params: {
+                                    paymentSeq: res.data,
+                                    memberId: paymentData.buyer_id,
+                                    purchaseProductSeq: element.goodsSeq,
+                                    paymentListCategory: paymentData.category,
+                                    paymentListPay: paymentData.amount,
+                                }})
+                                .then((res) => {console.log(res.data); })
+                                .catch((err) => console.log(err));
+                            });
+                            if (paymentData.name == '코인'){
+                                axios.post(config.address + 'plusCoin', null, { params: {
+                                    memberId: paymentData.buyer_id,
+                                    memberCoin:paymentData.amount
+                                }})
+                                .then((res) => {
+                                    console.log(res.data); 
+                                    // AsyncStorage.removeItem('goodsData');
+                                    // AsyncStorage.removeItem('payment');
+                                })
+                                .catch((err) => console.log(err));
+                            }
 
-    }, []);
-    
-    // addPaymentList 컨트롤러에 넘기기
-    useEffect(() => {
-        axios.post(config.address + 'payment/addPaymentList', null, { params: {
-            paymentSeq: 2,
-            memberId: paymentData.buyer_id,
-            purchaseProductSeq: 3,
-            paymentListCategory: '굿즈',
-            paymentListPay: paymentData.amount
-        }})
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err));
+                        }
+                    } catch(err) {
+                        console.log(err);
+                    }
+                }
+                addPaymentList()
+            })
+            .catch((err) => console.log(err));
+        }
+        
+        addPayment()
     }, []);
 
 

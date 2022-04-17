@@ -106,10 +106,11 @@ export default function PaymentInfo({route}:any) {
                 if (goodsData !== null) {
                     let datas = JSON.parse(goodsData);
                     setCart(datas)
+                    setCategory(datas[0].goodsCategory)
                     setAmount((datas.reduce(function (sum, data) {
                         return sum + parseInt(data.goodsPrice)*parseInt(data.count);
                     }, 0)));
-                    AsyncStorage.removeItem('goodsData')
+                    
                 }
             } catch(err) {
                 console.log(err);
@@ -146,7 +147,7 @@ export default function PaymentInfo({route}:any) {
 
                         <View>
                             {/* 상품 구분(굿즈/코인)에 따라 주소 입력 컴포넌트를 보여주거나 가림 */}
-                            { category === 'goods'
+                            { category != '코인'
                                 ? (
                                     <View>
                                         <Text style={styles.subTitle}>배송지 정보</Text>
@@ -257,8 +258,8 @@ export default function PaymentInfo({route}:any) {
                                             AsyncStorage.setItem('payment', JSON.stringify({
                                                 pg: pg,
                                                 pay_method: 'card',
-                                                merchant_uid: `ORD-${uid}-${userId}`,
-                                                name: '카카오 도마 칼 세트',                // 굿즈명 또는 코인 금액
+                                                merchant_uid: `ORD-${uid}-${loggedUser.memberId}`,
+                                                name: (cart[0].goodsName)=='코인'?'코인':cart[0].goodsName + "외 " + cart.length-1 + "개",                // 굿즈명 또는 코인 금액
                                                 amount: amount,
                                                 buyer_email: buyerEmail,
                                                 buyer_name: buyerName,
@@ -266,10 +267,10 @@ export default function PaymentInfo({route}:any) {
                                                 buyer_addr: buyerAddr,
                                                 buyer_detail_addr: buyerAddrDetail,
                                                 buyer_postcode: buyerPostcode,
-                                                buyer_id: userId,
+                                                buyer_id: loggedUser.memberId,
                                                 app_scheme: 'example',
                                                 escrow: false,
-                                                category: category
+                                                category: cart[0].goodsCategory
                                             }));
 
                                             // Payment 컴포넌트로 이동

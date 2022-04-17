@@ -18,4 +18,6 @@ public interface RatingDao {
 	public int writeComment(RatingDto ratingDto);
 	
 	public int getRatingCount(int recipeSeq);
+
+	public List<RatingDto> getGoodsRatingsBySeq(int docsSeq);
 }

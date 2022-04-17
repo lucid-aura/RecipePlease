@@ -1,32 +1,30 @@
 import { DrawerActions, useFocusEffect, useNavigation } from "@react-navigation/native";
 import React, { useCallback, useState } from "react";
-import { View, Text,StyleSheet, Button, TextInput, Image, TouchableHighlight, Dimensions, FlatList, ScrollView } from "react-native";
-import COLORS from "../consts/colors";
-import {default as Icons } from 'react-native-vector-icons/MaterialCommunityIcons';
+import { View, Text,StyleSheet, Button, Image, TouchableHighlight, ScrollView } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import foods from "../consts/foods";
-import { FlipInEasyX } from "react-native-reanimated";
-import Goodslisthome from "./Goodslisthome";
 import { NavigationHeader } from "../theme";
-import { black, white } from "react-native-paper/lib/typescript/styles/colors";
-import GoodsCategoryHome from "./GoodsCategoryHome";
-import GoodsSearch from "./goodshome/GoodsSearch";
 import axios from "axios";
 import config from "../project.config";
+import { useDispatch } from "react-redux";
+import * as D from "../store/drawer"
 
 export default function GoodsHomeScreen(){
     
  
     const navigation = useNavigation()
-    const drawerOpen = useCallback(() => {navigation.dispatch(DrawerActions.openDrawer())}, [])
-    const [goodsData, setGoodsData] = useState({})
+    const goBack = useCallback(() => navigation.canGoBack() && navigation.goBack(), [])
+    const [goodsData, setGoodsData] = useState([])
+    const dispatch = useDispatch()
+    const goShoppingCart = () => {
+        dispatch(D.drawerChangeFalseAction())
+        navigation.dispatch(DrawerActions.openDrawer())
+    }
 
     useFocusEffect(
         useCallback( () => {
             const fetchGoods = async() =>{
                 const goodsData =await axios.post(config.address + "getGoodsByCategory")
                 setGoodsData(goodsData.data)
-                console.log(goodsData)
             }
          fetchGoods()
     }, []));
@@ -37,9 +35,8 @@ export default function GoodsHomeScreen(){
             {/* 상단 네비게이터 */}
             <NavigationHeader title="레시피를 부탁해" viewStyle={{}}
                 target="goods"
-                Left= {() => <Icon name="text-account" size={30} onPress={drawerOpen} />}
-                Right= {() => <Icon name="cart-heart" size={30} />}/>
-
+                Left= {() => <Icon name="arrow-left-bold" size={40} onPress={goBack} />}
+                Right= {() => <Icon name="cart-heart" size={40} onPress={goShoppingCart} />}/>
 
              <View style={styles.categoryname}>
                 <Text style={{fontSize:17, fontWeight: "bold"}}>BEST 카테고리</Text>
@@ -55,7 +52,6 @@ export default function GoodsHomeScreen(){
                 
                 
                 <View style={styles.viewStyle1}>
-                    
                     <TouchableHighlight activeOpacity={0.9}
                     onPress={() => navigation.navigate('goodsBestAll', {"seq": 8})}>
                         <View style={styles.category}>
@@ -144,155 +140,39 @@ export default function GoodsHomeScreen(){
                 <Text style={{fontSize:15, fontWeight: "bold"}}> 만개의 추천 상품</Text>
             </View>
             <View style={styles.item}>
-            <TouchableHighlight activeOpacity={0.9}
-                    onPress={() => navigation.navigate('goodsDetail', {"seq": 8})}>
-                <View style={styles.card}>
+
+            {goodsData.map((good:{goodsSeq:number, goodsPrice:number, goodsName:string, goodsRating:number, photoUrl:string, photoContent:string}, index) :any=> (
+
+                <TouchableHighlight key={index} activeOpacity={0.9}
+                    onPress={() => navigation.navigate('goodsDetail', {"seq": good.goodsSeq})}>
+                    <View >
                     <View style={styles.img}>
                         
                         <Image 
                         style={styles.stretch}
-                        source={require('../assets/goodsdetail/main/gt1.jpg')}
+                        source={config.titleImageUri[index]}
                         ></Image>
                         
                     </View>
                         <View style={styles.mainstory}>
-                           <View style={styles.story}>
-                                <Text style={{fontSize:20, fontWeight:"bold"}}>99,990원</Text>
+                        <View style={styles.story}>
+                                <Text style={{fontSize:20, fontWeight:"bold"}}>{good.goodsPrice}원</Text>
                             </View>
                             <View style={styles.story1}>
                                 <Text style={{fontSize:15,}}>
-                                    놋담(식기) 백화점 선물포장 방짜유기 1인 식기세트(공기+대접+수저)
+                                    {good.goodsName}
                                 </Text>
                                     </View>
                                 <View style={styles.story2}>
-                                    <Text>별점</Text>
-                                 </View>
+                                    <Text>{good.goodsRating}</Text>
+                                </View>
                             </View>
-                </View>
+                    </View>
                 </TouchableHighlight>
-                <View style={styles.card1}>
-                    <View style={styles.img}/>
-                        <View style={styles.mainstory}>
-                           <View style={styles.story}>
-                                <Text style={{fontSize:20, fontWeight:"bold"}}>99,990원</Text>
-                            </View>
-                            <View style={styles.story1}>
-                                <Text style={{fontSize:15,}}>
-                                    놋담(식기) 백화점 선물포장 방짜유기 1인 식기세트(공기+대접+수저)
-                                </Text>
-                                    </View>
-                                <View style={styles.story2}>
-                                    <Text>별점</Text>
-                                 </View>
-                            </View>
-                </View>
-                <View style={styles.card2}>
-                    <View style={styles.img}/>
-                        <View style={styles.mainstory}>
-                           <View style={styles.story}>
-                                <Text style={{fontSize:20, fontWeight:"bold"}}>99,990원</Text>
-                            </View>
-                            <View style={styles.story1}>
-                                <Text style={{fontSize:15,}}>
-                                    놋담(식기) 백화점 선물포장 방짜유기 1인 식기세트(공기+대접+수저)
-                                </Text>
-                                    </View>
-                                <View style={styles.story2}>
-                                    <Text>별점</Text>
-                                 </View>
-                            </View>
-                </View>
-                <View style={styles.card3}>
-                    <View style={styles.img}/>
-                        <View style={styles.mainstory}>
-                           <View style={styles.story}>
-                                <Text style={{fontSize:20, fontWeight:"bold"}}>99,990원</Text>
-                            </View>
-                            <View style={styles.story1}>
-                                <Text style={{fontSize:15,}}>
-                                    놋담(식기) 백화점 선물포장 방짜유기 1인 식기세트(공기+대접+수저)
-                                </Text>
-                                    </View>
-                                <View style={styles.story2}>
-                                    <Text>별점</Text>
-                                 </View>
-                            </View>
-                </View>
 
-            </View>
 
-            <View style={styles.categoryname}>
-                <Text style={{fontSize:15, fontWeight: "bold"}}> 베스트 상품</Text>
-            </View>
-            <View style={styles.item}>
-            <TouchableHighlight activeOpacity={0.9}
-                    onPress={() => navigation.navigate('goodsDetail', {"seq": 8})}>
-                <View style={styles.card}>
-                    <View style={styles.img}/>
-                        <View style={styles.mainstory}>
-                           <View style={styles.story}>
-                                <Text style={{fontSize:20, fontWeight:"bold"}}>99,990원</Text>
-                            </View>
-                            <View style={styles.story1}>
-                                <Text style={{fontSize:15,}}>
-                                    놋담(식기) 백화점 선물포장 방짜유기 1인 식기세트(공기+대접+수저)
-                                </Text>
-                                    </View>
-                                <View style={styles.story2}>
-                                    <Text>별점</Text>
-                                 </View>
-                            </View>
-                </View>
-                </TouchableHighlight>
-                <View style={styles.card1}>
-                    <View style={styles.img}/>
-                        <View style={styles.mainstory}>
-                           <View style={styles.story}>
-                                <Text style={{fontSize:20, fontWeight:"bold"}}>99,990원</Text>
-                            </View>
-                            <View style={styles.story1}>
-                                <Text style={{fontSize:15,}}>
-                                    놋담(식기) 백화점 선물포장 방짜유기 1인 식기세트(공기+대접+수저)
-                                </Text>
-                                    </View>
-                                <View style={styles.story2}>
-                                    <Text>별점</Text>
-                                 </View>
-                            </View>
-                </View>
-                <View style={styles.card2}>
-                    <View style={styles.img}/>
-                        <View style={styles.mainstory}>
-                           <View style={styles.story}>
-                                <Text style={{fontSize:20, fontWeight:"bold"}}>99,990원</Text>
-                            </View>
-                            <View style={styles.story1}>
-                                <Text style={{fontSize:15,}}>
-                                    놋담(식기) 백화점 선물포장 방짜유기 1인 식기세트(공기+대접+수저)
-                                </Text>
-                                    </View>
-                                <View style={styles.story2}>
-                                    <Text>별점</Text>
-                                 </View>
-                            </View>
-                </View>
-                <View style={styles.card3}>
-                    <View style={styles.img}/>
-                        <View style={styles.mainstory}>
-                           <View style={styles.story}>
-                                <Text style={{fontSize:20, fontWeight:"bold"}}>99,990원</Text>
-                            </View>
-                            <View style={styles.story1}>
-                                <Text style={{fontSize:15,}}>
-                                    놋담(식기) 백화점 선물포장 방짜유기 1인 식기세트(공기+대접+수저)
-                                </Text>
-                                    </View>
-                                <View style={styles.story2}>
-                                    <Text>별점</Text>
-                                 </View>
-                            </View>
-                </View>
-
+            ))}
+         
             </View>
            
 

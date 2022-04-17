@@ -14,7 +14,7 @@ public interface PaymentDao {
 	int countPayment();
 
 	// 굿즈 결제 완료 시 db에 추가
-	boolean addGoodsShoppingList(PaymentDto dto);
+	int addGoodsShoppingList(PaymentDto dto);
 
 	// 환불요청 시 paymentDel 업데이트
 	boolean refundGoods(String memberId, int paymentSeq);

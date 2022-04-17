@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>food Detail - Code Chef</title>
-    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <script type="text/javascript" defer src="js/detail/profilePage.js"></script> <!-- defer(외부 참조용 연동 필수)-->
     <script src="https://kit.fontawesome.com/7a52739f2b.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
-
-    <script type="text/javascript" src="project.config.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/project.config.js" charset="utf-8"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
@@ -27,10 +27,10 @@
                 <a onclick="tabs(2)" class="tab">
                     <i class="fa fa-tv"></i>
                 </a>
-                <a onclick="tabs(3)" class="tab">
+                <!--<a onclick="tabs(3)" class="tab">
                     <i class="fa fa-tasks"></i>
-                </a>
-                <a onclick="tabs(4)" class="tab">
+                </a>-->
+                <a onclick="tabs(3)" class="tab">
                     <i class="fa fa-cog"></i>
                 </a>
             </nav>
@@ -76,7 +76,7 @@
                 <input type="text" id="memberGrade" name="memberMainAddr" class="input" readonly>
             </div>
 
-            <div class="subscription tabshow">
+            <!--<div class="subscription tabshow">
                 <h1>개인 설정</h1>
                 <h2>관리자 메일 보내기</h2>
                 <p></p>
@@ -89,7 +89,7 @@
                 <h2>소비자 보호 관련</h2>
                 <p></p>
                 <button class="btn">정보수정</button>
-            </div>
+            </div>-->
 
             <div class="setting tabshow">
                 <h1>세부 설정</h1>
@@ -111,82 +111,5 @@
         </div>
     </div>
 
-    <script>
-        const tabBtn = document.querySelectorAll(".tab");
-        const tab = document.querySelectorAll(".tabshow");
-
-        function tabs(panelIndex) {
-            tab.forEach(function(node){
-                node.style.display = "none";
-            });
-            tab[panelIndex].style.display = "block";
-        }
-        tabs(0);
-
-        function updateLoggedUser() {
-            $.ajax({
-                url : webAddress + "updatePersonalInfo",
-                type : 'POST', 
-                data : formData, 
-                success : function(res) {
-                    console.log(res)
-                },
-                error : function(xhr, status) {
-                    alert(xhr + " : " + status);
-                }
-            });
-        }
-
-        function updatePersonalInfo() {
-            let formData = $("form[id=personalInfo] :input[value!='']").serialize() ;
-            formData+= "&memberId=" + JSON.parse(sessionStorage.getItem("loggedUser")).memberId
-            $.ajax({
-                url : webAddress + "updatePersonalInfo",
-                type : 'POST', 
-                data : formData, 
-                success : function(res) {
-                    console.log(res)
-                    sessionStorage.setItem("loggedUser", JSON.stringify(res));
-                },
-                error : function(xhr, status) {
-                    alert(xhr + " : " + status);
-                }
-            });
-            
-        }
-
-        function updatePaymentInfo() {
-            let formData = $("form[id=paymentInfo] :input[value!='']").serialize() ;
-            formData+= "&memberId=" + JSON.parse(sessionStorage.getItem("loggedUser")).memberId
-            console.log(formData)
-            $.ajax({
-                url : webAddress + "updatePaymentInfo",
-                type : 'POST', 
-                data : formData, 
-                success : function(res) {
-                    console.log(res)
-                    sessionStorage.setItem("loggedUser", JSON.stringify(res));
-                },
-                error : function(xhr, status) {
-                    alert(xhr + " : " + status);
-                }
-            });
-        }
-
-        $( document ).ready(function() {
-            let loggedUser = JSON.parse(sessionStorage.getItem("loggedUser"))
-            $("#memberNickname").val(loggedUser.memberNickname)
-            $("#memberEmail").val(loggedUser.memberEmail)
-            $("#memberPhone").val(loggedUser.memberPhone)
-            $("#memberCoin").val(loggedUser.memberCoin + "개")
-            $("#memberMainAddr").val(loggedUser.memberMainAddr)
-            $("#memberDetailAddr").val(loggedUser.memberDetailAddr)
-            $("#memberZipcode").val(loggedUser.memberZipcode)
-            $("#memberGender").val(loggedUser.memberGender)
-            $("#memberName").val(loggedUser.memberName)
-            $("#memberGrade").val(loggedUser.memberGrade + " 회원")
-
-        })
-    </script>
 </body>
 </html>
