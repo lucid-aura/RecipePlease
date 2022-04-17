@@ -8,7 +8,6 @@ import { NavigationHeader } from "../../../theme";
 import GoodsSearch from "../GoodsSearch";
 
 
-
 export default function GoodsTableware({route}:any){
     
     const navigation = useNavigation()
