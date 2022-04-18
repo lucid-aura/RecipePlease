@@ -147,7 +147,7 @@ const MyInfoItem = ({loggedUser}:any) => {
                     <View style={[{borderWidth:1, width:"80%"}]}>
                         <Text style={{justifyContent:"center", alignSelf:'center', fontSize:15, marginBottom:5}}>{title} 수정하기</Text>
                         <TextInput 
-                            style={{borderWidth:0.3, width:"50%"}}
+                            style={{borderWidth:1, width:"50%"}}
                             value={updateValue}
                             placeholderTextColor='#003f5c'
                             onChangeText={(text) => setUpdateValue(text)}
@@ -185,18 +185,18 @@ const styles = StyleSheet.create({
         flex:1
     },
     topBar: {
-        borderWidth: 0.5,
+        borderWidth: 1,
     },
     contentView: {
         padding:20,
-        borderBottomWidth:0.5,
+        borderBottomWidth:1,
         borderBottomColor:Colors.grey500,
         flexDirection:'row',
         justifyContent: 'space-between',
         
     },
     pressAble: {
-        borderWidth:0.5,
+        borderWidth:1,
         justifyContent:'center',
         alignItems:'center',
         padding:3

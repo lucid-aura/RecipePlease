@@ -9,6 +9,9 @@
 	SELECT COUNT(*) FROM RECIPE WHERE RECIPEBIGCATEGORY=#{bigCategory} AND RECIPESMALLCATEGORY=#{smallCategory}
 </select>
 
+<select id="getRecipeSeq" parameterType="String" resultType="com.recipe.a.dto.RecipeDto">
+	SELECT * FROM RECIPE WHERE MEMBERID=#{memberId}
+</select>
 
 <insert id="insertRecipe" parameterType="com.recipe.a.dto.RecipeDto">
 	<selectKey keyProperty="recipeSeq" resultType="int" order="BEFORE">
@@ -79,7 +82,7 @@
 
 <!-- 레시피 시퀀스에 해당하는 레시피 정보들 가져오기 -->
 <select id="getRecipeInfo" parameterType="Integer" resultType="com.recipe.a.dto.RecipeDto">
-	SELECT RECIPETITLE, RECIPEREADCOUNT, RECIPERATING
+	SELECT MEMBERID, RECIPETITLE, RECIPEREADCOUNT, RECIPERATING
 	FROM RECIPE
 	WHERE RECIPESEQ = #{recipeSeq}
 </select>

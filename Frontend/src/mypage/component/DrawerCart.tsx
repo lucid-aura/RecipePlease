@@ -40,8 +40,10 @@ export default function DrawerCart({ cartData } :any) {
                 setTotal((cart.reduce(function (sum, data) {
                     return sum + parseInt(data.goodsPrice)*parseInt(data.count);
                 }, 0)));
+                
             }
         }
+
         getCart()
     }, [cartData]) 
 
@@ -64,7 +66,9 @@ export default function DrawerCart({ cartData } :any) {
 
                         </TouchableOpacity>
                     ))}
-                    <Text>총 가격 : {total}</Text>
+                    <Text>총 가격 : {(cart.reduce(function (sum, data) {
+                        return sum + parseInt(data.goodsPrice)*parseInt(data.count);
+                    }, 0))}</Text>
                     <View style={{justifyContent:'center', flexDirection:'row'}}>
                     <Button onPress={buy}>구매</Button>
                     <Button onPress={reset}>리셋</Button>

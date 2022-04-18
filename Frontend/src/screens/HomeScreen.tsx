@@ -16,6 +16,7 @@ import config from '../project.config'
 import { useDispatch } from 'react-redux';
 import * as D from "../store/drawer"
 
+
 const {width} = Dimensions.get('screen'); //스크린 
 const cardWidth = width / 2 - 20; //카드값 길이시 2개에서 부터 20개까지 설정
 

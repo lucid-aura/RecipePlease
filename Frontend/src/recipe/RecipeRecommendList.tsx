@@ -19,9 +19,6 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useFocusEffect } from "@react-navigation/native";
 
 
-LogBox.ignoreLogs([
-  'Non-serializable values were found in the navigation state',
-]);
 
 export default function RecipeRecommendList( { category } :any) { // 굿즈 태그 연결 부분
     

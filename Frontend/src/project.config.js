@@ -1,6 +1,6 @@
 module.exports = {
-	address : "http://192.168.219.102:3000/",
-	photo:"http://192.168.219.102:3000/photo/",
+	address : "http://192.168.0.4:3000/",
+	photo:"http://192.168.0.4:3000/photo/",
 	titleImageUri : [
         require("./assets/goodsdetail/main/sk1.jpg"),
         require("./assets/goodsdetail/main/sk2.jpg"),
