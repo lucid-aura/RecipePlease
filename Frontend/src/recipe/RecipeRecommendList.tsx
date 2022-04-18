@@ -56,7 +56,7 @@ export default function RecipeRecommendList( { category } :any) { // 굿즈 태�
             return (<View></View>)
             // 포커스가 벗어날 때 처리 추가
           };
-        }, []));
+        }, [isFocused]));
 
     useEffect( () => {
 
@@ -69,7 +69,7 @@ export default function RecipeRecommendList( { category } :any) { // 굿즈 태�
         if (isFocused) {
             fetchRecipe()
         } 
-    }, [])
+    }, [isFocused])
 
     function checkRecipe(index:number){ // 특정 레시피 선택 시
         navigation.navigate('RecipeDetail' as never,{

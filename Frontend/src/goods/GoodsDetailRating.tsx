@@ -98,13 +98,13 @@ export default function GoodsDetailRating( { route } :any) { // 평가 및 별�
         {/* 상품/리뷰 탭 */}
         <View style={styles.tap}>
              <TouchableHighlight activeOpacity={0.9} style={styles.subtap}
-                onPress={() => navigation.navigate('goodsDetail', {"seq": 8})}>
+                onPress={() => navigation.navigate('goodsDetail', {"seq": seq})}>
                 <View>
-                    <Text>삼품페이지 </Text>
+                    <Text>상품페이지 </Text>
                 </View>
             </TouchableHighlight>
             <TouchableHighlight activeOpacity={0.9} style={styles.subtap}
-                onPress={() => navigation.navigate('goodsDetailRating', {"seq": 8})}>
+                onPress={() => navigation.navigate('goodsDetailRating', {"seq": seq})}>
                 <View>
                     <Text>상품리뷰 </Text>
                 </View>

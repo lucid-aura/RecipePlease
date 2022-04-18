@@ -23,18 +23,13 @@ public class GoodsService {
 	@Autowired
 	RatingDao ratingDao;
 	
-	@Autowired
-	PhotoDao photoDao;
-	
 	public int countGoods() {
 		System.out.println("GoodsService");
 		return goodsDao.countGoods();
 	}
 
 	public GoodsDto goodsData(int goodsSeq) {
-		return goodsDao.goodsData(goodsSeq);
-		// TODO Auto-generated method stub
-		
+		return goodsDao.goodsData(goodsSeq);	
 	}
 
 	public List<GoodsDto> getGoodsByCategory(String category) {

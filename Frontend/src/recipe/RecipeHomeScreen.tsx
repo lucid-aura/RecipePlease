@@ -24,7 +24,7 @@ export default function RecipeHomeScreen(){
         dispatch(D.drawerChangeFalseAction())
         navigation.dispatch(DrawerActions.openDrawer())
     }
- 
+
     return(
         <SafeAreaView style={styles.container}>
             <NavigationHeader
