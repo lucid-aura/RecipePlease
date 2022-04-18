@@ -49,5 +49,7 @@ public interface RecipeDao {
 	public int countThumbnailByUrl(String url);
 
 	public int updateRecipeThumbnailUrl(RecipeDto recipeDto);
+	// 내가 좋아요한 레시피 시퀀스 가져오기
+	public List<RecipeDto> getRecipeSeq(String memberId);
 	
 }

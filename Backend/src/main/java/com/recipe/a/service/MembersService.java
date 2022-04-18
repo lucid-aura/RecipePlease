@@ -144,7 +144,7 @@ public class MembersService {
 					recipeInfo.get(i).getRecipeRating(),
 					thumbnailList.get(i).getPhotoUrl(),
 					recipeRatingCountList.get(i).getRecipeRatingCountList(),
-					memberId
+					recipeInfo.get(i).getMemberId()
 					));
 		}
 		
@@ -155,11 +155,12 @@ public class MembersService {
 	public List<RecipeDto> myUploadedRecipe(String memberId) {
 		System.out.println("myUploadedRecipe service");
 		
-		List<RecipeDto> recipeSeqListDto = RLDao.getRecipeSeq(memberId);
+		List<RecipeDto> recipeSeqListDto = RDao.getRecipeSeq(memberId);
 		System.out.println("recipeSeqListDto: " + recipeSeqListDto.toString());
 		System.out.println("recipeSeqListDto: " + recipeSeqListDto.size());
 		
 		List<Integer> recipeSeqList = new ArrayList<Integer>();
+		
 		for(int i=0; i < recipeSeqListDto.size(); i++) {
 			recipeSeqList.add(recipeSeqListDto.get(i).getRecipeSeq());
 		}

@@ -57,7 +57,7 @@ const MyUploadedRecipeFlatList:FC<MyUploadedRecipeDatas> = ({datas: initialDatas
                         style={{alignItems:"baseline", marginTop:10}}
                     />
                     <View style={[styles.ratingCount]}>
-                        <Text style={{fontSize:18, color:Colors.grey500}}>({ratingCount})</Text>
+                        <Text style={{fontSize:18, color:Colors.grey500}}>({myRecipe.recipeRating})</Text>
                     </View>
                     <View style={[styles.readCount]}>
                         <Text style={{fontSize:18, color:Colors.grey500}}>조회수 {myRecipe.recipeReadcount}회</Text>

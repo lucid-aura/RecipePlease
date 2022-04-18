@@ -45,7 +45,7 @@ const MyFavoriteFlatlist:FC<MyFavoriteRecipeDatas> = ({datas: initialDatas}) => 
                         <Text style={{fontSize:18, color:Colors.grey500}}>({myRecipe.recipeRatingCountList})</Text>
                     </View>
                     <View style={[styles.readCount]}>
-                        <Text style={{fontSize:18, color:Colors.grey500}}>조회수 {myRecipe.recipeRatingList}회</Text>
+                        <Text style={{fontSize:18, color:Colors.grey500}}> {myRecipe.recipeRatingList}점</Text>
                     </View>
                     
                 </View>

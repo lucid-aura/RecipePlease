@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import {Text, StyleSheet, View, Image, Alert} from 'react-native';
+import {Text, StyleSheet, View, Image, Alert, LogBox} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import COLORS from '../consts/colors';
 import {PrimaryButton} from '../components/Button';
@@ -14,6 +14,11 @@ import config from "../project.config"
 import * as U from '../mypage/utils'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { loggedUserkey } from '../store/login';
+
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+  'Possible Unhandled Promise Rejection'
+]);
 
 const OnBoardScreen = () => {
 

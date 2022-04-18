@@ -96,7 +96,7 @@ export default function GoodsDetail({route}:any){
                 count:count,
                 goodsPrice:goodsPrice
             }
-            cart.push(item)
+            await cart.push(item)
             console.log("a " + JSON.stringify(cart))
             await AsyncStorage.setItem('cartData', JSON.stringify(cart));
             Alert.alert("장바구니에 추가되었습니다.")
